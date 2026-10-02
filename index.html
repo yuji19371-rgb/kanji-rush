@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#120a26">
 <title>漢字ラッシュ</title>
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -161,6 +161,35 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 .reveal .rv-k.sent mark,.r-rev td.sent mark{background:var(--yellow);color:var(--ink);border-radius:6px;padding:0 4px}
 .r-rev td.k.sent{font-family:"M PLUS Rounded 1c",sans-serif;font-size:.92rem;color:#fff;white-space:normal;line-height:1.6;min-width:12em}
 
+/* ---------- タイトル：設定のまとめ ---------- */
+.summary{display:flex;align-items:center;gap:12px;width:min(420px,100%);background:rgba(18,8,40,.78);border:3px solid #fff;border-radius:18px;
+  padding:8px 12px 8px 8px;color:#fff;text-align:left;box-shadow:0 4px 0 var(--ink);margin-bottom:14px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.summary:active{transform:translateY(2px)}
+.s-lv{flex:0 0 auto;width:54px;height:54px;border-radius:14px;display:grid;place-items:center;font-size:1.35rem;border:3px solid var(--ink);color:#fff;-webkit-text-stroke:.12em var(--ink);paint-order:stroke fill}
+.s-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.s-txt b{font-size:1.02rem;font-weight:800}
+.s-txt small{font-size:.78rem;color:var(--sub);font-weight:800}
+.s-gear{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.66rem;font-weight:800;color:var(--yellow)}
+.s-gear svg{width:22px;height:22px}
+/* ---------- 設定シート ---------- */
+.set h3{font-size:.8rem;color:var(--yellow);margin:16px 0 6px;font-weight:800}
+.set h3 small{color:var(--sub);font-weight:500;margin-left:6px;font-size:.72rem}
+.set .modesel{display:flex;width:100%;box-shadow:none;border-width:2px}
+.set .modesel button{flex:1;padding:8px 4px;font-size:.88rem}
+.lvgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.lvbtn{border-radius:12px;border:3px solid var(--ink);box-shadow:0 3px 0 var(--ink);padding:6px 2px 5px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:2px}
+.lvbtn b{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:1.15rem;-webkit-text-stroke:.12em var(--ink);paint-order:stroke fill}
+.lvbtn small{font-size:.66rem;font-weight:800;text-shadow:0 1px 0 var(--ink)}
+.lvbtn[aria-checked="false"]{opacity:.55}
+.lvbtn[aria-checked="true"]{box-shadow:0 0 0 3px #fff,0 3px 0 var(--ink);transform:translateY(-2px)}
+.togrow{display:flex;gap:8px}
+.tog{flex:1;border-radius:999px;border:2px solid #fff;background:var(--panel2);font-weight:800;padding:8px;font-size:.88rem}
+.tog.off{background:transparent;color:var(--sub);border-color:rgba(255,255,255,.4)}
+.diag{margin-top:12px;background:var(--panel2);border-radius:12px;padding:10px 12px;font-size:.82rem;line-height:1.7}
+.diag b{color:var(--yellow)}
+.diag .ng{color:#ff8a96}
+.diag .okc{color:var(--green)}
+
 /* ---------- タイトル ---------- */
 .beta{display:inline-block;margin:8px 0 0;font-size:.72rem;font-weight:800;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:1px 10px}
 .title{position:absolute;inset:0;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:space-between;
@@ -188,6 +217,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
   border:4px solid var(--ink);box-shadow:0 6px 0 var(--ink)}
 .go:active{transform:translateY(4px);box-shadow:0 2px 0 var(--ink)}
 .subrow{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;justify-content:center}
+.subrow{margin-top:12px}
 .subrow #installBtn{background:var(--yellow);color:var(--ink);text-decoration:none;border:3px solid var(--ink);border-radius:999px;padding:4px 12px;box-shadow:0 3px 0 var(--ink)}
 .subrow button{background:none;border:0;font-weight:800;font-size:.88rem;color:#fff;text-decoration:underline;text-underline-offset:4px;padding:4px}
 
@@ -262,35 +292,52 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
       <div class="t-top">
         <h1 class="logo dela"><span class="l1">漢字</span><span class="l2">ラッシュ</span></h1>
         <p class="tag">せまってくる漢字を、読んではね返せ！</p>
-        <p class="beta">試作版 v0.3</p>
+        <p class="beta">試作版 v0.4</p>
       </div>
       <div class="t-bottom">
-        <div class="selrow">
-          <div class="modesel" id="genreSel" role="radiogroup" aria-label="問題の種類">
-            <button role="radio" data-genre="kanji">漢字</button>
-            <button role="radio" data-genre="vocab">語彙</button>
-            <button role="radio" data-genre="grammar">文法</button>
-          </div>
-          <div class="modesel" id="modeSel" role="radiogroup" aria-label="答え方">
-            <button role="radio" data-mode="type">タイピング</button>
-            <button role="radio" data-mode="choice">4択</button>
-          </div>
-          <div class="modesel sm" id="speedSel" role="radiogroup" aria-label="スピード">
-            <button role="radio" data-speed="0">のんびり</button>
-            <button role="radio" data-speed="1">ゆっくり</button>
-            <button role="radio" data-speed="2">ふつう</button>
-            <button role="radio" data-speed="3">はやい</button>
-          </div>
-          <div class="modesel sm" id="countSel" role="radiogroup" aria-label="問題数">
-            <button role="radio" data-count="10">10問</button>
-            <button role="radio" data-count="20">20問</button>
-            <button role="radio" data-count="30">30問</button>
-            <button role="radio" data-count="all">全問</button>
-          </div>
-        </div>
-        <div class="cards" id="cards" role="radiogroup" aria-label="レベル"></div>
+        <button class="summary" id="summaryBtn" aria-label="ゲーム設定を変える">
+          <span class="s-lv dela" id="sumLv">N5</span>
+          <span class="s-txt"><b id="sumMain"></b><small id="sumSub"></small></span>
+          <span class="s-gear"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm8.6-2.3.1-1.2-.1-1.2 2-1.6-2-3.4-2.4.9a8 8 0 0 0-2-1.2L15.8 3h-4l-.4 2.5a8 8 0 0 0-2 1.2L7 5.8 5 9.2l2 1.6-.1 1.2.1 1.2-2 1.6 2 3.4 2.4-.9c.6.5 1.3.9 2 1.2l.4 2.5h4l.4-2.5c.7-.3 1.4-.7 2-1.2l2.4.9 2-3.4-2-1.6Z" fill="currentColor"/></svg>設定</span>
+        </button>
         <button class="go dela" id="startBtn">スタート</button>
-        <div class="subrow"><button id="howBtn">遊び方</button><button id="musicBtn">音楽：オン</button><button id="sfxBtn">効果音：オン</button><button id="installBtn" hidden>アプリとして追加</button></div>
+        <div class="subrow"><button id="howBtn">遊び方</button><button id="settingsLink">設定</button><button id="installBtn" hidden>アプリとして追加</button></div>
+      </div>
+    </section>
+
+    <section class="sheet" id="settings" hidden>
+      <div class="panel set">
+        <h2 class="dela outl" style="color:var(--yellow)">ゲーム設定</h2>
+        <h3>レベル</h3>
+        <div class="lvgrid" id="cards" role="radiogroup" aria-label="レベル"></div>
+        <h3>問題の種類</h3>
+        <div class="modesel" id="genreSel" role="radiogroup" aria-label="問題の種類">
+          <button role="radio" data-genre="kanji">漢字</button>
+          <button role="radio" data-genre="vocab">語彙</button>
+          <button role="radio" data-genre="grammar">文法</button>
+        </div>
+        <h3>答え方 <small id="modeNote"></small></h3>
+        <div class="modesel" id="modeSel" role="radiogroup" aria-label="答え方">
+          <button role="radio" data-mode="type">タイピング</button>
+          <button role="radio" data-mode="choice">4択</button>
+        </div>
+        <h3>スピード</h3>
+        <div class="modesel" id="speedSel" role="radiogroup" aria-label="スピード">
+          <button role="radio" data-speed="0">のんびり</button>
+          <button role="radio" data-speed="1">ゆっくり</button>
+          <button role="radio" data-speed="2">ふつう</button>
+          <button role="radio" data-speed="3">はやい</button>
+        </div>
+        <h3>問題数 <small>クリアまでに必要な正解の数</small></h3>
+        <div class="modesel" id="countSel" role="radiogroup" aria-label="問題数">
+          <button role="radio" data-count="10">10問</button>
+          <button role="radio" data-count="20">20問</button>
+          <button role="radio" data-count="30">30問</button>
+          <button role="radio" data-count="all">全問</button>
+        </div>
+        <h3>音</h3>
+        <div class="togrow"><button class="tog" id="musicBtn">音楽：オン</button><button class="tog" id="sfxBtn">効果音：オン</button></div>
+        <div class="btnrow"><button class="p1" id="setStart">スタート</button><button class="p2" id="setClose">とじる</button></div>
       </div>
     </section>
 
@@ -321,13 +368,9 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 
     <section class="sheet how steps" id="iosHelp" hidden>
       <div class="panel">
-        <h2 class="dela outl" style="color:var(--yellow)">ホーム画面に追加</h2>
-        <dl>
-          <div><dt>1</dt><dd>このページを Safari で開きます。</dd></div>
-          <div><dt>2</dt><dd>画面下（iPadは上）の共有ボタン（四角から上向きの矢印）をタップします。</dd></div>
-          <div><dt>3</dt><dd>メニューを下にスクロールして「ホーム画面に追加」をタップします。</dd></div>
-          <div><dt>4</dt><dd>右上の「追加」をタップすると、ホーム画面にアイコンができます。</dd></div>
-        </dl>
+        <h2 class="dela outl" style="color:var(--yellow)">アプリとして追加</h2>
+        <dl id="installSteps"></dl>
+        <div class="diag" id="diag" hidden></div>
         <p class="note">ホーム画面のアイコンから開くと、ブラウザのバーがない全画面で遊べます。一度開いたあとは、電波がない場所でも遊べます。</p>
         <div class="btnrow"><button class="p1" id="iosClose">とじる</button></div>
       </div>
@@ -1769,7 +1812,7 @@ function startGame(){
   AU.init(); clearTimeout(S.timer); WARP = null;
   S = { mode:'count', stage:0, hp:0, hpShown:0, maxHp:1, rage:false, lives:3, score:0, combo:0, maxCombo:0, correct:0, wrongs:0, hits:0,
         missed:[], pool: shuffle(poolOf()), plan: hpPlan(qCount === 'all' ? poolOf().length : +qCount), idx:0, cur:null, p:0, push:0, dur:9000, hint:0, glitchT:0, wrongFx:0, spawnFlash:0, spinDir:1, hb:0, timer:null };
-  ['title','result','howto','reveal'].forEach(id => $(id).hidden = true);
+  ['title','result','howto','reveal','settings','iosHelp'].forEach(id => $(id).hidden = true);
   $('hud').hidden = false; $('controls').hidden = false; hintPill.hidden = true;
   ansForm.hidden = gameMode !== 'type'; choicesEl.hidden = gameMode !== 'choice'; choicesEl.innerHTML = '';
   const touch = window.matchMedia && matchMedia('(pointer: coarse)').matches;
@@ -2031,15 +2074,21 @@ function renderCards(){
   const box = $('cards'); box.innerHTML = '';
   LEVELS.forEach((L,i) => {
     const b = document.createElement('button');
-    b.className = 'card'; b.setAttribute('role','radio'); b.setAttribute('aria-checked', String(i === level));
-    b.style.background = `linear-gradient(165deg, ${mix(LV_COL[i],'#ffffff',.25)}, ${LV_COL[i]} 55%, ${mix(LV_COL[i],'#000000',.35)})`;
-    const smp = SAMPLE[genre][i], n = genre === 'kanji' ? WORDS[L].length + '語' : QS[genre][L].length + '問';
-    b.innerHTML = `<span class="c-lv dela">${L}</span><span class="c-k dela${[...smp].length > 2 ? ' small' : ''}">${smp}</span><span class="c-n">${n}</span><span class="c-best">ベスト ${bestOf(L).toLocaleString()}</span>`;
+    b.className = 'lvbtn'; b.setAttribute('role','radio'); b.setAttribute('aria-checked', String(i === level));
+    b.style.background = `linear-gradient(165deg, ${mix(LV_COL[i],'#ffffff',.2)}, ${LV_COL[i]} 60%, ${mix(LV_COL[i],'#000000',.3)})`;
+    const n = genre === 'kanji' ? WORDS[L].length + '語' : QS[genre][L].length + '問';
+    b.innerHTML = `<b>${L}</b><small>${n}</small>`;
     b.onclick = () => { level = i; store.set('kr-level', String(i)); renderCards(); AU.init(); sfx('tick'); };
     box.appendChild(b);
   });
-  const sel = box.children[level];
-  if (sel && sel.scrollIntoView) sel.scrollIntoView({ block:'nearest', inline:'center' });
+  renderSummary();
+}
+function renderSummary(){
+  const lv = $('sumLv'); lv.textContent = LEVELS[level];
+  lv.style.background = `linear-gradient(165deg, ${mix(LV_COL[level],'#ffffff',.2)}, ${LV_COL[level]} 60%, ${mix(LV_COL[level],'#000000',.3)})`;
+  $('sumMain').textContent = `${GENRE_NAME[genre]}・${gameMode === 'choice' ? '4択' : 'タイピング'}`;
+  $('sumSub').textContent = `${SPEEDS[speed].name}・${qCount === 'all' ? '全問' : qCount + '問'}　ベスト ${bestOf(LEVELS[level]).toLocaleString()}`;
+  $('modeNote').textContent = genre === 'kanji' ? '' : '語彙・文法は4択のみ';
 }
 function renderModeSel(){
   $('modeSel').querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.mode === gameMode)));
@@ -2069,7 +2118,7 @@ function renderSpeedSel(){
 }
 $('speedSel').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  speed = +b.dataset.speed; store.set('kr-speed', String(speed)); renderSpeedSel(); AU.init(); sfx('tick');
+  speed = +b.dataset.speed; store.set('kr-speed', String(speed)); renderSpeedSel(); renderSummary(); AU.init(); sfx('tick');
 });
 renderGenreSel(); renderSpeedSel(); renderCountSel();
 $('roster').innerHTML = STAGES.map((s,i) => `<span>${i === 4 ? '★' : i + 1}　${s.name}／${s.enemy}</span>`).join('');
@@ -2124,8 +2173,14 @@ $('againBtn').onclick = startGame;
 $('menuBtn').onclick = toTitle;
 $('quitBtn').addEventListener('click', () => { if (inGame()){ $('kbGate').hidden = true; Music.stop(); showResult(false); } });
 $('howBtn').onclick = () => { $('howto').hidden = false; };
+const openSettings = () => { renderCards(); $('settings').hidden = false; };
+$('summaryBtn').onclick = openSettings;
+$('settingsLink').onclick = openSettings;
+$('setClose').onclick = () => { $('settings').hidden = true; };
+$('setStart').onclick = () => { $('settings').hidden = true; startGame(); };
 $('howClose').onclick = () => { $('howto').hidden = true; };
-const paintSound = () => { $('musicBtn').textContent = AU.musicOn ? '音楽：オン' : '音楽：オフ'; $('sfxBtn').textContent = AU.sfxOn ? '効果音：オン' : '効果音：オフ'; };
+const paintSound = () => { $('musicBtn').textContent = AU.musicOn ? '音楽：オン' : '音楽：オフ'; $('sfxBtn').textContent = AU.sfxOn ? '効果音：オン' : '効果音：オフ';
+  $('musicBtn').classList.toggle('off', !AU.musicOn); $('sfxBtn').classList.toggle('off', !AU.sfxOn); };
 $('musicBtn').onclick = () => { AU.init(); AU.setMusic(!AU.musicOn); if (AU.musicOn && S.mode === 'title') { Music.stop(); Music.play(0); } paintSound(); };
 $('sfxBtn').onclick = () => { AU.init(); AU.setSfx(!AU.sfxOn); sfx('tick'); paintSound(); };
 paintSound();
@@ -2133,6 +2188,7 @@ document.addEventListener('keydown', e => {
   if (gameMode === 'choice' && S.mode === 'play' && /^[1-4]$/.test(e.key) && e.target !== input){ e.preventDefault(); choose(+e.key - 1); return; }
   if (e.key !== 'Enter' || e.isComposing || e.target === input) return;
   if (!$('howto').hidden){ $('howto').hidden = true; return; }
+  if (!$('iosHelp').hidden){ $('iosHelp').hidden = true; return; }
   if (e.target.tagName === 'BUTTON') return;
   if (S.mode === 'title' || S.mode === 'result') startGame();
 });
@@ -2202,21 +2258,41 @@ function frame(ts){
 let installPrompt = null;
 const isStandalone = () => (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
 const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const isAndroid = /android/i.test(navigator.userAgent);
+const canPWA = 'serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost') && !/claude\.(ai|site)$/.test(location.hostname) && !/claudeusercontent/.test(location.hostname);
 const installBtn = $('installBtn');
-const showInstall = () => { if (!isStandalone()) installBtn.hidden = false; };
-window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; showInstall(); });
+if (canPWA && !isStandalone() && (isIOS || isAndroid)) installBtn.hidden = false;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; if (!isStandalone()) installBtn.hidden = false; });
 window.addEventListener('appinstalled', () => { installPrompt = null; installBtn.hidden = true; });
+const STEPS = {
+  ios: ['このページを Safari で開きます。','共有ボタン（四角から上向きの矢印）をタップします。','メニューを下にスクロールして「ホーム画面に追加」をタップします。','右上の「追加」をタップすると、ホーム画面にアイコンができます。'],
+  android: ['このページを Chrome（または Brave）で開き、一度だけページを再読み込みします。','ブラウザのメニュー「︙」をタップします（Chromeは右上、Braveは右下）。','「アプリをインストール」または「ホーム画面に追加」を選びます。','「インストール」を選ぶと、ホーム画面にアイコンができます。']
+};
+async function runDiag(){
+  const box = $('diag'); box.hidden = false; box.innerHTML = '<b>インストールに必要なファイルを確認中…</b>';
+  const files = ['manifest.json','icon-192.png','icon-512.png','sw.js'], rows = []; let allOk = true;
+  for (const f of files){
+    let ok = false; try { const r = await fetch(f, { cache:'no-store' }); ok = r.ok; } catch(e){}
+    allOk = allOk && ok; rows.push(`<span class="${ok ? 'okc' : 'ng'}">${ok ? '✓' : '✗'}</span> ${f}`);
+  }
+  let sw = false; try { sw = !!(await navigator.serviceWorker.getRegistration()); } catch(e){}
+  allOk = allOk && sw; rows.push(`<span class="${sw ? 'okc' : 'ng'}">${sw ? '✓' : '✗'}</span> オフライン機能（sw.js の登録）`);
+  box.innerHTML = `<b>チェック結果</b><br>${rows.join('<br>')}` + (allOk ? '<br>準備はできています。上の手順でインストールしてください。'
+    : '<br><span class="ng">✗ のファイルがサーバーにありません。index.html と同じ場所に、すべてのファイルをアップロードしてください。アップロード後は、ページを再読み込みしてからお試しください。</span>');
+}
 installBtn.addEventListener('click', async () => {
   if (installPrompt){
     installPrompt.prompt();
     try { await installPrompt.userChoice; } catch(e){}
-    installPrompt = null; installBtn.hidden = true;
-  } else $('iosHelp').hidden = false;
+    installPrompt = null; installBtn.hidden = true; return;
+  }
+  const steps = isIOS ? STEPS.ios : STEPS.android;
+  $('installSteps').innerHTML = steps.map((t,i) => `<div><dt>${i + 1}</dt><dd>${t}</dd></div>`).join('');
+  $('iosHelp').hidden = false;
+  if (canPWA) runDiag();
 });
 $('iosClose').onclick = () => { $('iosHelp').hidden = true; };
-if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost') && !/claude\.(ai|site)$/.test(location.hostname)){
-  navigator.serviceWorker.register('./sw.js').then(() => { if (isIOS) showInstall(); }).catch(() => {});
-}
+if (canPWA) navigator.serviceWorker.register('./sw.js').catch(() => {});
 
 /* ===== スマホのキーボード対策 ===== */
 function fit(){

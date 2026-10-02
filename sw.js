@@ -1,16 +1,16 @@
 /* 漢字ラッシュ：オフラインでも遊べるようにするためのファイル
    index.html を更新したら、下の VERSION の数字も1つ上げてください。 */
-const VERSION = 'v0.3';
+const VERSION = 'v0.4';
 const CACHE = 'kanji-rush-' + VERSION;
 const FONT_CACHE = 'kanji-rush-fonts';
 const CORE = [
   './',
   './index.html',
-  './manifest.webmanifest',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-maskable-512.png',
-  './icons/apple-touch-icon.png'
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png',
+  './icon-maskable-512.png',
+  './apple-touch-icon.png'
 ];
 
 self.addEventListener('install', e => {
