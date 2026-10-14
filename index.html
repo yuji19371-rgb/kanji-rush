@@ -63,6 +63,10 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 .lives svg.lost{opacity:.22}
 .lives svg.break{animation:heartBreak .7s ease-out}
 @keyframes heartBreak{0%{transform:scale(1.9);opacity:1}35%{transform:scale(.5) rotate(-25deg);opacity:1}100%{transform:scale(1);opacity:.22}}
+.fsbtn .fs-out{display:none}
+.is-fs .fsbtn .fs-in{display:none}
+.is-fs .fsbtn .fs-out{display:inline}
+.fsbtn svg{width:16px;height:16px}
 .xbtn{width:32px;height:32px;border-radius:50%;border:2px solid rgba(255,255,255,.85);background:rgba(18,8,40,.66);display:grid;place-items:center;padding:0}
 .xbtn svg{width:14px;height:14px}
 .boss{position:absolute;left:0;right:0;bottom:10px;margin:0 auto;width:min(440px,72%)}
@@ -131,6 +135,12 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 /* 4択 */
 .choices{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
 @media (min-width:760px){.choices{grid-template-columns:repeat(4,1fr)}}
+ruby{ruby-position:over}
+rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
+.choice ruby rt{font-size:.5em}
+.choice{line-height:1.25}
+.reveal .rv-k.sent, .r-rev td.sent{line-height:2.1}
+.reveal .rv-k.sent mark, .r-rev td.sent mark{white-space:nowrap}
 .choice{position:relative;min-height:54px;border-radius:12px;border:3px solid var(--ink);box-shadow:0 4px 0 var(--ink);background:#fff;color:var(--ink);
   font-weight:800;font-size:clamp(1.05rem,4.6vw,1.3rem);padding:8px 8px 8px 34px;text-align:center;transition:background .15s,transform .1s}
 .choice:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
@@ -176,6 +186,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 .set h3 small{color:var(--sub);font-weight:500;margin-left:6px;font-size:.72rem}
 .set .modesel{display:flex;width:100%;box-shadow:none;border-width:2px}
 .set .modesel button{flex:1;padding:8px 4px;font-size:.88rem}
+.set #speedSel button{font-size:clamp(.68rem,3.3vw,.88rem);padding:8px 0;white-space:nowrap;letter-spacing:-.02em}
 .lvgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
 .lvbtn{border-radius:12px;border:3px solid var(--ink);box-shadow:0 3px 0 var(--ink);padding:6px 2px 5px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:2px}
 .lvbtn b{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:1.15rem;-webkit-text-stroke:.12em var(--ink);paint-order:stroke fill}
@@ -269,6 +280,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
         </div>
         <div class="hud-r">
           <div class="lives" id="lives" aria-label="ライフ"></div>
+          <button class="xbtn fsbtn" id="fsBtnHud" aria-label="全画面"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="fs-in" d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path class="fs-out" d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <button class="xbtn" id="quitBtn" aria-label="ゲームをやめる"><svg viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></button>
         </div>
       </div>
@@ -292,7 +304,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
       <div class="t-top">
         <h1 class="logo dela"><span class="l1">漢字</span><span class="l2">ラッシュ</span></h1>
         <p class="tag">せまってくる漢字を、読んではね返せ！</p>
-        <p class="beta">試作版 v0.4</p>
+        <p class="beta">試作版 v1.3</p>
       </div>
       <div class="t-bottom">
         <button class="summary" id="summaryBtn" aria-label="ゲーム設定を変える">
@@ -301,7 +313,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
           <span class="s-gear"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm8.6-2.3.1-1.2-.1-1.2 2-1.6-2-3.4-2.4.9a8 8 0 0 0-2-1.2L15.8 3h-4l-.4 2.5a8 8 0 0 0-2 1.2L7 5.8 5 9.2l2 1.6-.1 1.2.1 1.2-2 1.6 2 3.4 2.4-.9c.6.5 1.3.9 2 1.2l.4 2.5h4l.4-2.5c.7-.3 1.4-.7 2-1.2l2.4.9 2-3.4-2-1.6Z" fill="currentColor"/></svg>設定</span>
         </button>
         <button class="go dela" id="startBtn">スタート</button>
-        <div class="subrow"><button id="howBtn">遊び方</button><button id="settingsLink">設定</button><button id="installBtn" hidden>アプリとして追加</button></div>
+        <div class="subrow"><button id="howBtn">遊び方</button><button id="settingsLink">設定</button><button id="fsBtnTitle" class="fslink">全画面</button><button id="installBtn" hidden>アプリとして追加</button></div>
       </div>
     </section>
 
@@ -316,6 +328,11 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
           <button role="radio" data-genre="vocab">語彙</button>
           <button role="radio" data-genre="grammar">文法</button>
         </div>
+        <h3>ゲームモード <small id="jamNote"></small></h3>
+        <div class="modesel" id="jamSel" role="radiogroup" aria-label="ゲームモード">
+          <button role="radio" data-jam="off">ノーマル</button>
+          <button role="radio" data-jam="on">妨害</button>
+        </div>
         <h3>答え方 <small id="modeNote"></small></h3>
         <div class="modesel" id="modeSel" role="radiogroup" aria-label="答え方">
           <button role="radio" data-mode="type">タイピング</button>
@@ -323,10 +340,11 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
         </div>
         <h3>スピード</h3>
         <div class="modesel" id="speedSel" role="radiogroup" aria-label="スピード">
-          <button role="radio" data-speed="0">のんびり</button>
-          <button role="radio" data-speed="1">ゆっくり</button>
-          <button role="radio" data-speed="2">ふつう</button>
-          <button role="radio" data-speed="3">はやい</button>
+          <button role="radio" data-speed="0">じっくり</button>
+          <button role="radio" data-speed="1">のんびり</button>
+          <button role="radio" data-speed="2">ゆっくり</button>
+          <button role="radio" data-speed="3">ふつう</button>
+          <button role="radio" data-speed="4">はやい</button>
         </div>
         <h3>問題数 <small>クリアまでに必要な正解の数</small></h3>
         <div class="modesel" id="countSel" role="radiogroup" aria-label="問題数">
@@ -335,6 +353,13 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
           <button role="radio" data-count="30">30問</button>
           <button role="radio" data-count="all">全問</button>
         </div>
+        <h3>ふりがな <small id="furiNote"></small></h3>
+        <div class="modesel" id="furiSel" role="radiogroup" aria-label="ふりがな">
+          <button role="radio" data-furi="on">あり</button>
+          <button role="radio" data-furi="off">なし</button>
+        </div>
+        <h3>全画面 <small id="fsNote"></small></h3>
+        <div class="togrow"><button class="tog" id="fsAutoBtn">スタート時に全画面：オフ</button></div>
         <h3>音</h3>
         <div class="togrow"><button class="tog" id="musicBtn">音楽：オン</button><button class="tog" id="sfxBtn">効果音：オン</button></div>
         <div class="btnrow"><button class="p1" id="setStart">スタート</button><button class="p2" id="setClose">とじる</button></div>
@@ -386,7 +411,9 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
           <div><dt>4択</dt><dd>4つの読みから正しいものをタップします。パソコンでは1〜4のキーでも選べます。</dd></div>
           <div><dt>まちがい</dt><dd>まちがえると漢字が一気に近づきます。漢字が手前に届くか「パス」するとライフが1つ減ります。</dd></div>
           <div><dt>ヒント</dt><dd>1回目で英語の意味が出ます。2回目は、タイピングでは最初の1文字、4択ではまちがいの選択肢が1つ消えます。使うと点数が減ります。</dd></div>
-          <div><dt>スピード</dt><dd>タイトル画面で、漢字が迫ってくる速さを4段階から選べます。遅いほど点数は少なめ、速いほど多めになります。</dd></div>
+          <div><dt>ふりがな</dt><dd>語彙・文法の問題では、設定で漢字のふりがなを「あり／なし」に切り替えられます。</dd></div>
+          <div><dt>妨害モード</dt><dd>漢字モードで選べます。漢字は動きませんが、「ぼかし」「モザイク」「パズル」のどれかで見えにくくなっていて、時間とともにくっきりします。見えにくいうちに正解すると「見破り！」で点数が1.5倍になります。</dd></div>
+          <div><dt>スピード</dt><dd>タイトル画面で、漢字が迫ってくる速さを5段階から選べます。いちばん遅い「じっくり」は、文字を読むのに時間がかかる初級の学生におすすめです。遅いほど点数は少なめ、速いほど多めになります。</dd></div>
           <div><dt>問題数</dt><dd>クリアまでに必要な正解の数です。10問・20問・30問・全問（そのレベルの問題すべて）から選べ、5体の敵のHPに振り分けられます。</dd></div>
           <div><dt>ステージ</dt><dd>敵のHPを0にするとステージクリア。全5ステージで、HPが半分を切ると敵が怒って攻撃が速くなります。まちがえたりパスしたりした問題は数に入りません。</dd></div>
         </dl>
@@ -471,7 +498,13 @@ N5:`学校,がっこう,school
 千円,せんえん,1000 yen
 六月,ろくがつ,June
 九時,くじ,nine o'clock
-四人,よにん,four people`,
+四人,よにん,four people
+電話,でんわ,telephone
+中国,ちゅうごく,China
+中学校,ちゅうがっこう,junior high school
+今月,こんげつ,this month
+百円,ひゃくえん,100 yen
+出る,でる,to go out`,
 N4:`病院,びょういん,hospital
 医者,いしゃ,doctor
 旅行,りょこう,travel
@@ -519,7 +552,19 @@ N4:`病院,びょういん,hospital
 親切,しんせつ,kind
 便利,べんり,convenient
 不便,ふべん,inconvenient
-有名,ゆうめい,famous`,
+有名,ゆうめい,famous
+注文,ちゅうもん,order
+工場,こうじょう|こうば,factory
+地下鉄,ちかてつ,subway
+動物,どうぶつ,animal
+病気,びょうき,illness / sickness
+料金,りょうきん,fee / charge
+運転,うんてん,driving / operation
+働く,はたらく,to work
+決める,きめる,to decide
+短い,みじかい,short
+特に,とくに,especially
+急に,きゅうに,suddenly`,
 N3:`経験,けいけん,experience
 関係,かんけい,relationship
 選手,せんしゅ,athlete
@@ -561,7 +606,25 @@ N3:`経験,けいけん,experience
 苦しい,くるしい,painful
 細かい,こまかい,fine / detailed
 若い,わかい,young
-深い,ふかい,deep`,
+深い,ふかい,deep
+機会,きかい,opportunity
+参加,さんか,participation
+期待,きたい,expectation
+責任,せきにん,responsibility
+技術,ぎじゅつ,technology / skill
+印象,いんしょう,impression
+習慣,しゅうかん,custom / habit
+経営,けいえい,management
+作業,さぎょう,work / task
+性格,せいかく,personality
+残業,ざんぎょう,overtime work
+断る,ことわる,to refuse
+迎える,むかえる,to welcome / receive
+頼む,たのむ,to ask / request
+逃げる,にげる,to escape / run away
+優しい,やさしい,gentle / kind
+立派,りっぱ,splendid
+確か,たしか,surely / if I remember right`,
 N2:`影響,えいきょう,influence
 観察,かんさつ,observation
 専門,せんもん,specialty
@@ -601,7 +664,27 @@ N2:`影響,えいきょう,influence
 穏やか,おだやか,calm
 隣,となり,next to
 畑,はたけ,field (farm)
-腕,うで,arm`,
+腕,うで,arm
+普及,ふきゅう,spread / diffusion
+設備,せつび,facilities / equipment
+手段,しゅだん,means / method
+財産,ざいさん,property / assets
+大幅,おおはば,large-scale / sharp
+温暖,おんだん,warm (climate)
+勤務,きんむ,work / duty
+承知,しょうち,awareness / consent
+損失,そんしつ,loss / damage
+反映,はんえい,reflection / reflecting
+意欲,いよく,motivation / will
+支出,ししゅつ,expenditure
+補う,おぎなう,to make up for
+占める,しめる,to occupy / account for
+及ぼす,およぼす,to exert (influence)
+招く,まねく,to invite / cause
+著しい,いちじるしい,remarkable
+頼もしい,たのもしい,reliable / promising
+幸い,さいわい,fortunately / luckily
+等しい,ひとしい,equal`,
 N1:`概念,がいねん,concept
 措置,そち,measure / step
 抑制,よくせい,restraint / control
@@ -640,137 +723,639 @@ N1:`概念,がいねん,concept
 怠る,おこたる,to neglect
 甚だしい,はなはだしい,extreme
 委ねる,ゆだねる,to entrust
-免れる,まぬかれる|まぬがれる,to escape / avoid`
+免れる,まぬかれる|まぬがれる,to escape / avoid
+偏見,へんけん,prejudice / bias
+矛盾,むじゅん,contradiction
+隠蔽,いんぺい,cover-up
+萎縮,いしゅく,shrinking / cowering
+衰退,すいたい,decline
+懐疑,かいぎ,skepticism / doubt
+払拭,ふっしょく,dispelling / eradication
+頓挫,とんざ,setback / stall
+欠如,けつじょ,lack / absence
+乖離,かいり,divergence / gap
+凝縮,ぎょうしゅく,condensation / concentration
+傲慢,ごうまん,arrogance / arrogant
+陥る,おちいる,to fall into
+戒める,いましめる,to admonish
+唆す,そそのかす,to incite
+蔑む,さげすむ,to despise
+怯える,おびえる,to be frightened
+膨大,ぼうだい,enormous
+緻密,ちみつ,meticulous
+辛辣,しんらつ,scathing
+淡々,たんたん,calmly / matter-of-factly`
 };
 /* =========================================================
    語彙・文法の4択問題
    1行に1問：問題文（空欄は（　））|正解|まちがい1|まちがい2|まちがい3|英訳
+   漢字のすぐ後ろに {よみ} を書くと、ふりがなになります（例：飲{の}みます、日本{にほん}）。
    N5・N4は分かち書き（スペース区切り）のまま表示し、N3以上はスペースを自動で消します。
    ========================================================= */
 const QRAW = {
 vocab: {
-N5:`まいあさ コーヒーを（　）。|のみます|たべます|ききます|よみます|I drink coffee every morning.
-きのうは（　）でしたから、かさを もって いきました。|あめ|はれ|なつ|あさ|It was rainy yesterday, so I took an umbrella.
-この かばんは とても（　）です。1まんえんです。|たかい|ひくい|ながい|ふるい|This bag is very expensive. It costs 10,000 yen.
-としょかんで 本を 2さつ（　）。|かりました|あらいました|のぼりました|すいました|I borrowed two books at the library.
-へやが くらいですから、でんきを（　）ください。|つけて|けして|しめて|きって|The room is dark, so please turn on the light.
-わたしの（　）は 4人です。ちちと ははと あにと わたしです。|かぞく|ともだち|せんせい|がくせい|There are four people in my family: my father, mother, older brother and me.
-あしたは にちようびです。きょうは（　）です。|どようび|げつようび|きんようび|かようび|Tomorrow is Sunday. Today is Saturday.
-この みせの パンは（　）です。たくさん かいました。|おいしい|まずい|つめたい|うるさい|The bread at this shop is delicious. I bought a lot.
-えきまで バスに（　）。|のります|でます|あるきます|およぎます|I take the bus to the station.
+N5:`毎朝{まいあさ} コーヒーを（　）。|飲{の}みます|食{た}べます|聞{き}きます|読{よ}みます|I drink coffee every morning.
+きのうは（　）でしたから、かさを もって 行{い}きました。|雨{あめ}|はれ|なつ|朝{あさ}|It was rainy yesterday, so I took an umbrella.
+この かばんは とても（　）です。1万円{まんえん}です。|高{たか}い|ひくい|長{なが}い|古{ふる}い|This bag is very expensive. It costs 10,000 yen.
+としょかんで 本{ほん}を 2さつ（　）。|かりました|あらいました|のぼりました|すいました|I borrowed two books at the library.
+へやが くらいですから、電気{でんき}を（　）ください。|つけて|けして|しめて|きって|The room is dark, so please turn on the light.
+わたしの（　）は 4人{にん}です。父{ちち}と 母{はは}と あにと わたしです。|かぞく|ともだち|先生{せんせい}|学生{がくせい}|There are four people in my family: my father, mother, older brother and me.
+あしたは 日曜日{にちようび}です。今日{きょう}は（　）です。|土曜日{どようび}|月曜日{げつようび}|金曜日{きんようび}|火曜日{かようび}|Tomorrow is Sunday. Today is Saturday.
+この 店{みせ}の パンは（　）です。たくさん 買{か}いました。|おいしい|まずい|つめたい|うるさい|The bread at this shop is delicious. I bought a lot.
+駅{えき}まで バスに（　）。|のります|出{で}ます|あるきます|およぎます|I take the bus to the station.
 さむいですから、（　）を きます。|セーター|くつ|ぼうし|めがね|It's cold, so I'll put on a sweater.
-まいばん シャワーを（　）。|あびます|はいります|あらいます|ぬぎます|I take a shower every night.
-この ペンは（　）ですか。―150えんです。|いくら|いくつ|どれ|だれ|How much is this pen? — It's 150 yen.`,
-N4:`日本の 生活に もう（　）。|なれました|おぼえました|しりました|わかれました|I've already gotten used to life in Japan.
-かぜを ひいたので、くすりを（　）。|のみました|たべました|かけました|いれました|I caught a cold, so I took some medicine.
-友達との 約束を（　）しまって、おこられました。|わすれて|なくして|おとして|こわして|I forgot my promise with my friend, and they got angry.
-来週の 会議の 時間を 部長に（　）。|れんらくしました|せわしました|しんぱいしました|えんりょしました|I told the manager the time of next week's meeting.
-道が（　）いて、なかなか 進みません。|こんで|すいて|ひえて|やせて|The road is crowded, so we're barely moving.
-山田さんは いつも（　）で、みんなに 好かれて います。|しんせつ|ふべん|ざんねん|ふくざつ|Mr. Yamada is always kind, and everyone likes him.
-試験に 合格したと 聞いて、とても（　）。|うれしかったです|さびしかったです|こわかったです|ねむかったです|I was very happy to hear that I had passed the exam.
-窓を（　）と、すずしい 風が 入って きました。|あける|しめる|みがく|ふく|When I opened the window, a cool breeze came in.
-先生に 作文を（　）もらいました。|なおして|ならべて|ひろって|まちがえて|I had my teacher correct my essay.
-この 仕事は（　）が 高いですが、とても たいへんです。|きゅうりょう|ねだん|りょうきん|ねつ|This job pays well, but it's very hard.
-ゆうべは 遅くまで 起きて いたので、今日は とても（　）です。|ねむい|いたい|うすい|にがい|I stayed up late last night, so I'm very sleepy today.
-電車の 中に かさを（　）しまいました。|わすれて|なれて|しらべて|つたえて|I left my umbrella on the train.`,
-N3:`会議の 時間が 変わったことを、みんなに（　）ください。|知らせて|調べて|預けて|支えて|Please let everyone know that the meeting time has changed.
-約束の 時間に 遅れたことを 何度も（　）。|謝った|断った|許した|祝った|I apologized many times for being late.
-部屋が（　）いるので、片づけなさい。|散らかって|片づいて|空いて|並んで|Your room is a mess, so tidy it up.
-電車が 遅れて、会社に（　）して しまった。|遅刻|出席|予約|参加|The train was late, so I was late for work.
-雨が 降りそうなので、洗濯物を 早く（　）ほうがいい。|取り込んだ|取り消した|払い込んだ|書き込んだ|It looks like rain, so you should bring the laundry in soon.
-彼は 声が（　）、後ろの 席まで よく 聞こえる。|大きくて|細くて|浅くて|薄くて|His voice is loud, so you can hear him clearly even from the back seats.
-日本に 来て、日本の 文化に（　）を 持つように なった。|興味|意見|理由|準備|After coming to Japan, I became interested in Japanese culture.
-この スープは 味が（　）ので、塩を 少し 足した。|薄い|濃い|苦い|固い|This soup tasted bland, so I added a little salt.
-引っ越しの（　）を 友達に 手伝って もらった。|準備|景色|天気|性格|My friend helped me get ready for the move.
-けがを して、1週間 学校を（　）。|休んだ|落とした|閉めた|終えた|I got injured and missed school for a week.
-駅前に 新しい ビルが（　）。|建った|立てた|生えた|置いた|A new building went up in front of the station.
-子どもの ころの 写真を 見て、昔を（　）。|思い出した|思いついた|見つけた|気づいた|Looking at my childhood photos, I remembered the old days.`,
-N2:`彼の 説明は（　）で、よく わからなかった。|あいまい|明確|正確|適切|His explanation was vague, so I didn't really understand it.
-大雪の ため、交通が（　）している。|混乱|回復|拡大|発展|Traffic is in chaos because of the heavy snow.
-予算が 限られているので、費用を できるだけ（　）必要が ある。|抑える|備える|加える|構える|The budget is limited, so we need to keep costs as low as possible.
-新しい 制度に ついて、社員から 多くの（　）が 出た。|不満|不足|不便|不安定|Employees voiced many complaints about the new system.
-台風の（　）で、電車が 止まった。|影響|効果|結果|印象|The trains stopped because of the typhoon.
-彼女は どんな 仕事も（　）こなす。|てきぱきと|ぐっすり|うっかり|しっとり|She handles any job quickly and efficiently.
-失敗を（　）に して、次は もっと 準備を しよう。|教訓|記念|目標|習慣|Let's learn from this failure and prepare better next time.
-長時間 パソコンを 使っていたら、目が（　）。|疲れた|慣れた|枯れた|濡れた|My eyes got tired from using the computer for hours.
-合格の 知らせを 聞いて、思わず 涙が（　）。|こぼれた|ながめた|ふくらんだ|ちぢんだ|When I heard I had passed, tears came to my eyes.
-計画を 実行する 前に、もう一度 内容を（　）しておこう。|確認|発見|発明|減少|Let's check the details once more before carrying out the plan.
-その 映画は 予想以上に 面白くて、最後まで（　）見て しまった。|夢中で|無理に|平気で|一斉に|The movie was better than I expected, and I was absorbed until the end.
-会社の 規則を（　）と、処分される ことが ある。|破る|守る|決める|従う|If you break company rules, you may be disciplined.`,
-N1:`彼の 発言は 事実と（　）して いたため、訂正を 求められた。|相違|相応|相互|相当|His statement differed from the facts, so he was asked to correct it.
-解決しなければ ならない 課題が（　）している。|山積|満載|密集|充満|There is a mountain of issues that must be resolved.
-新製品の 売れ行きが（　）で、増産が 決まった。|好調|不振|低迷|停滞|Sales of the new product were strong, so they decided to increase production.
-長年の 努力が 実を（　）、ついに 賞を 受けた。|結び|付け|取り|持ち|Years of effort paid off, and she finally won an award.
-彼女は 周囲の 反対を（　）、独立を 果たした。|押し切って|打ち切って|割り切って|踏み切って|She overrode the objections of those around her and went independent.
-経費削減の ため、不要な 会議は（　）された。|廃止|投棄|解雇|撤去|Unnecessary meetings were abolished to cut costs.
-彼は（　）な 性格で、書類の ミスを ほとんど しない。|几帳面|大雑把|無邪気|臆病|He is meticulous and rarely makes mistakes in documents.
-事故の 原因を（　）ために、調査委員会が 設置された。|究明する|表明する|声明する|照明する|An investigative committee was set up to get to the bottom of the accident.
-子どもの 頃から 培った 経験が、今の 仕事に（　）いる。|生きて|至って|及んで|富んで|The experience I've built up since childhood is put to use in my current job.
-彼の 提案は（　）の 空論に すぎない。|机上|卓上|壇上|路上|His proposal is nothing more than armchair theory.
-景気の 先行きが 不透明で、企業は 投資に（　）に なっている。|慎重|軽率|頑丈|豊富|With the economic outlook uncertain, companies have become cautious about investing.
-締め切りが 迫っており、この 作業は（　）を 要する。|急|速|早|即|The deadline is approaching, so this work is urgent.`
+毎晩{まいばん} シャワーを（　）。|あびます|入{はい}ります|あらいます|ぬぎます|I take a shower every night.
+この ペンは（　）ですか。―150円{えん}です。|いくら|いくつ|どれ|だれ|How much is this pen? — It's 150 yen.
+かぜを ひいたので、（　）を 飲{の}みます。|くすり|ちゅうしゃ|ねつ|びょうき|I caught a cold, so I will take some medicine.
+マリアさんは 毎日{まいにち} 学校{がっこう}で 子{こ}どもに 英語{えいご}を おしえて います。マリアさんは（　）です。|先生{せんせい}|かいしゃいん|ぱんやさん|けいさつかん|Maria is a teacher who teaches English to children at school every day.
+へやが あついですから、（　）を つかいます。|エアコン|ストーブ|こたつ|ふとん|The room is hot, so I will use the air conditioner.
+かいものの 後{あと}で、レジで（　）を はらいました。|お金{かね}|おつり|きっぷ|かさ|After shopping, I paid the money at the register.
+今日{きょう}は ひざしが つよいので、（　）を かぶって 出{で}かけます。|ぼうし|てぶくろ|くつ|めがね|The sun is strong today, so I will go out wearing a hat.
+本{ほん}を かりに（　）へ 行{い}きます。|としょかん|ぎんこう|ゆうびんきょく|びょういん|I am going to the library to borrow a book.
+わからない（　）を じしょで しらべます。|ことば|人{ひと}|ごはん|電車{でんしゃ}|I look up words I don't understand in a dictionary.
+ゆうびんきょくで はがきと（　）を 買{か}いました。|きって|本{ほん}|パン|かさ|At the post office, I bought postcards and stamps.
+わたしの（　）は ベトナムです。|国{くに}|名前{なまえ}|まち|しごと|My country is Vietnam.
+あついですね。 まどを（　）。|あけましょう|しめましょう|つけましょう|けしましょう|It's hot, so let's open the window.
+道{みち}が わからないですから、（　）ください。|おしえて|かりて|かして|わすれて|I don't know the way, so please tell me.
+ねる 前{まえ}に、はを（　）。|みがきます|ふきます|きります|はきます|I brush my teeth before going to bed.
+たんじょうびに ともだちが わたしに 花{はな}を（　）。|くれました|あげました|もらいました|食{た}べました|On my birthday, my friend gave me flowers.
+うみで きれいな ゆうやけを（　）。|見{み}ました|聞{き}きました|読{よ}みました|食{た}べました|I saw a beautiful sunset at the sea.
+しけんの 前{まえ}に、かんじを（　）。|おぼえます|わすれます|きります|あけます|Before the exam, I will memorize the kanji.
+ふるさとの 母{はは}に、にもつを（　）。|おくります|うります|食{た}べます|ひろいます|I sent a package to my mother back home.
+さくらが きれいですから、花見{はなみ}を（　）。|します|あります|行{い}きます|ねます|The cherry blossoms are beautiful, so we will have a hanami party.
+しんごうが あかいですから、（　）。|とまります|わたります|はしります|うごきます|The light is red, so I will stop.
+ふゆは（　）です。雪{ゆき}が ふります。|さむい|あつい|あまい|くろい|Winter is cold, and it snows.
+今日{きょう}の 駅{えき}は（　）です。人{ひと}が たくさん います。|にぎやか|しずか|ひま|げんき|The station is lively today, with a lot of people.
+この 道{みち}は（　）です。車{くるま}が とおれません。|せまい|ひろい|あかい|高{たか}い|This road is narrow, so cars cannot pass.
+この かばんは（　）です。ノートが 1さつだけ 入{はい}って います。|かるい|おもい|長{なが}い|あつい|This bag is light, with only one notebook inside.
+きのうの パーティーは（　）。みんなで うたを うたいました。|たのしかった|こわかった|さびしかった|ねむかった|Yesterday's party was fun, and we all sang songs together.
+としょかんでは（　）に しましょう。|しずか|ゆうめい|げんき|ひま|Let's keep quiet in the library.
+わたしは（　）ごはんを 食{た}べて いません。おなかが すきました。|まだ|もう|いつも|よく|I still haven't eaten, and I'm hungry.
+時間{じかん}が ないですから、（　）食{た}べましょう。|早{はや}く|ゆっくり|いつも|ずっと|We don't have much time, so let's eat quickly.
+りょこうで（　）に とまりました。|ホテル|駅{えき}|こうえん|学校{がっこう}|On my trip, I stayed at a hotel.
+ともだちに（　）で ぶんしょを おくりました。|メール|電話{でんわ}|ケーキ|かさ|I sent the document to my friend by email.
+家{うち}に ついたら、母{はは}に 電話{でんわ}を（　）。|かけます|食{た}べます|書{か}きます|あらいます|When I get home, I will call my mother.
+スープが とても（　）です。やけどに きを つけて ください。|あつい|つめたい|うるさい|ひろい|The soup is very hot, so please be careful not to burn yourself.
+この りょうりは つくりかたが（　）です。すぐに できます。|かんたん|しずか|ひま|げんき|This recipe is easy, so you can make it right away.
+きのう ころんで けがを しました。すぐに（　）へ 行{い}きました。|びょういん|ゆうびんきょく|くうこう|ぎんこう|I fell yesterday and hurt myself, so I went to the hospital right away.
+スーパーで りんごを 3（　） 買{か}いました。|こ|まい|ひき|だい|I bought three apples at the supermarket.
+コーヒーに さとうを（　）。|入{い}れます|すわります|あるきます|ねます|I put sugar in my coffee.
+テストの けっかが よかったので、わたしは（　）。|うれしかったです|ねむかったです|こわかったです|さびしかったです|Because my test results were good, I was very happy.
+ねつが あるので、（　）を 休{やす}みます。|学校{がっこう}|くるま|天気{てんき}|お金{かね}|I have a fever, so I will miss school.
+ここに 名前{なまえ}を（　）ください。|書{か}いて|あるいて|入{はい}って|のって|Please write your name here.
+この たなは（　）ので、子{こ}どもでも とどきます。|ひくい|高{たか}い|ながい|あつい|This shelf is low, so even children can reach it.
+へやは いつも（　）です。ごみが ひとつも ありません。|きれい|ひま|げんき|上手{じょうず}|The room is always clean, with not a single piece of trash.
+かぜを ひいて、のどが（　）です。|いたい|ながい|ひろい|かるい|I caught a cold, and my throat hurts.
+雨{あめ}が ふって いるので、ながぐつを（　） 出{で}かけます。|はいて|きて|かぶって|かけて|It's raining, so I'll go out wearing rain boots.
+この かんじの よみかたが（　）。|分{わ}かりません|ありません|いりません|かかりません|I don't know how to read this kanji.
+ねこが いすの 上{うえ}に（　）。|います|あります|はいります|ならびます|A cat is on the chair.
+毎朝{まいあさ} 6時{じ}に（　）。|おきます|すわります|わらいます|休{やす}みます|I get up at six every morning.
+わたしは りょうりが すきです。毎日{まいにち}（　）を つくります。|朝{あさ}ごはん|てがみ|じしょ|きっぷ|I like cooking, and I make breakfast every day.
+一日{いちにち}じゅう あるいて、とても（　）。|つかれました|おぼえました|ふきました|ぬぎました|I walked all day, so I was very tired.
+あしたは（　）が ふります。|雪{ゆき}|はれ|かぜ|くもり|It will snow tomorrow.
+父{ちち}は 毎朝{まいあさ} 新聞{しんぶん}を（　）。|読{よ}みます|聞{き}きます|あらいます|おきます|My father reads the newspaper every morning.`,
+N4:`日本{にほん}の 生活{せいかつ}に もう（　）。|なれました|覚{おぼ}えました|知{し}りました|別{わか}れました|I've already gotten used to life in Japan.
+かぜを ひいたので、くすりを（　）。|飲{の}みました|食{た}べました|かけました|入{い}れました|I caught a cold, so I took some medicine.
+友達{ともだち}との 約束{やくそく}を（　）しまって、おこられました。|忘{わす}れて|なくして|落{お}として|こわして|I forgot my promise with my friend, and they got angry.
+来週{らいしゅう}の 会議{かいぎ}の 時間{じかん}を 部長{ぶちょう}に（　）。|連絡{れんらく}しました|世話{せわ}しました|心配{しんぱい}しました|えんりょしました|I told the manager the time of next week's meeting.
+道{みち}が（　）いて、なかなか 進{すす}みません。|こんで|空{す}いて|冷{ひ}えて|やせて|The road is crowded, so we're barely moving.
+山田{やまだ}さんは いつも（　）で、みんなに 好{す}かれて います。|親切{しんせつ}|不便{ふべん}|ざんねん|複雑{ふくざつ}|Mr. Yamada is always kind, and everyone likes him.
+試験{しけん}に 合格{ごうかく}したと 聞{き}いて、とても（　）。|うれしかったです|さびしかったです|こわかったです|ねむかったです|I was very happy to hear that I had passed the exam.
+窓{まど}を（　）と、すずしい 風{かぜ}が 入{はい}って きました。|開{あ}ける|閉{し}める|みがく|ふく|When I opened the window, a cool breeze came in.
+先生{せんせい}に 作文{さくぶん}を（　）もらいました。|直{なお}して|ならべて|拾{ひろ}って|間違{まちが}えて|I had my teacher correct my essay.
+この 仕事{しごと}は（　）が 高{たか}いですが、とても たいへんです。|きゅうりょう|ねだん|料金{りょうきん}|熱{ねつ}|This job pays well, but it's very hard.
+ゆうべは 遅{おそ}くまで 起{お}きて いたので、今日{きょう}は とても（　）です。|ねむい|いたい|うすい|苦{にが}い|I stayed up late last night, so I'm very sleepy today.
+大切{たいせつ}な 書類{しょるい}を なくさないように、かばんに（　）。|しまいました|すてました|ぬぎました|拾{ひろ}いました|I put the important papers away in my bag so I wouldn't lose them.
+旅行{りょこう}の 前{まえ}に、電車{でんしゃ}の きっぷを（　）。|よやくしました|出発{しゅっぱつ}しました|とうちゃくしました|ちこくしました|I reserved the train tickets before the trip.
+読{よ}んだ 本{ほん}を 友達{ともだち}の 家{いえ}に（　）。|届{とど}けました|集{あつ}めました|さわぎました|拾{ひろ}いました|I delivered the book I had read to my friend's house.
+部屋{へや}の 中{なか}で、財布{さいふ}を 一時間{いちじかん} かけて（　）。|探{さが}しました|さわぎました|引{ひ}きました|かざりました|I searched for my wallet in the room for an hour.
+友達{ともだち}の 誕生日{たんじょうび}を（　）。|おいわいしました|あんないしました|えんそうしました|さんかしました|I celebrated my friend's birthday.
+雨{あめ}が 降{ふ}る 前{まえ}に、せんたくした 服{ふく}を ベランダで（　）。|ほしました|あびました|さわぎました|覚{おぼ}えました|I hung the washed clothes on the balcony before it rained.
+先生{せんせい}の 説明{せつめい}は、とても（　）で わかりやすいです。|ていねい|複雑{ふくざつ}|きけん|ひま|The teacher's explanation is very careful and easy to understand.
+わからない 言葉{ことば}を 辞書{じしょ}で（　）。|調{しら}べます|書{か}きます|笑{わら}います|運{はこ}びます|I look up words I don't know in a dictionary.
+お客{きゃく}さんが 来{く}るので、部屋{へや}を（　）。|そうじしました|食{た}べました|飲{の}みました|笑{わら}いました|Guests were coming, so I cleaned the room.
+駅{えき}で 友達{ともだち}を（　）。|待{ま}ちました|食{た}べました|引{ひ}きました|乗{の}りました|I waited for my friend at the station.
+明日{あした}は（　）雨{あめ}が 降{ふ}るでしょう。|たぶん|ぜんぜん|けっして|あまり|It will probably rain tomorrow.
+パーティーの ために、部屋{へや}を（　）。|かざりました|わかしました|読{よ}みました|入{い}れました|I decorated the room for the party.
+きのうは 寒{さむ}かったですが、今日{きょう}は（　）です。|あたたかい|苦{にが}い|まずい|古{ふる}い|It was cold yesterday, but today is warm.
+かぜを ひいて、きょうは 会社{かいしゃ}を（　）。|休{やす}みます|曲{ま}がります|使{つか}います|あびます|I caught a cold, so I am taking today off work.
+おふろで かみを（　）。|洗{あら}います|読{よ}みます|はきます|ぬぎます|I wash my hair in the bath.
+じゅぎょうの 前{まえ}に、宿題{しゅくだい}を（　）。|出{だ}しました|笑{わら}いました|泳{およ}ぎました|乗{の}りました|I handed in my homework before class.
+ホテルの 部屋{へや}の（　）に 出{で}て、海{うみ}を 見{み}ました。|ベランダ|エアコン|カーテン|ベッド|I went out onto the hotel room's balcony and looked at the sea.
+雨{あめ}が 止{や}んで、空{そら}が（　）なりました。|明{あか}るく|苦{にが}く|あまく|あつく|The rain stopped, and the sky became bright.
+この 店{みせ}の ケーキは（　）ので、人気{にんき}です。|あまい|ねむい|寒{さむ}い|くさい|This shop's cake is sweet, so it is popular.
+今日{きょう}の テストの（　）は 九十{きゅうじゅう}点{てん}でした。|結果{けっか}|旅行{りょこう}|電話{でんわ}|けんこう|My test score was ninety points.
+先生{せんせい}は 生徒{せいと}の 努力{どりょく}を（　）。|ほめました|おこりました|笑{わら}いました|しかりました|The teacher praised the students' efforts.
+海{うみ}で おぼれた 子{こ}どもを（　）。|助{たす}けました|さわぎました|あきました|走{はし}りました|I rescued the child who was drowning in the sea.
+来月{らいげつ}の 海外{かいがい}旅行{りょこう}の ために、パスポートを（　）。|しんせいしました|ちゅうしゃしました|ふくしゅうしました|研究{けんきゅう}しました|I applied for a passport for my trip abroad next month.
+公園{こうえん}で ボールを（　）。|投{な}げます|飲{の}みます|食{た}べます|寝{ね}ます|I throw a ball in the park.
+電話{でんわ}で 友達{ともだち}に（　）。|話{はな}します|食{た}べます|泳{およ}ぎます|持{も}ちます|I talk with my friend on the phone.
+この 機械{きかい}の 使{つか}い方{かた}は（　）ので、わかりにくいです。|複雑{ふくざつ}な|静{しず}かな|元気{げんき}な|ひまな|The way to use this machine is complicated, so it is hard to understand.
+子{こ}どもの ころから、（　）この 町{まち}に 住{す}んで います。|ずっと|ぜんぜん|けっして|あまり|I have lived in this town ever since I was a child.
+その 本{ほん}は（　）ので、読{よ}みやすいです。|やさしい|赤{あか}い|苦{にが}い|まずい|That book is easy, so it is easy to read.
+この かばんは（　）ので、旅行{りょこう}に 便利{べんり}です。|軽{かる}い|重{おも}い|寒{さむ}い|赤{あか}い|This bag is light, so it is convenient for trips.
+知{し}らない 町{まち}で 道{みち}に（　）しまいました。|まよって|くらべて|わたして|かわいて|I got lost in a town I didn't know.
+洗{あら}った 服{ふく}が（　）まで、少{すこ}し 時間{じかん}が かかりました。|かわく|ぬれる|やく|きる|It took a little while for the washed clothes to dry.
+ぬれた 手{て}を タオルで（　）ください。|ふいて|よんで|かいて|はなして|Please dry your wet hands with a towel.
+来週{らいしゅう}の 試合{しあい}に 向{む}けて、毎日{まいにち} れんしゅうを（　）います。|つづけて|つづいて|けして|ぬいで|To prepare for next week's game, I keep practicing every day.
+ひさしぶりに 友達{ともだち}に 会{あ}って、（　）一日{いちにち}でした。|たのしい|くさい|あかい|かたい|I met a friend after a long time, and it was a fun day.
+明日{あした}の 朝{あさ}は 早{はや}いので、今夜{こんや}は 早{はや}く（　）つもりです。|寝{ね}る|洗{あら}う|押{お}す|かぶる|I have an early start tomorrow morning, so I plan to go to bed early tonight.
+電車{でんしゃ}が 止{と}まって、会社{かいしゃ}に（　）しました。|ちこく|ちゅうもん|せんたく|けっこん|The train stopped, so I was late for work.
+窓{まど}を 開{あ}けると、すずしい 風{かぜ}を（　）ました。|かんじ|わすれ|あらい|よやくし|When I opened the window, I felt a cool breeze.
+ほうちょうで トマトを（　）ください。|きって|つないで|はいて|ひいて|Please cut the tomatoes with a knife.
+かいぎで おきゃくさんに めいしを（　）ました。|くばり|むすび|わり|ふみ|At the meeting, I handed out my business cards to clients.
+来月{らいげつ}の こうざに（　）ました。|もうしこみ|ながし|おどり|ぬり|I signed up for next month's course.
+夏休{なつやす}みは いなかで（　）ました。|すごし|ぬぎ|たたき|はり|I spent my summer vacation in the countryside.
+公園{こうえん}の 桜{さくら}が きれいに（　）ました。|さき|つくり|かさね|ほどき|The cherry blossoms in the park bloomed beautifully.
+朝{あさ}は パンを（　）、コーヒーを 入{い}れます。|やいて|しぼって|はずして|ならして|In the morning, I toast bread and make coffee.
+最近{さいきん} 体重{たいじゅう}が（　）ので、うれしいです。|へった|かたまった|しずんだ|ひろがった|I've lost weight lately, so I'm happy.
+仕事{しごと}に（　）いたので、電話{でんわ}に 気{き}が つきませんでした。|しゅうちゅうして|はれて|こおって|わいて|I was focused on work, so I didn't notice the phone call.
+うちの 子{こ}は、ピアノを（　）のが 好{す}きです。|ひく|ぬぐ|はく|つむ|My child loves playing the piano.
+この 店{みせ}の 料理{りょうり}は 安{やす}くて、（　）です。|おいしい|ねむい|かゆい|ふかい|The food at this restaurant is cheap and delicious.
+かぜで 体{からだ}が（　）ので、今日{きょう}は 一日{いちにち} 寝{ね}ていました。|だるい|くらい|ひろい|あまい|I caught a cold and felt sluggish, so I stayed in bed all day.
+けがを したので、病院{びょういん}で（　）を してもらいました。|てあて|りょうがえ|よしゅう|ひっこし|I got hurt, so I received first aid at the hospital.`,
+N3:`会議{かいぎ}の 時間{じかん}が 変{か}わったことを、みんなに（　）ください。|知{し}らせて|調{しら}べて|預{あず}けて|支{ささ}えて|Please let everyone know that the meeting time has changed.
+約束{やくそく}の 時間{じかん}に 遅{おく}れたことを 何度{なんど}も（　）。|謝{あやま}った|断{ことわ}った|許{ゆる}した|祝{いわ}った|I apologized many times for being late.
+部屋{へや}が（　）いるので、片{かた}づけなさい。|散{ち}らかって|片{かた}づいて|空{あ}いて|並{なら}んで|Your room is a mess, so tidy it up.
+電車{でんしゃ}が 遅{おく}れて、会社{かいしゃ}に（　）して しまった。|遅刻{ちこく}|出席{しゅっせき}|予約{よやく}|参加{さんか}|The train was late, so I was late for work.
+雨{あめ}が 降{ふ}りそうなので、洗濯物{せんたくもの}を 早{はや}く（　）ほうがいい。|取{と}り込{こ}んだ|取{と}り消{け}した|払{はら}い込{こ}んだ|書{か}き込{こ}んだ|It looks like rain, so you should bring the laundry in soon.
+彼{かれ}は 声{こえ}が（　）、後{うし}ろの 席{せき}まで よく 聞{き}こえる。|大{おお}きくて|細{ほそ}くて|浅{あさ}くて|薄{うす}くて|His voice is loud, so you can hear him clearly even from the back seats.
+日本{にほん}に 来{き}て、日本{にほん}の 文化{ぶんか}に（　）を 持{も}つように なった。|興味{きょうみ}|意見{いけん}|理由{りゆう}|準備{じゅんび}|After coming to Japan, I became interested in Japanese culture.
+この スープは 味{あじ}が（　）ので、塩{しお}を 少{すこ}し 足{た}した。|薄{うす}い|濃{こ}い|苦{にが}い|固{かた}い|This soup tasted bland, so I added a little salt.
+引{ひ}っ越{こ}しの（　）を 友達{ともだち}に 手伝{てつだ}って もらった。|準備{じゅんび}|景色{けしき}|天気{てんき}|性格{せいかく}|My friend helped me get ready for the move.
+けがを して、1週間{しゅうかん} 学校{がっこう}を（　）。|休{やす}んだ|落{お}とした|閉{し}めた|終{お}えた|I got injured and missed school for a week.
+駅前{えきまえ}に 新{あたら}しい ビルが（　）。|建{た}った|立{た}てた|生{は}えた|置{お}いた|A new building went up in front of the station.
+子{こ}どもの ころの 写真{しゃしん}を 見{み}て、昔{むかし}を（　）。|思{おも}い出{だ}した|思{おも}いついた|見{み}つけた|気{き}づいた|Looking at my childhood photos, I remembered the old days.
+新{あたら}しい仕事{しごと}に（　）まで、少{すこ}し時間{じかん}がかかった。|慣{な}れる|残{のこ}る|欠{か}ける|伝{つた}わる|It took some time before I got used to my new job.
+雨{あめ}の日{ひ}は道{みち}が（　）ので、気{き}をつけてください。|滑{すべ}りやすい|鋭{するど}い|軽{かる}い|甘{あま}い|Be careful on rainy days, since the roads are slippery.
+病気{びょうき}が治{なお}るまで、激{はげ}しい運動{うんどう}は（　）ください。|控{ひか}えて|届{とど}けて|育{そだ}てて|預{あず}けて|Please refrain from intense exercise until your illness is cured.
+駅{えき}で財布{さいふ}を（　）ので、交番{こうばん}に行{い}って届{とど}けを出{だ}した。|落{お}とした|飲{の}んだ|並{なら}べた|焼{や}いた|I lost my wallet at the station, so I went to the police box and filed a report.
+明日{あした}の会議{かいぎ}で使{つか}う（　）を印刷{いんさつ}した。|資料{しりょう}|景色{けしき}|天気{てんき}|季節{きせつ}|I printed the materials I will use at tomorrow's meeting.
+海{うみ}が見{み}える（　）のいい部屋{へや}に泊{と}まった。|景色{けしき}|予約{よやく}|季節{きせつ}|天井{てんじょう}|We stayed in a room with a nice view of the sea.
+非常用{ひじょうよう}の水{みず}を買{か}ったのは、地震{じしん}への（　）だ。|対策{たいさく}|景色{けしき}|切符{きっぷ}|祭{まつ}り|I bought emergency water as a measure against earthquakes.
+この スープは 塩{しお}を 入{い}れすぎて（　）。|しょっぱくなった|甘{あま}くなった|酸{す}っぱくなった|苦{にが}くなった|I put too much salt in this soup, so it became very salty.
+試験{しけん}に合格{ごうかく}して、家族{かぞく}と（　）。|喜{よろこ}び合{あ}った|謝{あやま}り合{あ}った|断{ことわ}り合{あ}った|預{あず}け合{あ}った|I passed the exam and celebrated with my family.
+旅行先{りょこうさき}で道{みち}に（　）、地図{ちず}を見{み}た。|迷{まよ}って|囲{かこ}んで|沈{しず}んで|割{わ}れて|I got lost on my trip, so I looked at the map.
+健康{けんこう}のため、毎朝{まいあさ}公園{こうえん}のまわりを（　）ことにした。|走{はし}る|眠{ねむ}る|笑{わら}う|結{むす}ぶ|For my health, I decided to run around the park every morning.
+留学{りゅうがく}するために、奨学金{しょうがくきん}に（　）。|申{もう}し込{こ}んだ|届{とど}けた|支払{しはら}った|預{あず}けた|To study abroad, I applied for a scholarship.
+旅行{りょこう}の計画{けいかく}を立{た}てたが、（　）行{い}けなかった。|結局{けっきょく}|必{かなら}ず|ぜひ|さっそく|We made travel plans, but in the end we could not go.
+田中{たなか}さんは（　）人{ひと}で、困{こま}っている人{ひと}を必{かなら}ず助{たす}ける。|親切{しんせつ}な|乱暴{らんぼう}な|不便{ふべん}な|危険{きけん}な|Mr. Tanaka is a kind person who always helps people in trouble.
+新{あたら}しいアプリをダウンロードして、使{つか}い方{かた}を（　）。|調{しら}べた|届{とど}けた|預{あず}けた|叱{しか}った|I downloaded a new app and looked up how to use it.
+週末{しゅうまつ}の（　）を友達{ともだち}と相談{そうだん}した。|予定{よてい}|食器{しょっき}|天井{てんじょう}|郵便{ゆうびん}|I discussed my weekend plans with a friend.
+自分{じぶん}の意見{いけん}をはっきり（　）ことが大切{たいせつ}だ。|伝{つた}える|減{へ}らす|冷{ひ}やす|転{ころ}ぶ|It is important to clearly express your own opinion.
+この店{みせ}のラーメンは本当{ほんとう}に（　）。|美味{おい}しい|寂{さび}しい|眠{ねむ}い|狭{せま}い|The ramen at this shop is really delicious.
+締{し}め切{き}りが迫{せま}って、徹夜{てつや}でレポートを（　）。|仕上{しあ}げた|植{う}えた|煮{に}た|掘{ほ}った|The deadline was near, so I stayed up all night finishing my report.
+来週{らいしゅう}のテストに向{む}けて、単語{たんご}を（　）覚{おぼ}えた。|必死{ひっし}に|ぐっすり|にっこり|ふらふら|To prepare for next week's test, I memorized vocabulary with desperate effort.
+週末{しゅうまつ}に友達{ともだち}と海{うみ}で（　）をした。|サーフィン|ピアノ|カラオケ|登山{とざん}|On the weekend I went surfing at the beach with friends.
+子{こ}どもが寝{ね}ている間{あいだ}に、そっと部屋{へや}を（　）。|出{で}た|煮{に}た|噛{か}んだ|縮{ちぢ}めた|I quietly left the room while the child was sleeping.
+試合{しあい}が中止{ちゅうし}になって、チーム全員{ぜんいん}が（　）落{お}ち込{こ}んだ。|深{ふか}く|ぴかぴか|ふわふわ|きらきら|The game was cancelled, and the whole team was deeply discouraged.
+会議{かいぎ}の結論{けつろん}は、まだ（　）。|出{で}ていない|切{き}れていない|預{あず}かっていない|割{わ}れていない|The conclusion of the meeting has not come out yet.
+悩{なや}みを誰{だれ}かに（　）と、気持{きも}ちが楽{らく}になる。|話{はな}す|焼{や}く|煮{に}る|掘{ほ}る|When you talk about your worries with someone, you feel relieved.
+新{あたら}しい靴{くつ}は足{あし}に（　）ので、歩{ある}くと痛{いた}い。|合{あ}わない|広{ひろ}げない|並{なら}ばない|届{とど}かない|The new shoes do not fit my feet, so they hurt when I walk.
+料理{りょうり}の（　）を教{おし}えてもらった。|作{つく}り方{かた}|乗{の}り方{かた}|入{はい}り方{かた}|帰{かえ}り方{かた}|I was taught how to make the dish.
+駅前{えきまえ}の（　）で、家族{かぞく}の写真{しゃしん}を撮{と}った。|広場{ひろば}|天井{てんじょう}|調理{ちょうり}|郵便{ゆうびん}|We took a family photo at the plaza in front of the station.
+テストの結果{けっか}が悪{わる}くて、とても（　）。|残念{ざんねん}だった|得意{とくい}だった|便利{べんり}だった|丁寧{ていねい}だった|My test results were bad, so I was very disappointed.
+大雨{おおあめ}で電車{でんしゃ}が（　）、会社{かいしゃ}に遅{おく}れてしまった。|止{と}まった|止{と}めた|止{や}んだ|止{と}まらせた|Because of heavy rain the trains stopped, so I was late for work.
+リンさんが電話{でんわ}に（　）ので、留守番電話{るすばんでんわ}にメッセージを残{のこ}した。|出{で}なかった|来{こ}なかった|合{あ}わなかった|寄{よ}らなかった|Lin did not pick up the phone, so I left a message on the answering machine.
+先生{せんせい}の話{はなし}が難{むずか}しくて、内容{ないよう}を（　）ことができなかった。|理解{りかい}する|解決{かいけつ}する|修理{しゅうり}する|販売{はんばい}する|The teacher's lecture was hard, so I could not understand the content.
+コンビニで買{か}った弁当{べんとう}を、電子{でんし}レンジで（　）から食{た}べた。|温{あたた}めて|冷{ひ}やして|凍{こお}らせて|乾{かわ}かして|I heated the convenience-store lunch in the microwave and then ate it.
+先月{せんげつ}から、アパートの家賃{やちん}が（　）ので、生活{せいかつ}が大変{たいへん}だ。|上{あ}がった|下{さ}がった|払{はら}った|離{はな}れた|Since last month my apartment rent has gone up, so life is tough.
+ホテルの部屋{へや}を（　）ために、フロントに電話{でんわ}した。|予約{よやく}する|翻訳{ほんやく}する|販売{はんばい}する|注意{ちゅうい}する|I called the front desk to book a hotel room.
+パスポートの更新{こうしん}を（　）ために、役所{やくしょ}へ行{い}った。|申請{しんせい}する|解決{かいけつ}する|販売{はんばい}する|注意{ちゅうい}する|I went to the city office to apply for a passport renewal.
+電気代{でんきだい}を（　）ために、使{つか}わない部屋{へや}の明{あ}かりを消{け}している。|節約{せつやく}する|翻訳{ほんやく}する|修理{しゅうり}する|解決{かいけつ}する|To save on electricity bills, I turn off the lights in rooms I am not using.
+野菜{やさい}が足{た}りないので、ビタミンを（　）ために、サプリメントを飲{の}んでいる。|補{おぎな}う|減{へ}らす|届{とど}ける|割{わ}る|Because I do not eat enough vegetables, I take supplements to make up for a lack of vitamins.
+狭{せま}い部屋{へや}を（　）広{ひろ}く使{つか}っている。|工夫{くふう}して|解決{かいけつ}して|運転{うんてん}して|注文{ちゅうもん}して|I make good use of my small room by coming up with clever ideas.
+ひどいことを言{い}われて、（　）。|傷{きず}ついた|感動{かんどう}した|安心{あんしん}した|感心{かんしん}した|I was hurt by the cruel things that were said to me.
+面接{めんせつ}の前{まえ}は、（　）て、手{て}が震{ふる}えた。|緊張{きんちょう}して|安心{あんしん}して|満足{まんぞく}して|納得{なっとく}して|Before the job interview, I was so nervous that my hands were shaking.
+壊{こわ}れた携帯電話{けいたいでんわ}を、新{あたら}しいものと（　）。|交換{こうかん}した|相談{そうだん}した|反省{はんせい}した|出発{しゅっぱつ}した|I exchanged my broken cell phone for a new one.
+先月{せんげつ}、友達{ともだち}の結婚式{けっこんしき}の披露宴{ひろうえん}に（　）。|招待{しょうたい}された|遠慮{えんりょ}された|注意{ちゅうい}された|解雇{かいこ}された|Last month I was invited to my friend's wedding reception.
+なくした財布{さいふ}が、（　）。|見{み}つかった|見{み}つけた|見{み}せた|見{み}上{あ}げた|The wallet I had lost was found.
+台風{たいふう}が近{ちか}づいているので、今夜{こんや}は強{つよ}い風{かぜ}が（　）予想{よそう}だ。|吹{ふ}く|降{ふ}る|落{お}ちる|揺{ゆ}れる|With a typhoon approaching, strong winds are expected to blow tonight.
+セールで、ふだんより（　）値段{ねだん}で服{ふく}を買{か}った。|安{やす}い|高{たか}い|軽{かる}い|厚{あつ}い|I bought clothes at a lower price than usual during the sale.
+趣味{しゅみ}の絵{え}を（　）、コンテストに出{だ}した。|描{か}いて|編{あ}んで|弾{ひ}いて|歌{うた}って|For my hobby, I drew a picture and entered it in a contest.
+部長{ぶちょう}の（　）で、新{あたら}しいプロジェクトを始{はじ}めることになった。|提案{ていあん}|注意{ちゅうい}|計算{けいさん}|反省{はんせい}|At the manager's suggestion, we decided to start a new project.`,
+N2:`彼{かれ}の 説明{せつめい}は（　）で、よく わからなかった。|あいまい|明確{めいかく}|正確{せいかく}|適切{てきせつ}|His explanation was vague, so I didn't really understand it.
+大雪{おおゆき}の ため、交通{こうつう}が（　）している。|混乱{こんらん}|回復{かいふく}|拡大{かくだい}|発展{はってん}|Traffic is in chaos because of the heavy snow.
+予算{よさん}が 限{かぎ}られているので、費用{ひよう}を できるだけ（　）必要{ひつよう}が ある。|抑{おさ}える|備{そな}える|加{くわ}える|構{かま}える|The budget is limited, so we need to keep costs as low as possible.
+新{あたら}しい 制度{せいど}に ついて、社員{しゃいん}から 多{おお}くの（　）が 出{で}た。|不満{ふまん}|不足{ふそく}|不便{ふべん}|不安定{ふあんてい}|Employees voiced many complaints about the new system.
+台風{たいふう}の（　）で、電車{でんしゃ}が 止{と}まった。|影響{えいきょう}|効果{こうか}|結果{けっか}|印象{いんしょう}|The trains stopped because of the typhoon.
+彼女{かのじょ}は どんな 仕事{しごと}も（　）こなす。|てきぱきと|ぐっすり|うっかり|しっとり|She handles any job quickly and efficiently.
+失敗{しっぱい}を（　）に して、次{つぎ}は もっと 準備{じゅんび}を しよう。|教訓{きょうくん}|記念{きねん}|目標{もくひょう}|習慣{しゅうかん}|Let's learn from this failure and prepare better next time.
+長時間{ちょうじかん} パソコンを 使{つか}っていたら、目{め}が（　）。|疲{つか}れた|慣{な}れた|枯{か}れた|濡{ぬ}れた|My eyes got tired from using the computer for hours.
+合格{ごうかく}の 知{し}らせを 聞{き}いて、思{おも}わず 涙{なみだ}が（　）。|こぼれた|ながめた|ふくらんだ|ちぢんだ|When I heard I had passed, tears came to my eyes.
+計画{けいかく}を 実行{じっこう}する 前{まえ}に、もう一度{いちど} 内容{ないよう}を（　）しておこう。|確認{かくにん}|発見{はっけん}|発明{はつめい}|減少{げんしょう}|Let's check the details once more before carrying out the plan.
+その 映画{えいが}は 予想以上{よそういじょう}に 面白{おもしろ}くて、最後{さいご}まで（　）見{み}て しまった。|夢中{むちゅう}で|無理{むり}に|平気{へいき}で|一斉{いっせい}に|The movie was better than I expected, and I was absorbed until the end.
+会社{かいしゃ}の 規則{きそく}を（　）と、処分{しょぶん}される ことが ある。|破{やぶ}る|守{まも}る|決{き}める|従{したが}う|If you break company rules, you may be disciplined.
+地震{じしん}に 備{そな}えて、非常用{ひじょうよう}の 水{みず}と 食料{しょくりょう}を（　）して おいた。|備蓄{びちく}|予習{よしゅう}|出演{しゅつえん}|解決{かいけつ}|In preparation for an earthquake, I stockpiled emergency water and food.
+鈴木{すずき}さんは 会議{かいぎ}で 出{で}た 意見{いけん}を まとめて、（　）を 作成{さくせい}した。|議事録{ぎじろく}|座布団{ざぶとん}|靴下{くつした}|花粉{かふん}|Mr. Suzuki summarized the opinions raised in the meeting and prepared the minutes.
+子{こ}どもは 転{ころ}んでも 泣{な}かずに、（　）立{た}ち上{あ}がった。|さっと|ぐっすりと|しんしんと|ぎらぎらと|The child fell but didn't cry and quickly got up.
+不況{ふきょう}の 影響{えいきょう}で、多{おお}くの 会社{かいしゃ}が 経営{けいえい}（　）に 陥{おちい}った。|危機{きき}|機嫌{きげん}|規模{きぼ}|信用{しんよう}|Because of the economic downturn, many companies fell into a management crisis.
+彼女{かのじょ}は 話題{わだい}が 豊富{ほうふ}で、どんな 人{ひと}と 話{はな}しても 話{はなし}が（　）。|弾{はず}む|焦{こ}げる|腐{くさ}る|干{ひ}からびる|She has so many topics that conversations with anyone are always lively.
+大雨{おおあめ}で 川{かわ}の 水{みず}が（　）して、道路{どうろ}が 冠水{かんすい}した。|増水{ぞうすい}|蒸発{じょうはつ}|漂白{ひょうはく}|乾燥{かんそう}|Heavy rain made the river rise, and the road was flooded.
+父{ちち}は 会社{かいしゃ}を 定年{ていねん}（　）後{ご}、趣味{しゅみ}の 釣{つ}りを 楽{たの}しんでいる。|退職{たいしょく}|就職{しゅうしょく}|採用{さいよう}|転職{てんしょく}|After retiring at the mandatory retirement age, my father enjoys fishing as a hobby.
+マリアさんは 料理{りょうり}が 得意{とくい}で、新{あたら}しい レシピを 次々{つぎつぎ}と（　）している。|開発{かいはつ}|開通{かいつう}|解除{かいじょ}|開催{かいさい}|Maria is good at cooking and keeps developing new recipes one after another.
+パーティーの 準備{じゅんび}で、料理{りょうり}の（　）を 担当{たんとう}した。|献立{こんだて}|献金{けんきん}|献血{けんけつ}|献身{けんしん}|For the party, I took charge of planning the menu.
+ネットで 注文{ちゅうもん}を 受{う}けて、商品{しょうひん}を 全国{ぜんこく}に（　）している。|発送{はっそう}|発酵{はっこう}|発熱{はつねつ}|発作{ほっさ}|We take orders online and ship our products nationwide.
+リンさんは 誰{だれ}に 対{たい}しても（　）な 態度{たいど}で、みんなに 信頼{しんらい}されている。|誠実{せいじつ}|頑丈{がんじょう}|濃厚{のうこう}|豪華{ごうか}|Lin treats everyone sincerely, so people trust her.
+彼{かれ}の 話{はなし}は 長{なが}すぎて、聞{き}いている 方{ほう}が（　）に なってしまう。|退屈{たいくつ}|丈夫{じょうぶ}|清潔{せいけつ}|鮮{あざ}やか|His story goes on so long that listeners end up getting bored.
+会社{かいしゃ}の 新{あたら}しい 方針{ほうしん}は、社員{しゃいん}の 意見{いけん}を（　）して 決{き}められた。|反映{はんえい}|反応{はんのう}|反射{はんしゃ}|反撃{はんげき}|The company's new policy was decided after reflecting employees' opinions.
+その ニュースは 社会{しゃかい}に 大{おお}きな（　）を 与{あた}えた。|衝撃{しょうげき}|手順{てじゅん}|遺品{いひん}|名簿{めいぼ}|The news sent a huge shock through society.
+この 地域{ちいき}は 昔{むかし}から 農業{のうぎょう}が（　）で、米{こめ}と 野菜{やさい}が よく 作{つく}られている。|盛{さか}ん|鮮{あざ}やか|厳{おごそ}か|清{きよ}らか|This area has had a thriving farming industry for a long time, growing lots of rice and vegetables.
+彼{かれ}は 病気{びょうき}で 会社{かいしゃ}を 休{やす}んでいたが、ようやく 職場{しょくば}に（　）した。|復帰{ふっき}|帰国{きこく}|帰宅{きたく}|帰省{きせい}|He had been off work because of illness, but he finally returned to his workplace.
+店{みせ}の 前{まえ}に 大{おお}きな（　）が 出{で}ていて、新商品{しんしょうひん}の セールを 知{し}らせている。|看板{かんばん}|看護{かんご}|看病{かんびょう}|看守{かんしゅ}|A large sign in front of the shop announces a sale on new products.
+家族{かぞく}の 誕生日{たんじょうび}に、有名{ゆうめい}な 温泉{おんせん}（　）を 予約{よやく}した。|旅館{りょかん}|旅券{りょけん}|旅費{りょひ}|旅人{たびびと}|For my family's birthday, I booked a famous hot spring inn.
+新{あたら}しい 環境{かんきょう}に（　）のには、少{すこ}し 時間{じかん}が かかる。|適応{てきおう}する|適用{てきよう}する|応用{おうよう}する|対照{たいしょう}する|It takes some time to adapt to a new environment.
+この 薬{くすり}は 飲{の}んだ 後{あと}、眠気{ねむけ}が（　）ことが あるので、運転{うんてん}しないでください。|生{しょう}じる|含{ふく}まれる|逆{さか}らう|吸{す}う|This medicine may cause drowsiness after you take it, so do not drive.
+彼{かれ}は 性格{せいかく}が（　）で、どんな 相談{そうだん}にも 親身{しんみ}に 乗{の}ってくれる。|温厚{おんこう}|華麗{かれい}|豪華{ごうか}|盛大{せいだい}|He is even-tempered and kind, and always listens sincerely to any concern.
+この 本{ほん}は 内容{ないよう}が（　）ので、子{こ}どもにも 読{よ}みやすい。|易{やさ}しい|眩{まぶ}しい|冷{つめ}たい|騒{さわ}がしい|The content of this book is easy, so children can read it without trouble.
+彼{かれ}は 大事{だいじ}な 試合{しあい}の 前{まえ}で 緊張{きんちょう}して、（　）手{て}が 震{ふる}えていた。|小刻{こきざ}みに|大胆{だいたん}に|円満{えんまん}に|淡々{たんたん}と|He was so nervous before the big game that his hands were trembling in small, rapid movements.
+仕事{しごと}の 締{し}め切{き}りに 間{ま}に合{あ}わせるため、チームで（　）を 立{た}てた。|スケジュール|コンセント|カーテン|ドライブ|To meet the deadline, our team made a schedule.
+パソコンの 調子{ちょうし}が 悪{わる}いので、専門{せんもん}の 店{みせ}で（　）を 受{う}けた。|メンテナンス|ダイエット|ドレッシング|ペンキ|My computer was running poorly, so I had it serviced at a specialist shop.
+大雨{おおあめ}で 停電{ていでん}した 地域{ちいき}では、懐中電灯{かいちゅうでんとう}や（　）が 大活躍{だいかつやく}した。|乾電池{かんでんち}|乾杯{かんぱい}|乾季{かんき}|乾燥{かんそう}|In areas hit by the heavy rain and power outages, flashlights and batteries were extremely useful.
+彼女{かのじょ}は 失敗{しっぱい}を 気{き}にせず、（　）前{まえ}を 向{む}いて 歩{ある}いていた。|堂々{どうどう}と|ぎっしりと|しとしとと|ぴかぴかと|She didn't dwell on her failure and walked forward with confidence.
+毎月{まいつき}の 家計{かけい}を 見直{みなお}して、（　）を 節約{せつやく}する ことにした。|食費{しょくひ}|食卓{しょくたく}|食欲{しょくよく}|食道{しょくどう}|After reviewing the monthly household budget, we decided to cut back on food expenses.
+仕事{しごと}の 遅{おく}れを（　）ために、毎日{まいにち} 遅{おそ}くまで 残業{ざんぎょう}している。|取{と}り戻{もど}す|取{と}り次{つ}ぐ|取{と}り入{い}れる|取{と}り違{ちが}える|I am working late every day to make up for a mistake at work.
+大雨{おおあめ}で 道路{どうろ}が（　）ため、通行止{つうこうど}めに なった。|冠水{かんすい}した|蒸発{じょうはつ}した|漂白{ひょうはく}した|乾燥{かんそう}した|Heavy rain flooded the road, so it was closed to traffic.
+大事{だいじ}な 会議{かいぎ}の 前{まえ}なのに、寝坊{ねぼう}して（　）。|遅刻{ちこく}した|反論{はんろん}した|残業{ざんぎょう}した|協力{きょうりょく}した|Even though an important meeting was coming up, I overslept and was late.
+試験{しけん}に 落{お}ちた 彼{かれ}は、（　）顔{かお}で 部屋{へや}に 閉{と}じこもった。|不機嫌{ふきげん}な|上機嫌{じょうきげん}な|不器用{ぶきよう}な|不要{ふよう}な|After failing the exam, he shut himself in his room with a sulky look on his face.
+祖母{そぼ}は 年{とし}を とって、耳{みみ}が（　）ので、大{おお}きな 声{こえ}で 話{はな}すように している。|遠{とお}くなった|長{なが}くなった|高{たか}くなった|薄{うす}くなった|My grandmother has grown older and gone a bit deaf, so I try to speak loudly.
+大雨{おおあめ}で 山{やま}の 斜面{しゃめん}が（　）、道路{どうろ}が ふさがった。|崩{くず}れて|溶{と}けて|沈{しず}んで|漏{も}れて|Heavy rain caused the mountainside to collapse, blocking the road.
+会社{かいしゃ}の 業績{ぎょうせき}が（　）、ボーナスが 減{へ}った。|悪化{あっか}して|増加{ぞうか}して|協調{きょうちょう}して|解消{かいしょう}して|Because the company's performance worsened, our bonuses went down.
+試合{しあい}は 最後{さいご}の 一点{いってん}で（　）終{お}わった。|劇的{げきてき}に|一方的{いっぽうてき}に|冷静{れいせい}に|平等{びょうどう}に|The game ended dramatically with a last-minute goal.
+社長{しゃちょう}は、社員{しゃいん}の 努力{どりょく}を（　）ために、ボーナスを 増{ふ}やした。|評価{ひょうか}する|保護{ほご}する|解析{かいせき}する|軽視{けいし}する|The president increased bonuses to recognize the employees' efforts.
+寒{さむ}さで 手{て}が（　）しまい、ペンが うまく 持{も}てなかった。|かじかんで|縮{ちぢ}んで|透{す}き通{とお}って|ほころんで|My hands went numb from the cold, so I could not hold the pen well.
+彼{かれ}は、社員{しゃいん}の 不満{ふまん}を（　）ために、話{はな}し合{あ}いの 場{ば}を 設{もう}けた。|解消{かいしょう}する|増大{ぞうだい}させる|保{たも}つ|高{たか}める|He set up a meeting to resolve the employees' dissatisfaction.
+会議{かいぎ}の 時間{じかん}が（　）ので、資料{しりょう}の 準備{じゅんび}を 急{いそ}いだ。|迫{せま}っていた|乱{みだ}れていた|傾{かたむ}いていた|凍{こお}っていた|Since the meeting time was approaching, I hurried to prepare the materials.
+来週{らいしゅう}の 出張{しゅっちょう}に 備{そな}えて、資料{しりょう}を（　）しておいた。|用意{ようい}して|注意{ちゅうい}して|注目{ちゅうもく}して|反省{はんせい}して|To prepare for next week's business trip, I got the materials ready in advance.
+工場{こうじょう}では、製品{せいひん}の 品質{ひんしつ}を（　）ために、検査{けんさ}を 厳{きび}しく している。|維持{いじ}する|販売{はんばい}する|輸出{ゆしゅつ}する|申告{しんこく}する|The factory is tightening inspections in order to maintain product quality.
+彼{かれ}は、目標{もくひょう}を（　）ために、毎日{まいにち} 英語{えいご}の 勉強{べんきょう}を 続{つづ}けている。|達成{たっせい}する|放棄{ほうき}する|提案{ていあん}する|寄付{きふ}する|He keeps studying English every day in order to achieve his goal.
+夏{なつ}は、冷房{れいぼう}の（　）で 電気代{でんきだい}が 高{たか}くなりやすい。|使用{しよう}|停止{ていし}|節約{せつやく}|販売{はんばい}|In summer, using the air conditioner tends to make the electricity bill go up.
+彼女{かのじょ}は、外国{がいこく}での 生活{せいかつ}に（　）ために、毎日{まいにち} 日本語{にほんご}を 練習{れんしゅう}している。|なじむ|驚{おどろ}く|飽{あ}きる|疲{つか}れる|She practices Japanese every day in order to get used to life abroad.
+薬{くすり}の（　）を 守{まも}って、正{ただ}しく 飲{の}んで ください。|用法{ようほう}|用意{ようい}|用事{ようじ}|用語{ようご}|Please follow the directions for use and take the medicine correctly.
+薬{くすり}を 飲{の}んだ 後{あと}、副作用{ふくさよう}が（　）ことが あるので、注意{ちゅうい}して ください。|現{あらわ}れる|与{あた}える|引{ひ}き起{お}こす|防{ふせ}ぐ|Side effects may appear after taking the medicine, so please be careful.
+来年{らいねん}から、この 大学{だいがく}では 留学生{りゅうがくせい}の（　）を 増{ふ}やす 計画{けいかく}だ。|受{う}け入{い}れ|受{う}け取{と}り|受{う}け流{なが}し|受{う}け売{う}り|Starting next year, this university plans to expand its acceptance of international students.`,
+N1:`彼{かれ}の 発言{はつげん}は 事実{じじつ}と（　）して いたため、訂正{ていせい}を 求{もと}められた。|相違{そうい}|相応{そうおう}|相互{そうご}|相当{そうとう}|His statement differed from the facts, so he was asked to correct it.
+解決{かいけつ}しなければ ならない 課題{かだい}が（　）している。|山積{さんせき}|満載{まんさい}|密集{みっしゅう}|充満{じゅうまん}|There is a mountain of issues that must be resolved.
+新製品{しんせいひん}の 売{う}れ行{ゆ}きが（　）で、増産{ぞうさん}が 決{き}まった。|好調{こうちょう}|不振{ふしん}|低迷{ていめい}|停滞{ていたい}|Sales of the new product were strong, so they decided to increase production.
+長年{ながねん}の 努力{どりょく}が 実{み}を（　）、ついに 賞{しょう}を 受{う}けた。|結{むす}び|付{つ}け|取{と}り|持{も}ち|Years of effort paid off, and she finally won an award.
+彼女{かのじょ}は 周囲{しゅうい}の 反対{はんたい}を（　）、独立{どくりつ}を 果{は}たした。|押{お}し切{き}って|打{う}ち切{き}って|割{わ}り切{き}って|踏{ふ}み切{き}って|She overrode the objections of those around her and went independent.
+経費{けいひ}削減{さくげん}の ため、不要{ふよう}な 会議{かいぎ}は（　）された。|廃止{はいし}|投棄{とうき}|解雇{かいこ}|撤去{てっきょ}|Unnecessary meetings were abolished to cut costs.
+彼{かれ}は（　）な 性格{せいかく}で、書類{しょるい}の ミスを ほとんど しない。|几帳面{きちょうめん}|大雑把{おおざっぱ}|無邪気{むじゃき}|臆病{おくびょう}|He is meticulous and rarely makes mistakes in documents.
+事故{じこ}の 原因{げんいん}を（　）ために、調査{ちょうさ}委員会{いいんかい}が 設置{せっち}された。|究明{きゅうめい}する|表明{ひょうめい}する|声明{せいめい}する|照明{しょうめい}する|An investigative committee was set up to get to the bottom of the accident.
+子{こ}どもの 頃{ころ}から 培{つちか}った 経験{けいけん}が、今{いま}の 仕事{しごと}に（　）いる。|生{い}きて|至{いた}って|及{およ}んで|富{と}んで|The experience I've built up since childhood is put to use in my current job.
+彼{かれ}の 提案{ていあん}は（　）の 空論{くうろん}に すぎない。|机上{きじょう}|卓上{たくじょう}|壇上{だんじょう}|路上{ろじょう}|His proposal is nothing more than armchair theory.
+景気{けいき}の 先行{さきゆ}きが 不透明{ふとうめい}で、企業{きぎょう}は 投資{とうし}に（　）に なっている。|慎重{しんちょう}|軽率{けいそつ}|頑丈{がんじょう}|豊富{ほうふ}|With the economic outlook uncertain, companies have become cautious about investing.
+締{し}め切{き}りが 迫{せま}っており、この 作業{さぎょう}は（　）を 要{よう}する。|急{きゅう}|速{そく}|早{そう}|即{そく}|The deadline is approaching, so this work is urgent.
+政府{せいふ}は 物価{ぶっか}の（　）を 抑{おさ}えるため、金利{きんり}を 引{ひ}き上{あ}げた。|高騰{こうとう}|高揚{こうよう}|好況{こうきょう}|停滞{ていたい}|The government raised interest rates to curb the surge in prices.
+マリアさんは 手術後{しゅじゅつご}の（　）が 順調{じゅんちょう}で、来週{らいしゅう}には 退院{たいいん}できそうだ。|経過{けいか}|経歴{けいれき}|経由{けいゆ}|経費{けいひ}|Maria's recovery after surgery is going smoothly, and she may be discharged next week.
+新{あたら}しい 住宅地{じゅうたくち}の（　）が 完了{かんりょう}し、住民{じゅうみん}が 入居{にゅうきょ}を 始{はじ}めた。|造成{ぞうせい}|造船{ぞうせん}|造詣{ぞうけい}|造花{ぞうか}|Land development for the new residential area was completed, and residents began moving in.
+キムさんは 証拠{しょうこ}の（　）を 理由{りゆう}に、無罪{むざい}を 主張{しゅちょう}した。|不備{ふび}|不遇{ふぐう}|不振{ふしん}|不朽{ふきゅう}|Kim claimed innocence, citing flaws in the evidence.
+田中{たなか}さんは 会議{かいぎ}の（　）を 務{つと}め、議論{ぎろん}を 上手{じょうず}に まとめた。|司会{しかい}|司令{しれい}|司書{ししょ}|司法{しほう}|Mr. Tanaka served as the meeting moderator and skillfully summed up the discussion.
+大雨{おおあめ}による 河川{かせん}の（　）で、住宅街{じゅうたくがい}が 浸水{しんすい}した。|氾濫{はんらん}|反転{はんてん}|繁忙{はんぼう}|汎用{はんよう}|Heavy rain caused the river to overflow, and the residential area was flooded.
+ストレスが 原因{げんいん}で、胃{い}に（　）が 生{しょう}じた。|潰瘍{かいよう}|憔悴{しょうすい}|陶酔{とうすい}|錯乱{さくらん}|Stress caused an ulcer in his stomach.
+その 作家{さっか}の（　）は 独特{どくとく}で、多{おお}くの 読者{どくしゃ}を 魅了{みりょう}している。|文体{ぶんたい}|文脈{ぶんみゃく}|文献{ぶんけん}|文楽{ぶんらく}|The writer's style is distinctive and captivates many readers.
+市{し}は 財政{ざいせい}の（　）を 解消{かいしょう}するため、公共事業{こうきょうじぎょう}を 見直{みなお}した。|逼迫{ひっぱく}|繁栄{はんえい}|懐疑{かいぎ}|繁忙{はんぼう}|To resolve the tight fiscal situation, the city reviewed its public works projects.
+彼女{かのじょ}は 新{あたら}しい 事業{じぎょう}の（　）を 練{ね}るため、毎晩{まいばん} 遅{おそ}くまで 資料{しりょう}を 読{よ}んだ。|構想{こうそう}|構内{こうない}|構文{こうぶん}|構音{こうおん}|To refine the concept for her new business, she read materials late into the night every evening.
+彼{かれ}は 責任{せきにん}を（　）、部下{ぶか}に すべてを 押{お}しつけた。|逃{のが}れて|果{は}たして|感{かん}じて|負{お}って|He evaded responsibility and pushed everything onto his subordinates.
+父{ちち}は 私{わたし}の 将来{しょうらい}を（　）、留学{りゅうがく}に 反対{はんたい}した。|案{あん}じて|誇{ほこ}って|祝{いわ}って|競{きそ}って|Worried about my future, my father opposed my plan to study abroad.
+リンさんは 誤解{ごかい}を（　）ために、丁寧{ていねい}に 事情{じじょう}を 説明{せつめい}した。|解{と}く|生{しょう}じる|招{まね}く|抱{いだ}く|Lin explained the situation carefully to clear up the misunderstanding.
+大雪{おおゆき}で 道路{どうろ}が（　）ため、通行止{つうこうど}めに なった。|凍結{とうけつ}した|固定{こてい}した|結晶{けっしょう}した|乾燥{かんそう}した|Heavy snow froze the road, so it was closed to traffic.
+彼女{かのじょ}の 提案{ていあん}は、社内{しゃない}の 反対{はんたい}で（　）しまった。|頓挫{とんざ}して|凌駕{りょうが}して|陥落{かんらく}して|没落{ぼつらく}して|Her proposal fell through because of opposition within the company.
+記者{きしゃ}は 政治家{せいじか}の 不正{ふせい}を（　）ため、三年{さんねん}がかりで 取材{しゅざい}を 続{つづ}けた。|暴{あば}く|隠{かく}す|企{くわだ}てる|養{やしな}う|The reporter spent three years investigating to expose a politician's wrongdoing.
+彼{かれ}は 失敗{しっぱい}の ショックで、しばらく 部屋{へや}に（　）いた。|閉{と}じこもって|閉{と}じ込{こ}めて|閉{と}ざして|閉{し}め切{き}って|After the shock of the failure, he shut himself in his room for a while.
+その 店{みせ}は 材料{ざいりょう}の 質{しつ}に（　）、毎朝{まいあさ} 新鮮{しんせん}な 食材{しょくざい}を 仕入{しい}れている。|こだわって|甘{あま}んじて|浸{ひた}って|屈{くっ}して|That shop insists on the quality of its ingredients and buys fresh produce every morning.
+今年{ことし}は 暖冬{だんとう}の 影響{えいきょう}で、桜{さくら}の 開花{かいか}が 例年{れいねん}より（　）。|早{はや}まった|早{はや}めた|早{はや}まらせた|遅{おく}らせた|Because of the mild winter, the cherry blossoms bloomed earlier than usual this year.
+彼女{かのじょ}は（　）な 性格{せいかく}で、決{けっ}して 自分{じぶん}の 手柄{てがら}を 自慢{じまん}しない。|謙虚{けんきょ}|狡猾{こうかつ}|陰湿{いんしつ}|偏屈{へんくつ}|She is humble and never boasts about her achievements.
+彼{かれ}は 終始{しゅうし}（　）で、相手{あいて}の 怒{いか}りを 静{しず}めた。|冷静{れいせい}|軽薄{けいはく}|粗暴{そぼう}|陰鬱{いんうつ}|He stayed calm throughout and managed to soothe the other party's anger.
+この 計画{けいかく}は 資金{しきん}の 裏付{うらづ}けが（　）ので、実現{じつげん}は 難{むずか}しい。|乏{とぼ}しい|鈍{にぶ}い|重{おも}い|遅{おそ}い|This plan lacks financial backing, so it will be difficult to carry out.
+田中{たなか}さんの 話{はなし}は（　）で、聞{き}く 人{ひと}が すぐに 理解{りかい}できる。|明快{めいかい}|冗漫{じょうまん}|朦朧{もうろう}|雑駁{ざっぱく}|Mr. Tanaka's talks are so clear that listeners understand them right away.
+彼{かれ}は 借金{しゃっきん}の 返済計画{へんさいけいかく}を（　）に 立{た}て、家族{かぞく}を 安心{あんしん}させた。|綿密{めんみつ}|杜撰{ずさん}|漠然{ばくぜん}|無謀{むぼう}|He drew up a meticulous plan to repay his debts and reassured his family.
+キムさんは 締{し}め切{き}りを（　）守{まも}り、一度{いちど}も 遅{おく}れた ことが ない。|厳格{げんかく}に|漸次{ぜんじ}|大幅{おおはば}に|毛頭{もうとう}|Kim strictly kept every deadline and had never once been late.
+寒波{かんぱ}の 影響{えいきょう}で、気温{きおん}は（　）下{さ}がり、雪{ゆき}が 降{ふ}り始{はじ}めた。|急激{きゅうげき}に|漠然{ばくぜん}と|懸命{けんめい}に|得意{とくい}げに|Because of the cold wave, the temperature dropped sharply and snow began to fall.
+会社{かいしゃ}は 経営{けいえい}の 立{た}て直{なお}しのため、（　）な 改革{かいかく}を 断行{だんこう}した。|ドラスティック|ロマンチック|ナチュラル|ルーズ|To turn the company's management around, the firm carried out drastic reforms.
+アリさんは 病気{びょうき}を 隠{かく}して、（　）働{はたら}き続{つづ}けた。|黙々{もくもく}と|愕然{がくぜん}と|傲然{ごうぜん}と|忽然{こつぜん}と|Ali kept working silently while hiding his illness.
+結論{けつろん}を（　）出{だ}すのは 早計{そうけい}だ。|性急{せいきゅう}に|厳重{げんじゅう}に|陰険{いんけん}に|猛烈{もうれつ}に|It is premature to draw a conclusion hastily.
+部屋{へや}は（　）と 片付{かたづ}いていて、客{きゃく}を 迎{むか}える 準備{じゅんび}が 整{ととの}っていた。|整然{せいぜん}と|騒然{そうぜん}と|漠然{ばくぜん}と|猛然{もうぜん}と|The room was neatly tidied, and everything was ready to welcome the guests.
+自分{じぶん}の 失敗{しっぱい}は（　）、人{ひと}の 欠点{けってん}ばかり 批判{ひはん}するのは 感心{かんしん}しない。|棚{たな}に上{あ}げて|腹{はら}を割{わ}って|手{て}を焼{や}いて|幅{はば}を利{き}かせて|It is not admirable to set aside your own failures and criticize only other people's faults.
+事故{じこ}の 知{し}らせを 聞{き}いた 彼{かれ}は、（　）顔{かお}で 立{た}ち尽{つ}くした。|茫然{ぼうぜん}とした|陶然{とうぜん}とした|嬉々{きき}とした|悠然{ゆうぜん}とした|Hearing the news of the accident, he stood there with a dazed expression.
+彼{かれ}は 部下{ぶか}の 手柄{てがら}を（　）、自分{じぶん}の 功績{こうせき}にした。|横取{よこど}りして|称{たた}えて|譲{ゆず}って|分{わ}け与{あた}えて|He took his subordinate's achievement and made it his own.
+彼{かれ}は 会議{かいぎ}の 進{すす}め方{かた}に 不満{ふまん}を 抱{いだ}き、（　）口調{くちょう}で 批判{ひはん}した。|辛辣{しんらつ}な|寡黙{かもく}な|陽気{ようき}な|無邪気{むじゃき}な|Dissatisfied with how the meeting was run, he criticized it in a scathing tone.
+彼女{かのじょ}は（　）態度{たいど}を 崩{くず}さず、最後{さいご}まで 自分{じぶん}の 主張{しゅちょう}を 曲{ま}げなかった。|頑{かたく}なな|淡白{たんぱく}な|殊勝{しゅしょう}な|軽妙{けいみょう}な|She never relaxed her stubborn stance and refused to bend her position until the end.
+彼{かれ}は（　）、週末{しゅうまつ}も 休{やす}まず 働{はたら}き続{つづ}けた。|寝食{しんしょく}を忘{わす}れて|寝耳{ねみみ}に水{みず}で|目{め}から鱗{うろこ}で|猫{ねこ}の額{ひたい}で|He kept working without rest, even on weekends, forgetting to eat and sleep.
+期限{きげん}が 迫{せま}っているので、（　）作業{さぎょう}を 進{すす}めなければ ならない。|手{て}早{ばや}く|手{て}厳{きび}しく|手{て}短{みじか}に|手{て}薄{うす}く|Since the deadline is approaching, we must proceed with the work quickly.
+彼{かれ}は 失敗{しっぱい}を 恐{おそ}れる あまり、新{あたら}しい 挑戦{ちょうせん}に（　）ばかりいる。|尻込{しりご}みして|飛{と}びついて|踏{ふ}み込{こ}んで|割{わ}り込{こ}んで|Fearing failure, he keeps shrinking back from new challenges.
+彼{かれ}は 仕事{しごと}の 合間{あいま}を 縫{ぬ}って、資格{しかく}試験{しけん}の 勉強{べんきょう}に（　）。|余念{よねん}がない|余地{よち}がない|余力{よりょく}がない|余韻{よいん}がない|He squeezes in time between work to devote himself wholeheartedly to studying for a qualification exam.
+経済{けいざい}の（　）を 立{た}て直{なお}すため、政府{せいふ}は 大胆{だいたん}な 政策{せいさく}を 打{う}ち出{だ}した。|低迷{ていめい}|繁盛{はんじょう}|隆盛{りゅうせい}|盛況{せいきょう}|To revive the sluggish economy, the government introduced bold policies.
+その 計画{けいかく}は（　）な 部分{ぶぶん}が 多{おお}く、実現{じつげん}は 困難{こんなん}だ。|非現実的{ひげんじつてき}な|慎重{しんちょう}な|謙虚{けんきょ}な|寛大{かんだい}な|Many parts of this plan are unrealistic, so it will be difficult to carry out.
+彼{かれ}は（　）反論{はんろん}を 重{かさ}ね、会議{かいぎ}は 一時間{いちじかん}も 紛糾{ふんきゅう}した。|執拗{しつよう}に|簡潔{かんけつ}に|謙虚{けんきょ}に|寛大{かんだい}に|He kept raising objections relentlessly, and the meeting was in turmoil for over an hour.
+彼{かれ}は（　）ほど 大{おお}きな 声{こえ}で 話{はな}すので、周囲{しゅうい}が 驚{おどろ}いた。|耳{みみ}をつんざく|目{め}を凝{こ}らす|鼻{はな}を高{たか}くする|耳{みみ}を傾{かたむ}ける|He spoke in a voice so loud that it pierced the ears, so those around him were startled.
+先生{せんせい}は 生徒{せいと}の 作文{さくぶん}に、一{ひと}つ一{ひと}つ（　）添削{てんさく}を してくださった。|丹念{たんねん}に|大雑把{おおざっぱ}に|無頓着{むとんちゃく}に|大胆{だいたん}に|The teacher corrected each student's essay carefully, one by one.
+彼{かれ}は 一流{いちりゅう}の 選手{せんしゅ}に（　）実力{じつりょく}を 持{も}っている。|匹{ひっ}敵{てき}する|該当{がいとう}する|妥当{だとう}する|信頼{しんらい}する|He has ability that rivals that of a top-class athlete.
+彼{かれ}の 突然{とつぜん}の 辞職{じしょく}は、社内{しゃない}に（　）を 投{な}げかけた。|波紋{はもん}|波長{はちょう}|波浪{はろう}|波動{はどう}|His sudden resignation sent ripples through the company.
+被害者{ひがいしゃ}の 家族{かぞく}は、犯人{はんにん}への（　）を 募{つの}らせていた。|憎悪{ぞうお}|敬愛{けいあい}|寛容{かんよう}|懇願{こんがん}|The victim's family had been building up hatred toward the culprit.
+彼{かれ}は 仲間{なかま}の 裏切{うらぎ}りを 知{し}り、（　）言葉{ことば}を 失{うしな}った。|愕然{がくぜん}として|漠然{ばくぜん}として|悠然{ゆうぜん}として|陶然{とうぜん}として|Learning of his friend's betrayal, he was dumbfounded and at a loss for words.`
 },
 grammar: {
-N5:`わたしは まいあさ 7じ（　）おきます。|に|で|を|が|I get up at 7 every morning.
+N5:`わたしは 毎朝{まいあさ} 7時{じ}（　）おきます。|に|で|を|が|I get up at 7 every morning.
 としょかん（　）べんきょうします。|で|に|を|へ|I study at the library.
-きのう、ともだち（　）えいがを みました。|と|を|へ|で|Yesterday I watched a movie with a friend.
+きのう、ともだち（　）えいがを 見{み}ました。|と|を|へ|で|Yesterday I watched a movie with a friend.
 この りんごは あまくて（　）です。|おいしい|おいしくて|おいしく|おいしいの|This apple is sweet and delicious.
 きのうは（　）。|さむくなかったです|さむくないでした|さむいじゃなかったです|さむいでした|It wasn't cold yesterday.
-A「いっしょに ひるごはんを たべ（　）か。」B「ええ、たべましょう。」|ません|ました|たい|て|"Would you like to have lunch together?" "Yes, let's."
+A「いっしょに 昼{ひる}ごはんを 食{た}べ（　）か。」B「ええ、食{た}べましょう。」|ません|ました|たい|て|"Would you like to have lunch together?" "Yes, let's."
 へやに だれ（　）いません。|も|が|を|に|There is no one in the room.
-テレビを（　）ながら、ごはんを たべます。|み|みて|みる|みた|I eat while watching TV.
+テレビを（　）ながら、ごはんを 食{た}べます。|見{み}|見{み}て|見{み}る|見{み}た|I eat while watching TV.
 ここで しゃしんを とって（　）いいですか。|も|は|が|を|May I take pictures here?
-にほんごが（　）なりました。|じょうずに|じょうずく|じょうずな|じょうずで|My Japanese has gotten better.
-あした テストが ありますから、きょうは べんきょう（　）なければ なりません。|し|する|して|しない|I have a test tomorrow, so I have to study today.
-この へやは しずか（　）ひろいです。|で|くて|に|の|This room is quiet and spacious.`,
-N4:`日本へ 行ったら、すしを 食べて（　）です。|みたい|しまい|ある|いる|When I go to Japan, I want to try sushi.
-窓が 開けて（　）。|あります|います|おきます|しまいます|The window has been left open.
-薬を 飲んだ（　）、熱が 下がりません。|のに|ので|から|ら|Even though I took medicine, my fever won't go down.
-先生に 名前を（　）。|呼ばれました|呼びました|呼んでいました|呼べました|My name was called by the teacher.
-この 本は 漢字が 多くて、わたしには 読み（　）です。|にくい|やすい|すぎ|たい|This book has a lot of kanji, so it's hard for me to read.
-母は 子どもに 野菜を 食べ（　）ました。|させ|られ|させられ|て|The mother made her child eat vegetables.
-今にも 雨が（　）そうです。|降り|降る|降って|降った|It looks like it's going to rain any moment.
-宿題を 忘れない（　）、メモを 書きました。|ように|のに|ので|ながら|I wrote a note so that I wouldn't forget my homework.
-部屋を 出る 前に、電気を 消して（　）ください。|おいて|あって|いって|みせて|Please turn off the lights before you leave the room.
-この 料理は 作り方が 簡単（　）、おいしいです。|で|くて|に|だ|This dish is easy to make and tasty.
-日本語が 話せる（　）なりました。|ように|ために|ことが|そうに|I've become able to speak Japanese.
-今から 出かける（　）です。|ところ|ばかり|まま|あいだ|I'm just about to go out.`,
-N3:`雨が 降っている（　）、彼は 傘を 持たずに 出かけた。|のに|ので|から|ため|Even though it was raining, he went out without an umbrella.
-先生が おっしゃった（　）、この 問題は 簡単でした。|とおり|まま|ばかり|ところ|Just as the teacher said, this problem was easy.
-この レストランは 値段が 安い（　）、とても おいしい。|わりに|せいで|ために|うちに|This restaurant is very good for the price.
-日本に 住んでいる（　）、一度 富士山に 登りたい。|うちに|あいだ|ところ|ばかりに|While I'm living in Japan, I want to climb Mt. Fuji at least once.
-試験に 合格できたのは、先生の（　）です。|おかげ|せい|わけ|ほう|I passed the exam thanks to my teacher.
-疲れて いた（　）、すぐに 寝て しまった。|ので|のに|ところで|ながら|I was tired, so I fell asleep right away.
-この 薬を 飲めば、熱が 下がる（　）です。|はず|べき|こと|まま|If you take this medicine, your fever should go down.
-彼女は 何も 言わず（　）帰って しまった。|に|で|と|も|She went home without saying anything.
-弟に ケーキを 食べ（　）、とても 悲しかった。|られて|させて|させられて|て|My little brother ate my cake, and I was very sad.
-来年 留学する（　）、今 アルバイトで お金を ためている。|ために|ように|ばかりに|わりに|I'm saving money from my part-time job to study abroad next year.
-この 仕事は 経験の ある 人（　）できない。|にしか|だけで|ばかり|さえ|Only experienced people can do this job.
-日本語は 勉強すれば する（　）、おもしろく なる。|ほど|まで|ばかり|ところ|The more you study Japanese, the more interesting it becomes.`,
-N2:`調査の 結果（　）、新しい 計画を 立てる。|に基づいて|に対して|にとって|に比べて|We will draw up a new plan based on the results of the survey.
-努力した（　）、結果は 出なかった。|にもかかわらず|からこそ|だけあって|ばかりか|Despite my efforts, I didn't get results.
-彼は 医者（　）、自分の 健康には 気を つけていない。|のくせに|からには|ばかりに|とともに|Even though he's a doctor, he doesn't take care of his own health.
-社長が 来る（　）、会議を 始める わけには いかない。|までは|までに|ながら|ほどに|We can't start the meeting until the president arrives.
-この かばんは デザインが いい（　）、軽くて 使いやすい。|うえに|わりに|ところで|せいで|This bag has a nice design, and on top of that it's light and easy to use.
-地震が 起きた（　）は、まず 火を 消してください。|際|末|上|中|In the event of an earthquake, first put out any fires.
-彼の 話を 聞いた（　）、怒りが 込み上げて きた。|とたん|以上|次第|うえで|The moment I heard what he said, anger welled up in me.
-約束した（　）、守らなければ ならない。|以上|とたん|最中|末に|Since you promised, you have to keep it.
-3年間の 交渉の（　）、ようやく 合意に 達した。|末|際|上|中|After three years of negotiations, they finally reached an agreement.
-彼女は 歌手（　）、女優としても 活躍している。|だけでなく|どころか|ばかりに|からには|She is not only a singer but also active as an actress.
-合格できる（　）、毎日 必死に 勉強した。|よう|ため|わけ|まま|I studied desperately every day so that I could pass.
-説明書を 読んだ（　）、使い方が わからない。|ものの|ものだから|ことから|ことに|Although I read the manual, I don't understand how to use it.`,
-N1:`仕事が 終わる（　）、彼は 飲みに 出かけた。|や否や|次第|ところを|ものを|As soon as work was over, he went out drinking.
-円安が 物価の 上昇と（　）、生活は ますます 苦しく なった。|あいまって|ともなく|問わず|よそに|Combined with rising prices, the weak yen made life even harder.
-彼の 失礼な 態度には、怒りを（　）、あきれて しまった。|通り越して|めぐって|よそに|皮切りに|His rude attitude went beyond making me angry; I was simply appalled.
-親の 心配（　）、彼は 危険な 山に 登った。|をよそに|をもって|にあって|とあれば|Ignoring his parents' worries, he climbed a dangerous mountain.
-子ども（　）、そんな 簡単な ことも わからないのか。|じゃあるまいし|ならでは|なりに|たるもの|You're not a child — how can you not understand something so simple?
-本日の 営業は 午後6時（　）終了させて いただきます。|をもって|にあって|をよそに|ならでは|We will close today at 6 p.m.
-この 景色は 京都（　）の 美しさだ。|ならでは|ばかり|ずくめ|まみれ|This scenery has a beauty unique to Kyoto.
-試合に 負けて、悔しい（　）。|といったらない|にすぎない|までもない|きらいがある|I'm incredibly frustrated about losing the match.
-彼は 社長（　）、社員の 気持ちを 理解していない。|でありながら|ならでは|いかんで|たりとも|Although he's the president, he doesn't understand how his employees feel.
-危険を 承知の（　）、彼は 救助に 向かった。|うえで|あまり|末|かたわら|Fully aware of the danger, he went to the rescue.
-一度 約束した（　）、最後まで やり遂げる べきだ。|からには|ものなら|とはいえ|ことなしに|Once you've made a promise, you should see it through.
-雨が 降ろうが 雪が（　）、試合は 行われる。|降ろうが|降っても|降るなら|降れば|Whether it rains or snows, the match will be held.`
+日本語{にほんご}が（　）なりました。|上手{じょうず}に|上手{じょうず}く|上手{じょうず}な|上手{じょうず}で|My Japanese has gotten better.
+あした テストが ありますから、今日{きょう}は べんきょう（　）なければ なりません。|し|する|して|しない|I have a test tomorrow, so I have to study today.
+この へやは しずか（　）ひろいです。|で|くて|に|の|This room is quiet and spacious.
+朝{あさ} 9時{じ}（　）午後{ごご} 3時{じ}まで はたらきます。|から|まで|の|へ|I work from 9 in the morning until 3 in the afternoon.
+手{て}を あらっ（　）、ごはんを 食{た}べます。|てから|ても|たり|ては|I wash my hands and then eat.
+しゅくだいを した（　）、テレビを 見{み}ます。|後{あと}で|前{まえ}に|ながら|まで|I watch TV after I do my homework.
+なつやすみに 日本{にほん}に 行{い}き（　）です。|たい|ます|ましょう|ない|I want to go to Japan during summer vacation.
+新{あたら}しい かばんが（　）です。|ほしい|ほしく|ほしくて|ほしければ|I want a new bag.
+まどを あけ（　）ください。|ないで|なくて|ません|たい|Please don't open the window.
+にもつが おもそうですね。わたしが もち（　）？|ましょうか|ませんか|ますか|たいですか|Your bags look heavy. Shall I carry them for you?
+こうえんへ さんぽに（　）。|行{い}きます|行{い}って|行{い}け|行{い}こ|I am going to the park for a walk.
+わたしは スポーツが（　）です。|すき|すきな|すきで|すきに|I like sports.
+あしたは 雨{あめ}が ふる（　）。|でしょう|ましょう|ませんか|でした|It will probably rain tomorrow.
+朝{あさ}は はしったり（　）します。|あるいたり|あるいて|あるいたら|はしって|In the morning I sometimes run and sometimes walk.
+これは わたし（　）本{ほん}です。|の|を|で|が|This is my book.
+ねる（　）、電気{でんき}を けします。|前{まえ}に|後{あと}で|ながら|たり|I turn off the light before I go to bed.
+ひこうきは 電車{でんしゃ}（　）はやいです。|より|を|で|に|An airplane is faster than a train.
+ゆっくり 話{はな}して（　）。|ください|でしょう|ましょう|ませんか|Please speak slowly.
+かばんに りんごや バナナ（　）が 入{はい}って います。|など|も|しか|を|Apples, bananas and so on are in the bag.
+あした ともだちと きょうと（　）行{い}きます。|へ|を|が|の|Tomorrow I'm going to Kyoto with a friend.
+A「今日{きょう}は さむいですね。」B「ええ、さむいです（　）。」|ね|か|を|に|"It's cold today, isn't it?" "Yes, it is."
+くだものの 中{なか}で りんごが（　）すきです。|いちばん|もっと|ほうが|より|Among fruits, I like apples the most.
+A「ごはんは もう 食{た}べましたか。」B「いいえ、（　）です。」|まだ|もう|よく|いつも|"Have you eaten yet?" "No, not yet."
+朝{あさ} 6時{じ}（　）おきます。|ごろ|を|しか|へ|I get up around 6 in the morning.
+わたしは おちゃ（　）飲{の}みます。|だけ|しか|から|へ|I drink only tea.
+ここから 駅{えき}まで 10分{ぷん}（　）かかります。|ぐらい|しか|まで|を|It takes about 10 minutes from here to the station.
+家{うち}から 駅{えき}（　）あるきます。|まで|から|が|の|I walk from home to the station.
+この りんごは 高{たか}いです（　）、おいしく ないです。|が|に|を|や|This apple is expensive, but it isn't tasty.
+外{そと}より へやの（　）すずしいです。|ほうが|ほうを|ほうで|ほうに|The inside of the room is cooler than outside.
+今{いま} 本{ほん}を 読{よ}んで（　）。|います|たい|ながら|でした|I am reading a book now.
+のどが かわきました。何{なに}（　）飲{の}みたいです。|か|も|が|を|I'm thirsty. I want to drink something.
+英語{えいご}の 本{ほん}を 3（　） 買{か}いました。|さつ|まい|だい|にん|I bought three English books.
+きのうの 夜{よる}は とても（　）。|さむかったです|さむいでした|さむくでした|さむいだった|It was very cold last night.
+へやの 中{なか}に つくえが（　）。|あります|います|おきます|いきます|There is a desk in the room.
+A「しゅくだいは しましたか。」 B「はい、もう（　）。」|しました|します|しません|したい|"Did you do your homework?" "Yes, I already did."
+れいぞうこに（　） ありません。|何{なに}も|何{なに}か|何{なに}を|何{なに}で|There is nothing in the refrigerator.
+A「（　）、 学校{がっこう}を 休{やす}みましたか。」 B「かぜを ひいた からです。」|どうして|どこで|だれと|いつ|"Why did you miss school?" "Because I caught a cold."
+この りんごは（　） 高{たか}いです。|とても|たくさん|よく|ぜんぜん|This apple is very expensive.
+わたしは しゅうまつ（　） えいがを 見{み}ます。|ときどき|もう|まだ|ぜんぜん|I sometimes watch movies on weekends.
+毎朝{まいあさ} パン（　） 食{た}べます。|を|が|に|へ|I eat bread every morning.
+A「ケーキと クッキーと、（　）が すきですか。」 B「ケーキが すきです。」|どちら|どこ|だれ|いつ|"Which do you like, the cake or the cookies?" "I like the cake."
+毎日{まいにち} へやを（　） します。|きれいに|きれいな|きれいで|きれい|I tidy up my room every day.
+きのうは 日曜日{にちようび}（　）。|でした|です|でしたり|では|Yesterday was Sunday.
+この 店{みせ}の ラーメンは あまり（　）。|おいしくないです|おいしいじゃないです|おいしくじゃないです|おいしくないでした|The ramen at this shop is not very tasty.
+きのうは どこへも（　）。|行{い}きませんでした|行{い}きました|行{い}きません|行{い}きたいです|I didn't go anywhere yesterday.
+A「今{いま}、（　）ですか。」 B「3時{じ}です。」|何時{なんじ}|何日{なんにち}|何月{なんがつ}|なんさい|"What time is it now?" "It's three o'clock."
+もう 時間{じかん}が ないですから、（　） あるきましょう。|早{はや}く|早{はや}い|早{はや}くて|早{はや}さで|We don't have much time, so let's walk quickly.
+A「この かばんは（　）ですか。」 B「5000円{えん}です。」|いくら|どこ|いつ|だれ|"How much is this bag?" "It's 5,000 yen."
+A「にくは すきですか。」 B「いいえ、わたしは にくを（　）。」|食{た}べません|食{た}べます|食{た}べました|食{た}べたいです|"Do you like meat?" "No, I don't eat meat."
+A「（　）、 日本{にほん}へ 来{き}ましたか。」 B「きょねんです。」|いつ|どこ|だれ|なに|"When did you come to Japan?" "Last year."
+わたしは リンと（　）。|言{い}います|言{い}いです|言{い}って|言{い}いません|My name is Lin.`,
+N4:`日本{にほん}へ 行{い}ったら、すしを 食{た}べて（　）です。|みたい|しまい|ある|いる|When I go to Japan, I want to try sushi.
+窓{まど}が 開{あ}けて（　）。|あります|います|おきます|しまいます|The window has been left open.
+薬{くすり}を 飲{の}んだ（　）、熱{ねつ}が 下{さ}がりません。|のに|ので|から|ら|Even though I took medicine, my fever won't go down.
+先生{せんせい}に 名前{なまえ}を（　）。|呼{よ}ばれました|呼{よ}びました|呼{よ}んでいました|呼{よ}べました|My name was called by the teacher.
+この 本{ほん}は 漢字{かんじ}が 多{おお}くて、わたしには 読{よ}み（　）です。|にくい|やすい|すぎ|たい|This book has a lot of kanji, so it's hard for me to read.
+母{はは}は 子{こ}どもに 野菜{やさい}を 食{た}べ（　）ました。|させ|させられ|て|たく|The mother made her child eat vegetables.
+今{いま}にも 雨{あめ}が（　）そうです。|降{ふ}り|降{ふ}る|降{ふ}って|降{ふ}った|It looks like it's going to rain any moment.
+宿題{しゅくだい}を 忘{わす}れない（　）、メモを 書{か}きました。|ように|のに|ので|ながら|I wrote a note so that I wouldn't forget my homework.
+部屋{へや}を 出{で}る 前{まえ}に、電気{でんき}を 消{け}して（　）ください。|おいて|あって|くれて|みせて|Please turn off the lights before you leave the room.
+この 料理{りょうり}は 作{つく}り方{かた}が 簡単{かんたん}（　）、おいしいです。|で|くて|に|だ|This dish is easy to make and tasty.
+日本語{にほんご}が 話{はな}せる（　）なりました。|ように|ために|ことが|そうに|I've become able to speak Japanese.
+今{いま}から 出{で}かける（　）です。|ところ|ばかり|まま|あいだ|I'm just about to go out.
+私{わたし}は 北海道{ほっかいどう}へ 行{い}った（　）が あります。|こと|ため|はず|ほう|I have been to Hokkaido before.
+先週{せんしゅう} 日本{にほん}に 来{き}た（　）です。|ばかり|まま|あいだ|ほう|I arrived in Japan just last week.
+明日{あした}は 雨{あめ}が 降{ふ}る（　）しれません。|かも|よう|はず|ため|It may rain tomorrow.
+友達{ともだち}に 駅{えき}まで 車{くるま}で（　）もらいました。|送{おく}って|送{おく}る|送{おく}らない|送{おく}った|A friend drove me to the station.
+うっかり 大切{たいせつ}な 花瓶{かびん}を 割{わ}って（　）。|しまいました|しました|ありました|みました|I accidentally broke the precious vase.
+この 靴{くつ}は 大{おお}き（　）て、歩{ある}きにくいです。|すぎ|ない|そう|ます|These shoes are too big, so they are hard to walk in.
+もっと 大{おお}きな 声{こえ}で 話{はな}し（　）。|なさい|ませ|ない|ぬ|Please speak up.
+先生{せんせい}は 何{なに}を 召{め}し（　）ますか。|上{あ}がり|食{た}べ|上{あ}げ|参{まい}り|What would you like to have, teacher?
+この 漢字{かんじ}の 読{よ}み（　）を 教{おし}えてください。|方{かた}|番{ばん}|中{なか}|前{まえ}|Please teach me how to read this kanji.
+どこ（　）で 会{あ}いましょう。|か|に|を|も|Let's meet somewhere.
+明日{あした} 来{こ}られる（　）、まだ わかりません。|かどうか|ことか|わけか|ところか|I don't know yet whether I can come tomorrow.
+日本語{にほんご}を 勉強{べんきょう}する（　）、この 教室{きょうしつ}が いいですよ。|なら|はず|まま|ばかり|If you are studying Japanese, this class is good.
+この 本{ほん}は 字{じ}が 大{おお}きくて、読{よ}み（　）です。|やすい|にくい|ながら|ほど|This book has large characters, so it is easy to read.
+どんなに 忙{いそが}し（　）、毎朝{まいあさ} 運動{うんどう}します。|くても|くて|ければ|かったら|No matter how busy I am, I exercise every morning.
+来月{らいげつ}から 大阪{おおさか}で 働{はたら}く（　）なりました。|ことに|ために|はずに|ところに|It has been decided that I will work in Osaka from next month.
+試験{しけん}に 合格{ごうかく}する（　）、毎日{まいにち} 勉強{べんきょう}しています。|ために|ので|ながら|ばかり|I study every day in order to pass the exam.
+あの 人{ひと}は 医者{いしゃ}（　）です。|らしい|そう|ような|ため|That person seems to be a doctor.
+わたしは 先生{せんせい}に 本{ほん}を（　）。|いただきました|くださいました|いらっしゃいました|召{め}し上{あ}がりました|I received a book from the teacher.
+わたしは 妹{いもうと}の 宿題{しゅくだい}を 手伝{てつだ}って（　）。|あげました|くれました|もらいました|いただきました|I helped my younger sister with her homework.
+友達{ともだち}が 空港{くうこう}まで 車{くるま}で 迎{むか}えに 来{き}て（　）。|くれました|もらいました|はじめました|おわりました|My friend came to pick me up at the airport by car.
+この ボタンを 押{お}す（　）、ドアが 開{あ}きます。|と|ので|ばかり|まま|When you press this button, the door opens.
+家{いえ}に 着{つ}い（　）、電話{でんわ}してください。|たら|まま|ばかり|ので|Please call me when you get home.
+来年{らいねん}は 日本{にほん}で 働{はたら}く（　）です。|つもり|ばかり|まま|あいだ|I plan to work in Japan next year.
+この 服{ふく}を 着{き}て（　）も いいですか。|みて|ない|ほど|ところ|May I try on this clothing?
+もう 少{すこ}し 時間{じかん}が あれ（　）、一緒{いっしょ}に 行{い}けますよ。|ば|たら|ても|なら|If we have a little more time, we can go together.
+まるで 夢{ゆめ}（　）です。|のよう|のため|のわけ|のまま|It is just like a dream.
+先生{せんせい}は もう 教室{きょうしつ}に（　）。|いらっしゃいました|うかがいました|いただきました|ございました|The teacher has already come to the classroom.
+夏休{なつやす}みに 富士山{ふじさん}に（　）と 思{おも}って います。|のぼろう|のぼれ|のぼって|のぼり|I'm thinking of climbing Mt. Fuji during summer vacation.
+すみません、窓{まど}を 開{あ}けて（　）か。|くれません|あげません|ください|ほしい|Excuse me, could you open the window?
+社長{しゃちょう}は もう お帰{かえ}りに（　）。|なりました|しました|いたしました|まいりました|The president has already gone home.
+ここで 写真{しゃしん}を 撮{と}ら（　）ください。|ないで|ないと|ないように|なくても|Please do not take photos here.
+さいふに 100円{えん}（　）ありません。|しか|だけ|ばかり|まで|I only have 100 yen in my wallet.
+かぜの 時{とき}は 早{はや}く 寝{ね}た（　）いいですよ。|ほうが|はずが|ために|つもりが|When you have a cold, it's better to go to bed early.
+明日{あした}は 来{こ}なく（　）いいですよ。|ても|なくて|ない|ないと|You don't need to come tomorrow.
+日本語{にほんご}を 話{はな}す（　）できます。|ことが|ことに|ために|ところが|I can speak Japanese.
+子{こ}どもが 寝{ね}て いる（　）、 そうじを しました。|あいだに|までに|ために|ように|I cleaned while the child was sleeping.
+ここから 富士山{ふじさん}が 見{み}（　）ます。|られ|させ|なさ|ませ|You can see Mt. Fuji from here.
+図書館{としょかん}で 大{おお}きい 声{こえ}を 出{だ}して（　）。|はいけません|ください|ほうがいいです|ようです|You must not speak loudly in the library.
+外{そと}が 明{あか}るく なりました。雨{あめ}が やんだ（　）。|ようです|つもりです|ことです|ほうです|It has gotten brighter outside. It seems the rain has stopped.
+レポートは 金曜日{きんようび}（　）出{だ}して ください。|までに|ながら|ので|ことに|Please submit the report by Friday.
+最近{さいきん} 寒{さむ}（　）なりました。|く|い|かっ|さ|It has become cold recently.
+りんごを 三{さん}（　）買{か}いました。|個{こ}|枚{まい}|台{だい}|冊{さつ}|I bought three apples.
+すみません、少{すこ}し 休{やす}ま（　）。|せてください|せません|れません|ないでください|Excuse me, please let me rest for a little while.
+熱{ねつ}が 高{たか}いので、 病院{びょういん}に 行{い}か（　）。|なければなりません|なくてもいいです|なさい|ませんでした|My fever is high, so I have to go to the hospital.
+あの ケーキは おいし（　）です。|そう|そうに|くて|さそう|That cake looks delicious.
+この 料理{りょうり}は 辛{から}く（　）、 食{た}べられません。|て|で|ので|けど|This dish is so spicy that I can't eat it.
+夏休{なつやす}みの（　）、ずっと 国{くに}に 帰{かえ}って いました。|あいだ|うちに|までに|ために|I was back in my home country for the whole summer vacation.
+休{やす}みの 日{ひ}は そうじ（　）、せんたくとかを します。|とか|では|には|へは|On my days off, I do things like cleaning and laundry.`,
+N3:`雨{あめ}が 降{ふ}っている（　）、彼{かれ}は 傘{かさ}を 持{も}たずに 出{で}かけた。|のに|ので|から|ため|Even though it was raining, he went out without an umbrella.
+先生{せんせい}が おっしゃった（　）、この 問題{もんだい}は 簡単{かんたん}でした。|とおり|まま|ばかり|ところ|Just as the teacher said, this problem was easy.
+この レストランは 値段{ねだん}が 安{やす}い（　）、とても おいしい。|わりに|せいで|ために|うちに|This restaurant is very good for the price.
+スープが 冷{さ}めない（　）、早{はや}く 食{た}べて ください。|うちに|あいだに|ところに|までに|Please eat the soup before it gets cold.
+試験{しけん}に 合格{ごうかく}できたのは、先生{せんせい}の（　）です。|おかげ|せい|わけ|ほう|I passed the exam thanks to my teacher.
+疲{つか}れて いた（　）、すぐに 寝{ね}て しまった。|ので|のに|ところで|ながら|I was tired, so I fell asleep right away.
+この 薬{くすり}を 飲{の}めば、熱{ねつ}が 下{さ}がる（　）です。|はず|べき|こと|まま|If you take this medicine, your fever should go down.
+彼女{かのじょ}は 何{なに}も 言{い}わず（　）帰{かえ}って しまった。|に|で|と|も|She went home without saying anything.
+弟{おとうと}に ケーキを 食{た}べ（　）、とても 悲{かな}しかった。|られて|させて|させられて|て|My little brother ate my cake, and I was very sad.
+来年{らいねん} 留学{りゅうがく}する（　）、今{いま} アルバイトで お金{かね}を ためている。|ために|ように|ばかりに|わりに|I'm saving money from my part-time job to study abroad next year.
+この 仕事{しごと}は 経験{けいけん}の ある 人{ひと}（　）できない。|にしか|にだけ|にまで|ばかりに|Only experienced people can do this job.
+日本語{にほんご}は 勉強{べんきょう}すれば する（　）、おもしろく なる。|ほど|まで|ばかり|ところ|The more you study Japanese, the more interesting it becomes.
+弟{おとうと}は 休{やす}みの 日{ひ}は 一日中{いちにちじゅう} ゲームを して（　）。|ばかりいる|わけだ|ところだ|にちがいない|My younger brother spends his entire day off doing nothing but playing games.
+電気代{でんきだい}は 季節{きせつ}（　）大{おお}きく 変{か}わる。|によって|について|にとって|に対{たい}して|Electricity bills change greatly depending on the season.
+先生{せんせい}は 日本{にほん}の 歴史{れきし}（　）、わかりやすく 説明{せつめい}して くれた。|について|にとって|に対{たい}して|ために|The teacher kindly explained Japanese history in an easy-to-understand way.
+私{わたし}（　）、この 町{まち}は 第二{だいに}の ふるさとです。|にとって|によって|について|に対{たい}して|To me, this town is like a second hometown.
+大切{たいせつ}な 約束{やくそく}が あるので、ここで 帰{かえ}る（　）。|わけにはいかない|ようとする|てばかりいる|てしまう|I have an important appointment, so I can't leave here.
+祖母{そぼ}は 家{いえ}に 来{く}る（　）、おいしい お菓子{かし}を 持{も}って きて くれる。|たびに|ところに|ことに|ものの|Every time my grandmother visits, she brings delicious sweets.
+ドアを 開{あ}けよう（　）、かぎが かかって いた。|としたら|ことにしたら|ばかりしたら|ところだったら|When I tried to open the door, it was locked.
+冬{ふゆ}は 風邪{かぜ}を ひき（　）です。|がち|たびに|ばかり|ながら|In winter, I tend to catch colds easily.
+駅前{えきまえ}で 買{か}い物{もの}を した（　）、友達{ともだち}の 家{いえ}に 寄{よ}った。|ついでに|たびに|ように|ところに|While I was shopping near the station, I stopped by my friend's house.
+ドアを 開{あ}けた（　）、猫{ねこ}が 外{そと}へ 飛{と}び出{だ}した。|とたん|ように|まで|ことに|The moment I opened the door, the cat ran outside.
+いくら 練習{れんしゅう}して（　）、うまく 弾{ひ}けない。|ても|ば|ながら|ように|No matter how much I practice, I can't play well.
+苦{くる}しい 時{とき}（　）、友達{ともだち}の 大切{たいせつ}さが 分{わ}かる。|こそ|ところを|ずつ|ころ|It is precisely in hard times that you come to understand the value of friends.
+この 店{みせ}の 料理{りょうり}は とても おいしい。いつも 人気{にんき}が ある（　）。|わけだ|わけがない|ところだ|ばかりだ|The food at this shop is really good. No wonder it's always popular.
+子{こ}どもの ころ、よく この 公園{こうえん}で 遊{あそ}んだ（　）。|ものだ|わけだ|ところだ|ことだ|When I was a child, I often played in this park.
+そんなに 心配{しんぱい}する（　）。試験{しけん}は 必{かなら}ず 受{う}かるよ。|ことはない|はずだ|ことにしている|ところだ|There's no need to worry so much. You'll definitely pass the exam.
+彼{かれ}が 試験{しけん}に 落{お}ちる（　）、思{おも}っても いなかった。|なんて|ことか|ものか|ことに|I never imagined he would fail the exam.
+電気{でんき}を つけた（　）、寝{ね}て しまった。|まま|ところで|ように|ついでに|I fell asleep with the light still on.
+母{はは}の（　）、父{ちち}が 料理{りょうり}を した。|かわりに|わりに|ように|によって|My father cooked instead of my mother.
+彼{かれ}は 友達{ともだち}（　）、兄{あに}のような 存在{そんざい}だ。|というより|ということは|としても|ことに|He is less a friend to me and more like an older brother.
+彼女{かのじょ}は 日本語{にほんご}が とても 上手{じょうず}だ。長{なが}く 日本{にほん}に 住{す}んで いた（　）。|にちがいない|はずがない|ことにしている|ところだ|She speaks Japanese very well. She must have lived in Japan for a long time.
+この 店{みせ}は 味{あじ}が いい（　）、店員{てんいん}も 親切{しんせつ}だ。|ばかりでなく|ばかりに|まで|ところを|This shop not only has good food, but the staff are also kind.
+私{わたし}の 意見{いけん}（　）、田中{たなか}さんは 反対{はんたい}した。|に対{たい}して|にとって|によって|ながら|Tanaka opposed my opinion.
+ケーキが 嫌{きら}いな（　）。ただ、今{いま}は お腹{なか}が いっぱいなだけだ。|わけではない|わけがない|わけにはいかない|ところだ|It is not that I dislike cake. I am just full right now.
+今{いま}、ご飯{はん}を 食{た}べて いる（　）。あとで 電話{でんわ}しても いいですか。|ところです|わけです|ばかりです|ものです|I'm in the middle of eating right now. Would it be all right if I called you later?
+忙{いそが}しくて、昼{ひる}ご飯{はん}（　）食{た}べられなかった。|さえ|こそ|ばかり|ほど|I was so busy that I couldn't even eat lunch.
+彼{かれ}は 留学生{りゅうがくせい}（　）、日本{にほん}に 来{き}た。|として|にとって|によって|について|He came to Japan as an international student.
+会議{かいぎ}の（　）、急{きゅう}に 電話{でんわ}が 鳴{な}った。|最中{さいちゅう}に|ついでに|たびに|かわりに|My phone suddenly rang in the middle of the meeting.
+この 機械{きかい}は 壊{こわ}れて いて、もう 直{なお}し（　）。|ようがない|ところだ|わけがない|てばかりいる|This machine is broken, and there is no way to fix it anymore.
+自分{じぶん}では 何{なに}も しない（　）、人{ひと}の 仕事{しごと}には すぐ 文句{もんく}を 言{い}う。|くせに|ばかりに|ために|ながら|He does nothing himself, yet he is quick to complain about other people's work.
+雨{あめ}の（　）、試合{しあい}は 中止{ちゅうし}に なった。|せいで|ところで|からには|ばかりに|The match was canceled because of the rain.
+電話{でんわ}して みた（　）、田中{たなか}さんは まだ 寝{ね}て いた。|ところ|ばかりに|ながら|ところで|When I called, Mr. Tanaka was still asleep.
+去年{きょねん}（　）、今年{ことし}は 雨{あめ}が 少{すく}ない。|に比{ひ}べて|によって|にかけて|ついでに|Compared with last year, there has been less rain this year.
+この 問題{もんだい}（　）、質問{しつもん}が あります。|に関{かん}して|に比{ひ}べて|を込{こ}めて|にかけて|I have a question about this problem.
+田中{たなか}さん（　）、チームが 活動{かつどう}して いる。|を中心{ちゅうしん}に|を込{こ}めて|を超{こ}えて|をおいて|The team is active with Mr. Tanaka at its center.
+毎年{まいとし} 夏{なつ}には、町{まち}で 花火大会{はなびたいかい}が 行{おこな}われる（　）。|ことになっている|ことになった|ことにした|ようとしている|A fireworks festival is scheduled to be held in town every summer.
+この 靴{くつ}は 泥{どろ}（　）だ。早{はや}く 洗{あら}って ください。|だらけ|ずつ|ほど|抜{ぬ}き|These shoes are covered in mud, so please wash them quickly.
+電気{でんき}を つけ（　）で 出{で}かけて しまった。|っぱなし|ながら|ほど|ずつ|I went out and left the light on.
+今日{きょう}は 寒{さむ}い（　）、雨{あめ}も 降{ふ}って いる。|うえに|からには|ながら|ばかりに|It is cold today, and on top of that it is raining.
+何{なん}度{ど}も 練習{れんしゅう}した（　）、試合{しあい}には 負{ま}けて しまった。|ものの|ながら|ところで|わけだ|Although I practiced many times, I lost the match.
+大事{だいじ}な 書類{しょるい}を なくさない（　）、ファイルに 入{い}れて おいた。|ように|ばかりに|くせに|ところに|I put the important documents in a file so that I would not lose them.
+関東{かんとう}から 東北{とうほく}（　）、広{ひろ}い 範囲{はんい}で 大雨{おおあめ}が 降{ふ}る 見込{みこ}みです。|にかけて|に比{ひ}べて|を込{こ}めて|ついでに|Heavy rain is expected over a wide area stretching from the Kanto region to the Tohoku region.
+田舎{いなか}は 静{しず}かな（　）、交通{こうつう}が 不便{ふべん}だ。|一方{いっぽう}で|くせに|ながら|ばかりに|The countryside is quiet, but transportation is inconvenient.
+試合{しあい}に 負{ま}けて、悔{くや}しく（　）。|てしかたがない|ようがない|にすぎない|ことはない|I lost the match and I can't help feeling frustrated.
+あんなに 練習{れんしゅう}した 彼{かれ}が、試合{しあい}に 負{ま}ける（　）。|はずがない|はずだ|ことになっている|くせに|He practiced so hard that there is no way he would lose the match.
+宿題{しゅくだい}を 終{お}えて（　）、遊{あそ}びに 行{い}けない。|からでないと|ながら|ほど|くせに|Until you finish your homework, you can't go out to play.
+久{ひさ}しぶりに 友達{ともだち}に 会{あ}えて、うれしく（　）。|てたまらない|ようがない|にすぎない|ことはない|Seeing my friend after such a long time, I am overjoyed.
+母{はは}が 入院{にゅういん}して いる（　）、私{わたし}が 家事{かじ}を した。|あいだ|ばかりに|くせに|ながら|While my mother was in the hospital, I did the housework.
+この 雑誌{ざっし}は 若{わか}い 女性{じょせい}（　）に 作{つく}られて いる。|向{む}け|まみれ|ずくめ|つき|This magazine is made for young women.`,
+N2:`調査{ちょうさ}の 結果{けっか}（　）、新{あたら}しい 計画{けいかく}を 立{た}てる。|に基{もと}づいて|に対{たい}して|にとって|に比{くら}べて|We will draw up a new plan based on the results of the survey.
+努力{どりょく}した（　）、結果{けっか}は 出{で}なかった。|にもかかわらず|からこそ|だけあって|ばかりか|Despite my efforts, I didn't get results.
+彼{かれ}は 医者{いしゃ}（　）、自分{じぶん}の 健康{けんこう}には 気{き}を つけていない。|のくせに|からには|ばかりに|とともに|Even though he's a doctor, he doesn't take care of his own health.
+社長{しゃちょう}が 来{く}る（　）、会議{かいぎ}を 始{はじ}める わけには いかない。|までは|までに|ながら|ほどに|We can't start the meeting until the president arrives.
+この かばんは デザインが いい（　）、軽{かる}くて 使{つか}いやすい。|うえに|わりに|ところで|せいで|This bag has a nice design, and on top of that it's light and easy to use.
+地震{じしん}が 起{お}きた（　）は、まず 火{ひ}を 消{け}してください。|際{さい}|末{すえ}|上{うえ}|中{なか}|In the event of an earthquake, first put out any fires.
+彼{かれ}の 話{はなし}を 聞{き}いた（　）、怒{いか}りが 込{こ}み上{あ}げて きた。|とたん|以上{いじょう}|次第{しだい}|うえで|The moment I heard what he said, anger welled up in me.
+約束{やくそく}した（　）、守{まも}らなければ ならない。|以上{いじょう}|とたん|最中{さいちゅう}|末{すえ}に|Since you promised, you have to keep it.
+3年間{ねんかん}の 交渉{こうしょう}の（　）、ようやく 合意{ごうい}に 達{たっ}した。|末{すえ}|際{さい}|中{なか}|次第{しだい}|After three years of negotiations, they finally reached an agreement.
+彼女{かのじょ}は 歌手{かしゅ}（　）、女優{じょゆう}としても 活躍{かつやく}している。|だけでなく|どころか|ばかりに|からには|She is not only a singer but also active as an actress.
+合格{ごうかく}できる（　）、毎日{まいにち} 必死{ひっし}に 勉強{べんきょう}した。|よう|ため|わけ|まま|I studied desperately every day so that I could pass.
+説明書{せつめいしょ}を 読{よ}んだ（　）、使{つか}い方{かた}が わからない。|ものの|ものだから|ことから|ことに|Although I read the manual, I don't understand how to use it.
+大事{だいじ}な 会議{かいぎ}に 遅{おく}れて、上司{じょうし}に 謝{あやま}（　）。|らざるを得{え}なかった|ることはなかった|るわけではなかった|るまでもなかった|I was late for an important meeting, so I had no choice but to apologize to my boss.
+戻{もど}れる（　）、もう一度{いちど} 学生時代{がくせいじだい}に 戻{もど}りたい。|ものなら|ものか|ことか|ものだから|If only I could go back, I would like to return to my student days once more.
+映画{えいが}の ラストシーンを 見{み}て、涙{なみだ}を 流{なが}さ（　）。|ずにはいられなかった|ばかりだった|ところだった|ことにした|Watching the final scene of the movie, I could not help crying.
+一度{いちど}も 練習{れんしゅう}して いない 彼{かれ}が、試合{しあい}に 勝{か}てる（　）。|わけがない|ところだ|ばかりだ|ものだ|There is no way that he, who has never practiced even once, can win the match.
+彼{かれ}の 説明{せつめい}は 単{たん}なる 推測{すいそく}に（　）。|すぎない|わたる|過{す}ぎる|ようがない|His explanation is nothing more than mere speculation.
+彼{かれ}は 謝{あやま}る（　）、逆{ぎゃく}に 怒{おこ}り出{だ}した。|どころか|ばかりに|ことか|なしに|Far from apologizing, he instead flew into a rage.
+物価{ぶっか}は 上{あ}がる（　）。給料{きゅうりょう}は 増{ふ}えない。|一方{いっぽう}だ|次第{しだい}だ|ことにした|限{かぎ}りだ|Prices keep rising, while salaries do not increase.
+留学{りゅうがく}を（　）、世界{せかい}の 文化{ぶんか}に 触{ふ}れた。|通{つう}じて|限{かぎ}らず|応{おう}じて|沿{そ}って|Through studying abroad, I came into contact with cultures from around the world.
+人口{じんこう}が 減{へ}る（　）、学校{がっこう}の 数{かず}も 減{へ}って いる。|につれて|にわたって|をめぐって|に限{かぎ}って|As the population declines, the number of schools is also falling.
+新{あたら}しい 法律{ほうりつ}（　）、説明会{せつめいかい}が 開{ひら}かれる。|に関{かん}して|にわたって|を経{へ}て|ずに|An information session will be held regarding the new law.
+体{からだ}に 悪{わる}いと 知{し}り（　）、タバコを やめられない。|つつも|からには|ばかりに|うえに|Although I know smoking is bad for my health, I cannot quit.
+成績{せいせき}が 悪{わる}い（　）、努力{どりょく}が 足{た}りないとは 限{かぎ}らない。|からといって|からこそ|からには|ものだから|Just because one's grades are poor does not necessarily mean one lacks effort.
+実際{じっさい}に 食{た}べ（　）、おいしいか どうか 分{わ}からない。|てみないことには|てみたばかりに|てみるからには|てみたとたん|Until you actually try eating it, you cannot know whether it is delicious.
+駅{えき}に 近{ちか}い（　）、家賃{やちん}が 高{たか}い。|反面{はんめん}|ことか|ところで|ばかり|It is close to the station, but on the other hand the rent is high.
+無理{むり}な 計画{けいかく}は 会社{かいしゃ}を 倒産{とうさん}させ（　）。|かねない|かねる|っこない|ようがない|An unreasonable plan could even drive the company into bankruptcy.
+この件{けん}については、お答{こた}えし（　）。|かねます|っこありません|ことになります|ことです|I am afraid I cannot answer about this matter.
+今{いま}から 準備{じゅんび}しても、間{ま}に 合{あ}い（　）。|っこない|わけだ|ことだ|おそれがない|Even if we start preparing now, there is no way we will make it in time.
+大雨{おおあめ}で 川{かわ}が あふれる（　）。|おそれがある|っこない|わけがない|ようがない|Heavy rain means the river is at risk of overflowing.
+準備{じゅんび}が 整{ととの}い（　）、出発{しゅっぱつ}します。|次第{しだい}|最中{さいちゅう}|以上{いじょう}|限{かぎ}り|We will leave as soon as the preparations are complete.
+旅行{りょこう}は 何事{なにごと}も 安全{あんぜん}（　）。|に越{こ}したことはない|ばかりだ|にすぎない|限{かぎ}りだ|When traveling, it is always best to put safety first.
+彼女{かのじょ}は 英語{えいご}（　）、中国語{ちゅうごくご}も 話{はな}せる。|はもとより|ばかりに|ことに|ものか|She speaks Chinese as well, not to mention English.
+子{こ}ども（　）、大人{おとな}も スマホの 使{つか}いすぎに 注意{ちゅうい}が 必要{ひつよう}だ。|に限{かぎ}らず|にわたって|に応{おう}じて|ぬきで|Not limited to children, adults too need to be careful about overusing smartphones.
+砂糖{さとう}（　）、コーヒーを 飲{の}む。|ぬきで|に限{かぎ}らず|を通{つう}じて|に沿{そ}って|I drink my coffee without sugar.
+何時間{なんじかん}も 悩{なや}んだ（　）、結局{けっきょく} 何{なに}も 決{き}められなかった。|あげく|ついでに|ことに|次第{しだい}|After agonizing for hours, I was ultimately unable to decide anything.
+三日間{みっかかん}（　）、会議{かいぎ}が 続{つづ}いた。|にわたって|に伴{ともな}って|をめぐって|に沿{そ}って|The meeting continued for three days.
+東京{とうきょう}（　）、多{おお}くの 店{みせ}が 集{あつ}まって いる。|を中心{ちゅうしん}に|にわたって|を通{つう}じて|に応{おう}じて|Many shops are concentrated around Tokyo.
+説明書{せつめいしょ}（　）、組{く}み立{た}てて ください。|に沿{そ}って|にわたって|をめぐって|に限{かぎ}らず|Please assemble it following the instructions.
+誰{だれ}が 彼{かれ}の 話{はなし}など 信{しん}じる（　）。|ものか|ものなら|ものの|ことか|Who would ever believe a story like his?
+会社{かいしゃ}の 規則{きそく}を 確認{かくにん}した（　）、申請書{しんせいしょ}を 出{だ}して ください。|上{うえ}で|ところで|ばかりに|ために|Please submit the application form after checking the company rules.
+私{わたし}の 知{し}る（　）、この 町{まち}で 一番{いちばん} 古{ふる}い 店{みせ}だ。|限{かぎ}り|ために|ばかりに|ところで|As far as I know, this is the oldest shop in town.
+この 値段{ねだん}（　）、品質{ひんしつ}が いい。|にしては|ところを|ばかりに|ことから|For the price, the quality is quite good.
+彼{かれ}は 態度{たいど}（　）、失礼{しつれい}だ。|からして|からには|からこそ|からといって|Judging from his attitude alone, he is rude.
+彼{かれ}は 何{なに}も 言{い}う（　）、部屋{へや}を 出{で}て いった。|ことなく|ことに|ことから|ことだから|He left the room without saying a word.
+この 大会{たいかい}は 経験{けいけん}（　）、だれでも 参加{さんか}できる。|を問{と}わず|を込{こ}めて|を伴{ともな}って|を見込{みこ}んで|Anyone can take part in this competition, regardless of experience.
+彼女{かのじょ}は 人目{ひとめ}（　）、大声{おおごえ}で 泣{な}いて いた。|もかまわず|ながら|とともに|ままに|She was crying loudly, not caring who saw her.
+雨{あめ}も 降{ふ}っている（　）、今日{きょう}は 家{いえ}で ゆっくり しよう。|ことだし|ばかりに|ことなく|ところを|It is raining, so let us take it easy at home today.
+もう 二度{にど}と 彼{かれ}には 会{あ}う（　）。|まい|べきだ|ところだ|ばかりだ|I will never see him again.
+彼{かれ}（　）、遅刻{ちこく}しない。|に限{かぎ}って|をめぐって|を込{こ}めて|をもって|He, of all people, is never late.
+忙{いそが}しくて、旅行{りょこう}（　）。|どころではない|わけではない|ものではない|ことではない|I am too busy to even think about traveling.
+日本{にほん}に 来{き}て（　）、一度{いちど}も 国{くに}に 帰{かえ}って いない。|以来{いらい}|ほど|途中{とちゅう}|最中{さいちゅう}|I have not once gone back home since coming to Japan.
+経済{けいざい}は 少{すこ}しずつ 回復{かいふく}し（　）。|つつある|はずがない|ながら|ようがない|The economy is gradually recovering.
+会議{かいぎ}（　）、資料{しりょう}を 配{くば}った。|に先立{さきだ}って|ことなく|ばかりに|ところで|I handed out the materials before the meeting began.
+彼{かれ}は 歌{うた}が 上手{じょうず}な（　）、ダンスも 得意{とくい}だ。|ばかりか|ばかりに|ところで|ことか|Not only is he good at singing, but he is also good at dancing.
+食{た}べ物{もの}の こと（　）、彼女{かのじょ}は 目{め}の 色{いろ}が 変{か}わる。|となると|となるほど|となるまで|となるからには|When it comes to food, her eyes light up.
+新{あたら}しい 仕事{しごと}を 始{はじ}める（　）、資格{しかく}を 取{と}った。|にあたって|ずに|にしては|をめぐって|I got a qualification before starting my new job.
+味{あじ}（　）、値段{ねだん}が 高{たか}すぎる。|はともかく|ながらも|ばかりに|ところを|Taste aside, it is far too expensive.
+いくら 忙{いそが}しい（　）、連絡{れんらく}くらいは すべきだ。|にしても|ことには|ことなく|ばかりに|No matter how busy you are, you should at least get in touch.
+事故{じこ}（　）、交通{こうつう}ルールを 見直{みなお}す 人{ひと}が 増{ふ}えた。|をきっかけに|を込{こ}めて|を伴{ともな}って|をたよりに|After the accident, more people began to review traffic rules.`,
+N1:`仕事{しごと}が 終{お}わる（　）、彼{かれ}は 飲{の}みに 出{で}かけた。|や否{いな}や|次第{しだい}|ところを|ものを|As soon as work was over, he went out drinking.
+円安{えんやす}が 物価{ぶっか}の 上昇{じょうしょう}と（　）、生活{せいかつ}は ますます 苦{くる}しく なった。|あいまって|ともなく|問{と}わず|よそに|Combined with rising prices, the weak yen made life even harder.
+彼{かれ}の 失礼{しつれい}な 態度{たいど}には、怒{いか}りを（　）、あきれて しまった。|通{とお}り越{こ}して|めぐって|よそに|皮切{かわきり}りに|His rude attitude went beyond making me angry; I was simply appalled.
+親{おや}の 心配{しんぱい}（　）、彼{かれ}は 危険{きけん}な 山{やま}に 登{のぼ}った。|をよそに|をもって|にあって|とあれば|Ignoring his parents' worries, he climbed a dangerous mountain.
+子{こ}ども（　）、そんな 簡単{かんたん}な ことも わからないのか。|じゃあるまいし|ならでは|なりに|たるもの|You're not a child — how can you not understand something so simple?
+本日{ほんじつ}の 営業{えいぎょう}は 午後{ごご}6時{じ}（　）終了{しゅうりょう}させて いただきます。|をもって|にあって|をよそに|ならでは|We will close today at 6 p.m.
+この 景色{けしき}は 京都{きょうと}（　）の 美{うつく}しさだ。|ならでは|ばかり|ずくめ|まみれ|This scenery has a beauty unique to Kyoto.
+試合{しあい}に 負{ま}けて、悔{くや}しい（　）。|といったらない|にすぎない|までもない|きらいがある|I'm incredibly frustrated about losing the match.
+彼{かれ}は 社長{しゃちょう}（　）、社員{しゃいん}の 気持{きも}ちを 理解{りかい}していない。|でありながら|ならでは|いかんで|たりとも|Although he's the president, he doesn't understand how his employees feel.
+危険{きけん}を 承知{しょうち}の（　）、彼{かれ}は 救助{きゅうじょ}に 向{む}かった。|うえで|あまり|末{すえ}|かたわら|Fully aware of the danger, he went to the rescue.
+一度{いちど} 約束{やくそく}した（　）、最後{さいご}まで やり遂{と}げる べきだ。|からには|ものなら|とはいえ|ことなしに|Once you've made a promise, you should see it through.
+雨{あめ}が 降{ふ}ろうが 雪{ゆき}が（　）、試合{しあい}は 行{おこな}われる。|降{ふ}ろうが|降{ふ}っても|降{ふ}るなら|降{ふ}れば|Whether it rains or snows, the match will be held.
+来月{らいげつ}の東京公演{とうきょうこうえん}（　）、全国{ぜんこく}ツアーが始{はじ}まる。|を皮切{かわきり}りに|をものともせず|を禁{きん}じ得{え}ない|ずくめ|Starting with the Tokyo concert next month, the nationwide tour will begin.
+父{ちち}の強{つよ}い反対{はんたい}（　）、彼{かれ}は大学{だいがく}を辞{や}めて起業{きぎょう}した。|をものともせず|を禁{きん}じ得{え}ない|まみれ|ずくめ|Ignoring his father's strong opposition, he quit university and started his own business.
+子{こ}どもから高齢者{こうれいしゃ}（　）、地域{ちいき}の人々{ひとびと}が祭{まつ}りの準備{じゅんび}に参加{さんか}した。|に至{いた}るまで|に足{た}る|に堪{た}えない|にもまして|From children to the elderly, people throughout the neighborhood took part in preparing the festival.
+年末{ねんまつ}（　）、この店{みせ}は予約{よやく}が取{と}れないほど混{こ}み合{あ}う。|ともなると|きらいがある|まじき|ものを|At year-end, this shop gets so crowded that it is hard to get a reservation.
+理由{りゆう}（　）、遅刻{ちこく}は認{みと}められない。|いかんによらず|ずくめ|までもない|ばそれまでだ|Regardless of the reason, lateness will not be permitted.
+この不祥事{ふしょうじ}は、誰{だれ}かが責任{せきにん}を取{と}ら（　）。|ないではすまない|ばそれまでだ|ものを|までもない|This scandal cannot be allowed to pass without someone taking responsibility.
+今年{ことし}の猛暑{もうしょ}は、去年{きょねん}（　）厳{きび}しい。|にもまして|に至{いた}っては|ものを|ながらに|This year's scorching heat is even more severe than last year's.
+大雨{おおあめ}で、試合{しあい}の中止{ちゅうし}（　）。|を余儀{よぎ}なくされる|をものともせず|を禁{きん}じ得{え}ない|を経{へ}て|Heavy rain forced the match to be called off.
+彼{かれ}の無責任{むせきにん}な発言{はつげん}には、怒{いか}り（　）。|を禁{きん}じ得{え}ない|を経{へ}て|をものともせず|を皮切{かわきり}りに|His irresponsible remarks left me unable to contain my anger.
+彼{かれ}の見苦{みぐる}しい言{い}い訳{わけ}は、聞{き}く（　）ものだった。|に堪{た}えない|に足{た}る|ずくめ|ところを|His shameful excuse was too painful to listen to.
+結婚式{けっこんしき}は嬉{うれ}しいこと（　）で、本当{ほんとう}に幸{しあわ}せな一日{いちにち}だった。|ずくめ|きらいがある|ばそれまでだ|まじき|The wedding was full of happy moments, and it was truly a joyful day.
+工事現場{こうじげんば}から帰{かえ}ってきた彼{かれ}は、泥{どろ}（　）だった。|まみれ|ながらに|きらいがある|たるもの|He came home from the construction site covered in mud.
+彼{かれ}は生{う}まれ（　）、音楽{おんがく}の才能{さいのう}に恵{めぐ}まれていた。|ながらに|にもまして|ものを|ばかりに|He was blessed with musical talent from birth.
+祖父{そふ}は、教{おし}えた（　）忘{わす}れてしまう。|そばから|ばそれまでだ|きらいがある|たるもの|My grandfather forgets things as soon as I teach them to him.
+彼女{かのじょ}は今{いま}にも泣{な}か（　）、必死{ひっし}に訴{うった}えてきた。|んばかりに|ものを|ばそれまでだ|ながらに|She pleaded desperately, as if she were about to burst into tears.
+もっと早{はや}く相談{そうだん}してくれればいい（　）、一人{ひとり}で悩{なや}んでいたなんて。|ものを|までもない|ばそれまでだ|きらいがある|You could have consulted me sooner, yet you agonized over it alone.
+ここまで来{き}れば、もう確認{かくにん}する（　）。|までもない|ものを|ばそれまでだ|ところを|Now that we have come this far, there is no need to check again.
+心配{しんぱい}（　）。彼{かれ}は一人{ひとり}で十分{じゅうぶん}やっていける。|には及{およ}ばない|ものを|たるもの|ばそれまでだ|There is no need to worry; he can manage on his own.
+このチャンスを逃{のが}せ（　）。|ばそれまでだ|ものを|ながらに|きらいがある|If you let this chance slip away, that is the end of it.
+彼{かれ}は何{なん}でも楽観的{らっかんてき}に考{かんが}えすぎる（　）。|きらいがある|ばそれまでだ|ずくめ|ものを|He has a tendency to be overly optimistic about everything.
+彼{かれ}は遅刻{ちこく}ばかりして、ついには会議{かいぎ}を無断{むだん}で休{やす}む（　）。|しまつだ|たるもの|ながらに|んばかりに|He is always late, and now he has even skipped a meeting without notice.
+教師{きょうし}（　）、生徒{せいと}の前{まえ}で感情的{かんじょうてき}になってはいけない。|たるもの|まじき|ずくめ|ところを|As a teacher, you must not lose your temper in front of your students.
+お忙{いそが}しい（　）、お集{あつ}まりいただき、ありがとうございます。|ところを|を経{へ}て|ずくめ|まじき|Thank you for gathering here despite your busy schedule.
+長{なが}い交渉{こうしょう}（　）、両社{りょうしゃ}は合意{ごうい}に達{たっ}した。|を経{へ}て|ずくめ|まじき|ばそれまでだ|After long negotiations, the two companies finally reached an agreement.
+校内{こうない}では（　）。|走{はし}るべからず|走{はし}るまじき|走{はし}るべく|走{はし}ればそれまでだ|Running is prohibited inside the school building.
+信頼{しんらい}（　）人物{じんぶつ}として、彼女{かのじょ}は推薦{すいせん}された。|に足{た}る|に至{いた}るまで|ずくめ|まじき|She was recommended as someone worthy of trust.
+その発言{はつげん}は、教師{きょうし}（　）行為{こうい}として批判{ひはん}された。|にあるまじき|たるもの|ずくめ|をものともせず|That remark was criticized as conduct unbecoming of a teacher.
+すっかり春{はる}（　）、街{まち}にも花{はな}が咲{さ}き始{はじ}めた。|めいて|まじき|ながらに|ところを|Spring has truly arrived, and flowers have begun to bloom throughout the town.
+散歩{さんぽ}（　）、近所{きんじょ}の本屋{ほんや}に寄{よ}ってきた。|がてら|ながら|ばかりに|ところに|I dropped by a nearby bookstore while out for a walk.
+彼{かれ}は毎日{まいにち}努力{どりょく}を重{かさ}ねた（　）、今{いま}の成功{せいこう}がある。|ゆえに|ばかりに|ことなしに|ところで|Precisely because he kept working hard every day, he has his present success.
+彼女{かのじょ}が喜{よろこ}んだことは、想像{そうぞう}（　）。|にかたくない|にたえない|にさいして|にそくして|It is not hard to imagine how happy she was.
+今{いま}さら謝{あやま}（　）、彼{かれ}は許{ゆる}してくれないだろう。|ったところで|ったばかりに|ったおかげで|ったはずで|Even if I apologize now, he will probably not forgive me.
+人気{にんき}の俳優{はいゆう}が来{く}（　）、会場{かいじょう}は大勢{おおぜい}の人{ひと}でにぎわった。|るとあって|るまでもなく|るべくもなく|るふりをして|Because a popular actor was coming, the venue was packed with people.
+皆様{みなさま}のご健康{けんこう}とご多幸{たこう}を（　）。|祈{いの}ってやまない|祈{いの}るまでもない|祈{いの}りかねない|祈{いの}るには及{およ}ばない|I sincerely wish you good health and happiness.
+完璧{かんぺき}に（　）、せめて基本{きほん}だけは身{み}につけたい。|できないまでも|できるばかりか|できるとはいえ|できるかのように|Even if I cannot do it perfectly, I want to at least master the basics.
+実情{じつじょう}（　）対策{たいさく}を立{た}てる必要{ひつよう}がある。|に即{そく}した|に反{はん}した|にほかならない|にすぎない|We need to take countermeasures that fit the actual situation.
+この仕事{しごと}を任{まか}せられるのは、彼{かれ}（　）ほかにいない。|をおいて|をとわず|をもとにして|をかぎりに|He is the only person who can be entrusted with this job.
+どれだけ努力{どりょく}しても、彼{かれ}の実力{じつりょく}には（　）。|及{およ}ぶべくもない|及{およ}ぶまでもない|及{およ}ぶべきだ|及{およ}ぶかのようだ|No matter how hard we try, we cannot possibly match his ability.
+お客様{きゃくさま}（　）商売{しょうばい}だと、店長{てんちょう}はいつも言{い}っている。|あっての|ぬきの|まみれの|にあたっての|The store manager always says that business exists only because of customers.
+先週{せんしゅう}のお礼{れい}（　）、田中{たなか}さんのお宅{たく}を訪{たず}ねた。|かたがた|ながら|ところに|ものを|I visited Mr. Tanaka's home, partly to thank him for his help last week.
+一度{いちど}この沼{ぬま}にはまった（　）、二度{にど}と抜{ぬ}け出{だ}せない。|が最後{さいご}|ものを|までもなく|ところを|Once you get stuck in this swamp, you can never get out again.
+四十歳{よんじゅっさい}（　）、初{はじ}めて小説{しょうせつ}を書{か}き上{あ}げた。|にして|にわたって|にかけては|にとって|It was not until the age of forty that he finished his first novel.
+今年{ことし}（　）、この工場{こうじょう}は閉鎖{へいさ}されることになった。|を限{かぎ}りに|をもとに|を込{こ}めて|をおいて|This factory will close, with this year being its last.
+子{こ}どもならいざ（　）、大人{おとな}がこんな間違{まちが}いをするのは問題{もんだい}だ。|しらず|ともかく|ばかりに|ものを|Children may be excused, but for an adult to make such a mistake is a real problem.
+もし落{お}ちたら、来年{らいねん}もう一度{いちど}受験{じゅけん}する（　）。|までだ|ものか|ところだ|わけがない|If I fail, I will simply take the exam again next year.
+窓{まど}の外{そと}を見{み}る（　）見{み}ていると、雪{ゆき}が降{ふ}り始{はじ}めた。|ともなく|ばかりに|ものを|くせに|As I was idly gazing out the window, it began to snow.
+練習{れんしゅう}（　）、上手{じょうず}になる人{ひと}はいない。|することなしに|するまでもなく|するばかりに|するものを|Nobody becomes skilled without practicing.
+この店{みせ}は料理{りょうり}（　）、店員{てんいん}の接客{せっきゃく}も素晴{すば}らしい。|もさることながら|ならでは|ばかりに|ようでは|The food at this restaurant is excellent, and the staff's service is wonderful too.`
 }
 };
 
@@ -779,11 +1364,26 @@ const SAMPLE = { kanji:['学校','旅行','経験','影響','懸念'], vocab:['�
 const GENRE_NAME = { kanji:'漢字', vocab:'語彙', grammar:'文法' };
 const LV_COL = ['#2fb873','#3a86e0','#f08a24','#e0435a','#6a3fd0'];
 const WORDS = {};
+const RUBY_RE = /([一-鿿々〆ヶ]+)\{([ぁ-ゖ]+)\}/g;
+const rubyPlain = t => t.replace(RUBY_RE, '$1');
+// 「漢字{よみ}」を含む文字列を、[{t:'c', ch}] と [{t:'r', base, rt}] の並びに分ける
+function rubyParse(t){
+  const out = []; let last = 0; RUBY_RE.lastIndex = 0; let m;
+  while ((m = RUBY_RE.exec(t))){
+    for (const ch of t.slice(last, m.index)) out.push({ t:'c', ch });
+    out.push({ t:'r', base: m[1], rt: m[2] });
+    last = m.index + m[0].length;
+  }
+  for (const ch of t.slice(last)) out.push({ t:'c', ch });
+  return out;
+}
 const QS = { vocab:{}, grammar:{} };
 for (const g of ['vocab','grammar']) LEVELS.forEach((L,li) => {
   QS[g][L] = QRAW[g][L].trim().split('\n').map(line => {
     const [st, a, w1, w2, w3, e] = line.split('|').map(x => x.trim());
-    return { sent:true, g, k: li >= 2 ? st.split('（　）').map(x => x.replace(/[ \u3000]/g,'')).join('（　）') : st, r:[a], w:[w1,w2,w3], m:e };
+    const kr = li >= 2 ? st.split('（　）').map(x => x.replace(/[ \u3000]/g,'')).join('（　）') : st;
+    const ann = {}; [a, w1, w2, w3].forEach(x => { ann[rubyPlain(x)] = x; });
+    return { sent:true, g, kr, k: rubyPlain(kr), r:[rubyPlain(a)], w:[w1,w2,w3].map(rubyPlain), ann, m:e };
   });
 });
 for (const L of LEVELS) {
@@ -866,9 +1466,15 @@ function hpPlan(n){
   while (diff !== 0 && guard++ < 200){ if (diff > 0){ hp[i]++; diff--; } else if (hp[i] > 1){ hp[i]--; diff++; } i = (i + 4) % 5; }
   return hp;
 }
-const SPEEDS = [ { name:'のんびり', d:1.75, s:.6 }, { name:'ゆっくり', d:1.3, s:.8 }, { name:'ふつう', d:1, s:1 }, { name:'はやい', d:.75, s:1.25 } ];
-let speed = parseInt(store.get('kr-speed') ?? '2', 10); if (!(speed >= 0 && speed <= 3)) speed = 2;
-const bestKey = L => `kr-best-${L}-${genre}-${gameMode}-${qCount}`;
+const SPEEDS = [ { name:'じっくり', d:2.5, s:.4 }, { name:'のんびり', d:1.75, s:.6 }, { name:'ゆっくり', d:1.3, s:.8 }, { name:'ふつう', d:1, s:1 }, { name:'はやい', d:.75, s:1.25 } ];
+let speed = store.get('kr-speed5') !== null ? parseInt(store.get('kr-speed5'), 10) : (parseInt(store.get('kr-speed') ?? '2', 10) + 1);
+let jam = store.get('kr-jam') === 'on';
+let furi = store.get('kr-furi') !== 'off';
+const furiOn = () => furi && genre !== 'kanji';
+const jamOn = () => jam && genre === 'kanji';
+const JAM_NAMES = { blur:'ぼかし', mosaic:'モザイク', puzzle:'パズル' };
+if (!(speed >= 0 && speed <= 4)) speed = 3;
+const bestKey = L => `kr-best-${L}-${genre}-${gameMode}-${qCount}${jamOn() ? '-jam' : ''}`;
 const bestOf = L => parseInt(store.get(bestKey(L)) || '0', 10) || 0;
 
 /* =========================================================
@@ -1511,46 +2117,57 @@ function wordPos(w, p){
   const G = geom(), chars = [...w.k];
   const units = chars.reduce((s,ch) => s + (isKana(ch) ? .72 : 1), 0);
   const base = Math.min(W*.86/units, H*.32, 260);
+  if (jamOn() && !w.sent) return { x: G.vx, y: H*(H < 520 ? .54 : .52), fs: base*.78, chars, units };
   const k = .15 + .85*Math.pow(clamp(p,0,1), 1.55);
   return { x: G.vx, y: lerp(G.vy + G.bh*.08, H*(H < 520 ? .56 : .5), Math.pow(clamp(p,0,1), 1.25)), fs: base*k, chars, units };
 }
 function drawGlyphs(chars, cx, cy, fs, o={}){
+  const g = o.g || ctx;
   const alpha = o.alpha ?? 1;
   const ws = chars.map(ch => isKana(ch) ? .72 : 1), total = ws.reduce((a,b) => a + b, 0)*fs;
   let x = -total/2;
   const PP = chars.map((ch,i) => { const f = fs*ws[i]; const q = { ch, f, x: x + f/2, y: (fs - f)*.36 }; x += f; return q; });
-  ctx.save(); ctx.translate(cx, cy); if (o.rot) ctx.rotate(o.rot); if (o.scale) ctx.scale(o.scale, o.scale);
-  ctx.globalAlpha = alpha; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
-  const each = fn => PP.forEach(q => { ctx.font = `${q.f}px ${FONT}`; fn(q); });
-  if (o.flat){ ctx.fillStyle = o.flat; each(q => ctx.fillText(q.ch, q.x, q.y)); ctx.restore(); return; }
-  each(q => { ctx.lineWidth = q.f*.26; ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.strokeText(q.ch, q.x, q.y + fs*.07); });
-  each(q => { ctx.lineWidth = q.f*.24; ctx.strokeStyle = o.rim || '#ffffff'; ctx.strokeText(q.ch, q.x, q.y); });
-  each(q => { ctx.lineWidth = q.f*.12; ctx.strokeStyle = '#2a1206'; ctx.strokeText(q.ch, q.x, q.y); });
-  ctx.fillStyle = lg(0,-fs*.5,0,fs*.5,['#fff6b3','#ffcb2e','#ff8a1c']); each(q => ctx.fillText(q.ch, q.x, q.y));
-  if (o.danger > 0){ ctx.globalAlpha = alpha*o.danger; ctx.fillStyle = lg(0,-fs*.5,0,fs*.5,['#ffd1c9','#ff4a3a','#c5102b']); each(q => ctx.fillText(q.ch, q.x, q.y)); }
-  if (o.white > 0){ ctx.globalAlpha = alpha*o.white; ctx.fillStyle = '#fff'; each(q => ctx.fillText(q.ch, q.x, q.y)); }
-  ctx.restore();
+  g.save(); g.translate(cx, cy); if (o.rot) g.rotate(o.rot); if (o.scale) g.scale(o.scale, o.scale);
+  g.globalAlpha = alpha; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round';
+  const each = fn => PP.forEach(q => { g.font = `${q.f}px ${FONT}`; fn(q); });
+  if (o.flat){ g.fillStyle = o.flat; each(q => g.fillText(q.ch, q.x, q.y)); g.restore(); return; }
+  each(q => { g.lineWidth = q.f*.26; g.strokeStyle = 'rgba(0,0,0,.35)'; g.strokeText(q.ch, q.x, q.y + fs*.07); });
+  each(q => { g.lineWidth = q.f*.24; g.strokeStyle = o.rim || '#ffffff'; g.strokeText(q.ch, q.x, q.y); });
+  each(q => { g.lineWidth = q.f*.12; g.strokeStyle = '#2a1206'; g.strokeText(q.ch, q.x, q.y); });
+  g.fillStyle = lg(0,-fs*.5,0,fs*.5,['#fff6b3','#ffcb2e','#ff8a1c'], g); each(q => g.fillText(q.ch, q.x, q.y));
+  if (o.danger > 0){ g.globalAlpha = alpha*o.danger; g.fillStyle = lg(0,-fs*.5,0,fs*.5,['#ffd1c9','#ff4a3a','#c5102b'], g); each(q => g.fillText(q.ch, q.x, q.y)); }
+  if (o.white > 0){ g.globalAlpha = alpha*o.white; g.fillStyle = '#fff'; each(q => g.fillText(q.ch, q.x, q.y)); }
+  g.restore();
 }
 /* ===== 語彙・文法：文のカード ===== */
 function layoutCard(q){
-  const key = Math.round(W) + 'x' + Math.round(H);
+  const key = Math.round(W) + 'x' + Math.round(H) + (furiOn() ? 'f' : '');
   if (q._lay && q._lay.key === key) return q._lay;
   const fs = clamp(Math.min(W*.052, H*.058), 15, 28), maxW = Math.min(W*.86, 600) - fs*1.6;
   ctx.save(); ctx.font = `500 ${fs}px ${UIFONT}`;
-  const [pre, post = ''] = q.k.split('（　）');
+  const [pre, post = ''] = q.kr.split('（　）');
   const longest = Math.max(...[q.r[0], ...q.w].map(c => ctx.measureText(c).width))*1.08;
   const bw = Math.max(fs*2.4, longest + fs*1.1);
-  const mk = str => [...str].map(ch => ({ t:'c', ch, w: ctx.measureText(ch).width }));
+  const FO = furiOn();
+  const mk = str => rubyParse(str).flatMap(p => {
+    if (p.t === 'c') return [{ t:'c', ch: p.ch, w: ctx.measureText(p.ch).width }];
+    if (!FO) return [...p.base].map(ch => ({ t:'c', ch, w: ctx.measureText(ch).width }));
+    const bw0 = ctx.measureText(p.base).width;
+    ctx.font = `700 ${fs*.5}px ${UIFONT}`; const rw = ctx.measureText(p.rt).width; ctx.font = `500 ${fs}px ${UIFONT}`;
+    return [{ t:'r', base: p.base, rt: p.rt, w: Math.max(bw0, rw*.8) }];
+  });
   const toks = [...mk(pre), { t:'b', w: bw }, ...mk(post)];
   ctx.restore();
   const spaced = q.k.includes(' ');
   const units = []; let cur = [];
   const flush = () => { if (cur.length) units.push(cur); cur = []; };
-  for (const tk of toks){
-    if (tk.t === 'b'){ flush(); units.push([tk]); continue; }
+  const isKata = t => t && t.t === 'c' && /[\u30a1-\u30ff]/.test(t.ch);
+  toks.forEach((tk, ti) => {
+    if (tk.t === 'b'){ flush(); units.push([tk]); return; }
     cur.push(tk);
-    if (!spaced || tk.ch === ' ' || '、。'.includes(tk.ch)) flush();
-  }
+    const keep = !spaced && isKata(tk) && isKata(toks[ti + 1]);   // カタカナ語の途中では改行しない
+    if ((!spaced && !keep) || tk.ch === ' ' || '、。'.includes(tk.ch)) flush();
+  });
   flush();
   const lines = [[]]; let lw = 0;
   const uw = u => u.reduce((a,t) => a + t.w, 0);
@@ -1565,8 +2182,8 @@ function layoutCard(q){
     lines[lines.length-1].push(...u); lw += uw(u);
   });
   lines.forEach((l, li) => { while (l.length && l[l.length-1].ch === ' ') l.pop(); });
-  const widths = lines.map(l => l.reduce((a,t) => a + t.w, 0)), lineH = fs*1.75;
-  return q._lay = { key, fs, lines, widths, lineH, w: Math.max(...widths) + fs*1.6, h: lines.length*lineH + fs*1.5 };
+  const widths = lines.map(l => l.reduce((a,t) => a + t.w, 0)), lineH = fs*(FO ? 2.3 : 1.75);
+  return q._lay = { key, fs, lines, widths, lineH, furi: FO, w: Math.max(...widths) + fs*1.6, h: lines.length*lineH + fs*1.5 };
 }
 function cardPos(q, p){
   const G = geom(), L = layoutCard(q), pp = clamp(p, 0, 1), s = .6 + .4*Math.pow(pp, 1.3);
@@ -1583,10 +2200,17 @@ function drawCard(q, x, y, s, o={}){
   ctx.fillStyle = '#1a0b2b'; ctx.font = `800 ${f*.68}px ${UIFONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(tag, -w/2 + f*.5 + tw/2, -h/2 - th*.05);
   ctx.textAlign = 'left';
   L.lines.forEach((line, i) => {
-    let x0 = -L.widths[i]/2; const yy = -h/2 + f*.75 + L.lineH*(i + .5);
+    let x0 = -L.widths[i]/2; const yy = -h/2 + f*.75 + L.lineH*(i + .5) + (L.furi ? f*.28 : 0);
     for (const tk of line){
       if (tk.t === 'c'){ ctx.font = `500 ${f}px ${UIFONT}`; ctx.fillStyle = '#1a0b2b'; ctx.fillText(tk.ch, x0, yy); }
-      else {
+      else if (tk.t === 'r'){
+        ctx.font = `500 ${f}px ${UIFONT}`; ctx.fillStyle = '#1a0b2b'; ctx.textAlign = 'center';
+        ctx.fillText(tk.base, x0 + tk.w/2, yy);
+        ctx.font = `700 ${f*.5}px ${UIFONT}`; ctx.fillStyle = '#5a4a7a';
+        ctx.fillText(tk.rt, x0 + tk.w/2, yy - f*.82);
+        ctx.textAlign = 'left';
+      }
+      else if (tk.t === 'b') {
         RR(ctx, x0 + f*.12, yy - f*.74, tk.w - f*.24, f*1.48, f*.32);
         ctx.fillStyle = o.filled ? '#35d49a' : '#ffd23f'; ctx.fill(); ctx.lineWidth = f*.1; ctx.strokeStyle = '#1a0b2b'; ctx.stroke();
         ctx.textAlign = 'center'; ctx.fillStyle = o.filled ? '#ffffff' : '#1a0b2b'; ctx.font = `800 ${f}px ${UIFONT}`;
@@ -1620,15 +2244,81 @@ function drawCardWord(){
   drawCard(q, pos.x + jx, pos.y + jy, pos.s, { rot: spin, danger: pulse, white: S.spawnFlash > 0 ? S.spawnFlash/.2*.6 : 0 });
   if (S.wrongFx > 0) drawCross(pos.x, pos.y, Math.min(L.w, L.h)*pos.s*.42);
 }
+/* ===== 妨害モード ===== */
+function jamAmount(p){ const r = clamp(p / 0.7, 0, 1); return 1 - r*r*(3 - 2*r); }
+const jamC = document.createElement('canvas'), jamX = jamC.getContext('2d');
+const jamS = document.createElement('canvas'), jamSX = jamS.getContext('2d');
+function jamRand(seed, i){ const x = Math.sin(seed*91.7 + i*47.3)*43758.5453; return x - Math.floor(x); }
+function drawJamWord(pos, jx, jy, o, style, pulse){
+  // 1) 漢字をくっきりした状態で裏のキャンバス jamC に描く
+  const cw = Math.ceil(pos.fs*pos.units*1.25 + pos.fs*.6), ch = Math.ceil(pos.fs*1.6);
+  if (jamC.width !== Math.ceil(cw*DPR) || jamC.height !== Math.ceil(ch*DPR)){ jamC.width = Math.ceil(cw*DPR); jamC.height = Math.ceil(ch*DPR); }
+  jamX.setTransform(1,0,0,1,0,0); jamX.clearRect(0,0,jamC.width,jamC.height); jamX.setTransform(DPR,0,0,DPR,0,0);
+  drawGlyphs(pos.chars, cw/2, ch/2, pos.fs, { g: jamX, danger: pulse });
+  const dx = pos.x + jx - cw/2, dy = pos.y + jy - ch/2;
+  // 2) スタイルごとに jamC を本体の ctx に描く
+  if (o < 0.02){ ctx.drawImage(jamC, dx, dy, cw, ch); return; }
+  if (style === 'blur'){
+    const radius = lerp(1, pos.fs*.16, Math.pow(o, 1.2));  // ぼかしの大きさ（px）
+    jamS.width = Math.max(2, Math.round(cw / radius)); jamS.height = Math.max(2, Math.round(ch / radius));
+    jamSX.imageSmoothingEnabled = true; jamSX.imageSmoothingQuality = 'high';
+    jamSX.drawImage(jamC, 0, 0, jamS.width, jamS.height);
+    ctx.save(); ctx.imageSmoothingEnabled = true;
+    const passes = 1 + Math.round(o*2);          // ぼかしが強いほど重ねて濃くする（1〜3回）
+    for (let i = 0; i < passes; i++) ctx.drawImage(jamS, dx, dy, cw, ch);
+    ctx.restore();
+  } else if (style === 'mosaic'){
+    const block = lerp(2, pos.fs*.3, o);
+    jamS.width = Math.max(1, Math.round(cw/block)); jamS.height = Math.max(1, Math.round(ch/block));
+    jamSX.imageSmoothingEnabled = true;
+    jamSX.drawImage(jamC, 0, 0, jamS.width, jamS.height);
+    ctx.save(); ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(jamS, dx, dy, cw, ch);
+    ctx.restore();
+  } else if (style === 'puzzle'){
+    const cols = Math.max(3, Math.round(pos.units*3)), rows = 3;
+    const tw = cw/cols, th = ch/rows;
+    for (let i = 0; i < cols*rows; i++){
+      const c = i % cols, r = Math.floor(i/cols);
+      const r1 = jamRand(S.jamSeed, i*3), r2 = jamRand(S.jamSeed, i*3+1), r3 = jamRand(S.jamSeed, i*3+2);
+      const ox = (r1 - .5)*pos.fs*2.4*o, oy = (r2 - .5)*pos.fs*1.6*o, rot = (r3 - .5)*Math.PI*1.2*o;
+      const px = clamp(dx + (c + .5)*tw + ox, tw*.6, W - tw*.6), py = clamp(dy + (r + .5)*th + oy, th*.6, H - th*.6);
+      ctx.save(); ctx.translate(px, py); ctx.rotate(rot);
+      ctx.drawImage(jamC, c*tw*DPR, r*th*DPR, tw*DPR, th*DPR, -tw/2, -th/2, tw + 1, th + 1);
+      ctx.restore();
+    }
+  }
+}
+function drawJamUI(pos, o){
+  const bw = Math.min(W*.7, pos.fs*pos.units*.95), bh = Math.max(8, pos.fs*.07);
+  const bx = pos.x - bw/2, by = pos.y + pos.fs*.62;
+  ctx.save();
+  ctx.fillStyle = 'rgba(18,8,40,.7)'; RR(ctx, bx, by, bw, bh, bh/2); ctx.fill();
+  const rem = clamp(1 - S.p, 0, 1);
+  if (rem > 0){ ctx.fillStyle = S.p < .66 ? '#35d49a' : '#ff4d5e'; RR(ctx, bx, by, bw*rem, bh, bh/2); ctx.fill(); }
+  ctx.lineWidth = 2; ctx.strokeStyle = '#ffffff'; RR(ctx, bx, by, bw, bh, bh/2); ctx.stroke();
+  if (o > .02){
+    const fz = clamp(pos.fs*.13, 12, 18), py = by + bh + 16;
+    ctx.globalAlpha = clamp(o*3, 0, 1);
+    ctx.font = `800 ${fz}px ${UIFONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const label = JAM_NAMES[S.jamStyle] || '', pw = ctx.measureText(label).width + fz*1.4, ph = fz*1.7;
+    ctx.fillStyle = '#ffffff'; RR(ctx, pos.x - pw/2, py - ph/2, pw, ph, ph/2); ctx.fill();
+    ctx.fillStyle = '#1a0b2b'; ctx.fillText(label, pos.x, py);
+  }
+  ctx.restore();
+}
 function drawWord(){
   if (S.cur.sent) return drawCardWord();
+  const J = jamOn();
   const w = S.cur, p = S.p, pos = wordPos(w, p), G = geom();
   const danger = p > .66 ? (p - .66)/.34 : 0;
-  const spin = p < .1 ? (1 - p/.1)*S.spinDir*1.6 : 0;
-  ctx.fillStyle = `rgba(0,0,0,${.12 + .18*p})`;
-  E(ctx, pos.x, lerp(G.bb, H*.98, Math.pow(p,1.2)), pos.fs*pos.units*.42, pos.fs*.08); ctx.fill();
-  for (let i=3;i>=1;i--){ const pp = p - i*.035; if (pp <= 0) continue; const q = wordPos(w, pp);
-    drawGlyphs(q.chars, q.x, q.y, q.fs, { flat: danger > .3 ? '#ff6a5a' : '#fff1a8', alpha: .09 + .05*(3 - i) }); }
+  const spin = (!J && p < .1) ? (1 - p/.1)*S.spinDir*1.6 : 0;
+  if (!J){
+    ctx.fillStyle = `rgba(0,0,0,${.12 + .18*p})`;
+    E(ctx, pos.x, lerp(G.bb, H*.98, Math.pow(p,1.2)), pos.fs*pos.units*.42, pos.fs*.08); ctx.fill();
+    for (let i=3;i>=1;i--){ const pp = p - i*.035; if (pp <= 0) continue; const q = wordPos(w, pp);
+      drawGlyphs(q.chars, q.x, q.y, q.fs, { flat: danger > .3 ? '#ff6a5a' : '#fff1a8', alpha: .09 + .05*(3 - i) }); }
+  }
   if (danger > 0){
     const gr = pos.fs*pos.units*.7;
     ctx.fillStyle = rg(pos.x,pos.y,0,gr,[`rgba(255,40,60,${.45*danger})`,'rgba(255,40,60,0)']); ctx.fillRect(pos.x - gr, pos.y - gr, gr*2, gr*2);
@@ -1639,7 +2329,11 @@ function drawWord(){
     drawGlyphs(pos.chars, pos.x - o + jx, pos.y + jy, pos.fs, { flat:'#00e5ff', alpha:.75 });
     drawGlyphs(pos.chars, pos.x + o + jx, pos.y + jy, pos.fs, { flat:'#ff2bd6', alpha:.75 }); }
   const pulse = danger > 0 ? (.55 + .45*Math.sin(clock*(14 + danger*10)))*danger : 0;
-  drawGlyphs(pos.chars, pos.x + jx, pos.y + jy, pos.fs, { rot: spin, danger: pulse, white: S.spawnFlash > 0 ? S.spawnFlash/.2 : 0 });
+  if (J){
+    const o = jamAmount(p);
+    drawJamWord(pos, jx, jy, o, S.jamStyle, pulse);
+    drawJamUI(pos, o);
+  } else drawGlyphs(pos.chars, pos.x + jx, pos.y + jy, pos.fs, { rot: spin, danger: pulse, white: S.spawnFlash > 0 ? S.spawnFlash/.2 : 0 });
   drawSlots(pos, jx, jy);
   if (S.wrongFx > 0) drawCross(pos.x, pos.y, pos.fs*.55);
 }
@@ -1808,6 +2502,7 @@ function flashInput(cls){ ansForm.classList.remove('bad','good'); void ansForm.o
 
 const inGame = () => ['kbwait','count','intro','play','hit','reveal','defeat','warp'].includes(S.mode);
 function startGame(){
+  if (fsAuto && FS.supported() && !FS.active() && !isStandalone()) FS.enter();
   if (gameMode === 'type'){ $('controls').hidden = false; ansForm.hidden = false; input.value = ''; input.focus(); }
   AU.init(); clearTimeout(S.timer); WARP = null;
   S = { mode:'count', stage:0, hp:0, hpShown:0, maxHp:1, rage:false, lives:3, score:0, combo:0, maxCombo:0, correct:0, wrongs:0, hits:0,
@@ -1856,7 +2551,12 @@ function nextWord(){
   if (S.idx >= S.pool.length){ S.pool = shuffle(poolOf()); S.idx = 0; }
   S.cur = S.pool[S.idx++]; S.p = 0; S.push = 0; S.hint = 0; S.hb = 0; S.wrongFx = 0; S.glitchT = 0; S.spawnFlash = .2;
   S.spinDir = Math.random() < .5 ? -1 : 1;
-  S.dur = Math.max(3000, 9200*Math.pow(.9, S.stage)*(S.rage ? .85 : 1))*SPEEDS[speed].d*(S.cur.sent ? (S.cur.g === 'grammar' ? 1.7 : 1.6) : 1);
+  if (jamOn()){
+    const styles = ['blur','mosaic','puzzle'].filter(s => s !== S.jamStyle);
+    S.jamStyle = styles[Math.floor(Math.random()*styles.length)];
+    S.jamSeed = Math.random()*1000;
+  }
+  S.dur = Math.max(3000, 9200*Math.pow(.9, S.stage)*(S.rage ? .85 : 1))*SPEEDS[speed].d*(S.cur.sent ? (S.cur.g === 'grammar' ? 1.7 : 1.6) : 1)*(jamOn() && !S.cur.sent ? 1.3 : 1);
   hintPill.hidden = true; $('reveal').hidden = true;
   if (!composing) input.value = '';
   if (gameMode === 'choice') buildChoices();
@@ -1897,16 +2597,28 @@ function makeChoices(w){
   const [stem, suf] = splitOkuri(w), bad = new Set(w.r), picked = [];
   const add = r => { if (r && !bad.has(r) && !picked.includes(r) && picked.length < 3) picked.push(r); };
   shuffle(mutate(stem, !!suf)).slice(0, 2).forEach(m => add(m + suf));
-  const others = shuffle(WORDS[LEVELS[level]].filter(o => o !== w)).map(o => splitOkuri(o)[0] + suf);
+  const pool = WORDS[LEVELS[level]].filter(o => o !== w);
+  let others;
+  if (suf){
+    const sameSuf = pool.filter(o => splitOkuri(o)[1] === suf).map(o => splitOkuri(o)[0] + suf);
+    const sameEnd = pool.filter(o => splitOkuri(o)[1] && o.r[0].slice(-1) === suf.slice(-1)).map(o => o.r[0]);
+    others = [...shuffle(sameSuf), ...shuffle(sameEnd)];
+  } else others = shuffle(pool.filter(o => !splitOkuri(o)[1])).map(o => o.r[0]);
   const near = others.filter(r => Math.abs([...r].length - [...w.r[0]].length) <= 1);
   near.forEach(add); others.forEach(add);
   mutate(stem, !!suf).forEach(m => add(m + suf));
+  if (picked.length < 3){
+    const every = shuffle(Object.values(WORDS).flat().filter(o => o !== w));
+    const end = suf ? suf.slice(-1) : null;
+    every.filter(o => end ? (splitOkuri(o)[1] && o.r[0].slice(-1) === end) : !splitOkuri(o)[1]).forEach(o => add(o.r[0]));
+    every.forEach(o => add(o.r[0]));
+  }
   return shuffle([w.r[0], ...picked]);
 }
 function buildChoices(){
   const list = makeChoices(S.cur);
   S.choices = list;
-  choicesEl.innerHTML = list.map((r,i) => `<button class="choice" data-i="${i}"><span class="no">${i + 1}</span>${r}</button>`).join('');
+  choicesEl.innerHTML = list.map((r,i) => `<button class="choice" data-i="${i}"><span class="no">${i + 1}</span>${S.cur.ann ? rubyHTML(S.cur.ann[r] || r) : esc(r)}</button>`).join('');
 }
 function setChoicesWaiting(){ choicesEl.querySelectorAll('.choice').forEach(b => { if (!b.classList.contains('ok') && !b.classList.contains('ng')) b.classList.add('wait'); b.disabled = true; }); }
 function choose(i){
@@ -1930,7 +2642,8 @@ function submitAnswer(){
 function correct(){
   S.mode = 'hit';
   const mult = [1,.5,.25][S.hint];
-  const pts = Math.round((100 + 150*(1 - S.p) + Math.min(S.combo,10)*20)*(1 + .15*S.stage)*mult*SPEEDS[speed].s);
+  const jamBonus = jamOn() && !S.cur.sent && jamAmount(S.p) > .3;
+  const pts = Math.round((100 + 150*(1 - S.p) + Math.min(S.combo,10)*20)*(1 + .15*S.stage)*mult*SPEEDS[speed].s*(jamBonus ? 1.5 : 1));
   S.score += pts; S.combo++; S.maxCombo = Math.max(S.maxCombo, S.combo); S.correct++; S.hp--;
   const pos = S.cur.sent ? cardPos(S.cur, S.p) : wordPos(S.cur, S.p);
   if (S.cur.sent) ghosts.push({ card: S.cur, x: pos.x, y: pos.y, s: pos.s, life: .55, max: .55 });
@@ -1940,7 +2653,7 @@ function correct(){
   const ps = clamp(W*.07, 22, 42);
   pop(S.cur.r[0], pos.x, pos.y - pos.fs*.6 - ps*.3, ps, '#ffffff', { vy:-40 });
   pop('+' + pts, pos.x, pos.y + pos.fs*.55 + ps*.4, ps*.8, '#ffd23f', { vy:-60, life:.8 });
-  const judge = S.p < .35 ? ['はやい！','#6ff2e0'] : S.p < .7 ? ['ナイス！','#7dff7a'] : ['ギリギリ！','#ff8a5a'];
+  const judge = jamBonus ? ['見破り！','#ff6fe0'] : S.p < .35 ? ['はやい！','#6ff2e0'] : S.p < .7 ? ['ナイス！','#7dff7a'] : ['ギリギリ！','#ff8a5a'];
   pop(judge[0], pos.x - Math.min(W*.3, 160), pos.y - pos.fs*.2, ps*.75, judge[1], { vy:-30, life:.8, sc:1 });
   bolts.push({ x0: pos.x, y0: pos.y, t: 0, dur: .24, done: false, onHit: enemyDamaged });
   sfx('ok'); if (gameMode === 'type') flashInput('good');
@@ -1975,8 +2688,9 @@ function wrong(shown){
   $('combo').classList.remove('pop');
 }
 const esc = t => t.replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const rubyHTML = t => furiOn() ? esc(t).replace(RUBY_RE, '<ruby>$1<rt>$2</rt></ruby>') : esc(rubyPlain(t));
 function fillAnswerCell(el, w, baseCls){
-  if (w.sent){ const [pre, post = ''] = w.k.split('（　）'); el.className = baseCls.replace(/\b(dela|outl)\b/g,'').trim() + ' sent'; el.innerHTML = `${esc(pre)}<mark>${esc(w.r[0])}</mark>${esc(post)}`; }
+  if (w.sent){ const [pre, post = ''] = w.kr.split('（　）'); el.className = baseCls.replace(/\b(dela|outl)\b/g,'').trim() + ' sent'; el.innerHTML = `${rubyHTML(pre)}<mark>${rubyHTML(w.ann[w.r[0]] || w.r[0])}</mark>${rubyHTML(post)}`; }
   else { el.className = baseCls; el.textContent = w.k; }
 }
 function hitPlayer(){
@@ -2041,7 +2755,7 @@ function showResult(cleared){
   const tries = S.correct + S.wrongs + S.hits, acc = tries ? S.correct/tries : 0;
   const rank = cleared && acc >= .9 ? 'S' : (cleared || (S.stage >= 3 && acc >= .75)) ? 'A' : (S.stage >= 1 || acc >= .7) ? 'B' : 'C';
   $('rRank').textContent = rank;
-  const ml = GENRE_NAME[genre] + '・' + (gameMode === 'choice' ? '4択' : 'タイピング') + '・' + SPEEDS[speed].name + '・' + (qCount === 'all' ? '全問' : qCount + '問');
+  const ml = GENRE_NAME[genre] + (jamOn() ? '（妨害）' : '') + '・' + (gameMode === 'choice' ? '4択' : 'タイピング') + '・' + SPEEDS[speed].name + '・' + (qCount === 'all' ? '全問' : qCount + '問');
   $('rSub').textContent = cleared ? `${L}・${ml}　全5ステージ制覇` : `${L}・${ml}　ステージ${S.stage + 1}「${STAGES[S.stage].name}」まで`;
   $('rScore').textContent = S.score.toLocaleString();
   $('rNew').hidden = !isNew;
@@ -2086,7 +2800,8 @@ function renderCards(){
 function renderSummary(){
   const lv = $('sumLv'); lv.textContent = LEVELS[level];
   lv.style.background = `linear-gradient(165deg, ${mix(LV_COL[level],'#ffffff',.2)}, ${LV_COL[level]} 60%, ${mix(LV_COL[level],'#000000',.3)})`;
-  $('sumMain').textContent = `${GENRE_NAME[genre]}・${gameMode === 'choice' ? '4択' : 'タイピング'}`;
+  $('sumMain').textContent = `${GENRE_NAME[genre]}${jamOn() ? '（妨害）' : ''}・${gameMode === 'choice' ? '4択' : 'タイピング'}`;
+  if (furiOn()) $('sumMain').textContent += '・ふりがな';
   $('sumSub').textContent = `${SPEEDS[speed].name}・${qCount === 'all' ? '全問' : qCount + '問'}　ベスト ${bestOf(LEVELS[level]).toLocaleString()}`;
   $('modeNote').textContent = genre === 'kanji' ? '' : '語彙・文法は4択のみ';
 }
@@ -2103,10 +2818,34 @@ function renderGenreSel(){
   const tb = $('modeSel').querySelector('[data-mode="type"]'); tb.disabled = genre !== 'kanji';
   tb.title = genre !== 'kanji' ? '語彙・文法は4択のみです' : '';
   renderModeSel();
+  renderJamSel();
+  renderFuriSel();
 }
 $('genreSel').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   genre = b.dataset.genre; store.set('kr-genre', genre); renderGenreSel(); renderCards(); AU.init(); sfx('tick');
+});
+function renderFuriSel(){
+  $('furiSel').querySelectorAll('button').forEach(b => {
+    b.setAttribute('aria-checked', String((b.dataset.furi === 'on') === furi));
+    b.disabled = genre === 'kanji';
+  });
+  $('furiNote').textContent = genre === 'kanji' ? '語彙・文法のみ' : '';
+}
+$('furiSel').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b || b.disabled) return;
+  furi = b.dataset.furi === 'on'; store.set('kr-furi', furi ? 'on' : 'off'); renderFuriSel(); renderCards(); AU.init(); sfx('tick');
+});
+function renderJamSel(){
+  $('jamSel').querySelectorAll('button').forEach(b => {
+    b.setAttribute('aria-checked', String((b.dataset.jam === 'on') === jamOn()));
+    if (b.dataset.jam === 'on') b.disabled = genre !== 'kanji';
+  });
+  $('jamNote').textContent = genre === 'kanji' ? '漢字が動かず、見えにくくなります' : '漢字のみ';
+}
+$('jamSel').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b || b.disabled) return;
+  jam = b.dataset.jam === 'on'; store.set('kr-jam', jam ? 'on' : 'off'); renderJamSel(); renderCards(); AU.init(); sfx('tick');
 });
 function renderCountSel(){ $('countSel').querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.count === qCount))); }
 $('countSel').addEventListener('click', e => {
@@ -2118,9 +2857,9 @@ function renderSpeedSel(){
 }
 $('speedSel').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  speed = +b.dataset.speed; store.set('kr-speed', String(speed)); renderSpeedSel(); renderSummary(); AU.init(); sfx('tick');
+  speed = +b.dataset.speed; store.set('kr-speed5', String(speed)); renderSpeedSel(); renderSummary(); AU.init(); sfx('tick');
 });
-renderGenreSel(); renderSpeedSel(); renderCountSel();
+renderGenreSel(); renderSpeedSel(); renderCountSel(); renderJamSel(); renderFuriSel();
 $('roster').innerHTML = STAGES.map((s,i) => `<span>${i === 4 ? '★' : i + 1}　${s.name}／${s.enemy}</span>`).join('');
 
 /* ===== 入力 ===== */
@@ -2173,6 +2912,48 @@ $('againBtn').onclick = startGame;
 $('menuBtn').onclick = toTitle;
 $('quitBtn').addEventListener('click', () => { if (inGame()){ $('kbGate').hidden = true; Music.stop(); showResult(false); } });
 $('howBtn').onclick = () => { $('howto').hidden = false; };
+/* ===== 全画面 ===== */
+const FS = {
+  el: document.documentElement,
+  supported(){ return !!(this.el.requestFullscreen || this.el.webkitRequestFullscreen); },
+  active(){ return !!(document.fullscreenElement || document.webkitFullscreenElement); },
+  async enter(){
+    try {
+      if (this.el.requestFullscreen) await this.el.requestFullscreen({ navigationUI:'hide' });
+      else if (this.el.webkitRequestFullscreen) this.el.webkitRequestFullscreen();
+      try { await screen.orientation.lock('portrait'); } catch(e){}
+    } catch(e){}
+  },
+  async exit(){ try { if (document.exitFullscreen) await document.exitFullscreen(); else if (document.webkitExitFullscreen) document.webkitExitFullscreen(); } catch(e){} },
+  toggle(){
+    if (!this.supported()){ showFsHelp(); return; }
+    this.active() ? this.exit() : this.enter();
+  }
+};
+let fsAuto = store.get('kr-fsauto') === 'on';
+function showFsHelp(){
+  $('installSteps').innerHTML = ['このブラウザ（iPhoneのSafariなど）は、ページを全画面にする機能に対応していません。','タイトル画面の「アプリとして追加」からホーム画面に追加し、そのアイコンから開くと、ブラウザのバーがない全画面で遊べます。']
+    .map((t,i) => `<div><dt>${i + 1}</dt><dd>${t}</dd></div>`).join('');
+  $('diag').hidden = true; $('iosHelp').hidden = false;
+}
+function paintFs(){
+  document.body.classList.toggle('is-fs', FS.active());
+  $('fsBtnTitle').textContent = FS.active() ? '全画面をやめる' : '全画面';
+  $('fsBtnHud').setAttribute('aria-label', FS.active() ? '全画面をやめる' : '全画面');
+  const b = $('fsAutoBtn'); b.textContent = `スタート時に全画面：${fsAuto ? 'オン' : 'オフ'}`; b.classList.toggle('off', !fsAuto);
+  b.disabled = !FS.supported() || isStandalone();
+  $('fsNote').textContent = !FS.supported() ? 'このブラウザは非対応（ホーム画面に追加すると全画面になります）' : isStandalone() ? 'アプリとして開いているので常に全画面です' : '';
+  if (isStandalone() || !FS.supported()) { $('fsBtnHud').hidden = !FS.supported(); }
+  setTimeout(fit, 120);
+}
+for (const id of ['fsBtnHud','fsBtnTitle']){
+  const b = $(id);
+  b.addEventListener('mousedown', e => e.preventDefault());
+  b.addEventListener('click', () => { FS.toggle(); if (id === 'fsBtnHud' && gameMode === 'type' && inGame()) input.focus(); });
+}
+$('fsAutoBtn').onclick = () => { fsAuto = !fsAuto; store.set('kr-fsauto', fsAuto ? 'on' : 'off'); paintFs(); };
+document.addEventListener('fullscreenchange', paintFs);
+document.addEventListener('webkitfullscreenchange', paintFs);
 const openSettings = () => { renderCards(); $('settings').hidden = false; };
 $('summaryBtn').onclick = openSettings;
 $('settingsLink').onclick = openSettings;
@@ -2230,7 +3011,7 @@ function render(){
   const danger = playing && S.p > .66 ? (S.p - .66)/.34 : 0;
   ctx.save();
   if (shakeT > 0){ const a = shakeAmp*Math.min(1, shakeT/.3); ctx.translate((Math.random() - .5)*a, (Math.random() - .5)*a); }
-  if (danger > 0){ const z = 1 + .035*danger; ctx.translate(W/2, H/2); ctx.scale(z, z); ctx.translate(-W/2, -H/2); }
+  if (danger > 0 && !jamOn()){ const z = 1 + .035*danger; ctx.translate(W/2, H/2); ctx.scale(z, z); ctx.translate(-W/2, -H/2); }
   drawScene(curStage);
   if (S.rage && S.mode !== 'title'){
     const a = .1 + .07*Math.sin(clock*5);
@@ -2238,7 +3019,7 @@ function render(){
   }
   drawEnemy();
   drawAmb();
-  drawSpeedLines(Math.max(playing ? Math.pow(clamp((S.p - .35)/.65, 0, 1), 1.5)*.9 : 0, WARP ? Math.sin(Math.PI*clamp(WARP.t/WARP.dur,0,1))*1.2 : 0));
+  drawSpeedLines(Math.max(playing && !jamOn() ?Math.pow(clamp((S.p - .35)/.65, 0, 1), 1.5)*.9 : 0, WARP ? Math.sin(Math.PI*clamp(WARP.t/WARP.dur,0,1))*1.2 : 0));
   if (playing) drawWord();
   drawFx();
   ctx.restore();
@@ -2256,7 +3037,7 @@ function frame(ts){
 
 /* ===== インストール（PWA） ===== */
 let installPrompt = null;
-const isStandalone = () => (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+const isStandalone = () => (window.matchMedia && (matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches)) || navigator.standalone === true;
 const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 const isAndroid = /android/i.test(navigator.userAgent);
 const canPWA = 'serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost') && !/claude\.(ai|site)$/.test(location.hostname) && !/claudeusercontent/.test(location.hostname);
@@ -2316,7 +3097,7 @@ if (document.fonts && document.fonts.load){
 }
 
 setStageVisual(0); enemyEnter();
-renderCards(); resize(); fit();
+renderCards(); resize(); fit(); paintFs();
 requestAnimationFrame(frame);
 
 </script>
