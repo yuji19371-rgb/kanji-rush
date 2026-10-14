@@ -265,6 +265,38 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
 .roster{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .roster span{font-size:.78rem;font-weight:800;background:var(--panel2);border-radius:999px;padding:3px 10px}
 @media (prefers-reduced-motion:reduce){.banner.show .b-main,.banner.show .b-sub,.combo.pop,.inrow.bad input,.boss.hit,.lives svg.break,.reveal{animation:none}.combo.pop{opacity:1}}
+/* ---------- パソコン表示（横長・マウス） ---------- */
+@media (min-width: 900px) and (min-aspect-ratio: 5/4) and (pointer: fine){
+  #app{max-width:none}
+  .hud{zoom:1.35}
+  .controls{position:absolute;left:50%;bottom:2.5vh;transform:translateX(-50%);width:min(1180px,88vw);z-index:5;
+    background:rgba(24,12,52,.86);border:3px solid rgba(255,255,255,.9);border-radius:22px;padding:14px 16px 16px;
+    box-shadow:0 10px 0 rgba(0,0,0,.35),0 18px 40px rgba(0,0,0,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  .guiderow{margin-bottom:10px}
+  .mini{font-size:.95rem;padding:7px 14px}
+  .ctl-note{font-size:.85rem}
+  .choices{grid-template-columns:repeat(4,1fr);gap:12px}
+  .choice{min-height:86px;font-size:2rem;padding:10px 12px 10px 46px;white-space:nowrap;overflow:hidden;line-height:1.3}
+  .choice .no{width:28px;height:28px;font-size:.95rem;left:12px}
+  .inrow input{font-size:30px;padding:16px 20px}
+  .inrow input::placeholder{font-size:19px}
+  .okbtn{font-size:1.4rem;padding:0 34px}
+  .hintpill{top:96px;bottom:auto;font-size:1.1rem}
+  .boss{top:14px;bottom:auto;width:min(520px,36%)}
+  .title .t-top, .title .t-bottom{zoom:1.45}
+  .sheet .panel{zoom:1.12}
+  .reveal{min-width:440px;padding:20px 32px 22px}
+  .reveal .rv-h{font-size:1rem}
+  .reveal .rv-k{font-size:4.2rem}
+  .reveal .rv-k.sent{font-size:1.5rem}
+  .reveal .rv-r{font-size:2rem}
+  .reveal .rv-m{font-size:1.15rem}
+  .banner .b-sub{font-size:1.5rem}
+  .banner .b-sub2{font-size:1.3rem}
+}
+@media (min-width: 900px) and (min-aspect-ratio: 5/4) and (pointer: fine) and (max-height: 900px){
+  .sheet .panel{zoom:1}
+}
 </style>
 </head>
 <body>
@@ -304,7 +336,7 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
       <div class="t-top">
         <h1 class="logo dela"><span class="l1">漢字</span><span class="l2">ラッシュ</span></h1>
         <p class="tag">せまってくる漢字を、読んではね返せ！</p>
-        <p class="beta">試作版 v1.3</p>
+        <p class="beta">試作版 v1.5</p>
       </div>
       <div class="t-bottom">
         <button class="summary" id="summaryBtn" aria-label="ゲーム設定を変える">
@@ -1603,6 +1635,15 @@ const $ = id => document.getElementById(id);
 const app = $('app'), view = $('view'), cv = $('cv'), ctx = cv.getContext('2d');
 const input = $('answer'), choicesEl = $('choices'), banner = $('banner'), hintPill = $('hintPill'), ansForm = $('ansForm');
 let W = 1, H = 1, DPR = 1;
+const deskMQ = window.matchMedia ? matchMedia('(min-width: 900px) and (min-aspect-ratio: 5/4) and (pointer: fine)') : null;
+const isDesk = () => !!(deskMQ && deskMQ.matches);
+// パソコン表示のとき、回答パネルの上端（キャンバス座標）。それ以外は画面の高さ
+function panelTopY(){
+  if (!isDesk()) return H;
+  const c = document.getElementById('controls');
+  if (!c || c.hidden) return H;
+  return c.getBoundingClientRect().top - view.getBoundingClientRect().top;
+}
 function resize(){
   const r = view.getBoundingClientRect();
   W = Math.max(1, r.width); H = Math.max(1, r.height);
@@ -1612,6 +1653,7 @@ function resize(){
   ctx.setTransform(DPR,0,0,DPR,0,0);
 }
 new ResizeObserver(resize).observe(view);
+window.addEventListener('resize', () => { if (S && S.mode === 'play' && gameMode === 'choice') fitChoices(); });
 
 const lerp = (a,b,t) => a + (b - a)*t;
 const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
@@ -2116,10 +2158,10 @@ const isKana = ch => /[\u3041-\u309f\u30a1-\u30ff]/.test(ch);
 function wordPos(w, p){
   const G = geom(), chars = [...w.k];
   const units = chars.reduce((s,ch) => s + (isKana(ch) ? .72 : 1), 0);
-  const base = Math.min(W*.86/units, H*.32, 260);
-  if (jamOn() && !w.sent) return { x: G.vx, y: H*(H < 520 ? .54 : .52), fs: base*.78, chars, units };
+  const base = Math.min(W*.86/units, H*.32, isDesk() ? 320 : 260);
+  if (jamOn() && !w.sent) return { x: G.vx, y: Math.min(H*(H < 520 ? .54 : .52), panelTopY() - base*.78*.62 - 64), fs: base*.78, chars, units };
   const k = .15 + .85*Math.pow(clamp(p,0,1), 1.55);
-  return { x: G.vx, y: lerp(G.vy + G.bh*.08, H*(H < 520 ? .56 : .5), Math.pow(clamp(p,0,1), 1.25)), fs: base*k, chars, units };
+  return { x: G.vx, y: lerp(G.vy + G.bh*.08, Math.min(H*(H < 520 ? .56 : .5), panelTopY() - base*.6 - 20), Math.pow(clamp(p,0,1), 1.25)), fs: base*k, chars, units };
 }
 function drawGlyphs(chars, cx, cy, fs, o={}){
   const g = o.g || ctx;
@@ -2141,9 +2183,9 @@ function drawGlyphs(chars, cx, cy, fs, o={}){
 }
 /* ===== 語彙・文法：文のカード ===== */
 function layoutCard(q){
-  const key = Math.round(W) + 'x' + Math.round(H) + (furiOn() ? 'f' : '');
+  const key = Math.round(W) + 'x' + Math.round(H) + (furiOn() ? 'f' : '') + (isDesk() ? 'd' : '');
   if (q._lay && q._lay.key === key) return q._lay;
-  const fs = clamp(Math.min(W*.052, H*.058), 15, 28), maxW = Math.min(W*.86, 600) - fs*1.6;
+  const fs = clamp(Math.min(W*.052, H*.058), 15, isDesk() ? Math.min(40, H*.045) : 28), maxW = Math.min(W*.86, isDesk() ? 900 : 600) - fs*1.6;
   ctx.save(); ctx.font = `500 ${fs}px ${UIFONT}`;
   const [pre, post = ''] = q.kr.split('（　）');
   const longest = Math.max(...[q.r[0], ...q.w].map(c => ctx.measureText(c).width))*1.08;
@@ -2187,7 +2229,7 @@ function layoutCard(q){
 }
 function cardPos(q, p){
   const G = geom(), L = layoutCard(q), pp = clamp(p, 0, 1), s = .6 + .4*Math.pow(pp, 1.3);
-  return { x: G.vx, y: lerp(G.bb + L.h*.15, H*(H < 520 ? .55 : .52), Math.pow(pp, 1.25)), s, fs: L.h*s, units: L.w/L.h, chars: [], lay: L };
+  return { x: G.vx, y: lerp(G.bb + L.h*.15, Math.min(H*(H < 520 ? .55 : .52), panelTopY() - L.h/2 - 20), Math.pow(pp, 1.25)), s, fs: L.h*s, units: L.w/L.h, chars: [], lay: L };
 }
 function drawCard(q, x, y, s, o={}){
   const L = layoutCard(q), w = L.w, h = L.h, f = L.fs;
@@ -2615,10 +2657,22 @@ function makeChoices(w){
   }
   return shuffle([w.r[0], ...picked]);
 }
+// パソコン表示で、ボタンからはみ出す選択肢だけ文字を縮める
+function fitChoices(){
+  if (typeof isDesk !== 'function' || !isDesk()) return;
+  requestAnimationFrame(() => {
+    choicesEl.querySelectorAll('.choice').forEach(b => {
+      b.style.fontSize = '';
+      let px = parseFloat(getComputedStyle(b).fontSize), guard = 0;
+      while (b.scrollWidth > b.clientWidth + 1 && px > 17.6 && guard++ < 30){ px -= 1.5; b.style.fontSize = px + 'px'; }
+    });
+  });
+}
 function buildChoices(){
   const list = makeChoices(S.cur);
   S.choices = list;
   choicesEl.innerHTML = list.map((r,i) => `<button class="choice" data-i="${i}"><span class="no">${i + 1}</span>${S.cur.ann ? rubyHTML(S.cur.ann[r] || r) : esc(r)}</button>`).join('');
+  fitChoices();
 }
 function setChoicesWaiting(){ choicesEl.querySelectorAll('.choice').forEach(b => { if (!b.classList.contains('ok') && !b.classList.contains('ng')) b.classList.add('wait'); b.disabled = true; }); }
 function choose(i){

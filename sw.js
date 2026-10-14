@@ -1,6 +1,6 @@
 /* 漢字ラッシュ：オフラインでも遊べるようにするためのファイル
    index.html を更新したら、下の VERSION の数字も1つ上げてください。 */
-const VERSION = 'v1.3';
+const VERSION = 'v1.5';
 const CACHE = 'kanji-rush-' + VERSION;
 const FONT_CACHE = 'kanji-rush-fonts';
 const CORE = [
