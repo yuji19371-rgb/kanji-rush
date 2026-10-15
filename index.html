@@ -191,6 +191,8 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
 .lvbtn{border-radius:12px;border:3px solid var(--ink);box-shadow:0 3px 0 var(--ink);padding:6px 2px 5px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:2px}
 .lvbtn b{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:1.15rem;-webkit-text-stroke:.12em var(--ink);paint-order:stroke fill}
 .lvbtn small{font-size:.66rem;font-weight:800;text-shadow:0 1px 0 var(--ink)}
+body[data-lang="en"] .lvbtn small{white-space:nowrap;font-size:.6rem;letter-spacing:-.02em}
+@media (min-width:760px){body[data-lang="en"] .lvbtn small{font-size:.66rem}}
 .lvbtn[aria-checked="false"]{opacity:.55}
 .lvbtn[aria-checked="true"]{box-shadow:0 0 0 3px #fff,0 3px 0 var(--ink);transform:translateY(-2px)}
 .togrow{display:flex;gap:8px}
@@ -229,6 +231,8 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
 .go:active{transform:translateY(4px);box-shadow:0 2px 0 var(--ink)}
 .subrow{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;justify-content:center}
 .subrow{margin-top:12px}
+.langsel{margin-top:12px}
+.langsel button{min-width:64px}
 .subrow #installBtn{background:var(--yellow);color:var(--ink);text-decoration:none;border:3px solid var(--ink);border-radius:999px;padding:4px 12px;box-shadow:0 3px 0 var(--ink)}
 .subrow button{background:none;border:0;font-weight:800;font-size:.88rem;color:#fff;text-decoration:underline;text-underline-offset:4px;padding:4px}
 
@@ -265,6 +269,45 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
 .roster{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .roster span{font-size:.78rem;font-weight:800;background:var(--panel2);border-radius:999px;padding:3px 10px}
 @media (prefers-reduced-motion:reduce){.banner.show .b-main,.banner.show .b-sub,.combo.pop,.inrow.bad input,.boss.hit,.lives svg.break,.reveal{animation:none}.combo.pop{opacity:1}}
+.r-rev .rtabs{display:flex;width:100%;margin:2px 0 8px;box-shadow:none;border-width:2px}
+.r-rev .rtabs button{flex:1;padding:6px 4px;white-space:nowrap}
+.r-rev td.mk{width:1.4em;padding-right:4px;text-align:center;font-weight:900;font-size:1.05rem}
+.r-rev td.mk.ok{color:var(--green);font-size:1.25rem;line-height:1}
+.r-rev td.mk.ng{color:var(--red)}
+.r-rev td.mk.skip{color:var(--sub)}
+/* スマホ：表を2段（上：漢字・読み、下：意味）にして横にはみ出さないようにする */
+@media (max-width:600px){
+  .r-rev table, .r-rev tbody{display:block}
+  .r-rev tr:not(.ex-row){display:grid;grid-template-columns:1.3em auto 1fr;grid-template-areas:"mk k r" "mk m m";column-gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+  .r-rev tr.srow{grid-template-areas:"mk k k" "mk r r" "mk m m"}
+  .r-rev tr:not(.ex-row) td{display:block;padding:0;border:0;min-width:0}
+  .r-rev td.mk{grid-area:mk;width:auto;align-self:start;padding-top:2px}
+  .r-rev td.k{grid-area:k;font-size:1.2rem}
+  .r-rev td.k.sent{min-width:0;font-size:.9rem}
+  .r-rev td.r{grid-area:r;white-space:normal;word-break:keep-all;overflow-wrap:anywhere;font-size:.92rem}
+  .r-rev td.m{grid-area:m;margin-top:2px}
+  .r-rev tr.ex-row{display:block}
+  .r-rev tr.ex-row td{display:block;padding:0 0 12px}
+}
+.r-rev .r-extap{color:var(--yellow);font-size:.8rem;margin:-2px 0 6px}
+.r-rev tr.has-ex{cursor:pointer}
+.r-rev tr.has-ex td.m::after{content:"▾";margin-left:6px;color:var(--yellow);font-size:.8em}
+.r-rev tr.has-ex[aria-expanded="true"] td.m::after{content:"▴"}
+.r-rev tr.has-ex:focus-visible{outline:2px solid var(--yellow);outline-offset:-2px}
+.r-rev tr.ex-row td{padding:0 0 12px;border-bottom:1px solid rgba(255,255,255,.14)}
+.exbox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 12px;text-align:left}
+.exparts{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.exc{display:inline-flex;align-items:baseline;gap:6px;background:#fff;color:var(--ink);border-radius:8px;padding:3px 9px}
+.exc i{font-style:normal;font-family:"Dela Gothic One",sans-serif;font-size:1.15rem}
+.exc b{font-weight:800;font-size:.95rem}
+.exc.oku{background:rgba(255,255,255,.35);color:#fff}
+.exc.sp{background:var(--yellow)}
+.exc small{font-size:.65rem;font-weight:800;opacity:.75}
+.r-rev .expt,.r-rev .exs{margin:6px 0 0;font-size:.9rem;line-height:1.75;color:#fff}
+.expt em,.exs em{font-style:normal;font-weight:800;color:var(--yellow);font-size:.75rem;margin-right:8px}
+.exbox ruby rt{font-size:.6em;color:var(--sub)}
+.exs .exjp{font-size:1rem}
+.exs .extr{display:block;color:var(--sub);font-size:.85rem}
 /* ---------- パソコン表示（横長・マウス） ---------- */
 @media (min-width: 900px) and (min-aspect-ratio: 5/4) and (pointer: fine){
   #app{max-width:none}
@@ -307,16 +350,16 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
     <div class="hud" id="hud" hidden>
       <div class="hud-row">
         <div class="hud-l">
-          <div class="path" id="path" aria-label="ステージ"></div>
+          <div class="path" id="path" aria-label="ステージ" data-i18n-aria="aStage"></div>
           <div class="chip" id="scoreLbl">0</div>
         </div>
         <div class="hud-r">
-          <div class="lives" id="lives" aria-label="ライフ"></div>
+          <div class="lives" id="lives" aria-label="ライフ" data-i18n-aria="aLives"></div>
           <button class="xbtn fsbtn" id="fsBtnHud" aria-label="全画面"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="fs-in" d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path class="fs-out" d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <button class="xbtn" id="quitBtn" aria-label="ゲームをやめる"><svg viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></button>
+          <button class="xbtn" id="quitBtn" aria-label="ゲームをやめる" data-i18n-aria="aQuit"><svg viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></button>
         </div>
       </div>
-      <div class="boss" id="bossBar" aria-label="敵のHP">
+      <div class="boss" id="bossBar" aria-label="敵のHP" data-i18n-aria="aBoss">
         <div class="hp"><i id="hpFill"></i><em id="hpSeg"></em></div>
       </div>
     </div>
@@ -324,7 +367,7 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
     <div class="hintpill" id="hintPill" hidden></div>
     <div class="combo dela outl" id="combo"></div>
     <div class="banner" id="banner"></div>
-    <div class="kbgate" id="kbGate" hidden><button id="kbBtn">タップしてキーボードを開く<small>Tap to open the keyboard</small></button></div>
+    <div class="kbgate" id="kbGate" hidden><button id="kbBtn" data-i18n-html="kbBtn">タップしてキーボードを開く<small>Tap to open the keyboard</small></button></div>
     <div class="reveal" id="reveal" hidden aria-live="polite">
       <div class="rv-h" id="rvH">こたえ</div>
       <div class="rv-k dela outl" id="rvK"></div>
@@ -335,42 +378,45 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
     <section class="title" id="title">
       <div class="t-top">
         <h1 class="logo dela"><span class="l1">漢字</span><span class="l2">ラッシュ</span></h1>
-        <p class="tag">せまってくる漢字を、読んではね返せ！</p>
-        <p class="beta">試作版 v1.5</p>
+        <p class="tag" data-i18n="tag">せまってくる漢字を、読んではね返せ！</p>
+        <p class="beta" id="betaLbl">試作版 v2.2</p>
       </div>
       <div class="t-bottom">
-        <button class="summary" id="summaryBtn" aria-label="ゲーム設定を変える">
+        <button class="summary" id="summaryBtn" aria-label="ゲーム設定を変える" data-i18n-aria="aSummary">
           <span class="s-lv dela" id="sumLv">N5</span>
           <span class="s-txt"><b id="sumMain"></b><small id="sumSub"></small></span>
-          <span class="s-gear"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm8.6-2.3.1-1.2-.1-1.2 2-1.6-2-3.4-2.4.9a8 8 0 0 0-2-1.2L15.8 3h-4l-.4 2.5a8 8 0 0 0-2 1.2L7 5.8 5 9.2l2 1.6-.1 1.2.1 1.2-2 1.6 2 3.4 2.4-.9c.6.5 1.3.9 2 1.2l.4 2.5h4l.4-2.5c.7-.3 1.4-.7 2-1.2l2.4.9 2-3.4-2-1.6Z" fill="currentColor"/></svg>設定</span>
+          <span class="s-gear"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm8.6-2.3.1-1.2-.1-1.2 2-1.6-2-3.4-2.4.9a8 8 0 0 0-2-1.2L15.8 3h-4l-.4 2.5a8 8 0 0 0-2 1.2L7 5.8 5 9.2l2 1.6-.1 1.2.1 1.2-2 1.6 2 3.4 2.4-.9c.6.5 1.3.9 2 1.2l.4 2.5h4l.4-2.5c.7-.3 1.4-.7 2-1.2l2.4.9 2-3.4-2-1.6Z" fill="currentColor"/></svg><span data-i18n="settings">設定</span></span>
         </button>
-        <button class="go dela" id="startBtn">スタート</button>
-        <div class="subrow"><button id="howBtn">遊び方</button><button id="settingsLink">設定</button><button id="fsBtnTitle" class="fslink">全画面</button><button id="installBtn" hidden>アプリとして追加</button></div>
+        <button class="go dela" id="startBtn" data-i18n="start">スタート</button>
+        <div class="subrow"><button id="howBtn" data-i18n="how">遊び方</button><button id="settingsLink" data-i18n="settings">設定</button><button id="fsBtnTitle" class="fslink">全画面</button><button id="installBtn" hidden data-i18n="install">アプリとして追加</button></div>
+        <div class="modesel sm langsel" id="langTitle" role="radiogroup" aria-label="Language"><button role="radio" data-lang="ja">日本語</button><button role="radio" data-lang="en">English</button><button role="radio" data-lang="zh">中文</button></div>
       </div>
     </section>
 
     <section class="sheet" id="settings" hidden>
       <div class="panel set">
-        <h2 class="dela outl" style="color:var(--yellow)">ゲーム設定</h2>
-        <h3>レベル</h3>
+        <h2 class="dela outl" style="color:var(--yellow)" data-i18n="setTitle">ゲーム設定</h2>
+        <h3 data-i18n="hLang">言語 · Language · 语言</h3>
+        <div class="modesel" id="langSel" role="radiogroup" aria-label="Language"><button role="radio" data-lang="ja">日本語</button><button role="radio" data-lang="en">English</button><button role="radio" data-lang="zh">中文</button></div>
+        <h3 data-i18n="hLevel">レベル</h3>
         <div class="lvgrid" id="cards" role="radiogroup" aria-label="レベル"></div>
-        <h3>問題の種類</h3>
+        <h3 data-i18n="hGenre">問題の種類</h3>
         <div class="modesel" id="genreSel" role="radiogroup" aria-label="問題の種類">
-          <button role="radio" data-genre="kanji">漢字</button>
-          <button role="radio" data-genre="vocab">語彙</button>
-          <button role="radio" data-genre="grammar">文法</button>
+          <button role="radio" data-genre="kanji" data-i18n="gKanji">漢字</button>
+          <button role="radio" data-genre="vocab" data-i18n="gVocab">語彙</button>
+          <button role="radio" data-genre="grammar" data-i18n="gGrammar">文法</button>
         </div>
-        <h3>ゲームモード <small id="jamNote"></small></h3>
+        <h3><span data-i18n="hJam">ゲームモード</span> <small id="jamNote"></small></h3>
         <div class="modesel" id="jamSel" role="radiogroup" aria-label="ゲームモード">
-          <button role="radio" data-jam="off">ノーマル</button>
-          <button role="radio" data-jam="on">妨害</button>
+          <button role="radio" data-jam="off" data-i18n="jamOff">ノーマル</button>
+          <button role="radio" data-jam="on" data-i18n="jamOn">妨害</button>
         </div>
-        <h3>答え方 <small id="modeNote"></small></h3>
+        <h3><span data-i18n="hMode">答え方</span> <small id="modeNote"></small></h3>
         <div class="modesel" id="modeSel" role="radiogroup" aria-label="答え方">
-          <button role="radio" data-mode="type">タイピング</button>
-          <button role="radio" data-mode="choice">4択</button>
+          <button role="radio" data-mode="type" data-i18n="mType">タイピング</button>
+          <button role="radio" data-mode="choice" data-i18n="mChoice">4択</button>
         </div>
-        <h3>スピード</h3>
+        <h3 data-i18n="hSpeed">スピード</h3>
         <div class="modesel" id="speedSel" role="radiogroup" aria-label="スピード">
           <button role="radio" data-speed="0">じっくり</button>
           <button role="radio" data-speed="1">のんびり</button>
@@ -378,23 +424,23 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
           <button role="radio" data-speed="3">ふつう</button>
           <button role="radio" data-speed="4">はやい</button>
         </div>
-        <h3>問題数 <small>クリアまでに必要な正解の数</small></h3>
+        <h3><span data-i18n="hCount">問題数</span> <small data-i18n="hCountSub">クリアまでに必要な正解の数</small></h3>
         <div class="modesel" id="countSel" role="radiogroup" aria-label="問題数">
           <button role="radio" data-count="10">10問</button>
           <button role="radio" data-count="20">20問</button>
           <button role="radio" data-count="30">30問</button>
           <button role="radio" data-count="all">全問</button>
         </div>
-        <h3>ふりがな <small id="furiNote"></small></h3>
+        <h3><span data-i18n="hFuri">ふりがな</span> <small id="furiNote"></small></h3>
         <div class="modesel" id="furiSel" role="radiogroup" aria-label="ふりがな">
-          <button role="radio" data-furi="on">あり</button>
-          <button role="radio" data-furi="off">なし</button>
+          <button role="radio" data-furi="on" data-i18n="furiOn">あり</button>
+          <button role="radio" data-furi="off" data-i18n="furiOff">なし</button>
         </div>
-        <h3>全画面 <small id="fsNote"></small></h3>
+        <h3><span data-i18n="hFs">全画面</span> <small id="fsNote"></small></h3>
         <div class="togrow"><button class="tog" id="fsAutoBtn">スタート時に全画面：オフ</button></div>
-        <h3>音</h3>
+        <h3 data-i18n="hSound">音</h3>
         <div class="togrow"><button class="tog" id="musicBtn">音楽：オン</button><button class="tog" id="sfxBtn">効果音：オン</button></div>
-        <div class="btnrow"><button class="p1" id="setStart">スタート</button><button class="p2" id="setClose">とじる</button></div>
+        <div class="btnrow"><button class="p1" id="setStart" data-i18n="start">スタート</button><button class="p2" id="setClose" data-i18n="close">とじる</button></div>
       </div>
     </section>
 
@@ -404,39 +450,41 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
         <h2 class="dela outl" id="rTitle">ゲームオーバー</h2>
         <p class="r-sub" id="rSub"></p>
         <p class="r-score dela outl" id="rScore">0</p>
-        <span class="r-new" id="rNew" hidden>ベスト更新！</span>
+        <span class="r-new" id="rNew" hidden data-i18n="newBest">ベスト更新！</span>
         <div class="r-stats">
-          <div><small>正解</small><b id="rCorrect">0</b></div>
-          <div><small>まちがい</small><b id="rWrong">0</b></div>
-          <div><small>最大連続</small><b id="rCombo">0</b></div>
-          <div><small>ベスト</small><b id="rBest">0</b></div>
+          <div><small data-i18n="rCorrect">正解</small><b id="rCorrect">0</b></div>
+          <div><small data-i18n="rWrong">まちがい</small><b id="rWrong">0</b></div>
+          <div><small data-i18n="rCombo">最大連続</small><b id="rCombo">0</b></div>
+          <div><small data-i18n="rBest">ベスト</small><b id="rBest">0</b></div>
         </div>
         <div class="r-rev">
-          <h3>まちがえた言葉 / Review</h3>
+          <h3 data-i18n="rReview">まちがえた言葉 / Review</h3>
+          <div class="modesel sm rtabs" id="rTabs" role="tablist"><button role="tab" data-tab="miss"></button><button role="tab" data-tab="seen"></button><button role="tab" data-tab="all"></button></div>
+          <p class="r-extap" id="rExTap" data-i18n="exTap" hidden>言葉をタップすると解説が出ます</p>
           <div class="tw"><table id="rTable"></table></div>
-          <p id="rEmpty" hidden>まちがえた言葉はありません。</p>
+          <p id="rEmpty" hidden data-i18n="rEmpty">まちがえた言葉はありません。</p>
         </div>
         <div class="btnrow">
-          <button class="p1" id="againBtn">もう一度</button>
-          <button class="p2" id="menuBtn">タイトルへ</button>
+          <button class="p1" id="againBtn" data-i18n="again">もう一度</button>
+          <button class="p2" id="menuBtn" data-i18n="toTitle">タイトルへ</button>
         </div>
       </div>
     </section>
 
     <section class="sheet how steps" id="iosHelp" hidden>
       <div class="panel">
-        <h2 class="dela outl" style="color:var(--yellow)">アプリとして追加</h2>
+        <h2 class="dela outl" style="color:var(--yellow)" data-i18n="install">アプリとして追加</h2>
         <dl id="installSteps"></dl>
         <div class="diag" id="diag" hidden></div>
-        <p class="note">ホーム画面のアイコンから開くと、ブラウザのバーがない全画面で遊べます。一度開いたあとは、電波がない場所でも遊べます。</p>
-        <div class="btnrow"><button class="p1" id="iosClose">とじる</button></div>
+        <p class="note" data-i18n="installNote">ホーム画面のアイコンから開くと、ブラウザのバーがない全画面で遊べます。一度開いたあとは、電波がない場所でも遊べます。</p>
+        <div class="btnrow"><button class="p1" id="iosClose" data-i18n="close">とじる</button></div>
       </div>
     </section>
 
     <section class="sheet how" id="howto" hidden>
       <div class="panel">
-        <h2 class="dela outl" style="color:var(--yellow)">遊び方</h2>
-        <dl>
+        <h2 class="dela outl" style="color:var(--yellow)" id="howTitle" data-i18n="how">遊び方</h2>
+        <dl id="howList">
           <div><dt>問題の種類</dt><dd>「漢字」は読み方、「語彙」と「文法」は文の（　）に入ることばを選ぶ問題です。語彙と文法は4択だけで遊べます。</dd></div>
           <div><dt>ルール</dt><dd>敵が投げてくる漢字の読みを答えます。正解すると漢字がはね返って敵にダメージを与えます。漢字の上の○の数は、読みの文字数です。</dd></div>
           <div><dt>タイピング</dt><dd>読みを入力して、Enter（または「決定」）で答えます。ひらがなでもローマ字でもOKです（gakkou →「がっこう」）。日本語入力のときは、確定してからもう一度Enterを押してください。</dd></div>
@@ -450,8 +498,8 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
           <div><dt>ステージ</dt><dd>敵のHPを0にするとステージクリア。全5ステージで、HPが半分を切ると敵が怒って攻撃が速くなります。まちがえたりパスしたりした問題は数に入りません。</dd></div>
         </dl>
         <div class="roster" id="roster"></div>
-        <p class="note">レベル分けは目安です。JLPTは現在、公式の語彙・漢字リストを公表していません。</p>
-        <div class="btnrow"><button class="p1" id="howClose">とじる</button></div>
+        <p class="note" data-i18n="howNote">レベル分けは目安です。JLPTは現在、公式の語彙・漢字リストを公表していません。</p>
+        <div class="btnrow"><button class="p1" id="howClose" data-i18n="close">とじる</button></div>
       </div>
     </section>
   </div>
@@ -460,12 +508,12 @@ rt{font-size:.5em;font-weight:700;letter-spacing:0;line-height:1}
     <div class="guiderow">
       <button class="mini" id="hintBtn">ヒント</button>
       <div class="ctl-note" id="ctlNote">Enter で回答</div>
-      <button class="mini" id="passBtn">パス</button>
+      <button class="mini" id="passBtn" data-i18n="pass">パス</button>
     </div>
     <div class="choices" id="choices" hidden></div>
     <form class="inrow" id="ansForm" autocomplete="off">
-      <input id="answer" type="text" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="enter" placeholder="よみを入力して Enter" aria-label="読みを入力">
-      <button type="submit" class="okbtn" id="okBtn">決定</button>
+      <input id="answer" type="text" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="enter" placeholder="よみを入力して Enter" aria-label="読みを入力" data-i18n-ph="ph" data-i18n-aria="aAnswer">
+      <button type="submit" class="okbtn" id="okBtn" data-i18n="ok">決定</button>
     </form>
   </div>
 </div>
@@ -480,10 +528,10 @@ const RAW = {
 N5:`学校,がっこう,school
 先生,せんせい,teacher
 学生,がくせい,student
-日本,にほん,Japan
+日本,にほん|にっぽん,Japan
 今日,きょう,today
 明日,あした|あす,tomorrow
-昨日,きのう,yesterday
+昨日,きのう|さくじつ,yesterday
 天気,てんき,weather
 電車,でんしゃ,train
 時間,じかん,time
@@ -508,8 +556,8 @@ N5:`学校,がっこう,school
 小さい,ちいさい,small
 食べる,たべる,to eat
 飲む,のむ,to drink
-見る,みる,to see
-聞く,きく,to listen
+見る,みる,to see / to watch
+聞く,きく,to listen / to hear / to ask
 行く,いく,to go
 来る,くる,to come
 休む,やすむ,to rest
@@ -524,7 +572,7 @@ N5:`学校,がっこう,school
 右,みぎ,right
 左,ひだり,left
 出口,でぐち,exit
-入口,いりぐち,entrance
+入口,いりぐち|いりくち,entrance
 父,ちち,(my) father
 母,はは,(my) mother
 千円,せんえん,1000 yen
@@ -536,7 +584,7 @@ N5:`学校,がっこう,school
 中学校,ちゅうがっこう,junior high school
 今月,こんげつ,this month
 百円,ひゃくえん,100 yen
-出る,でる,to go out`,
+出る,でる,to go out / to leave`,
 N4:`病院,びょういん,hospital
 医者,いしゃ,doctor
 旅行,りょこう,travel
@@ -947,7 +995,7 @@ N3:`会議{かいぎ}の 時間{じかん}が 変{か}わったことを、み�
 料理{りょうり}の（　）を教{おし}えてもらった。|作{つく}り方{かた}|乗{の}り方{かた}|入{はい}り方{かた}|帰{かえ}り方{かた}|I was taught how to make the dish.
 駅前{えきまえ}の（　）で、家族{かぞく}の写真{しゃしん}を撮{と}った。|広場{ひろば}|天井{てんじょう}|調理{ちょうり}|郵便{ゆうびん}|We took a family photo at the plaza in front of the station.
 テストの結果{けっか}が悪{わる}くて、とても（　）。|残念{ざんねん}だった|得意{とくい}だった|便利{べんり}だった|丁寧{ていねい}だった|My test results were bad, so I was very disappointed.
-大雨{おおあめ}で電車{でんしゃ}が（　）、会社{かいしゃ}に遅{おく}れてしまった。|止{と}まった|止{と}めた|止{や}んだ|止{と}まらせた|Because of heavy rain the trains stopped, so I was late for work.
+大雨{おおあめ}で電車{でんしゃ}が（　）ので、会社{かいしゃ}に遅{おく}れてしまった。|止{と}まった|止{と}めた|止{や}んだ|止{と}まらせた|Because of heavy rain the trains stopped, so I was late for work.
 リンさんが電話{でんわ}に（　）ので、留守番電話{るすばんでんわ}にメッセージを残{のこ}した。|出{で}なかった|来{こ}なかった|合{あ}わなかった|寄{よ}らなかった|Lin did not pick up the phone, so I left a message on the answering machine.
 先生{せんせい}の話{はなし}が難{むずか}しくて、内容{ないよう}を（　）ことができなかった。|理解{りかい}する|解決{かいけつ}する|修理{しゅうり}する|販売{はんばい}する|The teacher's lecture was hard, so I could not understand the content.
 コンビニで買{か}った弁当{べんとう}を、電子{でんし}レンジで（　）から食{た}べた。|温{あたた}めて|冷{ひ}やして|凍{こお}らせて|乾{かわ}かして|I heated the convenience-store lunch in the microwave and then ate it.
@@ -958,7 +1006,7 @@ N3:`会議{かいぎ}の 時間{じかん}が 変{か}わったことを、み�
 野菜{やさい}が足{た}りないので、ビタミンを（　）ために、サプリメントを飲{の}んでいる。|補{おぎな}う|減{へ}らす|届{とど}ける|割{わ}る|Because I do not eat enough vegetables, I take supplements to make up for a lack of vitamins.
 狭{せま}い部屋{へや}を（　）広{ひろ}く使{つか}っている。|工夫{くふう}して|解決{かいけつ}して|運転{うんてん}して|注文{ちゅうもん}して|I make good use of my small room by coming up with clever ideas.
 ひどいことを言{い}われて、（　）。|傷{きず}ついた|感動{かんどう}した|安心{あんしん}した|感心{かんしん}した|I was hurt by the cruel things that were said to me.
-面接{めんせつ}の前{まえ}は、（　）て、手{て}が震{ふる}えた。|緊張{きんちょう}して|安心{あんしん}して|満足{まんぞく}して|納得{なっとく}して|Before the job interview, I was so nervous that my hands were shaking.
+面接{めんせつ}の前{まえ}は、（　）、手{て}が震{ふる}えた。|緊張{きんちょう}して|安心{あんしん}して|満足{まんぞく}して|納得{なっとく}して|Before the job interview, I was so nervous that my hands were shaking.
 壊{こわ}れた携帯電話{けいたいでんわ}を、新{あたら}しいものと（　）。|交換{こうかん}した|相談{そうだん}した|反省{はんせい}した|出発{しゅっぱつ}した|I exchanged my broken cell phone for a new one.
 先月{せんげつ}、友達{ともだち}の結婚式{けっこんしき}の披露宴{ひろうえん}に（　）。|招待{しょうたい}された|遠慮{えんりょ}された|注意{ちゅうい}された|解雇{かいこ}された|Last month I was invited to my friend's wedding reception.
 なくした財布{さいふ}が、（　）。|見{み}つかった|見{み}つけた|見{み}せた|見{み}上{あ}げた|The wallet I had lost was found.
@@ -1018,7 +1066,7 @@ N2:`彼{かれ}の 説明{せつめい}は（　）で、よく わからなか�
 寒{さむ}さで 手{て}が（　）しまい、ペンが うまく 持{も}てなかった。|かじかんで|縮{ちぢ}んで|透{す}き通{とお}って|ほころんで|My hands went numb from the cold, so I could not hold the pen well.
 彼{かれ}は、社員{しゃいん}の 不満{ふまん}を（　）ために、話{はな}し合{あ}いの 場{ば}を 設{もう}けた。|解消{かいしょう}する|増大{ぞうだい}させる|保{たも}つ|高{たか}める|He set up a meeting to resolve the employees' dissatisfaction.
 会議{かいぎ}の 時間{じかん}が（　）ので、資料{しりょう}の 準備{じゅんび}を 急{いそ}いだ。|迫{せま}っていた|乱{みだ}れていた|傾{かたむ}いていた|凍{こお}っていた|Since the meeting time was approaching, I hurried to prepare the materials.
-来週{らいしゅう}の 出張{しゅっちょう}に 備{そな}えて、資料{しりょう}を（　）しておいた。|用意{ようい}して|注意{ちゅうい}して|注目{ちゅうもく}して|反省{はんせい}して|To prepare for next week's business trip, I got the materials ready in advance.
+来週{らいしゅう}の 出張{しゅっちょう}に 備{そな}えて、資料{しりょう}を（　）おいた。|用意{ようい}して|注意{ちゅうい}して|注目{ちゅうもく}して|反省{はんせい}して|To prepare for next week's business trip, I got the materials ready in advance.
 工場{こうじょう}では、製品{せいひん}の 品質{ひんしつ}を（　）ために、検査{けんさ}を 厳{きび}しく している。|維持{いじ}する|販売{はんばい}する|輸出{ゆしゅつ}する|申告{しんこく}する|The factory is tightening inspections in order to maintain product quality.
 彼{かれ}は、目標{もくひょう}を（　）ために、毎日{まいにち} 英語{えいご}の 勉強{べんきょう}を 続{つづ}けている。|達成{たっせい}する|放棄{ほうき}する|提案{ていあん}する|寄付{きふ}する|He keeps studying English every day in order to achieve his goal.
 夏{なつ}は、冷房{れいぼう}の（　）で 電気代{でんきだい}が 高{たか}くなりやすい。|使用{しよう}|停止{ていし}|節約{せつやく}|販売{はんばい}|In summer, using the air conditioner tends to make the electricity bill go up.
@@ -1067,7 +1115,7 @@ N1:`彼{かれ}の 発言{はつげん}は 事実{じじつ}と（　）して �
 会社{かいしゃ}は 経営{けいえい}の 立{た}て直{なお}しのため、（　）な 改革{かいかく}を 断行{だんこう}した。|ドラスティック|ロマンチック|ナチュラル|ルーズ|To turn the company's management around, the firm carried out drastic reforms.
 アリさんは 病気{びょうき}を 隠{かく}して、（　）働{はたら}き続{つづ}けた。|黙々{もくもく}と|愕然{がくぜん}と|傲然{ごうぜん}と|忽然{こつぜん}と|Ali kept working silently while hiding his illness.
 結論{けつろん}を（　）出{だ}すのは 早計{そうけい}だ。|性急{せいきゅう}に|厳重{げんじゅう}に|陰険{いんけん}に|猛烈{もうれつ}に|It is premature to draw a conclusion hastily.
-部屋{へや}は（　）と 片付{かたづ}いていて、客{きゃく}を 迎{むか}える 準備{じゅんび}が 整{ととの}っていた。|整然{せいぜん}と|騒然{そうぜん}と|漠然{ばくぜん}と|猛然{もうぜん}と|The room was neatly tidied, and everything was ready to welcome the guests.
+部屋{へや}は（　） 片付{かたづ}いていて、客{きゃく}を 迎{むか}える 準備{じゅんび}が 整{ととの}っていた。|整然{せいぜん}と|騒然{そうぜん}と|漠然{ばくぜん}と|猛然{もうぜん}と|The room was neatly tidied, and everything was ready to welcome the guests.
 自分{じぶん}の 失敗{しっぱい}は（　）、人{ひと}の 欠点{けってん}ばかり 批判{ひはん}するのは 感心{かんしん}しない。|棚{たな}に上{あ}げて|腹{はら}を割{わ}って|手{て}を焼{や}いて|幅{はば}を利{き}かせて|It is not admirable to set aside your own failures and criticize only other people's faults.
 事故{じこ}の 知{し}らせを 聞{き}いた 彼{かれ}は、（　）顔{かお}で 立{た}ち尽{つ}くした。|茫然{ぼうぜん}とした|陶然{とうぜん}とした|嬉々{きき}とした|悠然{ゆうぜん}とした|Hearing the news of the accident, he stood there with a dazed expression.
 彼{かれ}は 部下{ぶか}の 手柄{てがら}を（　）、自分{じぶん}の 功績{こうせき}にした。|横取{よこど}りして|称{たた}えて|譲{ゆず}って|分{わ}け与{あた}えて|He took his subordinate's achievement and made it his own.
@@ -1078,7 +1126,7 @@ N1:`彼{かれ}の 発言{はつげん}は 事実{じじつ}と（　）して �
 彼{かれ}は 失敗{しっぱい}を 恐{おそ}れる あまり、新{あたら}しい 挑戦{ちょうせん}に（　）ばかりいる。|尻込{しりご}みして|飛{と}びついて|踏{ふ}み込{こ}んで|割{わ}り込{こ}んで|Fearing failure, he keeps shrinking back from new challenges.
 彼{かれ}は 仕事{しごと}の 合間{あいま}を 縫{ぬ}って、資格{しかく}試験{しけん}の 勉強{べんきょう}に（　）。|余念{よねん}がない|余地{よち}がない|余力{よりょく}がない|余韻{よいん}がない|He squeezes in time between work to devote himself wholeheartedly to studying for a qualification exam.
 経済{けいざい}の（　）を 立{た}て直{なお}すため、政府{せいふ}は 大胆{だいたん}な 政策{せいさく}を 打{う}ち出{だ}した。|低迷{ていめい}|繁盛{はんじょう}|隆盛{りゅうせい}|盛況{せいきょう}|To revive the sluggish economy, the government introduced bold policies.
-その 計画{けいかく}は（　）な 部分{ぶぶん}が 多{おお}く、実現{じつげん}は 困難{こんなん}だ。|非現実的{ひげんじつてき}な|慎重{しんちょう}な|謙虚{けんきょ}な|寛大{かんだい}な|Many parts of this plan are unrealistic, so it will be difficult to carry out.
+その 計画{けいかく}は（　） 部分{ぶぶん}が 多{おお}く、実現{じつげん}は 困難{こんなん}だ。|非現実的{ひげんじつてき}な|慎重{しんちょう}な|謙虚{けんきょ}な|寛大{かんだい}な|Many parts of this plan are unrealistic, so it will be difficult to carry out.
 彼{かれ}は（　）反論{はんろん}を 重{かさ}ね、会議{かいぎ}は 一時間{いちじかん}も 紛糾{ふんきゅう}した。|執拗{しつよう}に|簡潔{かんけつ}に|謙虚{けんきょ}に|寛大{かんだい}に|He kept raising objections relentlessly, and the meeting was in turmoil for over an hour.
 彼{かれ}は（　）ほど 大{おお}きな 声{こえ}で 話{はな}すので、周囲{しゅうい}が 驚{おどろ}いた。|耳{みみ}をつんざく|目{め}を凝{こ}らす|鼻{はな}を高{たか}くする|耳{みみ}を傾{かたむ}ける|He spoke in a voice so loud that it pierced the ears, so those around him were startled.
 先生{せんせい}は 生徒{せいと}の 作文{さくぶん}に、一{ひと}つ一{ひと}つ（　）添削{てんさく}を してくださった。|丹念{たんねん}に|大雑把{おおざっぱ}に|無頓着{むとんちゃく}に|大胆{だいたん}に|The teacher corrected each student's essay carefully, one by one.
@@ -1425,6 +1473,1250 @@ for (const L of LEVELS) {
   });
 }
 
+/* 漢字の解説：1行に1語。漢字語|読みの内訳|ポイント(日)|ポイント(英)|ポイント(中)|例文|例文(英)|例文(中) */
+const EXRAW = { kanji:{ N5:`
+学校|学=がっ 校=こう|学{がく}は、後{うし}ろに「こう」が 来{く}ると「がっ」に なります。「がこう」では ありません。|学 is がく, but before こう it becomes がっ (small っ): がっこう, not がこう.|学读作「がく」，但后面接「こう」时变成「がっ」（促音）：是「がっこう」，不是「がこう」。|毎日{まいにち} 学校{がっこう}へ 行{い}きます。|I go to school every day.|我每天去学校。
+先生|先=せん 生=せい|先生{せんせい}は、「せんせい」と 読{よ}みます。「せんぜい」では ありません。生{せい}は「せい」です。|先生 is せんせい. 生 is せい, not ぜい, so it is not せんぜい.|「先生」读「せんせい」，「生」读「せい」，不是「せんぜい」。|先生{せんせい}は 日本語{にほんご}を 教{おし}えます。|The teacher teaches Japanese.|老师教日语。
+学生|学=がく 生=せい|学{がく}は、後{うし}ろに「せい」が 来{く}ても「がく」と 読{よ}みます。「学校{がっこう}」の「がっ」とは ちがいます。|学 is がく before 生 (student): がくせい. Compare 学校, where it becomes がっ.|「学生」的「学」读「がく」，和「学校」的「がっ」不一样。|私{わたし}は 大学{だいがく}の 学生{がくせい}です。|I am a university student.|我是大学生。
+日本|日=に 本=ほん|「日{に}」と「本{ほん}」で「にほん」と 読{よ}みます。「にっぽん」と 読{よ}むことも あります。|日 is に and 本 is ほん, so together they make にほん (Japan). にっぽん is also used.|「日」读「に」，「本」读「ほん」，合起来是「にほん」。也可以读「にっぽん」。|私{わたし}は 日本{にほん}人{じん}です。|I am Japanese.|我是日本人。
+今日|今日=きょう*|今日{きょう}は、字{じ}を 1つずつ 読{よ}むと 読{よ}めない 特別{とくべつ}な 読{よ}み方{かた}です。|今日 is a special reading: きょう. Do not read each kanji on its own.|「今日」是特殊读法「きょう」，不能一个字一个字地读。|今日{きょう}は 天気{てんき}が いいです。|The weather is nice today.|今天天气很好。
+明日|明日=あした*|明日{あした}は 特別{とくべつ}な 読{よ}み方{かた}です。「明{めい}」と「日{にち}」では ありません。|明日 is a special reading: あした (also あす). Do not read it as めい・にち.|「明日」是特殊读法「あした」（也读「あす」），不能逐字读。|明日{あした}は 学校{がっこう}へ 行{い}きます。|I will go to school tomorrow.|我明天去学校。
+昨日|昨日=きのう*|昨日{きのう}は 特別{とくべつ}な 読{よ}み方{かた}です。字{じ}を 1つずつ 読{よ}みません。かたい 言{い}い方{かた}で「さくじつ」とも 読{よ}みます。|昨日 is a special reading: きのう — don't read it kanji by kanji. In formal speech it is also read さくじつ.|「昨日」是特殊读法「きのう」，不能逐字读。在正式场合也读「さくじつ」。|昨日{きのう}は 天気{てんき}が 悪{わる}かったです。|The weather was bad yesterday.|昨天天气不好。
+天気|天=てん 気=き|「天{てん}」と「気{き}」を つなげて「てんき」と 読{よ}みます。「てんぎ」では ありません。|天 is てん and 気 is き; together てんき. Not てんぎ.|「天」读「てん」，「気」读「き」，合起来是「てんき」，不是「てんぎ」。|今日{きょう}の 天気{てんき}は 晴{は}れです。|The weather today is sunny.|今天的天气是晴天。
+電車|電=でん 車=しゃ|「車{しゃ}」は「しゃ」と 読{よ}みます。「や」は 小{ちい}さく 書{か}きます。「でんしや」では ありません。|車 is しゃ with a small ゃ: でんしゃ, not でんしや.|「車」读「しゃ」，「や」要写成小的「ゃ」：「でんしゃ」，不是「でんしや」。|電車{でんしゃ}で 学校{がっこう}へ 行{い}きます。|I go to school by train.|我坐电车去学校。
+時間|時=じ 間=かん|「時{じ}」と「間{かん}」を つなげて「じかん」と 読{よ}みます。「じがん」や「じっかん」では ありません。|時 is じ and 間 is かん, together じかん. Not じがん or じっかん.|「時」读「じ」，「間」读「かん」，合起来是「じかん」，不是「じがん」「じっかん」。|日本語{にほんご}の 勉強{べんきょう}の 時間{じかん}です。|It is time to study Japanese.|现在是学习日语的时间。
+友達|友=とも 達=だち|「達{たち}」は ふつう「たち」ですが、友達{ともだち}では「だち」に なります。「ともだっち」では ありません。|達 is usually たち, but in 友達 it becomes だち: ともだち. Not ともだっち.|「達」一般读「たち」，在「友達」里变成「だち」：「ともだち」，不是「ともだっち」。|友達{ともだち}と 学校{がっこう}へ 行{い}きます。|I go to school with my friend.|我和朋友一起去学校。
+大学|大=だい 学=がく|大学{だいがく}の「大{だい}」は「だい」と 読{よ}みます。「学{がく}」は「がく」です。「たいがく」では ありません。|大 is だい and 学 is がく: だいがく. Not たいがく. (The 大 in 大きい is おお, a different reading.)|「大」读「だい」，「学」读「がく」：「だいがく」，不是「たいがく」。|私{わたし}の 兄{あに}は 大学{だいがく}の 学生{がくせい}です。|My older brother is a university student.|我哥哥是大学生。
+会社|会=かい 社=しゃ|会社{かいしゃ}は、「会{かい}」と「社{しゃ}」を つなげて 読{よ}みます。「社{しゃ}」の「や」は 小{ちい}さく 書{か}きます。「かいしや」や「がいしゃ」では ありません。|会 is かい and 社 is しゃ (small ゃ): かいしゃ. Not かいしや or がいしゃ.|「会社」读「かいしゃ」（「社」的「ゃ」要写小）。不是「かいしや」或「がいしゃ」。|私{わたし}は 会社{かいしゃ}で 働{はたら}きます。|I work at a company.|我在公司工作。
+名前|名=な 前=まえ|「名{な}」は「な」、「前{まえ}」は「まえ」と 読{よ}みます。「午前{ごぜん}」の「ぜん」とは ちがいます。|名 is な and 前 is まえ: なまえ. In 午前, 前 is read ぜん — a different reading.|「名」读「な」，「前」读「まえ」：「なまえ」。「午前」里的「前」读「ぜん」，读法不同。|私{わたし}の 名前{なまえ}は ユウです。|My name is Yu.|我的名字是小优。
+毎日|毎=まい 日=にち|毎日{まいにち}は、「毎{まい}」と「日{にち}」を つなげて 読{よ}みます。「まいにっち」では ありません。|毎日 is まいにち (毎 + 日). Not まいにっち.|「毎日」读「まいにち」，不是「まいにっち」。|毎日{まいにち} 日本語{にほんご}を 勉強{べんきょう}します。|I study Japanese every day.|我每天学习日语。
+午前|午=ご 前=ぜん|午前{ごぜん}は、「午{ご}」と「前{ぜん}」を つなげて 読{よ}みます。「ごうぜん」や「ごせん」では ありません。|午 is ご and 前 is ぜん: ごぜん. Not ごうぜん or ごせん.|「午前」读「ごぜん」，不是「ごうぜん」或「ごせん」。|午前{ごぜん}に 学校{がっこう}へ 行{い}きます。|I go to school in the morning.|我上午去学校。
+午後|午=ご 後=ご|午後{ごご}は、「午{ご}」と「後{ご}」を つなげて 読{よ}みます。「ごうご」や「ごごう」では ありません。|午 is ご and 後 is ご: ごご. Not ごうご or ごごう.|「午後」读「ごご」，不是「ごうご」或「ごごう」。|午後{ごご}に 友達{ともだち}と 話{はな}します。|I talk with my friend in the afternoon.|我下午和朋友聊天。
+半分|半=はん 分=ぶん|半分{はんぶん}は、「半{はん}」と「分{ぶん}」を つなげて 読{よ}みます。「ばんぶん」や「はぶん」では ありません。|半 is はん and 分 is ぶん: はんぶん. Not ばんぶん or はぶん.|「半分」读「はんぶん」，不是「ばんぶん」或「はぶん」。|ケーキの 半分{はんぶん}を 食{た}べます。|I eat half of the cake.|我吃蛋糕的一半。
+外国|外=がい 国=こく|外国{がいこく}は、「外{がい}」と「国{こく}」を つなげて 読{よ}みます。「がいこうく」や「がいごく」では ありません。|外 is がい and 国 is こく: がいこく. Not がいこうく or がいごく.|「外国」读「がいこく」，不是「がいこうく」或「がいごく」。|外国{がいこく}の 友達{ともだち}が います。|I have a friend from a foreign country.|我有一个外国朋友。
+来年|来=らい 年=ねん|来年{らいねん}の「来{らい}」は「らい」と 読{よ}みます。「来{く}る」の「く」とは ちがいます。|来 is らい in 来年 (らいねん). In the verb 来る it is く — a different reading.|「来年」的「来」读「らい」，和「来る」的「く」读法不同。|来年{らいねん} 日本{にほん}へ 行{い}きます。|I will go to Japan next year.|我明年去日本。
+先週|先=せん 週=しゅう|先週{せんしゅう}は、「先{せん}」と「週{しゅう}」を つなげて 読{よ}みます。「せんじゅう」や「ぜんしゅう」では ありません。|先 is せん and 週 is しゅう: せんしゅう. Not せんじゅう or ぜんしゅう.|「先週」读「せんしゅう」（上周），不是「せんじゅう」或「ぜんしゅう」。|先週{せんしゅう}、友達{ともだち}と 映画{えいが}を 見{み}ました。|Last week, I watched a movie with my friend.|上周我和朋友看了电影。
+白い|白=しろ い|「白{しろ}」は「しろ」と 読{よ}みます。「じろい」では ありません。「い」は 後{うし}ろに つきます。|白 is しろ, not じろ (no dakuten). 白い is しろい.|「白」读「しろ」，不是「じろ」。「白い」是「しろい」。|白{しろ}い 花{はな}が 好{す}きです。|I like white flowers.|我喜欢白色的花。
+高い|高=たか い|「高{たか}」は「たか」と 読{よ}みます。「たがい」や「だかい」では ありません。「高{たか}い」は 「たかい」です。|高 is たか: 高い is たかい. Not たがい or だかい.|「高」读「たか」，「高い」是「たかい」，不是「たがい」或「だかい」。|あの 山{やま}は 高{たか}いです。|That mountain is tall.|那座山很高。
+安い|安=やす い|「安{やす}い」は「やすい」と 読{よ}みます。「やずい」や「やっすい」では ありません。|安 is やす: 安い is やすい. Not やずい or やっすい.|「安い」读「やすい」，不是「やずい」或「やっすい」。|この 本{ほん}は 安{やす}いです。|This book is cheap.|这本书很便宜。
+新しい|新=あたら しい|「新{あたら}」は「あたら」と 読{よ}みます。「しい」は ひらがなで 書{か}きます。「あだらしい」では ありません。|新 is あたら, and しい is written in hiragana: あたらしい. Not あだらしい (た has no dakuten).|「新」读「あたら」，后面的「しい」用平假名写：「あたらしい」，不是「あだらしい」。|新{あたら}しい 電車{でんしゃ}で 学校{がっこう}へ 行{い}きます。|I go to school by a new train.|我坐新电车去学校。
+古い|古=ふる い|「古{ふる}」は「ふる」と 読{よ}みます。「ぶるい」では ありません。「古{ふる}い」は「ふるい」です。|古 is ふる: 古い is ふるい. Not ぶるい.|「古い」读「ふるい」，不是「ぶるい」。|この 家{いえ}は 古{ふる}いです。|This house is old.|这栋房子很旧。
+長い|長=なが い|「長{なが}」は「なが」と 読{よ}みます。「なかい」では ありません。「長{なが}い」は「ながい」です。|長 is なが: 長い is ながい. Not なかい.|「長い」读「ながい」，「長」读「なが」，不是「なかい」。|この 川{かわ}は 長{なが}いです。|This river is long.|这条河很长。
+大きい|大=おお きい|「大{おお}きい」の「大{おお}」は「おお」と 読{よ}みます。「大学{だいがく}」の「だい」とは ちがいます。|大 is おお in 大きい: おおきい. Not だいきい. (Compare 大学, where 大 is だい.)|「大きい」的「大」读「おお」，和「大学」的「だい」不一样。|この 車{くるま}は 大{おお}きいです。|This car is big.|这辆车很大。
+小さい|小=ちい さい|「小{ちい}」は「ちい」と 読{よ}みます。「ちいさい」です。「しょう」では ありません。|小 is ちい in 小さい: ちいさい. Not しょうさい.|「小さい」读「ちいさい」，「小」读「ちい」。|小{ちい}さい 犬{いぬ}が 好{す}きです。|I like small dogs.|我喜欢小狗。
+食べる|食=た べる|「食{た}べる」の「食{た}」は「た」と 読{よ}みます。「たべる」です。「しょく」と 読{よ}むのは ほかの 言葉{ことば}です。|食 is た in 食べる: たべる. 食 is read しょく in other words, not here.|「食べる」的「食」读「た」，不读「しょく」。|毎日{まいにち} 朝{あさ}ごはんを 食{た}べます。|I eat breakfast every day.|我每天吃早饭。
+飲む|飲=の む|「飲{の}」は「の」と 読{よ}みます。「飲{の}む」は「のむ」です。「飲{の}みます」「飲{の}んで」の 形{かたち}も おぼえましょう。|飲 is の: 飲む is のむ. Also learn the forms 飲みます (のみます) and 飲んで (のんで).|「飲」读「の」，「飲む」是「のむ」。也要记住「飲みます（のみます）」「飲んで（のんで）」等形式。|水{みず}を 飲{の}みます。|I drink water.|我喝水。
+見る|見=み る|「見{み}」は「み」と 読{よ}みます。後{うし}ろに「る」が つきます。「見{み}る」です。|見 is read み, followed by る: みる.|「見」读「み」，后面加「る」：「みる」。|映画{えいが}を 見{み}ます。|I watch a movie.|我看电影。
+聞く|聞=き く|「聞{き}」は「き」と 読{よ}みます。「ぎく」では ありません。「聞{き}く」は「きく」です。|聞 is き: 聞く is きく. Not ぎく.|「聞く」读「きく」，「聞」读「き」，不是「ぎく」。|音楽{おんがく}を 聞{き}きます。|I listen to music.|我听音乐。
+行く|行=い く|「行{い}く」の「行{い}」は「い」と 読{よ}みます。「いく」です。「こう」や「ぎょう」の 読{よ}みでは ありません。|行 is い in 行く: いく. It is not こう or ぎょう here.|「行く」的「行」读「い」，「いく」，不读「こう」或「ぎょう」。|友達{ともだち}と 公園{こうえん}へ 行{い}きます。|I go to the park with my friend.|我和朋友去公园。
+来る|来=く る|「来{く}」は「く」と 読{よ}みます。「来{く}る」は「くる」です。「ぐる」では ありません。|来 is く: 来る is くる. Not ぐる.|「来る」读「くる」，「来」读「く」，不是「ぐる」。|友達{ともだち}が うちに 来{き}ます。|My friend comes to my house.|朋友来我家。
+休む|休=やす む|「休{やす}」は「やす」と 読{よ}みます。「やすむ」です。「やずむ」や「やっすむ」では ありません。|休 is やす: 休む is やすむ. Not やずむ or やっすむ.|「休む」读「やすむ」，不是「やずむ」或「やっすむ」。|日曜日{にちようび}は 休{やす}みます。|I rest on Sunday.|星期天我休息。
+読む|読=よ む|「読{よ}」は「よ」と 読{よ}みます。「読{よ}む」は「よむ」です。「読{よ}みます」「読{よ}んで」の 形{かたち}も おぼえましょう。|読 is よ: 読む is よむ. Also learn 読みます (よみます) and 読んで (よんで).|「読」读「よ」，「読む」是「よむ」。也要记住「読みます（よみます）」「読んで（よんで）」。|本{ほん}を 読{よ}みます。|I read books.|我读书。
+書く|書=か く|「書{か}」は「か」と 読{よ}みます。「書{か}く」は「かく」です。「がく」では ありません。|書 is か: 書く is かく. Not がく (that is the reading of 学).|「書」读「か」，「書く」是「かく」，不是「がく」（「がく」是「学」的读音）。|名前{なまえ}を 書{か}きます。|I write my name.|我写名字。
+話す|話=はな す|「話{はな}」は「はな」と 読{よ}みます。「話{はな}す」は「はなす」です。「ばなす」では ありません。|話 is はな: 話す is はなす. Not ばなす.|「話す」读「はなす」，不是「ばなす」。|日本語{にほんご}で 話{はな}します。|I speak in Japanese.|我用日语说话。
+山|山=やま|「山{やま}」は「やま」と 読{よ}みます。「富士山{ふじさん}」の「さん」は 別{べつ}の 読{よ}み方{かた}です。|山 is read やま. In 富士山 it is さん, a different reading.|「山」读「やま」。在「富士山」中读「さん」。|山{やま}に 行{い}きます。|I go to the mountains.|我去山里。
+川|川=かわ|「川{かわ}」は「かわ」と 読{よ}みます。ほかの 字{じ}の 後{あと}では「がわ」と 変{か}わります。小川{おがわ}です。|川 is かわ. After another word it changes to がわ, as in 小川 (おがわ).|「川」读「かわ」，接在别的字后面时变成「がわ」（例：小川「おがわ」）。|川{かわ}の 水{みず}は きれいです。|The water in the river is clean.|河里的水很干净。
+雨|雨=あめ|「雨{あめ}」は「あめ」と 読{よ}みます。「め」に 点{てん}（゛）は つきません。|雨 is あめ. Careful: め has no dakuten, and the sound あめ also means "candy" (飴), a different kanji.|「雨」读「あめ」。注意：「あめ」这个音也可以是「糖果（飴）」，那是不同的字。|今日{きょう}は 雨{あめ}です。|It is rainy today.|今天下雨。
+花|花=はな|「花{はな}」は「はな」と 読{よ}みます。「ばな」では ありません。|花 is はな. Not ばな. (The sound はな also means "nose", 鼻, a different kanji.)|「花」读「はな」，不是「ばな」。（「はな」这个音也指「鼻子（鼻）」，是不同的字。）|花{はな}を 見{み}ます。|I look at flowers.|我看花。
+魚|魚=さかな|「魚{さかな}」は 1字{じ}で「さかな」と 読{よ}みます。「さがな」「さっかな」「ざかな」では ありません。|魚 is さかな. Not さがな, さっかな, or ざかな.|「魚」读「さかな」，不是「さがな」「さっかな」或「ざかな」。|魚{さかな}を 食{た}べます。|I eat fish.|我吃鱼。
+右|右=みぎ|「右{みぎ}」は「みぎ」と 読{よ}みます。「みき」では ありません。|右 is みぎ. Not みき.|「右」读「みぎ」，不是「みき」。|出口{でぐち}は 右{みぎ}です。|The exit is on the right.|出口在右边。
+左|左=ひだり|「左{ひだり}」は「ひだり」と 読{よ}みます。「ひたり」や「びだり」では ありません。|左 is ひだり. Not ひたり or びだり.|「左」读「ひだり」，不是「ひたり」或「びだり」。|左{ひだり}に 先生{せんせい}が います。|The teacher is on the left.|老师在左边。
+出口|出=で 口=ぐち|「口{くち}」は、前{まえ}に 字{じ}が あると「ぐち」に なります。出口{でぐち}・入口{いりぐち}。「てぐち」では ありません。|口 (くち) becomes ぐち after another word: でぐち, いりぐち. And 出 is で, not て.|「口」接在别的字后面变成浊音「ぐち」：「でぐち」「いりぐち」。「出」读「で」，不是「て」。|出口{でぐち}は 右{みぎ}です。|The exit is on the right.|出口在右边。
+入口|入=いり 口=ぐち|「口{くち}」は、前{まえ}に 字{じ}が あると「ぐち」に なることが あります。出口{でぐち}も 同{おな}じです。「いりくち」と 言{い}う 人{ひと}も います。|口 (くち) often becomes ぐち after another word: いりぐち, like でぐち. Some people also say いりくち.|「口」接在别的字后面时常变成浊音「ぐち」：「いりぐち」，和「でぐち」一样。也有人说「いりくち」。|入口{いりぐち}は 左{ひだり}です。|The entrance is on the left.|入口在左边。
+父|父=ちち|「父{ちち}」は「ちち」と 読{よ}みます。「ちっち」では ありません。|父 is ちち. Not ちっち.|「父」读「ちち」，不是「ちっち」。|父{ちち}は 会社{かいしゃ}で 働{はたら}きます。|My father works at a company.|我父亲在公司工作。
+母|母=はは|「母{はは}」は「はは」と 読{よ}みます。「はば」や「ばは」では ありません。|母 is はは. Not はば or ばは.|「母」读「はは」，不是「はば」或「ばは」。|母{はは}は 料理{りょうり}が 好{す}きです。|My mother likes cooking.|我母亲喜欢做菜。
+千円|千=せん 円=えん|千円{せんえん}は、「千{せん}」と「円{えん}」を つなげて 読{よ}みます。「せえん」「せんえ」「ぜんえん」では ありません。|千 is せん and 円 is えん: せんえん. Not せえん, せんえ, or ぜんえん.|「千円」读「せんえん」，不是「せえん」「せんえ」或「ぜんえん」。|千円{せんえん}の 本{ほん}を 買{か}いました。|I bought a book for 1000 yen.|我花一千日元买了一本书。
+六月|六=ろく 月=がつ|月{つき}の 名前{なまえ}の「月{がつ}」は「がつ」と 読{よ}みます。六月{ろくがつ}。「ろっくがつ」では ありません。四月{しがつ}・九月{くがつ}にも 注意{ちゅうい}。|月 in month names is がつ: ろくがつ. Not ろっくがつ. Also note 四月 (しがつ) and 九月 (くがつ).|月份的「月」读「がつ」：「ろくがつ」，不是「ろっくがつ」。也要注意「四月（しがつ）」「九月（くがつ）」。|六月{ろくがつ}に 日本{にほん}へ 行{い}きます。|I will go to Japan in June.|我六月去日本。
+九時|九=く 時=じ|九{きゅう}は ふつう「きゅう」ですが、時間{じかん}の「九時{くじ}」は「く」です。「きゅうじ」では ありません。|九 is usually きゅう, but for the time 9 o'clock it is く: くじ. Not きゅうじ.|「九」一般读「きゅう」，但表示时间「9点」时读「く」：「くじ」，不是「きゅうじ」。|九時{くじ}に 学校{がっこう}へ 行{い}きます。|I go to school at nine o'clock.|我九点去学校。
+四人|四=よ 人=にん|四{よん}は「よん」や「し」とも 読{よ}みますが、四人{よにん}は「よ」です。「よんにん」「しにん」では ありません。|四 can be よん or し, but "four people" is よにん. Not よんにん or しにん.|「四」可以读「よん」或「し」，但「四个人」读「よにん」，不是「よんにん」或「しにん」。|四人{よにん}で 食{た}べます。|Four of us eat.|我们四个人一起吃。
+電話|電=でん 話=わ|電話{でんわ}は、「電{でん}」と「話{わ}」を つなげて 読{よ}みます。「話{わ}」は 「わ」と 読{よ}みます。「てんわ」や「でわ」では ありません。|電 is でん and 話 is わ: でんわ. Not てんわ or でわ.|「電話」读「でんわ」，「話」读「わ」，不是「てんわ」或「でわ」。|友達{ともだち}に 電話{でんわ}します。|I call my friend.|我给朋友打电话。
+中国|中=ちゅう 国=ごく|中国{ちゅうごく}は、「中{ちゅう}」と「国{ごく}」を つなげて 読{よ}みます。「国{ごく}」は 前{まえ}の 字{じ}の 後{あと}で「ごく」と 濁{にご}ります。「ちゅうこく」では ありません。|中 is ちゅう and 国 is ごく (dakuten after another word): ちゅうごく. Not ちゅうこく.|「中国」读「ちゅうごく」，「国」接在别的字后面时变成浊音「ごく」，不是「ちゅうこく」。|中国{ちゅうごく}へ 行{い}きます。|I go to China.|我去中国。
+中学校|中=ちゅう 学=がっ 校=こう|中{ちゅう}学{がっ}校{こう}は「ちゅうがっこう」と 読{よ}みます。「学{がっ}」は 後{うし}ろに「こう」が 来{く}ると「がっ」に なります。「ちゅうがこう」では ありません。|中学校 is ちゅうがっこう. 学 becomes がっ before こう, as in 学校. Not ちゅうがこう.|「中学校」读「ちゅうがっこう」，「学」后面接「こう」时变成「がっ」，不是「ちゅうがこう」。|中学校{ちゅうがっこう}の 先生{せんせい}は 日本語{にほんご}を 教{おし}えます。|The teacher at the junior high school teaches Japanese.|初中的老师教日语。
+今月|今=こん 月=げつ|今月{こんげつ}は、「今{こん}」と「月{げつ}」を つなげて 読{よ}みます。「こげつ」や「こんけつ」では ありません。|今 is こん and 月 is げつ: こんげつ. Not こげつ or こんけつ.|「今月」读「こんげつ」，不是「こげつ」或「こんけつ」。|今月{こんげつ}は 忙{いそが}しいです。|I am busy this month.|这个月我很忙。
+百円|百=ひゃく 円=えん|百円{ひゃくえん}は、「百{ひゃく}」と「円{えん}」を つなげて 読{よ}みます。「ひゃくえ」や「ひゃっくえん」では ありません。|百 is ひゃく and 円 is えん: ひゃくえん. Not ひゃくえ or ひゃっくえん.|「百円」读「ひゃくえん」，不是「ひゃくえ」或「ひゃっくえん」。|百円{ひゃくえん}の ジュースを 買{か}いました。|I bought a juice for 100 yen.|我花一百日元买了一杯果汁。
+出る|出=で る|「出{で}る」は「でる」と 読{よ}みます。「で」は「出{で}」の 読{よ}み方{かた}です。「てる」では ありません。|出 is で in 出る: でる. Not てる.|「出る」读「でる」，「出」读「で」，不是「てる」。|九時{くじ}に 家{いえ}を 出{で}ます。|I leave home at nine o'clock.|我九点出门。
+`, N4:`
+病院|病=びょう 院=いん|病{びょう}の「びょう」は「ょ」を 小{ちい}さく 書{か}きます。「びよういん」は「美容院{びよういん}」の ことで、ちがう 意味{いみ}です。|病 is びょう and 院 is いん: びょういん. The ょ is small. Not びよういん, which means "beauty salon" (美容院).|「病」读「びょう」，「院」读「いん」：「びょういん」。「ょ」要写小。不是「びよういん」（美容院）。|病院{びょういん}で 医者{いしゃ}に 会{あ}いました。|I saw a doctor at the hospital.|我在医院见了医生。
+医者|医=い 者=しゃ|医{い}は「い」、者{しゃ}は「しゃ」です。「いしや」「いじゃ」「いっしゃ」では ありません。|医 is い and 者 is しゃ: いしゃ. Not いしや, いじゃ, or いっしゃ. (The ゃ is small.)|「医」读「い」，「者」读「しゃ」：「いしゃ」，不是「いしや」「いじゃ」或「いっしゃ」。（「ゃ」要写小。）|医者{いしゃ}に 行{い}きます。|I go to the doctor.|我去看医生。
+旅行|旅=りょ 行=こう|行{い}く の 字{じ}は、旅行{りょこう}では「こう」と 読{よ}みます。旅{りょ}の「ょ」は 小{ちい}さく、のばしません（「りょうこう」では ありません）。|行 (as in 行く) is こう in 旅行. 旅 is りょ — small ょ and no long vowel: りょこう, not りょうこう.|「行く」的「行」在「旅行」里读「こう」。「旅」读「りょ」，「ょ」要小写，不拉长：是「りょこう」，不是「りょうこう」。|夏{なつ}に 旅行{りょこう}します。|I will travel in summer.|夏天我要去旅行。
+運動|運=うん 動=どう|動{うご}く の 字{じ}は、運動{うんどう}では「どう」と 読{よ}みます。点{てん}（゛）が つきます。「うんとう」では ありません。|動 (as in 動く) is どう in 運動, with a dakuten: うんどう. Not うんとう.|「動く」的「動」在「運動」里读浊音「どう」：「うんどう」，不是「うんとう」。|週末{しゅうまつ} 公園{こうえん}で 運動{うんどう}します。|I exercise in the park on weekends.|周末我在公园运动。
+料理|料=りょう 理=り|料{りょう}は「りょう」、理{り}は「り」です。「りょり」「りようり」では ありません。|料 is りょう and 理 is り: りょうり. Not りょり or りようり. (The ょ is small.)|「料」读「りょう」，「理」读「り」：「りょうり」，不是「りょり」或「りようり」。（「ょ」要写小。）|夜{よる}に 料理{りょうり}を 作{つく}ります。|I cook at night.|晚上我做饭。
+写真|写=しゃ 真=しん|写{しゃ}の「ゃ」は 小{ちい}さく 書{か}きます。真{しん}に 点{てん}（゛）は つきません。「しやしん」「しゃじん」では ありません。|写 is しゃ (small ゃ) and 真 is しん (no dakuten): しゃしん. Not しやしん or しゃじん.|「写」读「しゃ」（「ゃ」小写），「真」读「しん」（不浊化）：「しゃしん」，不是「しやしん」或「しゃじん」。|友達{ともだち}と 写真{しゃしん}を 撮{と}りました。|I took photos with my friend.|我和朋友拍了照片。
+映画|映=えい 画=が|映{えい}は「えい」、画{が}は「が」です。「えいか」「えが」では ありません。|映 is えい and 画 is が: えいが. Not えいか or えが. (画 has a dakuten: が.)|「映」读「えい」，「画」读「が」：「えいが」，不是「えいか」或「えが」。|日曜日{にちようび}に 映画{えいが}を 見{み}ました。|I watched a movie on Sunday.|星期天我看了电影。
+音楽|音=おん 楽=がく|楽{たの}しい の 字{じ}は、音楽{おんがく}では「がく」と 読{よ}みます。「おがく」「おんかく」では ありません。|楽 (as in 楽しい, たのしい) is がく in 音楽: おんがく. Not おがく or おんかく.|「楽しい」的「楽」在「音楽」里读「がく」：「おんがく」，不是「おがく」或「おんかく」。|毎晩{まいばん} 音楽{おんがく}を 聞{き}きます。|I listen to music every night.|我每天晚上听音乐。
+家族|家=か 族=ぞく|家{いえ}の 字{じ}は、家族{かぞく}では「か」と 読{よ}みます。族{ぞく}は「ぞく」で、点{てん}（゛）が つきます。|家 (いえ, house) is か in 家族, and 族 is ぞく with a dakuten: かぞく. Not かそく.|「家（いえ）」在「家族」里读「か」，「族」读浊音「ぞく」：是「かぞく」，不是「かそく」。|家族{かぞく}と 日本{にほん}へ 行{い}きました。|I went to Japan with my family.|我和家人一起去了日本。
+兄弟|兄=きょう 弟=だい|兄{あに}・弟{おとうと}ですが、兄弟{きょうだい}では「きょう」「だい」と 読{よ}みます。「きょ」の「ょ」は 小{ちい}さく、のばします。|兄 is usually あに and 弟 おとうと, but in 兄弟 they are きょう and だい: きょうだい. Not きょだい.|「兄」一般读「あに」，「弟」读「おとうと」，但在「兄弟」里读「きょう」「だい」：是「きょうだい」，不是「きょだい」。|私{わたし}は 兄弟{きょうだい}が 三人{さんにん}います。|I have three siblings.|我有三个兄弟姐妹。
+世界|世=せ 界=かい|世{せ}は「せ」、界{かい}は「かい」です。「せがい」「せっかい」「ぜかい」では ありません。|世 is せ and 界 is かい: せかい. Not せがい, せっかい, or ぜかい. (界 is かい, not がい.)|「世」读「せ」，「界」读「かい」：「せかい」，不是「せがい」「せっかい」或「ぜかい」。|世界{せかい}には いろいろな 国{くに}が あります。|There are many countries in the world.|世界上有很多国家。
+地図|地=ち 図=ず|地{ち}は「ち」、図{ず}は「ず」です。「ちす」では ありません。「図書館{としょかん}」の「と」とは ちがいます。|地 is ち and 図 is ず: ちず. Not ちす. (図 is と in 図書館, a different reading.)|「地」读「ち」，「図」读「ず」：「ちず」，不是「ちす」。（「図書館」的「図」读「と」。）|駅{えき}の 地図{ちず}を 見{み}ます。|I look at the map of the station.|我看车站的地图。
+空港|空=くう 港=こう|空{そら}の 字{じ}は、空港{くうこう}では「くう」と 読{よ}みます。「くう」も「こう」も のばす 音{おと}です。|空 (そら, sky) is くう in 空港. Both parts have a long vowel: くうこう. Not くうこ.|「空（そら）」在「空港」里读「くう」。两部分都是长音：「くうこう」，不是「くうこ」。|空港{くうこう}まで 電車{でんしゃ}で 行{い}きます。|I go to the airport by train.|我坐电车去机场。
+銀行|銀=ぎん 行=こう|行{い}く の 字{じ}は、銀行{ぎんこう}では「こう」と 読{よ}みます。旅行{りょこう}と 同{おな}じです。「きんこう」では ありません。|行 (as in 行く) is こう in 銀行, like in 旅行. 銀 is ぎん with a dakuten: ぎんこう, not きんこう.|「行く」的「行」在「銀行」里读「こう」，和「旅行」一样。「銀」读「ぎん」：是「ぎんこう」，不是「きんこう」。|銀行{ぎんこう}で お金{かね}を おろします。|I withdraw money at the bank.|我在银行取钱。
+図書館|図=と 書=しょ 館=かん|図{と}は「と」、書{しょ}は「しょ」、館{かん}は「かん」です。「としょうかん」「としょがん」「とっしょかん」などでは ありません。「書{か}く」の「か」とは ちがいます。|図 is と, 書 is しょ and 館 is かん: としょかん. Not としょうかん, としょがん, or とっしょかん. (書 here is not the か of 書く.)|「図」读「と」，「書」读「しょ」，「館」读「かん」：「としょかん」，不是「としょうかん」「としょがん」或「とっしょかん」。|図書館{としょかん}で 本{ほん}を 読{よ}みます。|I read books at the library.|我在图书馆看书。
+自転車|自=じ 転=てん 車=しゃ|自{じ}は「じ」、転{てん}は「てん」、車{しゃ}は「しゃ」です。「してんしゃ」「じでんしゃ」「じてんしや」「じてんじゃ」では ありません。「車{くるま}」とは ちがいます。|自 is じ, 転 is てん and 車 is しゃ: じてんしゃ. Not してんしゃ, じでんしゃ, じてんしや, or じてんじゃ. (車 alone is くるま, a different reading.)|「自」读「じ」，「転」读「てん」，「車」读「しゃ」：「じてんしゃ」，不是「してんしゃ」「じでんしゃ」「じてんしや」或「じてんじゃ」。（「車」单独时读「くるま」。）|自転車{じてんしゃ}で 学校{がっこう}へ 行{い}きます。|I go to school by bicycle.|我骑自行车去学校。
+研究|研=けん 究=きゅう|研{けん}は「けん」、究{きゅう}は「きゅう」です。「けきゅう」「けんきゆう」「けんぎゅう」「げんきゅう」では ありません。|研 is けん and 究 is きゅう: けんきゅう. Not けきゅう, けんきゆう, けんぎゅう, or げんきゅう. (The ゅ is small.)|「研」读「けん」，「究」读「きゅう」：「けんきゅう」，不是「けきゅう」「けんきゆう」「けんぎゅう」或「げんきゅう」。（「ゅ」要写小。）|大学{だいがく}で 日本語{にほんご}の 研究{けんきゅう}を します。|I do research on Japanese at university.|我在大学研究日语。
+試験|試=し 験=けん|試{し}は「し」、験{けん}は「けん」です。「じけん」は 事件{じけん}（ニュースの こと）で、ちがう 言葉{ことば}です。|試 is し and 験 is けん: しけん. じけん is a different word (事件, incident).|「試」读「し」，「験」读「けん」：「しけん」。「じけん」是另一个词（事件）。|明日{あした} 日本語{にほんご}の 試験{しけん}が あります。|I have a Japanese exam tomorrow.|明天有日语考试。
+説明|説=せつ 明=めい|明{あか}るい の 字{じ}は、説明{せつめい}では「めい」と 読{よ}みます。説{せつ}は「せつ」で、小{ちい}さい「っ」は ありません。|明 (as in 明るい) is めい in 説明. 説 is せつ, with no small っ: せつめい, not せっつめい.|「明るい」的「明」在「説明」里读「めい」。「説」读「せつ」，没有促音：是「せつめい」，不是「せっつめい」。|先生{せんせい}が 文法{ぶんぽう}の 説明{せつめい}を します。|The teacher explains the grammar.|老师说明语法。
+特別|特=とく 別=べつ|特{とく}は「とく」、別{べつ}は「べつ」です。「とうくべつ」「とくへつ」「とくべっつ」「どくべつ」では ありません。|特 is とく and 別 is べつ: とくべつ. Not とうくべつ, とくへつ, とくべっつ, or どくべつ.|「特」读「とく」，「別」读「べつ」：「とくべつ」，不是「とうくべつ」「とくへつ」「とくべっつ」或「どくべつ」。|今日{きょう}は 特別{とくべつ}な 日{ひ}です。|Today is a special day.|今天是特别的日子。
+意味|意=い 味=み|意{い}と 味{み}で「いみ」と 読{よ}みます。「味{あじ}」（食{た}べ物{もの}の 味{あじ}）は「あじ」です。|意 is い and 味 is み: いみ. In 味 for taste, the reading is あじ, not み.|「意」读「い」，「味」读「み」：「いみ」。「味」表示味道时读「あじ」。|この 言葉{ことば}の 意味{いみ}を 知{し}って いますか。|Do you know the meaning of this word?|你知道这个词的意思吗？
+問題|問=もん 題=だい|問{もん}は「もん」、題{だい}は「だい」です。「もだい」「もんたい」では ありません。|問 is もん and 題 is だい: もんだい. Not もだい or もんたい. (題 has a dakuten: だい.)|「問」读「もん」，「題」读「だい」：「もんだい」，不是「もだい」或「もんたい」。|試験{しけん}の 問題{もんだい}は 難{むずか}しかったです。|The exam questions were difficult.|考试的题目很难。
+春|春=はる|春{はる}は「はる」と 読{よ}みます。「ばる」では ありません。|春 is read はる. Not ばる (no dakuten).|「春」读「はる」，不是「ばる」。|春{はる}に 日本{にほん}へ 行{い}きます。|I will go to Japan in spring.|春天我去日本。
+夏|夏=なつ|夏{なつ}は「なつ」と 読{よ}みます。「なっつ」では ありません。|夏 is read なつ. Not なっつ (no small っ).|「夏」读「なつ」，不是「なっつ」。|夏{なつ}は 暑{あつ}いです。|Summer is hot.|夏天很热。
+秋|秋=あき|秋{あき}は「あき」と 読{よ}みます。「あぎ」「あっき」では ありません。|秋 is read あき. Not あぎ or あっき.|「秋」读「あき」，不是「あぎ」或「あっき」。|秋{あき}は 涼{すず}しいです。|Autumn is cool.|秋天很凉爽。
+冬|冬=ふゆ|冬{ふゆ}は「ふゆ」と 読{よ}みます。「ぶゆ」では ありません。|冬 is read ふゆ. Not ぶゆ (no dakuten).|「冬」读「ふゆ」，不是「ぶゆ」。|冬{ふゆ}に 雪{ゆき}が 降{ふ}ります。|It snows in winter.|冬天下雪。
+朝|朝=あさ|朝{あさ}は「あさ」と 読{よ}みます。毎朝{まいあさ}も「あさ」ですが、今朝{けさ}は 特別{とくべつ}な 読{よ}み方{かた}です。|朝 is あさ, also in 毎朝 (まいあさ). But 今朝 has a special reading: けさ.|「朝」读「あさ」，「毎朝」也读「まいあさ」。但「今朝」是特殊读法「けさ」。|朝{あさ}ごはんを 食{た}べます。|I eat breakfast.|我吃早饭。
+夜|夜=よる|夜{よる}は「よる」と 読{よ}みます。今夜{こんや}では「や」に なります。「ようる」では ありません。|夜 is よる. In 今夜 (tonight) it is や: こんや. Not ようる.|「夜」读「よる」，在「今夜」里读「や」（「こんや」）。不是「ようる」。|夜{よる} 十一時{じゅういちじ}に 寝{ね}ます。|I go to bed at eleven at night.|我晚上十一点睡觉。
+近い|近=ちか い|近{ちか}い は「ちかい」と 読{よ}みます。「ちがい」（違{ちが}い）や「ちっかい」では ありません。|近い is read ちかい. Not ちがい (違い, "difference") or ちっかい.|「近い」读「ちかい」，不是「ちがい」（「違い」是「不同」）或「ちっかい」。|駅{えき}は 家{いえ}から 近{ちか}いです。|The station is near my house.|车站离我家很近。
+遠い|遠=とお い|遠{とお}い は「とおい」と 書{か}きます。「とうい」では ありません。大{おお}きい と 同{おな}じで、「お」で のばします。|遠い is spelled とおい, not とうい — like 大きい (おおきい), the long vowel is written with お.|「遠い」写作「とおい」，不是「とうい」。和「大きい（おおきい）」一样，用「お」表示长音。|日本{にほん}は 遠{とお}いです。|Japan is far away.|日本很远。
+重い|重=おも い|重{おも}い は「おもい」と 読{よ}みます。「重{じゅう}」（体重{たいじゅう}）の「じゅう」とは ちがいます。|重 is おも in 重い: おもい. It is not じゅう, as in 体重 (weight).|「重い」的「重」读「おも」，「体重」的「重」读「じゅう」，读法不同。|この 箱{はこ}は 重{おも}いです。|This box is heavy.|这个箱子很重。
+軽い|軽=かる い|軽{かる}い は「かるい」と 読{よ}みます。「がるい」では ありません。|軽い is read かるい. Not がるい (no dakuten).|「軽い」读「かるい」，不是「がるい」。|この かばんは 軽{かる}いです。|This bag is light.|这个包很轻。
+暗い|暗=くら い|暗{くら}い は「くらい」と 読{よ}みます。「ぐらい」（だいたい）は 別{べつ}の 言葉{ことば}です。|暗い is read くらい. ぐらい (about) is a different word.|「暗い」读「くらい」。「ぐらい」（大约）是另一个词。|夜{よる}は 外{そと}が 暗{くら}いです。|It is dark outside at night.|晚上外面很暗。
+早い|早=はや い|早{はや}い は「はやい」と 読{よ}みます。時間{じかん}が 早{はや}い ことに 使{つか}います。速{はや}い（スピード）と 読{よ}みは 同{おな}じです。「ばやい」では ありません。|早い is はやい, used for time (early). 速い (fast) has the same reading with a different kanji. Not ばやい.|「早い」读「はやい」，指时间早；「速い」（快）读音相同，字不同。不是「ばやい」。|今朝{けさ}は 早{はや}く 起{お}きました。|I got up early this morning.|今天早上我起得很早。
+急ぐ|急=いそ ぐ|急{いそ}ぐ は「いそぐ」と 読{よ}みます。「いぞぐ」「いっそぐ」では ありません。|急ぐ is read いそぐ. Not いぞぐ or いっそぐ. (急 is そ, not ぞ.)|「急ぐ」读「いそぐ」，不是「いぞぐ」或「いっそぐ」。|電車{でんしゃ}に 遅{おく}れないように 急{いそ}ぎます。|I hurry so I won't miss the train.|为了不误车，我赶快走。
+送る|送=おく る|送{おく}る は「おくる」と 読{よ}みます。「おぐる」「おっくる」では ありません。|送る is read おくる. Not おぐる or おっくる.|「送る」读「おくる」，不是「おぐる」或「おっくる」。|友達{ともだち}に 手紙{てがみ}を 送{おく}ります。|I send a letter to my friend.|我给朋友寄信。
+借りる|借=か りる|借{か}りる は「かりる」と 読{よ}みます。「がりる」では ありません。人{ひと}から 借{か}りる ことで、「貸{か}す」（人{ひと}に 貸{か}す）と 反対{はんたい}の 意味{いみ}です。|借りる is read かりる. Not がりる. It means borrow from someone; 貸す means lend to someone. They are opposites.|「借りる」读「かりる」，不是「がりる」。「借りる」是向别人借，「貸す」是借给别人，意思相反。|友達{ともだち}に 本{ほん}を 借{か}りました。|I borrowed a book from my friend.|我向朋友借了书。
+貸す|貸=か す|貸{か}す は「かす」と 読{よ}みます。「がす」では ありません。人{ひと}に 貸{か}す ことで、「借{か}りる」と 反対{はんたい}の 意味{いみ}です。|貸す is read かす. Not がす. It means lend to someone; 借りる means borrow from someone. They are opposites.|「貸す」读「かす」，不是「がす」。「貸す」是借给别人，「借りる」是向别人借，意思相反。|先生{せんせい}が 辞書{じしょ}を 貸{か}して くれました。|The teacher lent me a dictionary.|老师借给我一本词典。
+売る|売=う る|売{う}る は「うる」と 読{よ}みます。「買{か}う」の 反対{はんたい}の 意味{いみ}です。|売る is read うる, the opposite of 買う (to buy). 売 is read う here.|「売る」读「うる」，和「買う」（买）意思相反。|店{みせ}で 本{ほん}を 売{う}って います。|The shop sells books.|那家店卖书。
+始まる|始=はじ まる|始{はじ}まる は「はじまる」と 読{よ}みます。「はしまる」「ばじまる」では ありません。「始{はじ}める」（人{ひと}が 何{なに}かを 始{はじ}める）とは 対{たい}に なる 言葉{ことば}です。|始まる is read はじまる (something begins). Its pair 始める (someone starts something) is a different word. Not はしまる or ばじまる.|「始まる」读「はじまる」，不是「はしまる」或「ばじまる」。「始める」（开始做某事）是另一个词。|授業{じゅぎょう}が 始{はじ}まります。|The class begins.|课开始了。
+終わる|終=お わる|終{お}わる は「おわる」と 読{よ}みます。「終{お}える」（人{ひと}が 終{お}える）とは 対{たい}に なる 言葉{ことば}です。|終わる is read おわる (something ends). 終える is its pair, used when someone finishes something.|「終わる」读「おわる」。「終える」（做完某事）是它的对应词。|授業{じゅぎょう}は 三時{さんじ}に 終{お}わります。|Class ends at three o'clock.|课三点结束。
+集める|集=あつ める|集{あつ}める は「あつめる」と 読{よ}みます。「あっつめる」では ありません。|集める is read あつめる. Not あっつめる (no small っ).|「集める」读「あつめる」，不是「あっつめる」。|切手{きって}を 集{あつ}めて います。|I am collecting stamps.|我在收集邮票。
+建物|建=たて 物=もの|建{たて}は「たて」、物{もの}は「もの」です。「たってもの」「たでもの」「だてもの」では ありません。|建 is たて and 物 is もの: たてもの. Not たってもの, たでもの, or だてもの. (建 has no dakuten.)|「建」读「たて」，「物」读「もの」：「たてもの」，不是「たってもの」「たでもの」或「だてもの」。|駅{えき}の 近{ちか}くに 大{おお}きい 建物{たてもの}が あります。|There is a big building near the station.|车站附近有一栋大楼。
+品物|品=しな 物=もの|品{しな}は「しな」、物{もの}は「もの」です。「じなもの」では ありません。動物{どうぶつ}の 物{ぶつ}は「ぶつ」です。|品 is しな and 物 is もの: しなもの. Not じなもの. In 動物, 物 is ぶつ.|「品」读「しな」，「物」读「もの」：「しなもの」，不是「じなもの」。（「動物」的「物」读「ぶつ」。）|店{みせ}で 品物{しなもの}を 買{か}いました。|I bought goods at the shop.|我在店里买了商品。
+親切|親=しん 切=せつ|親{おや}の 字{じ}は「しん」、切{き}る の 字{じ}は「せつ」と 読{よ}みます。親切{しんせつ}。「しんぜつ」では ありません。|親 (おや, parent) is しん and 切 (as in 切る) is せつ: しんせつ. Not しんぜつ.|「親（おや）」读「しん」，「切る」的「切」读「せつ」：「しんせつ」，不是「しんぜつ」。|先生{せんせい}は とても 親切{しんせつ}です。|The teacher is very kind.|老师非常亲切。
+便利|便=べん 利=り|便{べん}は「べん」、利{り}は「り」です。「へんり」「べり」では ありません。|便 is べん and 利 is り: べんり. Not へんり or べり. (便 has a dakuten: べん.)|「便」读「べん」，「利」读「り」：「べんり」，不是「へんり」或「べり」。|この 電車{でんしゃ}は 便利{べんり}です。|This train is convenient.|这趟电车很方便。
+不便|不=ふ 便=べん|不{ふ}は「ふ」、便{べん}は「べん」です。「ふへん」「ふべ」「ぶべん」では ありません。|不 is ふ and 便 is べん: ふべん. Not ふへん, ふべ, or ぶべん. (不 has no dakuten.)|「不」读「ふ」，「便」读「べん」：「ふべん」，不是「ふへん」「ふべ」或「ぶべん」。|この 町{まち}は 交通{こうつう}が 不便{ふべん}です。|Transportation in this town is inconvenient.|这个城镇交通不方便。
+有名|有=ゆう 名=めい|有{ゆう}は「ゆう」、名{めい}は「めい」です。「ゆうめ」では ありません。名前{なまえ}の 名{な}は「な」です。|有 is ゆう and 名 is めい: ゆうめい. Not ゆうめ. (名 is な in 名前, a different reading.)|「有」读「ゆう」，「名」读「めい」：「ゆうめい」，不是「ゆうめ」。（「名前」的「名」读「な」。）|富士山{ふじさん}は 有名{ゆうめい}です。|Mt. Fuji is famous.|富士山很有名。
+注文|注=ちゅう 文=もん|文{ぶん}（作文{さくぶん}）は、注文{ちゅうもん}では「もん」と 読{よ}みます。注{ちゅう}の「ゅ」は 小{ちい}さく 書{か}きます。|文 is ぶん in 作文, but もん in 注文: ちゅうもん. The ゅ in ちゅう is small.|「文」在「作文」里读「ぶん」，在「注文」里读「もん」：「ちゅうもん」。「ちゅう」的「ゅ」要小写。|店員{てんいん}に 料理{りょうり}を 注文{ちゅうもん}します。|I order food from the staff.|我向店员点菜。
+工場|工=こう 場=じょう|工{こう}場{じょう}は「こうじょう」と 読{よ}みます。小{ちい}さい 工場{こうば}は「こうば」とも 読{よ}みます。|工場 is こうじょう (factory). It can also be read こうば for a small workshop.|「工場」读「こうじょう」（工厂）。也可以读「こうば」，指小的作坊。|工場{こうじょう}で 車{くるま}を 作{つく}ります。|They make cars at the factory.|工厂生产汽车。
+地下鉄|地=ち 下=か 鉄=てつ|地{ち}は「ち」、下{か}は「か」、鉄{てつ}は「てつ」です。「地{じ}」（地震{じしん}）の「じ」とは ちがいます。「ちかってつ」「ちかでつ」「ちがてつ」では ありません。|地 is ち, 下 is か and 鉄 is てつ: ちかてつ. Not ちかってつ, ちかでつ, ちがてつ, or ちっかてつ. (地 in 地震 is じ, a different reading.)|「地」读「ち」，「下」读「か」，「鉄」读「てつ」：「ちかてつ」，不是「ちかってつ」「ちかでつ」「ちがてつ」或「ちっかてつ」。|地下鉄{ちかてつ}で 会社{かいしゃ}へ 行{い}きます。|I go to the office by subway.|我坐地铁去公司。
+動物|動=どう 物=ぶつ|物{もの}の 字{じ}は、動物{どうぶつ}では「ぶつ」と 読{よ}みます。建物{たてもの}・品物{しなもの}では「もの」です。|物 is ぶつ in 動物, but もの in 建物 and 品物. 動 is どう: どうぶつ.|「物」在「動物」里读「ぶつ」，在「建物」「品物」里读「もの」。「動」读「どう」：「どうぶつ」。|動物{どうぶつ}が 好{す}きです。|I like animals.|我喜欢动物。
+病気|病=びょう 気=き|病{びょう}は「びょう」、気{き}は「き」です。「ひょうき」「びょうぎ」「びょうっき」「びょき」「びようき」では ありません。|病 is びょう and 気 is き: びょうき. Not ひょうき, びょうぎ, びょうっき, びょき, or びようき. (The ょ is small.)|「病」读「びょう」，「気」读「き」：「びょうき」，不是「ひょうき」「びょうぎ」「びょうっき」「びょき」或「びようき」。（「ょ」要写小。）|病気{びょうき}で 病院{びょういん}に 行{い}きました。|I went to the hospital because I was sick.|因为生病，我去了医院。
+料金|料=りょう 金=きん|料{りょう}は「りょう」、金{きん}は「きん」です。「りょうき」「りょうぎん」「りょうっきん」「りょきん」「りようきん」では ありません。|料 is りょう and 金 is きん: りょうきん. Not りょうき, りょうぎん, りょうっきん, りょきん, or りようきん.|「料」读「りょう」，「金」读「きん」：「りょうきん」，不是「りょうき」「りょうぎん」「りょうっきん」「りょきん」或「りようきん」。|バスの 料金{りょうきん}は 高{たか}いです。|The bus fare is expensive.|公交车的费用很贵。
+運転|運=うん 転=てん|運{うん}は「うん」、転{てん}は「てん」です。「うてん」「うんて」「うんでん」では ありません。|運 is うん and 転 is てん: うんてん. Not うてん, うんて, or うんでん. (転 is てん, not でん.)|「運」读「うん」，「転」读「てん」：「うんてん」，不是「うてん」「うんて」或「うんでん」。|父{ちち}は 車{くるま}を 運転{うんてん}します。|My father drives a car.|父亲开车。
+働く|働=はたら く|働{はたら}く は「はたらく」と 読{よ}みます。「はだらく」「はったらく」「ばたらく」では ありません。|働く is read はたらく. Not はだらく, はったらく, or ばたらく.|「働く」读「はたらく」，不是「はだらく」「はったらく」或「ばたらく」。|母{はは}は 病院{びょういん}で 働{はたら}いて います。|My mother works at a hospital.|我母亲在医院工作。
+決める|決=き める|決{き}める は「きめる」と 読{よ}みます。「ぎめる」では ありません。|決める is read きめる. Not ぎめる (no dakuten).|「決める」读「きめる」，不是「ぎめる」。|旅行{りょこう}の 日{ひ}を 決{き}めました。|We decided the date of the trip.|我们决定了旅行的日期。
+短い|短=みじか い|短{みじか}い は「みじかい」と 読{よ}みます。「短{みじか}」までが 漢字{かんじ}で、「い」だけ ひらがなです。「みじがい」では ありません。|短い is みじかい: 短 covers みじか, and only い is in hiragana. Not みじがい.|「短い」读「みじかい」：「短」读「みじか」，只有「い」用平假名。不是「みじがい」。|この 鉛筆{えんぴつ}は 短{みじか}いです。|This pencil is short.|这支铅笔很短。
+特に|特=とく に|特{とく}に は「とくに」と 読{よ}みます。「とぐに」「とっくに」「どくに」では ありません。|特に is read とくに (especially). Not とぐに, とっくに (long ago, already), or どくに.|「特に」读「とくに」（特别、尤其），不是「とぐに」「とっくに」或「どくに」。|特{とく}に 日本語{にほんご}が 好{す}きです。|I especially like Japanese.|我特别喜欢日语。
+急に|急=きゅう に|急{きゅう}に は「きゅうに」と 読{よ}みます。「ぎゅうに」「きゆうに」では ありません。急{いそ}ぐ の 急{いそ}は「いそ」です。|急に is read きゅうに (suddenly). Not ぎゅうに or きゆうに. (急 in 急ぐ is read いそ.)|「急に」读「きゅうに」（突然），不是「ぎゅうに」或「きゆうに」。（「急ぐ」的「急」读「いそ」。）|急{きゅう}に 雨{あめ}が 降{ふ}りました。|It suddenly started to rain.|突然下雨了。
+` } };
+/* 中国語（簡体字）の意味・訳：RAW・QRAW と同じ順番で、1行に1つ（問題を足したり並べ替えたりしたら、ここも合わせる） */
+const ZHRAW = {
+kanji:{
+N5:`
+学校
+老师
+学生
+日本
+今天
+明天
+昨天
+天气
+电车；列车
+时间
+朋友
+大学
+公司
+名字
+每天
+上午；早上
+下午
+一半；半
+外国
+明年
+上周
+白色
+贵；高
+便宜
+新的
+旧的；老旧
+长
+大
+小
+吃
+喝
+看；观看
+听；听见；问
+去
+来
+休息
+读；阅读
+写
+说话；讲
+山
+河；河流
+雨
+花
+鱼
+右边
+左边
+出口
+入口
+父亲
+母亲
+一千日元
+六月
+九点
+四个人
+电话
+中国
+初中
+这个月；本月
+一百日元
+出去；离开
+`,
+N4:`
+医院
+医生
+旅行
+运动
+烹饪；做菜
+照片
+电影
+音乐
+家人；家庭
+兄弟姐妹
+世界
+地图
+机场
+银行
+图书馆
+自行车
+研究
+考试
+说明；解释
+特别
+意思；含义
+问题
+春天
+夏天
+秋天
+冬天
+早上
+夜晚；夜里
+近
+远
+重
+轻
+黑暗；暗
+早；早的
+赶快；急忙
+寄；送
+借入；借
+借出；借给
+卖
+开始
+结束
+收集
+建筑；大楼
+商品；物品
+亲切；热情
+方便
+不方便
+有名；著名
+订购；订单
+工厂
+地铁
+动物
+疾病；生病
+费用
+驾驶；运转
+工作
+决定
+短
+特别是；尤其
+突然
+`,
+N3:`
+经验
+关系
+选手
+政治
+经济
+环境
+增加
+努力
+成功
+失败
+计划；日程
+准备
+联系
+商量；咨询
+感谢
+最近
+将来；未来
+结果
+原因
+必要
+安全
+危险
+复杂
+到达
+出发
+判断
+变化
+表达；表现
+信息
+笑脸
+希望；祈求
+迷路；犹豫
+比较
+调查；查阅
+送到；送达
+承认；认可
+相信
+支付
+痛苦；难受
+细致；详细
+年轻
+深
+机会
+参加
+期待
+责任
+技术
+印象
+习惯
+经营
+工作；作业
+性格
+加班
+拒绝
+迎接
+请求；拜托
+逃跑；逃避
+温柔；和蔼
+出色；了不起
+确实；大概
+`,
+N2:`
+影响
+观察
+专业；专门
+规则
+资源
+贸易
+删除
+保险
+价值
+状态
+倾向
+解决
+批判；批评
+评价
+效果
+现象
+组织
+制度
+燃料
+灾害
+姿势；态度
+距离
+范围
+作者
+丰富
+珍贵
+灵活
+恰当；适当
+防止；预防
+包含
+陈述；叙述
+担任
+抱有；承担
+造访；来访
+陡峭；险峻
+锐利；敏锐
+平静；温和
+隔壁；旁边
+田地；田
+手臂
+普及
+设施；设备
+手段；方法
+财产
+大幅；大幅度
+温暖
+工作；勤务
+知晓；同意
+损失；损害
+反映
+意愿；干劲
+支出
+弥补；补充
+占；占据
+施加；带来
+招致；邀请
+显著；明显
+可靠；值得信赖
+幸好；幸运
+相等；相同
+`,
+N1:`
+概念
+措施
+抑制
+缓和
+妥协
+担忧；顾虑
+显著
+模糊；含糊
+掌握；理解
+执行；完成
+适用；符合
+诱导；引导
+弊端；弊害
+笼统；模糊
+脆弱
+暂定；临时
+催促；督促
+斡旋；调停
+陈腐；老套
+频繁
+偏离；脱离
+纠正；矫正
+涵盖；网罗
+拘束；限制
+促进
+纤细；细腻
+麻烦；烦人
+干脆；坦荡
+前往；奔赴
+从事；参与
+推翻；颠覆
+培育；培养
+筹措；承担
+愤慨；愤怒
+贯彻；坚持
+怠慢；疏忽
+极端；严重
+委托；托付
+避免；免于
+偏见
+矛盾
+隐瞒；掩盖
+畏缩；萎缩
+衰退
+怀疑
+消除；扫除
+受挫；停滞
+缺乏；欠缺
+背离；脱节
+浓缩；凝聚
+傲慢；高傲
+陷入
+告诫；劝诫
+教唆；怂恿
+蔑视；轻视
+惧怕；害怕
+庞大；巨量
+缜密；细致
+尖刻；刻薄
+淡然；平静
+`
+},
+vocab:{
+N5:`
+每天早上我喝咖啡。
+昨天下雨，所以我带着伞去了。
+这个包非常贵。要一万日元。
+我在图书馆借了两本书。
+房间很暗，请开灯。
+我家有四口人，是父亲、母亲、哥哥和我。
+明天是星期日。今天是星期六。
+这家店的面包很好吃。我买了很多。
+我坐公交车去车站。
+因为很冷，我要穿毛衣。
+我每天晚上洗澡。
+这支笔多少钱？——一百五十日元。
+因为感冒了，我要吃药。
+玛丽亚女士每天在学校教孩子们英语，她是老师。
+房间很热，我要用空调。
+购物之后，我在收银台付了钱。
+今天阳光很强，所以我戴着帽子出门。
+我去图书馆借书。
+我用词典查不懂的单词。
+我在邮局买了明信片和邮票。
+我的国家是越南。
+好热啊。我们把窗户打开吧。
+我不知道路，请告诉我。
+睡觉前，我刷牙。
+生日的时候，朋友送给我花。
+我在大海边看到了美丽的夕阳。
+考试之前，我要记住汉字。
+我把包裹寄给在老家的母亲。
+樱花开得很美，所以我们要举办赏花会。
+因为红灯亮着，我停下来。
+冬天很冷，还会下雪。
+今天车站很热闹，有很多人。
+这条路很窄，车子过不去。
+这个包很轻，里面只装了一本笔记本。
+昨天的聚会很开心，我们大家一起唱了歌。
+在图书馆我们保持安静吧。
+我还没有吃饭，肚子饿了。
+没有多少时间了，我们快吃吧。
+旅行时我住在酒店。
+我用电子邮件把文件发给了朋友。
+回到家后，我给妈妈打电话。
+汤非常烫，请小心不要烫伤。
+这个菜的做法很简单，马上就能做好。
+昨天我摔倒受伤了，马上去了医院。
+我在超市买了三个苹果。
+我往咖啡里加糖。
+考试成绩很好，我非常高兴。
+因为发烧，我要请假不去学校。
+请在这里写上名字。
+这个架子很低，连小孩子也够得着。
+房间总是很干净，一点垃圾也没有。
+感冒了，喉咙疼。
+下雨，所以我穿着雨靴出门。
+我不知道这个汉字的读法。
+猫在椅子上。
+我每天早上6点起床。
+我喜欢做饭，每天做早饭。
+走了一整天，我非常累。
+明天会下雪。
+父亲每天早上读报纸。
+`,
+N4:`
+我已经习惯了日本的生活。
+因为感冒了，我吃了药。
+我忘了和朋友的约定，结果被对方骂了。
+我把下周会议的时间通知了部长。
+路上很拥挤，怎么也前进不了。
+山田先生总是很亲切，大家都喜欢他。
+听说通过了考试，我非常高兴。
+我打开窗户，凉爽的风吹了进来。
+我请老师帮忙改了作文。
+这份工作工资很高，但是非常辛苦。
+昨晚熬夜到很晚，所以今天非常困。
+为了不弄丢重要文件，我把它们收进了包里。
+旅行前，我预订了火车票。
+我把读过的书送到了朋友家。
+我在房间里花了一个小时找钱包。
+我庆祝了朋友的生日。
+下雨之前，我把洗好的衣服晾在阳台上。
+老师的讲解非常细致，容易理解。
+我用词典查不懂的词。
+因为有客人要来，我打扫了房间。
+我在车站等朋友。
+明天大概会下雨吧。
+为了聚会，我布置了房间。
+昨天很冷，但今天很暖和。
+因为感冒了，今天我请假不去公司。
+我在洗澡的时候洗头发。
+上课之前，我交了作业。
+我走到酒店房间的阳台上，看了大海。
+雨停了，天空变亮了。
+这家店的蛋糕很甜，所以很受欢迎。
+今天考试的成绩是九十分。
+老师表扬了学生们的努力。
+我救了在海里溺水的孩子。
+为了下个月的出国旅行，我申请了护照。
+我在公园里扔球。
+我在电话里跟朋友说话。
+这台机器的使用方法很复杂，所以很难懂。
+我从小时候起就一直住在这个镇上。
+那本书很简单，所以很好读。
+这个包很轻，所以旅行时很方便。
+我在不熟悉的城镇迷路了。
+洗好的衣服干透花了一点时间。
+请用毛巾擦干湿手。
+为了下周的比赛，我每天坚持练习。
+好久没见朋友了，是很开心的一天。
+明天早上起得早，所以今晚打算早点睡。
+电车停了，我上班迟到了。
+打开窗户，我感到了凉爽的风。
+请用菜刀把番茄切开。
+会议上，我把名片分发给了客户。
+我报名参加了下个月的课程。
+暑假我在乡下度过。
+公园里的樱花开得很漂亮。
+早上我烤面包，然后泡咖啡。
+最近体重减轻了，所以我很高兴。
+我专心工作，所以没注意到电话。
+我家孩子喜欢弹钢琴。
+这家店的菜便宜又好吃。
+因为感冒全身乏力，今天我躺了一整天。
+我受了伤，在医院接受了治疗。
+`,
+N3:`
+请让大家知道会议时间变了。
+因为约定的时间迟到了，我道了好几次歉。
+房间乱七八糟的，快收拾吧。
+电车晚点了，我上班迟到了。
+好像要下雨，最好尽快把洗好的衣服收回来。
+他声音很大，坐在后排的座位也能清楚地听到。
+来到日本后，我开始对日本文化感兴趣了。
+这汤味道很淡，所以我加了一点盐。
+朋友帮我做了搬家的准备。
+受伤了，我请了一个星期的假没去学校。
+车站前建起了一栋新大楼。
+看到小时候的照片，我想起了过去的事。
+直到我习惯新工作，花了一些时间。
+下雨天路很滑，请小心。
+在病治好之前，请克制剧烈运动。
+我在车站丢了钱包，于是去派出所报了案。
+我印了明天会议要用的资料。
+我住在一间能看到大海、景色很好的房间。
+我买应急用的水，是为了应对地震。
+这汤放了太多盐，变得很咸。
+通过考试后，我和家人一起分享喜悦。
+在旅途中迷路了，于是我看了地图。
+为了身体健康，我决定每天早上绕着公园跑步。
+为了留学，我申请了奖学金。
+我制定了旅行计划，但最终没能去成。
+田中先生是一个亲切的人，总是帮助有困难的人。
+我下载了新应用，并查了怎么使用。
+我和朋友商量了周末的安排。
+清楚地表达自己的意见是很重要的。
+这家店的拉面真的很好吃。
+截止日期临近，我熬夜完成了报告。
+为了下周的考试，我拼命背单词。
+周末我和朋友去海边冲浪了。
+趁孩子睡着，我悄悄地离开了房间。
+比赛被取消了，全队都深感沮丧。
+会议的结论还没有出来。
+向别人倾诉烦恼，心情就会轻松起来。
+新鞋和脚不合，走路时很疼。
+我请人教我这道菜的做法。
+我们在车站前的广场上拍了全家福。
+考试成绩不好，我非常遗憾。
+因为大雨，电车停了，我上班迟到了。
+林先生没接电话，所以我在留言机上留了言。
+老师讲的内容很难，我没能理解。
+把在便利店买的便当用微波炉加热后吃了。
+从上个月开始，公寓的房租涨了，生活很辛苦。
+为了预订酒店房间，我给前台打了电话。
+为了办理护照更新，我去了市政府。
+为了节省电费，我把没在用的房间的灯关掉。
+因为蔬菜吃得不够，我吃营养补充剂来补充维生素。
+我巧妙地利用狭小的房间，让它显得宽敞。
+被说了过分的话，我受到了伤害。
+面试前，我紧张得手都在发抖。
+我把坏了的手机换成了新的。
+上个月，我被邀请参加朋友的婚宴。
+丢失的钱包找到了。
+台风临近，预计今晚会刮强风。
+大减价时，我以比平时便宜的价格买了衣服。
+我画了一幅业余爱好的画，并参加了比赛。
+根据部长的提议，我们决定开始一个新项目。
+`,
+N2:`
+他的解释很模糊，我没怎么听懂。
+因为大雪，交通陷入了混乱。
+预算有限，所以需要尽可能压缩费用。
+关于新制度，员工提出了很多不满。
+因为台风的影响，电车停运了。
+她无论什么工作都干得又快又利落。
+把失败当作教训，下次要更好地做准备吧。
+长时间用电脑，眼睛累了。
+听到录取的消息，眼泪不由得流了出来。
+执行计划之前，再确认一下内容吧。
+那部电影比预想的还有趣，我看得入了迷，一直看到最后。
+违反公司规定的话，可能会受到处分。
+为了应对地震，我储备了应急用的水和食物。
+铃木先生整理了会议上提出的意见，并做了会议记录。
+孩子摔倒了也没哭，迅速地站了起来。
+由于经济不景气，许多公司陷入了经营危机。
+她话题很丰富，无论跟谁聊天，话题都能热烈地展开。
+因为大雨，河水暴涨，道路被淹没了。
+父亲退休后，一直享受着钓鱼的乐趣。
+玛丽亚擅长做菜，不断开发新的食谱。
+为了准备派对，我负责了菜单的安排。
+接受网上订单，把商品发送到全国各地。
+林女士对任何人都很真诚，所以大家都信赖她。
+他的话太长了，听的人最后会感到厌烦。
+公司的新方针是在反映员工意见后决定的。
+那条新闻给社会带来了巨大冲击。
+这个地区自古以来农业就很发达，大量种植稻米和蔬菜。
+他因病休假了一段时间，终于回到了工作岗位。
+店前挂着一块大招牌，宣传新品促销。
+为了家人的生日，我预订了一家有名的温泉旅馆。
+适应新环境需要一些时间。
+这种药服用后可能会出现困意，所以请不要开车。
+他性格温和，无论什么咨询都会热心地倾听。
+这本书内容浅显易懂，孩子也容易读。
+他在重要比赛前紧张得手都在微微颤抖。
+为了赶上工作的截止日期，团队制定了日程安排。
+因为电脑状况不好，我把它送到专业店进行维护。
+大雨导致停电的地区，手电筒和干电池发挥了巨大作用。
+她不在意失败，昂首挺胸地向前走。
+审视每月的家庭收支后，我们决定节省食品开支。
+为了弥补工作上的延误，我每天加班到很晚。
+因为大雨道路被淹，所以封闭了交通。
+明明是重要会议，我却睡过头迟到了。
+考试落榜的他，带着闷闷不乐的脸色躲进了房间。
+祖母年纪大了，耳朵变背了，所以我尽量大声说话。
+因为大雨，山坡崩塌，堵住了道路。
+因为公司业绩恶化，我们的奖金减少了。
+比赛在最后一分钟戏剧性地结束了。
+社长为了认可员工的努力，增加了奖金。
+由于寒冷，手冻僵了，笔都拿不好。
+他为了解决员工的不满，设立了协商的场合。
+会议时间快到了，所以我赶紧准备资料。
+为了准备下周的出差，我提前把资料准备好了。
+工厂为了维持产品质量，正在加强检查。
+他为了实现目标，每天坚持学习英语。
+夏天使用空调容易导致电费上涨。
+她为了适应国外的生活，每天练习日语。
+请遵守药品的用法，正确服用。
+服药后可能会出现副作用，请注意。
+从明年开始，这所大学计划扩大留学生的录取人数。
+`,
+N1:`
+他的发言与事实不符，因此被要求更正。
+需要解决的课题堆积如山。
+新产品销路良好，于是决定增产。
+多年的努力终于开花结果，最终获了奖。
+她不顾周围人的反对，毅然独立创业。
+为了削减成本，不必要的会议被废除了。
+他性格一丝不苟，文件上几乎从不出错。
+为了查明事故原因，设立了调查委员会。
+从小积累的经验，在现在的工作中发挥着作用。
+他的提议不过是纸上谈兵。
+经济前景不明朗，企业对投资变得十分谨慎。
+截止日期临近，这项工作很紧急。
+政府为了抑制物价飞涨，提高了利率。
+玛丽亚手术后的恢复很顺利，下周可能就能出院。
+新住宅区的土地开发已经完成，居民开始入住。
+金先生以证据存在缺陷为由，主张自己无罪。
+田中先生担任会议主持，很好地总结了讨论内容。
+因大雨导致河流泛滥，住宅区被淹没了。
+由于压力，他的胃里出现了溃疡。
+那位作家的文体独具特色，吸引了众多读者。
+市政府为了缓解财政吃紧，重新审视了公共工程。
+她为了构思新事业的方案，每晚读资料读到深夜。
+他逃避责任，把一切都推给了下属。
+父亲担心我的将来，反对我去留学。
+林女士为了消除误解，仔细地说明了情况。
+大雪使道路结冰，因此封闭了交通。
+她的提案因公司内部的反对而搁浅了。
+记者为了揭露政客的不法行为，花了三年时间持续采访。
+他因失败的打击，一段时间里闭门不出。
+那家店对食材质量很讲究，每天早上采购新鲜食材。
+今年因暖冬的影响，樱花比往年提前开放了。
+她为人谦虚，从不夸耀自己的功绩。
+他始终冷静，平息了对方的愤怒。
+这个计划缺乏资金保障，很难实现。
+田中先生的讲话条理清晰，听的人一下子就能理解。
+他周密地制定了偿还债务的计划，让家人放心。
+金先生严格遵守截止日期，从未迟到过一次。
+因为寒流的影响，气温急剧下降，开始下雪。
+为了让公司经营重新振作，公司果断进行了大刀阔斧的改革。
+阿里隐瞒了自己的病情，默默地继续工作。
+轻率地下结论是不明智的。
+房间整整齐齐地收拾好了，迎接客人的准备已经就绪。
+把自己的失败置之不理，只顾批评别人的缺点，是不值得称赞的。
+听到事故消息的他，呆立在那里，神情茫然。
+他抢走了部下的功劳，据为己有。
+他对会议的进行方式不满，用尖刻的语气加以批评。
+她始终保持着顽固的态度，直到最后都不肯改变自己的主张。
+他废寝忘食，连周末也不休息地持续工作。
+因为期限临近，必须迅速推进工作。
+他因为太害怕失败，总是对新的挑战畏缩不前。
+他在工作的间隙，全身心投入资格考试的学习。
+为了振兴低迷的经济，政府推出了大胆的政策。
+这个计划有很多不切实际的地方，很难实现。
+他不断执拗地反驳，会议吵闹了一个多小时。
+他说话声音大得震耳欲聋，周围的人都吃了一惊。
+老师一篇一篇认真地为学生的作文做了修改。
+他的实力足以与一流选手相匹敌。
+他突然辞职，在公司里引起了波澜。
+受害者的家属对罪犯的仇恨与日俱增。
+他得知伙伴的背叛后，惊愕得说不出话来。
+`
+},
+grammar:{
+N5:`
+我每天早上7点起床。
+我在图书馆学习。
+昨天我和朋友一起看了电影。
+这个苹果又甜又好吃。
+昨天不冷。
+“要不要一起吃午饭？”“好啊，吃吧。”
+房间里谁也没有。
+我一边看电视一边吃饭。
+在这里拍照可以吗？
+我的日语变得流利了。
+明天有考试，所以今天必须学习。
+这个房间安静又宽敞。
+我从早上9点工作到下午3点。
+洗完手之后再吃饭。
+做完作业之后看电视。
+暑假想去日本。
+我想要一个新包。
+请不要开窗。
+行李看起来好重啊。要我帮你拿吗？
+我去公园散步。
+我喜欢运动。
+明天大概会下雨。
+早上有时跑步，有时走路。
+这是我的书。
+睡觉前关灯。
+飞机比火车快。
+请慢慢说。
+包里装着苹果、香蕉等东西。
+明天我和朋友去京都。
+“今天好冷啊。”“是啊，真冷呢。”
+在水果中我最喜欢苹果。
+“已经吃过饭了吗？”“还没呢。”
+我早上6点左右起床。
+我只喝茶。
+从这里到车站大约需要10分钟。
+我从家一直走到车站。
+这个苹果很贵，但是不好吃。
+房间里比外面凉快。
+我现在正在看书。
+我口渴了，想喝点什么。
+我买了三本英文书。
+昨天晚上非常冷。
+房间里有一张桌子。
+“作业做了吗？”“嗯，已经做了。”
+冰箱里什么都没有。
+“你为什么请假没去学校？”“因为感冒了。”
+这个苹果非常贵。
+周末我有时看电影。
+我每天早上吃面包。
+“蛋糕和饼干，你更喜欢哪个？”“我喜欢蛋糕。”
+我每天把房间收拾干净。
+昨天是星期日。
+这家店的拉面不太好吃。
+昨天哪里也没去。
+“现在几点了？”“3点。”
+时间已经不多了，我们快点走吧。
+“这个包多少钱？”“5000日元。”
+“你喜欢肉吗？”“不，我不吃肉。”
+“你什么时候来日本的？”“去年。”
+我叫林。
+`,
+N4:`
+去日本的时候，我想尝一尝寿司。
+窗户是开着的（已经有人打开了）。
+尽管吃了药，烧还是退不下来。
+我的名字被老师叫到了。
+这本书汉字很多，我读起来很难。
+妈妈让孩子吃了蔬菜。
+眼看就要下雨了。
+为了不忘记作业，我写了便条。
+离开房间之前，请先把灯关好。
+这道菜做法简单，又很好吃。
+我变得能说日语了。
+我现在正要出门。
+我去过北海道。
+我上周刚来到日本。
+明天或许会下雨。
+朋友开车送我到了车站。
+我一不留神把珍贵的花瓶打碎了。
+这双鞋太大了，很难走。
+你要大点声说。
+老师您想吃点什么？
+请教我这个汉字怎么读。
+我们找个地方见面吧。
+我还不知道明天能不能来。
+如果要学日语的话，这个班很不错哦。
+这本书字大，很容易读。
+不管多忙，我每天早上都运动。
+决定了下个月起在大阪工作。
+为了通过考试，我每天学习。
+那个人好像是医生。
+我从老师那里收到了一本书。
+我帮妹妹做了功课。
+朋友开车来机场接我。
+按下这个按钮，门就会打开。
+到家后请打个电话。
+明年我打算在日本工作。
+我可以试穿这件衣服吗？
+如果再多一点时间，我们就能一起去了。
+简直像做梦一样。
+老师已经到教室了。
+我打算暑假去爬富士山。
+不好意思，能请您开一下窗户吗？
+社长已经回去了。
+请不要在这里拍照。
+钱包里只有一百日元。
+感冒的时候，早点睡比较好哦。
+明天不来也没关系哦。
+我会说日语。
+趁孩子睡着的时候，我打扫了卫生。
+从这里能看到富士山。
+在图书馆不可以大声说话。
+外面亮了起来。看样子雨已经停了。
+请在周五前交报告。
+最近天气变冷了。
+我买了三个苹果。
+不好意思，请让我休息一下。
+烧得很厉害，所以我必须去医院。
+那个蛋糕看起来很好吃。
+这道菜太辣，我吃不下。
+整个暑假期间，我一直待在老家。
+休息的日子，我会做打扫、洗衣服之类的事。
+`,
+N3:`
+明明在下雨，他却没带伞就出门了。
+正如老师所说，这道题很简单。
+以这个价格来说，这家餐厅非常好吃。
+趁汤还没凉，请快点喝。
+我能通过考试，多亏了老师。
+因为很累，我马上就睡着了。
+吃了这个药，烧应该会退。
+她什么也没说就回去了。
+我的蛋糕被弟弟吃掉了，我非常难过。
+为了明年去留学，我现在在打工攒钱。
+这份工作只有有经验的人才能做。
+日语越学越有意思。
+弟弟休息的日子里整天只顾打游戏。
+电费会根据季节而有很大变化。
+老师就日本历史做了通俗易懂的讲解。
+对我来说，这个小镇就是第二故乡。
+我有重要的约定，所以现在不能就这样回去。
+祖母每次来家里，都会带好吃的点心。
+我想开门的时候，发现门锁着。
+冬天容易感冒。
+我在车站前买东西时顺便去了朋友家。
+门一打开，猫就蹿了出去。
+无论怎么练习，也弹不好。
+正是在痛苦的时候，才懂得朋友的珍贵。
+这家店的菜很好吃，难怪总是很受欢迎。
+小时候我常在这个公园里玩。
+没必要那么担心。考试你一定会通过的。
+我做梦也没想到他会考试落第。
+就那样开着灯睡着了。
+父亲代替母亲做了饭。
+与其说是朋友，他更像是我的哥哥。
+她日语非常流利，一定是在日本住过很长时间。
+这家店不光味道好，店员也很亲切。
+对于我的意见，田中先生表示了反对。
+并不是讨厌蛋糕。只是现在肚子饱了而已。
+我正在吃饭呢。之后打电话给您可以吗？
+忙得连午饭都没能吃上。
+他以留学生的身份来到了日本。
+会议正进行中，电话突然响了。
+这台机器坏了，已经没法修了。
+明明自己什么都不做，却很快就抱怨别人的工作。
+因为下雨，比赛取消了。
+我打电话过去，田中先生还在睡。
+与去年相比，今年雨水少。
+关于这个问题我有疑问。
+团队以田中先生为中心开展活动。
+按照惯例，每年夏天镇上都会举行烟花大会。
+这双鞋上全是泥，请快点洗。
+我就那样开着灯出门了。
+今天很冷，而且还下着雨。
+虽然练习了很多次，比赛还是输了。
+为了不弄丢重要文件，我把它们放进了文件夹里。
+预计从关东到东北的广大地区都会下大雨。
+乡下很安静，另一方面交通却很不便。
+输了比赛，我懊恼得不得了。
+他练习得那么刻苦，不可能输掉比赛。
+不做完作业就不能去玩。
+好久没见，见到朋友我高兴极了。
+妈妈住院期间，我做了家务。
+这本杂志是为年轻女性而制作的。
+`,
+N2:`
+根据调查结果，我们制定新的计划。
+尽管我努力过，结果还是没有出来。
+他明明是医生，却不注意自己的身体。
+在社长来之前，不能开始会议。
+这个包设计好，而且又轻又好用。
+发生地震的时候，请先关火。
+我一听到他的话，怒火就涌了上来。
+既然答应了，就必须遵守。
+经过三年的谈判，终于达成了协议。
+她不仅是歌手，还以演员身份活跃着。
+为了能考上，我每天拼命学习。
+虽然看了说明书，却还是不知道怎么用。
+因为重要会议迟到了，我不得不向上司道歉。
+要是能回去的话，我真想再回到学生时代。
+看到电影的最后一幕，我忍不住流下了眼泪。
+从来没练习过的他，不可能赢得比赛。
+他的解释不过是单纯的推测而已。
+他不但没道歉，反而大发脾气。
+物价只涨不跌，工资却没有增加。
+通过留学，我接触到了世界的文化。
+随着人口减少，学校的数量也在减少。
+关于新法律，将举办说明会。
+虽然知道对身体有害，却戒不了烟。
+并不能因为成绩差就说明努力不够。
+不实际吃一吃，就不知道好不好吃。
+离车站近，另一方面房租却很高。
+不合理的计划可能会让公司倒闭。
+关于这件事，恐怕我无法回答。
+就算现在开始准备，也绝对赶不上了。
+因为大雨，有河水泛滥的危险。
+一准备好，就出发。
+旅行时，凡事以安全为上总是最好的。
+英语自不必说，她的汉语也很流利。
+不仅是孩子，大人也需要注意不要过度使用智能手机。
+我不加糖喝咖啡。
+烦恼了好几个小时，结果什么也没能决定。
+会议连续进行了整整三天。
+许多店铺以东京为中心聚集在一起。
+请按照说明书组装。
+谁会相信他那种话啊！
+确认公司规定之后，再提交申请书。
+据我所知，这是镇上最老的一家店。
+以这个价格来说，质量相当不错。
+单从他的态度来看，就很没礼貌。
+他什么也没说，就走出了房间。
+不论经验，任何人都能参加这次比赛。
+她不顾别人的目光，大声哭着。
+既然下着雨，今天就在家里好好休息吧。
+我再也不见他了。
+唯独他，从来不迟到。
+忙得很，哪还有心情去旅行。
+自从来到日本以后，一次也没回过国。
+经济正在逐渐恢复。
+会议开始之前，分发了资料。
+他不仅歌唱得好，舞蹈也很拿手。
+一说到吃的，她的眼神就变了。
+在开始新工作之际，我考取了资格证。
+暂且不谈味道，价格实在太贵了。
+就算再忙，至少也该联系一下。
+以那起事故为契机，重新审视交通规则的人多了起来。
+`,
+N1:`
+工作一结束，他就出去喝酒了。
+日元贬值加上物价上涨，生活变得越来越困难。
+他那无礼的态度让我已经不只是生气，而是无语了。
+无视父母的担心，他登上了危险的山。
+又不是小孩子，这么简单的事情你都不明白吗？
+今天的营业将于下午6点结束。
+这样的美景只有京都才有。
+输了比赛，我懊恼极了。
+虽然身为社长，他却不理解员工的心情。
+他在明知危险的情况下，仍然前去救助。
+既然已经答应了，就应当坚持到底。
+无论下雨还是下雪，比赛都会举行。
+以下个月的东京公演为开端，全国巡演将拉开序幕。
+他不顾父亲的强烈反对，退学创办了公司。
+从孩子到老人，社区居民都参与了节日的筹备。
+一到年底，这家店就挤得难以订到座位。
+无论理由如何，都不允许迟到。
+这起丑闻若无人负责，就无法善了。
+今年的酷暑比去年更加严酷。
+因大雨，比赛不得不取消。
+对他那不负责任的发言，我无法抑制怒火。
+他那难看的借口简直不忍听。
+婚礼上尽是喜事，真是幸福的一天。
+从工地回来的他浑身都是泥。
+他与生俱来就有音乐天赋。
+爷爷刚教他，转眼就忘了。
+她几乎要哭出来似的，拼命地诉说。
+早点跟我商量就好了，你却一个人烦恼。
+都到这一步了，已经没必要再确认了。
+不必担心。他一个人完全可以应付。
+如果错过这次机会，那就一切都完了。
+他有把什么都想得过于乐观的倾向。
+他老是迟到，最后竟然擅自缺席了会议。
+作为老师，不应该在学生面前情绪激动。
+在您百忙之中承蒙光临，非常感谢。
+经过漫长的谈判，两家公司达成了协议。
+校内禁止奔跑。
+她被推荐为值得信赖的人。
+那番言论被批评为作为教师不应有的行为。
+已经颇有春天的样子，街上也开始开花了。
+顺便散散步，去附近的书店转了转。
+正是因为他每天不断努力，才有了今天的成功。
+她有多么高兴，不难想象。
+事到如今即使道歉，他恐怕也不会原谅。
+因为当红演员要来，会场挤满了人。
+衷心祈愿各位健康幸福。
+即使无法做到完美，也想至少掌握基础。
+有必要制定符合实际情况的对策。
+能托付这份工作的人，除了他之外别无他人。
+无论怎么努力，也不可能赶得上他的实力。
+店长经常说，正因为有顾客，才有生意可做。
+我去田中先生家拜访，顺便答谢上周的帮助。
+一旦陷进这片沼泽，就再也无法脱身。
+到了四十岁才第一次写完了小说。
+这家工厂决定以今年为限关闭。
+孩子犯错还可以原谅，大人犯这种错就是问题了。
+如果落榜了，就只好明年再考一次。
+我漫无目的地望着窗外，雪开始下了起来。
+没有人是不练习就能变得熟练的。
+这家店的菜固然好，店员的服务也很出色。
+`
+}
+};
+LEVELS.forEach(L => {
+  const z = s => (s || '').trim().split('\n').map(x => x.trim());
+  z(ZHRAW.kanji[L]).forEach((m,i) => { if (WORDS[L][i]) WORDS[L][i].mz = m; });
+  for (const g of ['vocab','grammar']) z(ZHRAW[g][L]).forEach((m,i) => { if (QS[g][L][i]) QS[g][L][i].mz = m; });
+});
+for (const L of Object.keys(EXRAW.kanji)){
+  const byK = new Map(WORDS[L].map(w => [w.k, w]));
+  EXRAW.kanji[L].trim().split('\n').filter(Boolean).forEach(line => {
+    const [k, parts, pj, pe, pz, s, se, sz] = line.split('|').map(x => x.trim());
+    const w = byK.get(k); if (!w) return;
+    w.ex = { parts: parts.split(/\s+/).map(tok => { const i = tok.indexOf('='); return i < 0 ? { k:'', r:tok, oku:true } : { k:tok.slice(0,i), r:tok.slice(i+1).replace('*',''), special:tok.endsWith('*') }; }),
+             p:{ ja:pj, en:pe, zh:pz }, s, t:{ en:se, zh:sz } };
+  });
+}
+
+/* ===== 画面の言葉（日本語・English・中文） ===== */
+const LANGS = ['ja','en','zh'];
+const I18N = {
+ja: {
+  sep:'・', tag:'せまってくる漢字を、読んではね返せ！', beta:'試作版 {v}',
+  settings:'設定', start:'スタート', how:'遊び方', install:'アプリとして追加', close:'とじる',
+  aStage:'ステージ', aLives:'ライフ', aQuit:'ゲームをやめる', aBoss:'敵のHP', aSummary:'ゲーム設定を変える', aAnswer:'読みを入力',
+  kbBtn:'タップしてキーボードを開く<small>Tap to open the keyboard</small>',
+  setTitle:'ゲーム設定', hLang:'言語 · Language · 语言', hLevel:'レベル', hGenre:'問題の種類', hJam:'ゲームモード', hMode:'答え方',
+  hSpeed:'スピード', hCount:'問題数', hCountSub:'クリアまでに必要な正解の数', hFuri:'ふりがな', hFs:'全画面', hSound:'音',
+  gKanji:'漢字', gVocab:'語彙', gGrammar:'文法', jamOff:'ノーマル', jamOn:'妨害', mType:'タイピング', mChoice:'4択',
+  speeds:['じっくり','のんびり','ゆっくり','ふつう','はやい'],
+  nQ:'{n}問', allQ:'全問', nWords:'{n}語', furiOn:'あり', furiOff:'なし', furiTag:'ふりがな', jamTag:'（妨害）',
+  best:'ベスト {n}', modeNote:'語彙・文法は4択のみ', modeTitle:'語彙・文法は4択のみです', furiNote:'語彙・文法のみ',
+  jamNoteK:'漢字が動かず、見えにくくなります', jamNoteO:'漢字のみ',
+  jamStyles:{ blur:'ぼかし', mosaic:'モザイク', puzzle:'パズル' },
+  fs:'全画面', fsExit:'全画面をやめる', fsAuto:'スタート時に全画面：{s}', on:'オン', off:'オフ',
+  fsNoteNo:'このブラウザは非対応（ホーム画面に追加すると全画面になります）', fsNoteApp:'アプリとして開いているので常に全画面です',
+  fsHelp:['このブラウザ（iPhoneのSafariなど）は、ページを全画面にする機能に対応していません。','タイトル画面の「アプリとして追加」からホーム画面に追加し、そのアイコンから開くと、ブラウザのバーがない全画面で遊べます。'],
+  music:'音楽：{s}', sfx:'効果音：{s}',
+  hint:'ヒント', hint2:'もう1つ', pass:'パス', ok:'決定', ph:'よみを入力して Enter',
+  noteEnter:'Enter で回答', noteTap:'タップで回答', noteKeys:'キー 1〜4 でも選べます',
+  hintMean:'意味：{m}', hintSent:'英語：{m}', hintFirst:'意味：{m}　／　最初の字「{c}」',
+  answer:'こたえ', answerLives:'こたえ　ライフ のこり {n}', combo:'れんぞく',
+  judge:{ jam:'見破り！', fast:'はやい！', nice:'ナイス！', close:'ギリギリ！' },
+  stageN:'ステージ {n}', bossStage:'ボスステージ', appeared:'{e} があらわれた！', go:'スタート！',
+  defeat:'撃破！', defeated:'{e} をたおした！', bonus:'ボーナス +{n}', allClear:'全ステージクリア！', lifeBonus:'のこりライフボーナス +{n}',
+  gameOver:'ゲームオーバー', goodWork:'おつかれさま', newBest:'ベスト更新！',
+  subClear:'{l}・{ml}　全5ステージ制覇', subReach:'{l}・{ml}　ステージ{n}「{s}」まで',
+  rCorrect:'正解', rWrong:'まちがい', rCombo:'最大連続', rBest:'ベスト', rReview:'ふりかえり / Review', rEmpty:'まちがえた言葉はありません。',
+  tabMiss:'まちがい', tabSeen:'出た問題', tabAll:'このレベル全部', rNoneSeen:'まだ問題が出ていません。', markOk:'正解', markNg:'まちがい', markSkip:'答えていない',
+  exTap:'言葉をタップすると解説が出ます', exSpecial:'特別な読み', exPoint:'ポイント', exExample:'例文',
+  again:'もう一度', toTitle:'タイトルへ',
+  installNote:'ホーム画面のアイコンから開くと、ブラウザのバーがない全画面で遊べます。一度開いたあとは、電波がない場所でも遊べます。',
+  stepsIOS:['このページを Safari で開きます。','共有ボタン（四角から上向きの矢印）をタップします。','メニューを下にスクロールして「ホーム画面に追加」をタップします。','右上の「追加」をタップすると、ホーム画面にアイコンができます。'],
+  stepsAndroid:['このページを Chrome（または Brave）で開き、一度だけページを再読み込みします。','ブラウザのメニュー「︙」をタップします（Chromeは右上、Braveは右下）。','「アプリをインストール」または「ホーム画面に追加」を選びます。','「インストール」を選ぶと、ホーム画面にアイコンができます。'],
+  diagChecking:'インストールに必要なファイルを確認中…', diagResult:'チェック結果', diagSw:'オフライン機能（sw.js の登録）',
+  diagOk:'準備はできています。上の手順でインストールしてください。',
+  diagNg:'✗ のファイルがサーバーにありません。index.html と同じ場所に、すべてのファイルをアップロードしてください。アップロード後は、ページを再読み込みしてからお試しください。',
+  howNote:'レベル分けは目安です。JLPTは現在、公式の語彙・漢字リストを公表していません。',
+  howItems:[
+    ['問題の種類','「漢字」は読み方、「語彙」と「文法」は文の（　）に入ることばを選ぶ問題です。語彙と文法は4択だけで遊べます。'],
+    ['ルール','敵が投げてくる漢字の読みを答えます。正解すると漢字がはね返って敵にダメージを与えます。漢字の上の○の数は、読みの文字数です。'],
+    ['タイピング','読みを入力して、Enter（または「決定」）で答えます。ひらがなでもローマ字でもOKです（gakkou →「がっこう」）。日本語入力のときは、確定してからもう一度Enterを押してください。'],
+    ['4択','4つの読みから正しいものをタップします。パソコンでは1〜4のキーでも選べます。'],
+    ['まちがい','まちがえると漢字が一気に近づきます。漢字が手前に届くか「パス」するとライフが1つ減ります。'],
+    ['ヒント','1回目で英語の意味が出ます。2回目は、タイピングでは最初の1文字、4択ではまちがいの選択肢が1つ消えます。使うと点数が減ります。'],
+    ['ふりがな','語彙・文法の問題では、設定で漢字のふりがなを「あり／なし」に切り替えられます。'],
+    ['妨害モード','漢字モードで選べます。漢字は動きませんが、「ぼかし」「モザイク」「パズル」のどれかで見えにくくなっていて、時間とともにくっきりします。見えにくいうちに正解すると「見破り！」で点数が1.5倍になります。'],
+    ['スピード','漢字が迫ってくる速さを5段階から選べます。いちばん遅い「じっくり」は、文字を読むのに時間がかかる初級の学生におすすめです。遅いほど点数は少なめ、速いほど多めになります。'],
+    ['問題数','クリアまでに必要な正解の数です。10問・20問・30問・全問（そのレベルの問題すべて）から選べ、5体の敵のHPに振り分けられます。'],
+    ['ステージ','敵のHPを0にするとステージクリア。全5ステージで、HPが半分を切ると敵が怒って攻撃が速くなります。まちがえたりパスしたりした問題は数に入りません。ステージごとに2つのパターンがあり、どちらが出るかは遊ぶたびに変わります。'],
+    ['言語','画面の言葉と、ヒント・答えの意味の言語を、日本語・English・中文から選べます（日本語を選ぶと、意味は英語で出ます）。']
+  ],
+  stages:['鳥居の参道','夕ぐれの校舎','ネオン横丁','古書の回廊','星の深淵','雪の温泉街','真夏の海辺','からくり時計塔','紅葉の山寺','月夜の天守閣'],
+  enemies:['スミっこ','ケシゴムン','デンパコウモリ','ホンノムシ','スミノオウ','フデマル','タコスミ','ハグルマン','カラカサ','ヤミギツネ']
+},
+en: {
+  sep:' · ', tag:'Read the kanji. Knock them back!', beta:'Beta {v}',
+  settings:'Settings', start:'Start', how:'How to Play', install:'Install App', close:'Close',
+  aStage:'Stage', aLives:'Lives', aQuit:'Quit game', aBoss:'Enemy HP', aSummary:'Change game settings', aAnswer:'Type the reading',
+  kbBtn:'Tap to open the keyboard',
+  setTitle:'Game Settings', hLang:'言語 · Language · 语言', hLevel:'Level', hGenre:'Question type', hJam:'Game mode', hMode:'Answer with',
+  hSpeed:'Speed', hCount:'Questions', hCountSub:'Correct answers needed to clear', hFuri:'Furigana', hFs:'Fullscreen', hSound:'Sound',
+  gKanji:'Kanji', gVocab:'Vocab', gGrammar:'Grammar', jamOff:'Normal', jamOn:'Obscured', mType:'Typing', mChoice:'4 choices',
+  speeds:['Slowest','Slower','Slow','Normal','Fast'],
+  nQ:'{n} Qs', allQ:'All', nWords:'{n} words', furiOn:'On', furiOff:'Off', furiTag:'Furigana', jamTag:' (Obscured)',
+  best:'Best {n}', modeNote:'Vocab & grammar: 4 choices only', modeTitle:'Vocab and grammar use 4 choices only', furiNote:'Vocab & grammar only',
+  jamNoteK:'Kanji stay still but are hard to see', jamNoteO:'Kanji only',
+  jamStyles:{ blur:'Blur', mosaic:'Mosaic', puzzle:'Puzzle' },
+  fs:'Fullscreen', fsExit:'Exit fullscreen', fsAuto:'Fullscreen on start: {s}', on:'On', off:'Off',
+  fsNoteNo:'Not supported in this browser (add to Home Screen for fullscreen)', fsNoteApp:'Always fullscreen when opened as an app',
+  fsHelp:['This browser (such as Safari on iPhone) cannot make a page fullscreen.','Use "Install App" on the title screen to add it to your Home Screen. Opened from that icon, the game plays fullscreen without the browser bar.'],
+  music:'Music: {s}', sfx:'Sound FX: {s}',
+  hint:'Hint', hint2:'One more', pass:'Pass', ok:'OK', ph:'Type the reading + Enter',
+  noteEnter:'Press Enter to answer', noteTap:'Tap to answer', noteKeys:'Keys 1–4 also work',
+  hintMean:'Meaning: {m}', hintSent:'Translation: {m}', hintFirst:'Meaning: {m}　/　First kana: 「{c}」',
+  answer:'Answer', answerLives:'Answer　Lives left: {n}', combo:'combo',
+  judge:{ jam:'Seen through!', fast:'Quick!', nice:'Nice!', close:'Close call!' },
+  stageN:'Stage {n}', bossStage:'Boss Stage', appeared:'{e} appeared!', go:'Start!',
+  defeat:'Defeated!', defeated:'You beat {e}!', bonus:'Bonus +{n}', allClear:'All Stages Clear!', lifeBonus:'Life bonus +{n}',
+  gameOver:'Game Over', goodWork:'Good work!', newBest:'New best!',
+  subClear:'{l} · {ml} — all 5 stages cleared', subReach:'{l} · {ml} — reached Stage {n} “{s}”',
+  rCorrect:'Correct', rWrong:'Missed', rCombo:'Best combo', rBest:'Best', rReview:'Review', rEmpty:'No mistakes!',
+  tabMiss:'Missed', tabSeen:'This game', tabAll:'Whole level', rNoneSeen:'No questions yet.', markOk:'correct', markNg:'missed', markSkip:'not answered',
+  exTap:'Tap a word to see notes', exSpecial:'special reading', exPoint:'Point', exExample:'Example',
+  again:'Play again', toTitle:'Title',
+  installNote:'Open it from the Home Screen icon to play fullscreen without the browser bar. After opening it once, you can play offline.',
+  stepsIOS:['Open this page in Safari.','Tap the Share button (a square with an up arrow).','Scroll down the menu and tap "Add to Home Screen".','Tap "Add" in the top right. The icon appears on your Home Screen.'],
+  stepsAndroid:['Open this page in Chrome (or Brave) and reload it once.','Tap the browser menu "⋮" (top right in Chrome, bottom right in Brave).','Choose "Install app" or "Add to Home screen".','Choose "Install". The icon appears on your Home Screen.'],
+  diagChecking:'Checking the files needed to install…', diagResult:'Check results', diagSw:'Offline support (sw.js registered)',
+  diagOk:'Everything is ready. Follow the steps above to install.',
+  diagNg:'Files marked ✗ are missing on the server. Upload all the files to the same place as index.html, then reload the page and try again.',
+  howNote:'Levels are approximate. The JLPT does not currently publish official vocabulary or kanji lists.',
+  howItems:[
+    ['Question types','"Kanji": give the reading. "Vocab" and "Grammar": choose the word that fits the blank (　) in the sentence. Vocab and grammar are 4-choice only.'],
+    ['Rules','The enemy throws kanji at you. Answer the reading correctly to knock the kanji back and damage the enemy. The circles above the kanji show how many kana the reading has.'],
+    ['Typing','Type the reading and press Enter (or "OK"). Hiragana or romaji both work (gakkou → がっこう). With a Japanese keyboard, confirm the text first, then press Enter again.'],
+    ['4 choices','Tap the correct reading out of four. On a computer, keys 1–4 also work.'],
+    ['Mistakes','A wrong answer makes the kanji rush closer. If the kanji reaches you, or you press "Pass", you lose one life.'],
+    ['Hints','The first hint shows the meaning. The second shows the first kana (typing) or removes one wrong choice (4 choices). Hints lower your score.'],
+    ['Furigana','For vocab and grammar, you can turn furigana (readings above kanji) on or off in Settings.'],
+    ['Obscured mode','Available in kanji mode. The kanji stays still but is hidden by blur, mosaic or a puzzle, and gets clearer over time. Answer while it is still hard to see for "Seen through!" and 1.5× points.'],
+    ['Speed','Choose from 5 speeds for how fast the kanji approach. "Slowest" is good for beginners who need time to read. Slower speeds give fewer points; faster speeds give more.'],
+    ['Questions','The number of correct answers needed to clear: 10, 20, 30 or All (every question in the level). They are split across the HP of the 5 enemies.'],
+    ['Stages','Bring the enemy\'s HP to 0 to clear the stage. There are 5 stages. When an enemy\'s HP falls below half, it gets angry and attacks faster. Missed or passed questions do not count. Each stage has two versions, and which one appears changes every game.'],
+    ['Language','Choose 日本語, English or 中文 for the screen text and for the meanings in hints and answers (with 日本語, meanings are shown in English).']
+  ],
+  stages:['Shrine Path','Twilight School','Neon Alley','Old Book Corridor','Starry Abyss','Snowy Hot-Spring Town','Midsummer Beach','Clockwork Tower','Maple Mountain Temple','Moonlit Castle Keep'],
+  enemies:['Sumikko','Keshigomun','Denpa Bat','Bookworm','Ink King','Fudemaru','Takosumi','Gearman','Karakasa','Shadow Fox']
+},
+zh: {
+  sep:'・', tag:'读出逼近的汉字，把它们打回去！', beta:'试用版 {v}',
+  settings:'设置', start:'开始', how:'玩法说明', install:'添加为应用', close:'关闭',
+  aStage:'关卡', aLives:'生命', aQuit:'退出游戏', aBoss:'敌人HP', aSummary:'更改游戏设置', aAnswer:'输入读音',
+  kbBtn:'点击打开键盘',
+  setTitle:'游戏设置', hLang:'言語 · Language · 语言', hLevel:'级别', hGenre:'题目类型', hJam:'游戏模式', hMode:'答题方式',
+  hSpeed:'速度', hCount:'题数', hCountSub:'通关所需的答对题数', hFuri:'假名注音', hFs:'全屏', hSound:'声音',
+  gKanji:'汉字', gVocab:'词汇', gGrammar:'语法', jamOff:'普通', jamOn:'干扰', mType:'打字', mChoice:'四选一',
+  speeds:['最慢','较慢','慢','普通','快'],
+  nQ:'{n}题', allQ:'全部', nWords:'{n}词', furiOn:'有', furiOff:'无', furiTag:'注音', jamTag:'（干扰）',
+  best:'最高分 {n}', modeNote:'词汇・语法仅限四选一', modeTitle:'词汇和语法只能四选一', furiNote:'仅限词汇・语法',
+  jamNoteK:'汉字不移动，但会变得难以看清', jamNoteO:'仅限汉字',
+  jamStyles:{ blur:'模糊', mosaic:'马赛克', puzzle:'拼图' },
+  fs:'全屏', fsExit:'退出全屏', fsAuto:'开始时全屏：{s}', on:'开', off:'关',
+  fsNoteNo:'此浏览器不支持（添加到主屏幕后即可全屏）', fsNoteApp:'以应用方式打开时始终全屏',
+  fsHelp:['此浏览器（如 iPhone 的 Safari）不支持将网页设为全屏。','请在标题画面点击“添加为应用”，把它添加到主屏幕。从该图标打开，即可在没有浏览器栏的全屏状态下游玩。'],
+  music:'音乐：{s}', sfx:'音效：{s}',
+  hint:'提示', hint2:'再提示', pass:'跳过', ok:'确定', ph:'输入读音后按 Enter',
+  noteEnter:'按 Enter 回答', noteTap:'点击回答', noteKeys:'也可以按 1〜4 键选择',
+  hintMean:'意思：{m}', hintSent:'中文：{m}', hintFirst:'意思：{m}　／　第一个假名「{c}」',
+  answer:'答案', answerLives:'答案　剩余生命 {n}', combo:'连击',
+  judge:{ jam:'看穿了！', fast:'好快！', nice:'漂亮！', close:'好险！' },
+  stageN:'第{n}关', bossStage:'BOSS关', appeared:'{e} 出现了！', go:'开始！',
+  defeat:'击败！', defeated:'打倒了 {e}！', bonus:'奖励 +{n}', allClear:'全部通关！', lifeBonus:'剩余生命奖励 +{n}',
+  gameOver:'游戏结束', goodWork:'辛苦了', newBest:'刷新最高分！',
+  subClear:'{l}・{ml}　5关全部通关', subReach:'{l}・{ml}　到达第{n}关「{s}」',
+  rCorrect:'答对', rWrong:'答错', rCombo:'最大连击', rBest:'最高分', rReview:'复习', rEmpty:'没有答错的词语。',
+  tabMiss:'答错', tabSeen:'本局题目', tabAll:'本级全部', rNoneSeen:'还没有出题。', markOk:'答对', markNg:'答错', markSkip:'未作答',
+  exTap:'点击词语查看解析', exSpecial:'特殊读音', exPoint:'要点', exExample:'例句',
+  again:'再玩一次', toTitle:'返回标题',
+  installNote:'从主屏幕的图标打开，即可在没有浏览器栏的全屏状态下游玩。打开过一次之后，没有网络也能玩。',
+  stepsIOS:['用 Safari 打开此页面。','点击“分享”按钮（方框加向上箭头）。','向下滚动菜单，点击“添加到主屏幕”。','点击右上角的“添加”，主屏幕上就会出现图标。'],
+  stepsAndroid:['用 Chrome（或 Brave）打开此页面，并刷新一次。','点击浏览器菜单“⋮”（Chrome 在右上角，Brave 在右下角）。','选择“安装应用”或“添加到主屏幕”。','选择“安装”，主屏幕上就会出现图标。'],
+  diagChecking:'正在检查安装所需的文件…', diagResult:'检查结果', diagSw:'离线功能（已注册 sw.js）',
+  diagOk:'已准备就绪。请按照上面的步骤安装。',
+  diagNg:'服务器上缺少标有 ✗ 的文件。请把所有文件上传到与 index.html 相同的位置，然后刷新页面再试。',
+  howNote:'级别划分仅供参考。JLPT 目前没有公布官方的词汇和汉字列表。',
+  howItems:[
+    ['题目类型','“汉字”回答读音；“词汇”和“语法”选择填入句中（　）的词语。词汇和语法只能用四选一。'],
+    ['规则','敌人会向你投来汉字。答对读音，汉字就会被弹回去，对敌人造成伤害。汉字上方的○表示读音的假名数。'],
+    ['打字','输入读音后按 Enter（或“确定”）回答。平假名和罗马字都可以（gakkou →「がっこう」）。使用日语输入法时，请先确认文字，再按一次 Enter。'],
+    ['四选一','从4个读音中点击正确的一个。在电脑上也可以按 1〜4 键选择。'],
+    ['答错','答错后汉字会一下子逼近。汉字到达眼前，或点击“跳过”时，会失去1条生命。'],
+    ['提示','第1次提示显示意思。第2次提示：打字时显示第一个假名，四选一时去掉一个错误选项。使用提示会减少得分。'],
+    ['假名注音','词汇和语法题可以在设置中切换是否显示汉字的假名注音。'],
+    ['干扰模式','在汉字模式中可以选择。汉字不会移动，但会被“模糊”“马赛克”或“拼图”遮挡，随着时间慢慢变清楚。在看不清的时候答对，就是“看穿了！”，得分变为1.5倍。'],
+    ['速度','汉字逼近的速度有5档可选。最慢的“最慢”适合读字需要时间的初级学生。越慢得分越少，越快得分越多。'],
+    ['题数','通关所需的答对题数。可以选择10题、20题、30题或全部（该级别的所有题目），分配到5个敌人的HP上。'],
+    ['关卡','把敌人的HP降到0就能通关。共5关，敌人HP低于一半时会生气，攻击变快。答错或跳过的题目不计入题数。每一关有两种场景，每次游戏出现哪一种都会变化。'],
+    ['语言','可以从日本語・English・中文中选择画面文字以及提示、答案中意思的语言（选择日本語时，意思以英语显示）。']
+  ],
+  stages:['鸟居参道','黄昏校舍','霓虹小巷','古书回廊','星之深渊','雪中温泉街','盛夏海边','机关钟楼','红叶山寺','月夜天守阁'],
+  enemies:['墨仔','橡皮怪','电波蝙蝠','书虫','墨之王','毛笔丸','墨章鱼','齿轮怪','纸伞怪','暗夜狐']
+}
+};
 /* ===== ステージ（景色・敵・音楽） ===== */
 const STAGES = [
   { name:'鳥居の参道', enemy:'スミっこ', hp:6, song:1, amb:'petal', ecol:'#8a4ff0', edark:'#34177a',
@@ -1436,7 +2728,17 @@ const STAGES = [
   { name:'古書の回廊', enemy:'ホンノムシ', hp:9, song:4, amb:'page', ecol:'#8a2232', edark:'#3a0a12',
     th:{ sky:['#1a100a','#3b2618'], wall:['#36220f','#6e4a2e'], floor:['#2a1a0f','#5a3b25'], fog:'#7a5232', portal:'#ffd98c' } },
   { name:'星の深淵', enemy:'スミノオウ', hp:12, song:5, amb:'star', boss:true, ecol:'#232a52', edark:'#05060f',
-    th:{ sky:['#01020a','#0a1142'], wall:['#02030d','#0a0f33'], floor:['#02030d','#0e1548'], fog:'#1e2a78', portal:'#d4f8ff' } }
+    th:{ sky:['#01020a','#0a1142'], wall:['#02030d','#0a0f33'], floor:['#02030d','#0e1548'], fog:'#1e2a78', portal:'#d4f8ff' } },
+  { name:'雪の温泉街', enemy:'フデマル', hp:6, song:6, amb:'snow', ecol:'#c8a165', edark:'#6b4a22',
+    th:{ sky:['#24305e','#8fa6d6'], wall:['#2a1a12','#5a3a26'], floor:['#b9c6de','#f4f7fc'], fog:'#dfe8ff', portal:'#fff3d0' } },
+  { name:'真夏の海辺', enemy:'タコスミ', hp:7, song:7, amb:'spark', ecol:'#ff6b6b', edark:'#a3243a',
+    th:{ sky:['#1f9cff','#c4ecff'], wall:['#0a6aa3','#4cc6ea'], floor:['#e4c283','#fbe9bd'], fog:'#e9f9ff', portal:'#ffffff' } },
+  { name:'からくり時計塔', enemy:'ハグルマン', hp:8, song:8, amb:'ember', ecol:'#c9932f', edark:'#5a3a10',
+    th:{ sky:['#1a120a','#3d2a14'], wall:['#2b1c0e','#7a5a2a'], floor:['#1c140c','#4a361c'], fog:'#a8742c', portal:'#ffe1a0' } },
+  { name:'紅葉の山寺', enemy:'カラカサ', hp:9, song:9, amb:'leaf', ecol:'#d9483b', edark:'#6e1a14',
+    th:{ sky:['#ff8f4f','#ffe2b5'], wall:['#4f160b','#c2421f'], floor:['#544a42','#9a8f84'], fog:'#ffd6a6', portal:'#fff4dc' } },
+  { name:'月夜の天守閣', enemy:'ヤミギツネ', hp:12, song:10, amb:'foxfire', boss:true, ecol:'#3b2a6e', edark:'#0e0820',
+    th:{ sky:['#03051a','#16224f'], wall:['#0a0e22','#2a3358'], floor:['#120c08','#3a2a1c'], fog:'#3a4a8a', portal:'#fff6d8' } }
 ];
 
 /* ===== ローマ字 → ひらがな ===== */
@@ -1498,6 +2800,24 @@ function hpPlan(n){
   while (diff !== 0 && guard++ < 200){ if (diff > 0){ hp[i]++; diff--; } else if (hp[i] > 1){ hp[i]--; diff++; } i = (i + 4) % 5; }
   return hp;
 }
+/* ===== 言語 ===== */
+function detectLang(){
+  const ls = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'ja']).map(x => String(x).toLowerCase());
+  for (const l of ls){ if (l.startsWith('ja')) return 'ja'; if (l.startsWith('zh')) return 'zh'; if (l.startsWith('en')) return 'en'; }
+  return 'en';
+}
+let lang = LANGS.includes(store.get('kr-lang')) ? store.get('kr-lang') : detectLang();
+function t(key, vars){
+  let s = I18N[lang][key]; if (s === undefined) s = I18N.ja[key];
+  if (typeof s === 'string' && vars) s = s.replace(/\{(\w+)\}/g, (m, k) => vars[k] !== undefined ? vars[k] : m);
+  return s;
+}
+const meanOf = w => (lang === 'zh' && w.mz) ? w.mz : w.m;
+const genreName = g => t({ kanji:'gKanji', vocab:'gVocab', grammar:'gGrammar' }[g]);
+const stageName = i => t('stages')[i];
+const enemyName = i => t('enemies')[i];
+const qCountText = c => c === 'all' ? t('allQ') : t('nQ', { n: c });
+const APP_VER = 'v2.2';
 const SPEEDS = [ { name:'じっくり', d:2.5, s:.4 }, { name:'のんびり', d:1.75, s:.6 }, { name:'ゆっくり', d:1.3, s:.8 }, { name:'ふつう', d:1, s:1 }, { name:'はやい', d:.75, s:1.25 } ];
 let speed = store.get('kr-speed5') !== null ? parseInt(store.get('kr-speed5'), 10) : (parseInt(store.get('kr-speed') ?? '2', 10) + 1);
 let jam = store.get('kr-jam') === 'on';
@@ -1590,6 +2910,8 @@ const SONGS = [
   { bpm:112, root:52, ch:[[0,'m'],[5,'m'],[8,'M'],[7,'M']],  dr:'half', lead:L4, arp:2, lw:'triangle', bass:[0,-1,-1,-1,7,-1,-1,-1,0,-1,-1,-1,7,-1,12,-1] },
   { bpm:150, root:48, ch:[[0,'m'],[8,'M'],[1,'M'],[7,'M']],  dr:'four', lead:L5, arp:1, lw:'sawtooth', bass:[0,0,12,0,0,12,0,0,0,0,12,0,0,12,0,12] }
 ];
+// 別パターンのステージ用（6〜10）：ステージ1〜5の曲を移調して音色を変える
+[1,2,3,4,5].forEach((i,k) => SONGS.push({ ...SONGS[i], root: SONGS[i].root + [2,-2,3,-3,2][k], lw: ['square','triangle','sawtooth','square','square'][k], bpm: SONGS[i].bpm + [-6,4,-4,4,6][k] }));
 const Music = {
   song:null, idx:-1, step:0, next:0, intense:0, danger:0,
   play(i){ if (!AU.ctx) return; if (this.song && this.idx === i) return; this.song = SONGS[i]; this.idx = i; this.step = 0; this.next = AU.ctx.currentTime + .08; },
@@ -1896,6 +3218,389 @@ const SCENES = [
     }
   }
 ];
+/* 別パターンの背景（5〜9）と舞うもの。stg/SPEC_SCENES.md どおり */
+const SCENES_B = [
+  { // 5 雪の温泉街
+    base(G,T){
+      ctx.fillStyle = lg(0,0,0,G.bb,[T.sky[0],T.sky[1]]); ctx.fillRect(0,0,W,G.bb);
+      fillP(ctx, [[0,-H*.2],[G.bl,G.bt],[G.bl,G.bb],[0,H]], lg(0,0,G.bl,0,['#2a170c','#4a2c1a']));
+      fillP(ctx, [[W,-H*.2],[G.br,G.bt],[G.br,G.bb],[W,H]], lg(W,0,G.br,0,['#2a170c','#4a2c1a']));
+      fillP(ctx, [[0,H],[W,H],[G.br,G.bb],[G.bl,G.bb]], lg(0,H,0,G.bb,[T.floor[0],T.floor[1]]));
+      fillP(ctx, [[W*.36,H],[W*.64,H],[G.vx + G.bw*.1,G.bb],[G.vx - G.bw*.1,G.bb]], lg(0,H,0,G.bb,['#8f99ad','#c9d2e2']));
+      ctx.fillStyle = rg(G.vx,G.vy,0,G.bw*.85,[T.portal,T.fog]); ctx.fillRect(G.bl,G.bt,G.bw,G.bh);
+    },
+    rib(rb,R,k){
+      const w = R.r - R.l, h = R.b - R.t;
+      const pw = w*.06, px1 = R.l + w*.1, px2 = R.r - w*.1, topY = R.t + h*.08, th = h*.06, cx = (px1 + px2)/2;
+      ctx.fillStyle = '#4a2c1a';
+      ctx.fillRect(px1 - pw/2, topY, pw, R.b - topY); ctx.fillRect(px2 - pw/2, topY, pw, R.b - topY);
+      ctx.fillStyle = '#2a170c';
+      ctx.fillRect(px1, topY, pw/2, R.b - topY); ctx.fillRect(px2, topY, pw/2, R.b - topY);
+      ctx.fillStyle = '#5c3820'; ctx.fillRect(px1 - pw*1.2, topY, px2 - px1 + pw*2.4, th);
+      ctx.fillStyle = '#2a170c'; ctx.fillRect(px1 - pw*1.2, topY + th, px2 - px1 + pw*2.4, th*.25);
+      ctx.beginPath(); ctx.moveTo(px1 - pw*1.6, topY - th*.2); ctx.lineTo(cx, topY - th*1.1); ctx.lineTo(px2 + pw*1.6, topY - th*.2);
+      ctx.lineTo(px2 + pw*1.6, topY + th*.1); ctx.lineTo(px1 - pw*1.6, topY + th*.1); ctx.closePath(); ctx.fillStyle = '#2a170c'; ctx.fill();
+      ctx.fillStyle = '#f4f8ff'; ctx.fillRect(px1 - pw*1.6, topY - th*.25, px2 - px1 + pw*3.2, th*.12);
+      if (rb.id % 3 === 0){
+        // 湯ののれん：左右の柱のすぐ内側に1枚ずつ（まん中は敵のために空けておく）
+        const nw = w*.16, nt = topY + th, nb = nt + h*.2, dl = h*.035, sway = Math.sin(clock*1.5 + rb.id)*w*.006;
+        for (const nx of [px1 + pw*.6, px2 - pw*.6 - nw]){
+          const bx = u => nx + nw*u + sway;   // 下の端だけ風でゆれる
+          ctx.fillStyle = '#1d2a6b';
+          ctx.beginPath(); ctx.moveTo(nx, nt); ctx.lineTo(nx + nw, nt); ctx.lineTo(bx(1), nb + dl); ctx.lineTo(bx(.7), nb + dl); ctx.lineTo(bx(.7), nb);
+          ctx.lineTo(bx(.3), nb); ctx.lineTo(bx(.3), nb + dl); ctx.lineTo(bx(0), nb + dl); ctx.closePath(); ctx.fill();
+          ctx.fillStyle = 'rgba(0,0,0,.2)'; ctx.fillRect(nx, nt, nw, (nb - nt)*.05);
+          ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fillRect(nx, nt + (nb - nt)*.1, nw, Math.max(1, h*.006));
+          ctx.fillStyle = '#ffffff'; ctx.font = `${Math.max(6, nw*.55)}px ${UIFONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText('湯', nx + nw/2 + sway*.5, nt + (nb - nt)*.3);
+        }
+      } else if (rb.id % 2 === 0){
+        for (const lx of [cx - w*.33, cx + w*.33]){
+          const ly = topY + th + h*.14, lr = w*.07, lh = h*.085;
+          ctx.strokeStyle = '#2a170c'; ctx.lineWidth = Math.max(1, k*2); ctx.beginPath(); ctx.moveTo(lx, topY + th); ctx.lineTo(lx, ly - lh); ctx.stroke();
+          ctx.fillStyle = rg(lx,ly,0,lr*4,['rgba(255,150,80,.5)','rgba(255,150,80,0)']); ctx.fillRect(lx - lr*4, ly - lr*4, lr*8, lr*8);
+          E(ctx,lx,ly,lr,lh); ctx.fillStyle = '#e0412e'; ctx.fill();
+          ctx.fillStyle = '#1a0c08'; ctx.fillRect(lx - lr, ly - lh, lr*2, lh*.25); ctx.fillRect(lx - lr, ly + lh*.75, lr*2, lh*.25);
+          ctx.fillStyle = '#ffe9a8'; ctx.fillRect(lx - lr*.3, ly - lh*.35, lr*.6, lh*.7);
+        }
+      }
+    },
+    seg(rb,RA,RB){
+      for (const side of [0,1]){
+        const xa = side ? RA.r : RA.l, xb = side ? RB.r : RB.l;
+        const fx = u => lerp(xa, xb, u), fy = (u,v) => lerp(lerp(RA.t,RB.t,u), lerp(RA.b,RB.b,u), v);
+        const q = (u0,v0,u1,v1) => [[fx(u0),fy(u0,v0)],[fx(u1),fy(u1,v0)],[fx(u1),fy(u1,v1)],[fx(u0),fy(u0,v1)]];
+        fillP(ctx, q(0,0,1,1), hash(rb.id*5 + side*9) > .5 ? '#3d2415' : '#4a2c1a');
+        fillP(ctx, q(0,0,1,.05), '#f2f7ff');
+        fillP(ctx, q(0,.05,1,.08), 'rgba(20,10,5,.5)');
+        fillP(ctx, q(0,.5,1,.53), '#1e0f07');
+        fillP(ctx, q(0,.92,1,1), '#24140b');
+        for (const [v0,v1] of [[.12,.4],[.62,.88]]) for (const [u0,u1] of [[.12,.42],[.58,.88]]){
+          fillP(ctx, q(u0,v0,u1,v1), '#ffd46a');
+          for (const t of [1/3, 2/3]){ const um = u0 + (u1 - u0)*t; fillP(ctx, q(um - .012,v0,um + .012,v1), '#2a170c'); }
+          fillP(ctx, q(u0,(v0 + v1)/2 - .015,u1,(v0 + v1)/2 + .015), '#2a170c');
+        }
+      }
+      ctx.strokeStyle = 'rgba(120,120,130,.4)'; ctx.lineWidth = 1 + (RA.b - RA.t)/H*2;
+      ctx.beginPath(); ctx.moveTo(lerp(RA.l,RA.r,.4),RA.b); ctx.lineTo(lerp(RB.l,RB.r,.4),RB.b); ctx.moveTo(lerp(RA.l,RA.r,.6),RA.b); ctx.lineTo(lerp(RB.l,RB.r,.6),RB.b); ctx.stroke();
+    },
+    after(G){
+      for (let i=0;i<3;i++){
+        const f = ((clock*.08 + i/3) % 1), x = G.vx + (i - 1)*G.bw*.3 + Math.sin(clock*.6 + i)*G.bw*.05, y = lerp(G.bb, G.bt*.2, f);
+        ctx.globalAlpha = Math.sin(f*Math.PI)*.45;
+        ctx.fillStyle = rg(x,y,0,G.bw*.35,['rgba(255,255,255,.9)','rgba(255,255,255,0)']);
+        E(ctx, x, y, G.bw*.3, G.bw*.14); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+  },
+  { // 6 真夏の海辺
+    base(G,T){
+      ctx.fillStyle = lg(0,0,0,G.bb,[T.sky[0],T.sky[1]]); ctx.fillRect(0,0,W,G.bb);
+      ctx.fillStyle = rg(G.vx,G.bt*.6,0,W*.6,['rgba(255,252,220,.95)','rgba(255,252,220,0)']); ctx.fillRect(0,0,W,G.bb);
+      ctx.fillStyle = 'rgba(255,255,255,.9)';
+      for (let i=0;i<3;i++){
+        const x = ((hash(i*5.3)*1.2 - .1)*W + clock*4*(1 + i*.3)) % (W*1.3) - W*.15, y = G.bt*(.25 + hash(i*2.7)*.4), sc = .7 + hash(i)*.5;
+        for (const [dx,dy,rx,ry] of [[0,0,.09,.04],[.05,-.02,.07,.05],[-.05,.01,.06,.03]]){ E(ctx,x + W*dx*sc,y + H*dy*sc,W*rx*sc,H*ry*sc); ctx.fill(); }
+      }
+      const hy = G.bb;
+      ctx.fillStyle = 'rgba(255,255,255,.6)'; ctx.fillRect(0,hy - 1,W,2);
+      fillP(ctx, [[0,-H*.2],[G.bl,G.bt],[G.bl,hy],[0,H]], lg(0,0,G.bl,0,[T.wall[0],T.wall[1]]));
+      fillP(ctx, [[W,-H*.2],[G.br,G.bt],[G.br,hy],[W,H]], lg(W,0,G.br,0,[T.wall[0],T.wall[1]]));
+      ctx.strokeStyle = 'rgba(255,255,255,.7)'; ctx.lineWidth = 1.5;
+      for (let i=0;i<5;i++){
+        const yy = lerp(G.bt, hy, .2 + i*.15), wob = Math.sin(clock*2 + i*1.3)*G.bw*.02;
+        ctx.beginPath(); ctx.moveTo(0, yy - H*.05*i/5); ctx.quadraticCurveTo(G.bl*.5 + wob, yy + wob, G.bl, yy); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(W, yy - H*.05*i/5); ctx.quadraticCurveTo(lerp(G.br,W,.5) - wob, yy - wob, G.br, yy); ctx.stroke();
+      }
+      fillP(ctx, [[0,H],[W,H],[G.br,G.bb],[G.bl,G.bb]], lg(0,H,0,G.bb,[T.floor[0],T.floor[1]]));
+      ctx.fillStyle = rg(G.vx,G.vy,0,G.bw*.9,[T.portal,'rgba(255,240,180,.6)','rgba(255,240,180,0)']); ctx.fillRect(G.bl,G.bt,G.bw,G.bh);
+    },
+    rib(rb,R,k){
+      const w = R.r - R.l, h = R.b - R.t;
+      const pw = w*.05, lx = R.l + w*.07, rx = R.r - w*.07;
+      ctx.fillStyle = '#6b4226'; ctx.fillRect(lx - pw/2, R.t, pw, R.b - R.t); ctx.fillRect(rx - pw/2, R.t, pw, R.b - R.t);
+      ctx.fillStyle = '#3f2412'; ctx.fillRect(lx, R.t, pw/2, R.b - R.t); ctx.fillRect(rx, R.t, pw/2, R.b - R.t);
+      ctx.strokeStyle = '#d9b98a'; ctx.lineWidth = Math.max(1, k*3); ctx.beginPath(); ctx.moveTo(lx, R.t + h*.25); ctx.quadraticCurveTo((lx + rx)/2, R.t + h*.25 + h*.2, rx, R.t + h*.25); ctx.stroke();
+      ctx.strokeStyle = '#8c5a33'; ctx.lineWidth = Math.max(1, k*1.5); ctx.beginPath(); ctx.moveTo(lx, R.t + h*.3); ctx.quadraticCurveTo((lx + rx)/2, R.t + h*.3 + h*.2, rx, R.t + h*.3); ctx.stroke();
+      if (rb.i % 2 === 0){
+        const side = rb.id % 2 ? lx : rx, px = side, top = R.t + h*.42, pr = w*.2;
+        ctx.strokeStyle = '#5a3a22'; ctx.lineWidth = Math.max(1, k*1.6); ctx.beginPath(); ctx.moveTo(px, R.b); ctx.lineTo(px, top); ctx.stroke();
+        for (let s=0;s<6;s++){
+          const a0 = Math.PI + s*Math.PI/6, a1 = Math.PI + (s + 1)*Math.PI/6;
+          ctx.fillStyle = s % 2 ? '#ffffff' : '#e8413a';
+          ctx.beginPath(); ctx.moveTo(px, top); ctx.arc(px, top, pr, a0, a1); ctx.closePath(); ctx.fill();
+        }
+      }
+    },
+    seg(rb,RA,RB){
+      ctx.strokeStyle = 'rgba(160,110,60,.35)'; ctx.lineWidth = 1 + (RA.b - RA.t)/H*2;
+      for (let j=1;j<4;j++){ const f = j/4; ctx.beginPath(); ctx.moveTo(lerp(RA.l,RA.r,.1),lerp(RA.b,RB.b,f)); ctx.lineTo(lerp(RA.l,RA.r,.9),lerp(RA.b,RB.b,f)); ctx.stroke(); }
+      fillP(ctx, [[lerp(RA.l,RA.r,.1),RA.b],[lerp(RA.l,RA.r,.9),RA.b],[lerp(RB.l,RB.r,.9),RB.b],[lerp(RB.l,RB.r,.1),RB.b]], 'rgba(240,210,150,.25)');
+    }
+  },
+  { // 7 からくり時計塔（ステージ3の別パターン）
+    base(G,T){
+      baseCorridor(G,T);
+    },
+    rib(rb,R,k){
+      // 歯車の輪：廊下の四角に合わせただ円の枠（中はとうめい）。暗い青銅色＋金のふちで、金色の敵が目立つように
+      const cx = (R.l + R.r)/2, cy = (R.t + R.b)/2, w = R.r - R.l, h = R.b - R.t;
+      const a0 = ctx.globalAlpha; ctx.globalAlpha = a0*clamp((.95 - k)/.3, 0, 1);   // 目の前に来た歯車はうすく消す（画面をふさがない）
+      if (ctx.globalAlpha <= 0){ ctx.globalAlpha = a0; return; }
+      const rr = .5, ring = .075, ri = rr*.9 - ring, teeth = 16, dir = rb.id % 2 ? 1 : -1, rot = clock*.4*dir + rb.id*.2;
+      ctx.save(); ctx.translate(cx, cy); ctx.scale(w*.98, h*.98);
+      const toothed = () => { ctx.beginPath();
+        for (let i=0;i<teeth*2;i++){ const a = rot + i*Math.PI/teeth, rad = i % 2 ? rr : rr*.92;
+          const x = Math.cos(a)*rad, y = Math.sin(a)*rad; i ? ctx.lineTo(x,y) : ctx.moveTo(x,y); }
+        ctx.closePath(); };
+      toothed(); ctx.moveTo(ri, 0); ctx.arc(0, 0, ri, 0, Math.PI*2);
+      ctx.fillStyle = '#5e3f17'; ctx.fill('evenodd');
+      ctx.restore();
+      // 線はスケールの外で描く（太さがゆがまないように）
+      const pt = (a, rad) => [cx + Math.cos(a)*rad*w*.98, cy + Math.sin(a)*rad*h*.98];
+      ctx.strokeStyle = '#d9a640'; ctx.lineWidth = Math.max(1, k*3.5); ctx.beginPath();
+      for (let i=0;i<teeth*2;i++){ const [x,y] = pt(rot + i*Math.PI/teeth, i % 2 ? rr : rr*.92); i ? ctx.lineTo(x,y) : ctx.moveTo(x,y); }
+      ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(cx, cy, ri*w*.98, ri*h*.98, 0, 0, Math.PI*2); ctx.stroke();
+      ctx.globalAlpha = a0;
+    },
+    seg(rb,RA,RB){
+      for (const side of [0,1]){
+        const xa = side ? RA.r : RA.l, xb = side ? RB.r : RB.l;
+        const ya = RA.t + (RA.b - RA.t)*.12, yb = RB.t + (RB.b - RB.t)*.12;
+        ctx.strokeStyle = '#b8862e'; ctx.lineWidth = 1 + (RA.b - RA.t)/H*8; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(xa, ya); ctx.lineTo(xb, yb); ctx.stroke();
+        ctx.strokeStyle = '#6a4418'; ctx.lineWidth = Math.max(1, (RA.b - RA.t)/H*2); ctx.beginPath(); ctx.moveTo(xa, ya + ctx.lineWidth*.5); ctx.lineTo(xb, yb + ctx.lineWidth*.5); ctx.stroke();
+        if (rb.i % 2 === 0){ const rw = Math.max(1, (RA.b - RA.t)/H*10); ctx.strokeStyle = '#8a5f1c'; ctx.lineWidth = rw; ctx.beginPath(); ctx.moveTo(xa, ya); ctx.lineTo(xa, ya + (RA.b - RA.t)*.04); ctx.stroke(); }
+      }
+      ctx.fillStyle = 'rgba(255,220,150,.08)'; fillP(ctx, [[RA.l,RA.b],[RA.r,RA.b],[RB.r,RB.b],[RB.l,RB.b]], 'rgba(255,220,150,.06)');
+      ctx.strokeStyle = 'rgba(184,134,46,.35)'; ctx.lineWidth = 1 + (RA.b - RA.t)/H*2;
+      ctx.beginPath(); ctx.moveTo(lerp(RA.l,RA.r,.3),RA.b); ctx.lineTo(lerp(RB.l,RB.r,.3),RB.b); ctx.moveTo(lerp(RA.l,RA.r,.7),RA.b); ctx.lineTo(lerp(RB.l,RB.r,.7),RB.b); ctx.stroke();
+    },
+    after(G){
+      const cr = G.bw*.42, hA = clock*.05 - Math.PI/2, mA = clock*.6 - Math.PI/2;
+      ctx.save(); ctx.globalAlpha = .88; ctx.lineCap = 'round';
+      ctx.fillStyle = '#ffe1a0'; E(ctx,G.vx,G.vy,cr,cr); ctx.fill();
+      ctx.strokeStyle = '#3a240c'; ctx.lineWidth = Math.max(1.5, cr*.06); E(ctx,G.vx,G.vy,cr,cr); ctx.stroke();
+      for (let i=0;i<12;i++){ const t = i*Math.PI/6; ctx.lineWidth = Math.max(1, cr*(i % 3 ? .05 : .09));
+        ctx.beginPath(); ctx.moveTo(G.vx + Math.cos(t)*cr*.76, G.vy + Math.sin(t)*cr*.76); ctx.lineTo(G.vx + Math.cos(t)*cr*.9, G.vy + Math.sin(t)*cr*.9); ctx.stroke(); }
+      ctx.strokeStyle = '#3a240c';
+      ctx.lineWidth = Math.max(2, cr*.12); ctx.beginPath(); ctx.moveTo(G.vx,G.vy); ctx.lineTo(G.vx + Math.cos(hA)*cr*.5, G.vy + Math.sin(hA)*cr*.5); ctx.stroke();
+      ctx.lineWidth = Math.max(1.5, cr*.08); ctx.beginPath(); ctx.moveTo(G.vx,G.vy); ctx.lineTo(G.vx + Math.cos(mA)*cr*.72, G.vy + Math.sin(mA)*cr*.72); ctx.stroke();
+      ctx.fillStyle = '#b8862e'; E(ctx,G.vx,G.vy,cr*.07,cr*.07); ctx.fill();
+      ctx.restore();
+    }
+  },
+  { // 8 紅葉の山寺（ステージ4の別パターン）
+    base(G,T){
+      ctx.fillStyle = lg(0,0,0,G.bb,[T.sky[0],T.sky[1]]); ctx.fillRect(0,0,W,G.bb);
+      ctx.fillStyle = rg(G.vx,G.bb,0,W*.7,['rgba(255,236,190,.7)','rgba(255,236,190,0)']); ctx.fillRect(0,0,W,G.bb);
+      fillP(ctx, [[0,-H*.2],[G.bl,G.bt],[G.bl,G.bb],[0,H]], lg(0,0,G.bl,0,[T.wall[0],T.wall[1]]));
+      fillP(ctx, [[W,-H*.2],[G.br,G.bt],[G.br,G.bb],[W,H]], lg(W,0,G.br,0,[T.wall[0],T.wall[1]]));
+      const leaf = ['#7a1a10','#a32a18','#c9462a','#e0702c','#f0a83a','#ffd35a'];
+      for (const side of [0,1]){
+        for (let i=0;i<30;i++){
+          const d = hash(i*3.7 + side*101);
+          const x = side ? lerp(W, G.br, d) : lerp(0, G.bl, d);
+          const yT = lerp(-H*.2, G.bt, d), yB = lerp(H, G.bb, d);
+          const y = lerp(yT, yB, hash(i*5.1 + side*33)*.9 + .05);
+          const r = lerp(W*.1, W*.025, d) * (.7 + hash(i*2.9)*.5);
+          for (let j=0;j<4;j++){
+            ctx.fillStyle = leaf[(i + j*2 + side) % leaf.length];
+            E(ctx, x + Math.cos(j*1.7)*r*.6, y + Math.sin(j*2.3)*r*.45, r*.7, r*.5, j); ctx.fill();
+          }
+        }
+      }
+      fillP(ctx, [[0,H],[W,H],[G.br,G.bb],[G.bl,G.bb]], lg(0,H,0,G.bb,[T.floor[0],T.floor[1]]));
+      ctx.fillStyle = rg(G.vx,G.vy,0,G.bw*.9,[T.portal,T.fog]); ctx.fillRect(G.bl,G.bt,G.bw,G.bh);
+    },
+    rib(rb,R,k){
+      const w = R.r - R.l, h = R.b - R.t, cx = (R.l + R.r)/2;
+      const pw = w*.06, px1 = R.l + w*.16, px2 = R.r - w*.16, topY = R.t + h*.12;
+      ctx.fillStyle = '#2b1d16';
+      ctx.fillRect(px1 - pw/2, topY, pw, R.b - topY); ctx.fillRect(px2 - pw/2, topY, pw, R.b - topY);
+      ctx.fillStyle = '#4a3428'; ctx.fillRect(px1, topY, pw/2, R.b - topY); ctx.fillRect(px2, topY, pw/2, R.b - topY);
+      ctx.fillStyle = '#f2ead8'; ctx.fillRect(px1 - pw*.6, topY + h*.02, px2 - px1 + pw*1.2, h*.03);
+      const rT = R.t + h*.06, rB = topY + h*.01, ep = (px2 - px1 + pw*3.2)/2;
+      ctx.beginPath(); ctx.moveTo(cx - ep*.7, rT + h*.01);
+      ctx.quadraticCurveTo(cx, rT - h*.005, cx + ep*.7, rT + h*.01);
+      ctx.quadraticCurveTo(cx + ep*1.05, rT + h*.01, cx + ep, rT - h*.02);
+      ctx.lineTo(cx + ep*.92, rB); ctx.lineTo(cx - ep*.92, rB); ctx.lineTo(cx - ep, rT - h*.02);
+      ctx.quadraticCurveTo(cx - ep*1.05, rT + h*.01, cx - ep*.7, rT + h*.01); ctx.closePath();
+      ctx.fillStyle = '#1f1612'; ctx.fill();
+      ctx.strokeStyle = 'rgba(255,240,210,.14)'; ctx.lineWidth = Math.max(1, k*2); ctx.beginPath(); ctx.moveTo(cx - ep*.8, rT + h*.04); ctx.lineTo(cx + ep*.8, rT + h*.04); ctx.stroke();
+      if (rb.i % 2 === 0){
+        for (const sx of [px1 - pw*2.2, px2 + pw*2.2]){
+          const by = R.b - h*.04, sw = w*.12;
+          ctx.fillStyle = '#6b6862'; ctx.fillRect(sx - sw*.5, by - h*.07, sw, h*.07);
+          ctx.fillStyle = '#7d7a72'; ctx.fillRect(sx - sw*.7, by - h*.09, sw*1.4, h*.03);
+          ctx.fillStyle = '#5b5852'; ctx.fillRect(sx - sw*.22, by - h*.12, sw*.44, h*.03);
+          ctx.fillStyle = '#ffd35a'; ctx.fillRect(sx - sw*.15, by - h*.11, sw*.3, h*.025);
+          ctx.fillStyle = rg(sx, by - h*.1, 0, w*.14, ['rgba(255,200,90,.5)','rgba(255,200,90,0)']); ctx.fillRect(sx - w*.14, by - h*.24, w*.28, w*.28);
+        }
+      }
+    },
+    seg(rb,RA,RB){
+      ctx.strokeStyle = 'rgba(60,40,30,.35)'; ctx.lineWidth = 1 + (RA.b - RA.t)/H*3;
+      for (let j=0;j<3;j++){ const f = (j+.5)/3; ctx.beginPath(); ctx.moveTo(lerp(RA.l,RA.r,.2),lerp(RA.b,RB.b,f)); ctx.lineTo(lerp(RA.l,RA.r,.8),lerp(RA.b,RB.b,f)); ctx.stroke(); }
+      for (let j=0;j<4;j++){
+        const f = .25 + hash(rb.id*7 + j)*.5, x = lerp(RA.l,RA.r,.25 + j*.17), y = lerp(RA.b,RB.b,f);
+        const col = ['#d9552a','#e88a2c','#b8331e','#f2c24a'][(rb.id + j) % 4];
+        ctx.fillStyle = col; E(ctx, x, y, (RA.r - RA.l)*.03, (RA.r - RA.l)*.015, hash(rb.id + j)*3); ctx.fill();
+      }
+    }
+  },
+  { // 9 月夜の天守閣：屋根の上を、月に向かって走る。閉じた四角い枠は使わない
+    moon(G){ return { x:G.vx, y:G.vy - G.bh*.25, r:Math.min(W,H)*.16 }; },
+    base(G,T){
+      // 夜空と、上半分の星（ちらちら）
+      ctx.fillStyle = lg(0,0,0,H,[T.sky[0], T.sky[1], '#2a2350']); ctx.fillRect(0,0,W,H);
+      ctx.fillStyle = '#fff';
+      for (const s of STARS){ ctx.globalAlpha = .25 + .6*Math.abs(Math.sin(clock*1.2 + s.ph)); ctx.fillRect(s.x*W, s.y*H*.5, s.s, s.s); }
+      ctx.globalAlpha = 1;
+      // 大きな満月（敵の後ろ＝後光）。地平線より上に収める
+      const M = this.moon(G), mx = M.x, my = M.y, mr = M.r;
+      ctx.fillStyle = rg(mx,my,mr*.9,mr*3,['rgba(255,246,216,.4)','rgba(255,246,216,0)']); ctx.fillRect(mx - mr*3, my - mr*3, mr*6, mr*6);
+      ctx.fillStyle = '#fff6d8'; E(ctx,mx,my,mr,mr); ctx.fill();
+      ctx.fillStyle = 'rgba(200,180,140,.18)';
+      E(ctx,mx - mr*.3,my - mr*.2,mr*.2,mr*.16); ctx.fill();
+      E(ctx,mx + mr*.35,my + mr*.3,mr*.14,mr*.12); ctx.fill();
+      E(ctx,mx + mr*.1,my - mr*.55,mr*.1,mr*.07); ctx.fill();
+      // 遠くの山のシルエット（地平線のすぐ上）
+      ctx.fillStyle = '#0a0d24'; ctx.beginPath(); ctx.moveTo(0, G.bb);
+      for (let x = 0; x <= W + 1; x += W/30) ctx.lineTo(x, G.bb - H*(.012 + .01*Math.sin(x*.021 + 1) + .008*Math.sin(x*.057)));
+      ctx.lineTo(W, G.bb); ctx.closePath(); ctx.fill();
+      // 地平線より下：城下町の夜景（暗い紺＋小さな暖かい灯り）
+      ctx.fillStyle = '#0e1230'; ctx.fillRect(0, G.bb, W, H - G.bb);
+      ctx.fillStyle = lg(0, G.bb, 0, G.bb + H*.09, ['rgba(255,190,110,.2)','rgba(255,190,110,0)']); ctx.fillRect(0, G.bb, W, H*.09);   // 町の明かりの照り返し
+      // 城下町の屋根のシルエット（地平線ぎわほど小さく、多い）
+      for (let i=0;i<46;i++){
+        const u = hash(i*3.7 + 2)**2, side = i % 2, yb = lerp(G.bb, H, u) + 2;
+        const edgeL = lerp(G.bl, W*.06, u), edgeR = lerp(G.br, W*.94, u);
+        const bw = W*(.012 + .02*hash(i*5.3 + 4))*(.5 + u), bh = H*(.012 + .03*hash(i*8.1 + 3))*(.5 + u);
+        const a = hash(i*2.9 + 9), x = side ? lerp(edgeR, W - bw, a) : lerp(0, edgeL - bw, a);
+        ctx.fillStyle = '#080a1e'; ctx.fillRect(x, yb - bh, bw, bh + 2);
+        if (i % 2 === 0) fillP(ctx, [[x - bw*.08, yb - bh],[x + bw/2, yb - bh - bw*.45],[x + bw*1.08, yb - bh]], '#080a1e');
+        else fillP(ctx, [[x - bw*.1, yb - bh],[x + bw*.2, yb - bh - bw*.3],[x + bw*.8, yb - bh - bw*.3],[x + bw*1.1, yb - bh]], '#080a1e');
+      }
+      // 町の灯り（40個、1.5〜3px。4つに1つは小さな光の輪つき）
+      for (let i=0;i<40;i++){
+        const u = hash(i*2.3 + 7)**2, y = lerp(G.bb, H, u) + 1, a = hash(i*4.7 + 1), side = i % 2;
+        const edgeL = lerp(G.bl, W*.06, u), edgeR = lerp(G.br, W*.94, u);
+        const x = side ? lerp(edgeR, W, a) : lerp(0, edgeL, a);
+        const sz = 1.5 + hash(i*6.1)*1.5;
+        ctx.globalAlpha = .6 + .4*Math.sin(clock*2.5 + i);
+        if (i % 4 === 0){ ctx.fillStyle = rg(x, y, 0, sz*3.5, ['rgba(255,207,122,.45)','rgba(255,207,122,0)']); ctx.fillRect(x - sz*3.5, y - sz*3.5, sz*7, sz*7); }
+        ctx.fillStyle = '#ffcf7a'; ctx.fillRect(x, y, sz, sz);
+      }
+      ctx.globalAlpha = 1;
+      // 屋根（瓦色の台形）と、左右のしっくいのふち（手前は太く、奥は細く）
+      fillP(ctx, [[W*.06,H],[W*.94,H],[G.br,G.bb],[G.bl,G.bb]], lg(0,H,0,G.bb,['#1b1d2e','#3a3d58']));
+      const plaster = (xA, xB, dir) => fillP(ctx, [[xA,H],[xA + dir*W*.012,H],[xB + dir*W*.003,G.bb],[xB,G.bb]], '#e9ecf6');
+      plaster(W*.06, G.bl, 1); plaster(W*.94, G.br, -1);
+      // 屋根の上に奥へ向かう瓦の筋
+      ctx.strokeStyle = 'rgba(120,130,170,.18)'; ctx.lineWidth = 1.2;
+      for (let i=0;i<7;i++){ const f = (i + .5)/7; ctx.beginPath(); ctx.moveTo(lerp(W*.06,W*.94,f), H); ctx.lineTo(lerp(G.bl,G.br,f), G.bb); ctx.stroke(); }
+    },
+    shachi(sh){
+      // しゃちほこ（金）：小さな黒い台の上に、頭（大きく口を開ける）が下、体が上へそり上がり、尾は上で二つに開く扇
+      const bez = (p, t) => { const m = 1 - t, a = m*m*m, b = 3*m*m*t, c = 3*m*t*t, d = t*t*t;
+        return [a*p[0][0] + b*p[1][0] + c*p[2][0] + d*p[3][0], a*p[0][1] + b*p[1][1] + c*p[2][1] + d*p[3][1]]; };
+      const at = (f, t, k) => { const [x,y] = f(t), [x0,y0] = f(Math.max(0, t - .02)), [x1,y1] = f(Math.min(1, t + .02));
+        const dx = x1 - x0, dy = y1 - y0, d = Math.hypot(dx, dy) || 1; return [x - dy/d*k, y + dx/d*k]; };
+      const tube = (f, hw, n) => { const L = [], Rr = [];
+        for (let i = 0; i <= n; i++){ const t = i/n; L.push(at(f, t, hw(t))); Rr.push(at(f, t, -hw(t))); }
+        return L.concat(Rr.reverse()); };
+      const poly = (pts, col) => { fillP(ctx, pts, col); P(ctx, pts); ctx.stroke(); };
+      const outline = Math.max(1, sh*.035);
+      ctx.strokeStyle = '#7a5a12'; ctx.lineWidth = outline; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      // 台（黒い小さな台）
+      fillP(ctx, [[-.26*sh,0],[.24*sh,0],[.17*sh,-.10*sh],[-.17*sh,-.10*sh]], '#1c1f2a');
+      // 体：首から上へ、S字にそり上がる
+      const C = [[-.04*sh,-.20*sh],[-.28*sh,-.26*sh],[-.28*sh,-.78*sh],[-.10*sh,-.88*sh]];
+      const body = t => bez(C, t), bodyW = t => sh*(.05 + .035*Math.sin(Math.PI*Math.min(1, t*1.15)));
+      // 尾：上で二つに開く扇（二つの葉）
+      const root = body(1), lobeW = t => sh*(.13 - .11*t);
+      const lobeL = t => bez([root, [-.26*sh,-.96*sh], [-.42*sh,-1.02*sh], [-.36*sh,-1.16*sh]], t);
+      const lobeR = t => bez([root, [-.02*sh,-1.00*sh], [.06*sh,-1.10*sh], [-.02*sh,-1.22*sh]], t);
+      poly(tube(lobeL, lobeW, 14), '#e3b54a');
+      poly(tube(lobeR, lobeW, 14), '#e3b54a');
+      poly(tube(body, bodyW, 18), '#e3b54a');
+      // うろこの弧（2〜3本）と、うすいハイライト
+      ctx.strokeStyle = 'rgba(122,90,18,.6)'; ctx.lineWidth = Math.max(1, sh*.03);
+      for (const t of [.32, .52, .72]){
+        const w = bodyW(t), a0 = at(body, t, -w*.9), a1 = at(body, t, w*.9), ctl = body(Math.min(1, t + .05));
+        ctx.beginPath(); ctx.moveTo(a0[0], a0[1]); ctx.quadraticCurveTo(ctl[0], ctl[1], a1[0], a1[1]); ctx.stroke();
+      }
+      ctx.strokeStyle = 'rgba(255,240,190,.6)'; ctx.lineWidth = Math.max(1, sh*.025); ctx.beginPath();
+      for (let t = .12; t <= .85; t += .04){ const q = at(body, t, bodyW(t)*.5); t < .13 ? ctx.moveTo(q[0], q[1]) : ctx.lineTo(q[0], q[1]); }
+      ctx.stroke();
+      // 頭：大きくてまるい。内側（右）に大きく口を開ける
+      const hc = [.10*sh, -.17*sh], r = .15*sh;
+      poly([[hc[0] - r*.3, hc[1] - r*.7], [hc[0] - r*1.1, hc[1] - r*1.0], [hc[0] - r*.7, hc[1] - r*.2]], '#e3b54a');   // 後ろのヒレ
+      poly([[hc[0] + r*.2, hc[1] + r*.6], [hc[0] + r*.7, hc[1] + r*1.05], [hc[0] - r*.2, hc[1] + r*.85]], '#e3b54a'); // あごのヒレ
+      ctx.beginPath(); ctx.arc(hc[0], hc[1], r, 0, Math.PI*2); ctx.fillStyle = '#e3b54a'; ctx.fill(); ctx.stroke();
+      poly([[hc[0] + r*.35, hc[1] - r*.55], [hc[0] + r*1.35, hc[1] - r*.05], [hc[0] + r*.35, hc[1] + r*.45]], '#2a1408');   // 大きく開いた口
+      ctx.fillStyle = '#1a0c08'; E(ctx, hc[0] - r*.25, hc[1] - r*.3, r*.16, r*.16); ctx.fill();                              // 目（ひとつ）
+      ctx.fillStyle = '#fff6d8'; E(ctx, hc[0] - r*.2, hc[1] - r*.36, r*.05, r*.05); ctx.fill();
+    },
+    lantern(L){
+      // きつね火の灯籠：黒い鉄の台・柱・笠（台形）。火袋で青白いきつね火がゆらぐ
+      const u = v => v*L, iron = '#1c1f2a', fy = u(-.54), t = clock;
+      ctx.fillStyle = rg(0, fy, 0, u(.5), ['rgba(120,200,255,.45)','rgba(120,200,255,0)']); ctx.fillRect(-u(.5), fy - u(.5), u(1), u(1));
+      fillP(ctx, [[-u(.22),0],[u(.22),0],[u(.15),u(-.10)],[u(-.15),u(-.10)]], iron);   // 台
+      ctx.fillStyle = iron; ctx.fillRect(-u(.05), u(-.40), u(.10), u(.32));            // 柱
+      ctx.fillStyle = '#3a3f52'; ctx.fillRect(-u(.05), u(-.40), u(.02), u(.32));        // 柱のハイライト
+      fillP(ctx, [[-u(.15),u(-.40)],[u(.15),u(-.40)],[u(.13),u(-.68)],[u(-.13),u(-.68)]], '#2a3144');   // 火袋
+      fillP(ctx, [[-u(.26),u(-.68)],[u(.26),u(-.68)],[u(.10),u(-.80)],[u(-.10),u(-.80)]], iron);        // 笠
+      ctx.fillRect(-u(.02), u(-.92), u(.04), u(.12));                                                    // 宝珠
+      // きつね火（しずく形の炎）
+      const fh = u(.12)*(1 + .1*Math.sin(t*9)), fw = u(.07)*(1 + .08*Math.sin(t*7 + 1));
+      ctx.beginPath(); ctx.moveTo(0, fy - fh);
+      ctx.quadraticCurveTo(fw*1.2, fy - fh*.25, fw, fy + fh*.25);
+      ctx.quadraticCurveTo(0, fy + fh*.55, -fw, fy + fh*.25);
+      ctx.quadraticCurveTo(-fw*1.2, fy - fh*.25, 0, fy - fh);
+      ctx.fillStyle = rg(0, fy, 0, fh, ['#f4fdff','#8fd6ff','rgba(74,168,255,.25)']); ctx.fill();
+    },
+    rib(rb,R,k){
+      // 屋根のふちに飾りを左右1対：偶数の枠はしゃちほこ、奇数の枠はきつね火の灯籠（枠は描かない）
+      const h = R.b - R.t;
+      for (const s of [1,-1]){   // 1: 左のふち（内側は右）、-1: 右のふち
+        const x = lerp(R.l, R.r, s > 0 ? .08 : .92);
+        ctx.save(); ctx.translate(x, R.b); ctx.scale(s, 1);
+        if (rb.i % 2 === 0) this.shachi(h*.17); else this.lantern(h*.14);
+        ctx.restore();
+      }
+    },
+    seg(rb,RA,RB){
+      // 屋根の瓦の横の列（2本）
+      ctx.strokeStyle = 'rgba(150,160,200,.25)'; ctx.lineWidth = 1 + (RA.b - RA.t)/H*2;
+      for (let j=1;j<=2;j++){ const f = j/3;
+        ctx.beginPath(); ctx.moveTo(lerp(RA.l,RB.l,f), lerp(RA.b,RB.b,f)); ctx.lineTo(lerp(RA.r,RB.r,f), lerp(RA.b,RB.b,f)); ctx.stroke(); }
+    },
+    after(G){
+      // 月の前を横に流れる、うすい雲
+      const M = this.moon(G);
+      for (let i=0;i<2;i++){
+        const x = lerp(-W*.4, W*1.4, ((clock*.03 + i*.5) % 1)), y = M.y + (i - .5)*M.r*.9;
+        ctx.fillStyle = 'rgba(40,46,90,.35)'; E(ctx, x, y, W*.35, H*.02); ctx.fill();
+        ctx.fillStyle = 'rgba(60,70,120,.25)'; E(ctx, x + W*.1, y + H*.01, W*.22, H*.012); ctx.fill();
+      }
+      // 画面の下から、紫のもや
+      ctx.fillStyle = rg(W*.5, H, 0, W*.8, ['rgba(90,60,160,.25)','rgba(90,60,160,0)']); ctx.fillRect(0, H*.5, W, H*.5);
+    }
+  }
+];
+
+const AMB_B = {
+  snow(a,x,y,s){ const dx = Math.sin(clock*2 + a.rot)*s*.8; ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.arc(x + dx, y, s*.5, 0, 7); ctx.fill(); },
+  spark(a,x,y,s){ const b = .5 + .5*Math.sin(clock*6 + a.rot); ctx.strokeStyle = `rgba(255,255,255,${.4 + .6*b})`; ctx.lineWidth = Math.max(1, s*.25); ctx.beginPath(); ctx.moveTo(x - s, y); ctx.lineTo(x + s, y); ctx.moveTo(x, y - s); ctx.lineTo(x, y + s); ctx.stroke(); },
+  leaf(a,x,y,s){ const col = ['#d9483b','#e88a2c','#f2c24a','#b8331e'][Math.floor(hash(a.sp*100)*4)]; ctx.fillStyle = col; ctx.beginPath(); for (let i=0;i<10;i++){ const r = i % 2 ? s*.4 : s*1.1, t = a.rot + i*Math.PI/5; i ? ctx.lineTo(x + Math.cos(t)*r, y + Math.sin(t)*r) : ctx.moveTo(x + Math.cos(t)*r, y + Math.sin(t)*r); } ctx.closePath(); ctx.fill(); },
+  ember(a,x,y,s){ ctx.strokeStyle = 'rgba(255,150,60,.7)'; ctx.lineWidth = Math.max(1, s*.3); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + s*.4, y + s*1.6); ctx.stroke(); ctx.fillStyle = '#ffb347'; ctx.beginPath(); ctx.arc(x, y, s*.5, 0, 7); ctx.fill(); },
+  foxfire(a,x,y,s){ const f = .75 + .25*Math.sin(clock*4 + a.rot); ctx.fillStyle = rg(x,y,0,s*2.2,['rgba(230,250,255,.95)','rgba(90,200,255,.55)','rgba(60,120,255,0)']); ctx.beginPath(); ctx.arc(x, y, s*2.2*f, 0, 7); ctx.fill(); ctx.fillStyle = '#7fd8ff'; ctx.beginPath(); ctx.moveTo(x, y - s*1.4); ctx.quadraticCurveTo(x + s*.8, y + s*.2, x, y + s*.7); ctx.quadraticCurveTo(x - s*.8, y + s*.2, x, y - s*1.4); ctx.fill(); }
+};
+SCENES.push(...SCENES_B);
 
 function drawScene(stIdx){
   const G = geom(), T = STAGES[stIdx].th, SC = SCENES[stIdx];
@@ -1939,6 +3644,7 @@ function drawAmb(){
     const k = kOf(a.z), R = rectAt(k,G);
     const x = lerp(R.l,R.r,(a.x + 1)/2), y = lerp(R.t,R.b,(a.y + 1)/2), s = .6 + k*4.5;
     ctx.globalAlpha = clamp((ZF - a.z)/2, 0, 1);
+    if (AMB_B[type]){ AMB_B[type](a, x, y, s, G); continue; }
     if (type === 'petal'){ ctx.fillStyle = '#ffd1e3'; E(ctx,x,y,s*1.6,s*.9,a.rot); ctx.fill(); ctx.fillStyle = '#ff9cc4'; E(ctx,x,y,s*.9,s*.4,a.rot); ctx.fill(); }
     else if (type === 'star'){ const dx = (x - G.vx)*.06, dy = (y - G.vy)*.06; ctx.strokeStyle = '#cfe6ff'; ctx.lineWidth = Math.max(1, s*.4); ctx.beginPath(); ctx.moveTo(x - dx, y - dy); ctx.lineTo(x, y); ctx.stroke(); }
     else if (type === 'page'){ ctx.save(); ctx.translate(x,y); ctx.rotate(a.rot); ctx.fillStyle = '#f3ead2'; ctx.fillRect(-s*1.4,-s,s*2.8,s*2); ctx.fillStyle = 'rgba(80,60,40,.5)';
@@ -2092,6 +3798,388 @@ const ART = [
     grin(g, r, r*.3, r*.5, s.laugh ? .3 + .1*Math.abs(Math.sin(c*13)) : (s.throwing ? .25 : .12), 6);
   }
 ];
+/* 別パターンの敵（5体）：フデマル・タコスミ・カラカサ・ハグルマン・ヤミギツネ */
+/* 手足のふくろ（テーパー＋うねり）。x0,y0 は付け根（px）、len は長さ（px）、amp は横ゆれ（r 単位） */
+function abLeg(g, r, x0, y0, len, amp, ph, w0, w1, col, dark){
+  const N = 18, Lp = [], Rp = [], Cp = [];
+  const cx = t => x0 + amp*r*t*Math.sin(ph + t*3.1), cy = t => y0 + len*t;
+  for (let i = 0; i <= N; i++){
+    const t = i/N, x = cx(t), y = cy(t);
+    const dx = cx(t + .01) - cx(t - .01), dy = cy(t + .01) - cy(t - .01);
+    const d = Math.hypot(dx, dy) || 1, w = lerp(w0, w1, t)*r/2, nx = -dy/d*w, ny = dx/d*w;
+    Lp.push([x + nx, y + ny]); Rp.push([x - nx, y - ny]); Cp.push([x, y, w]);
+  }
+  g.beginPath();
+  Lp.forEach((p, i) => i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1]));
+  for (let i = Rp.length - 1; i >= 0; i--) g.lineTo(Rp[i][0], Rp[i][1]);
+  g.closePath();
+  g.fillStyle = lg(x0, y0, x0, y0 + len, [mix(col, '#ffffff', .2), col, dark], g); g.fill();
+  g.lineWidth = r*.06; g.strokeStyle = '#140820'; g.stroke();
+  for (const t of [.42, .62, .8]){
+    const [x, y, w] = Cp[Math.round(t*N)];
+    g.fillStyle = 'rgba(255,235,235,.85)'; E(g, x, y, w*.42, w*.42); g.fill();
+  }
+}
+
+const ART_B = [
+  /* 5 フデマル：書道の筆のおばけ */
+  function fudemaru(g, r, c, s, col, dark){
+    g.save(); g.lineCap = 'round'; g.lineJoin = 'round';
+    g.rotate(Math.sin(c*1.6)*.05);
+    const tip = 1.12*r;
+    // 腕（細い線と小さな手）
+    for (const sd of [-1, 1]){
+      const wv = Math.sin(c*3 + sd*1.2)*.08*r;
+      g.strokeStyle = '#140820'; g.lineWidth = r*.05;
+      g.beginPath(); g.moveTo(sd*.56*r, -.05*r); g.quadraticCurveTo(sd*.98*r, -.2*r + wv*.5, sd*1.0*r, .16*r + wv); g.stroke();
+      g.fillStyle = '#fff'; E(g, sd*1.02*r, .18*r + wv, .12*r, .12*r); g.fill(); g.lineWidth = r*.04; g.stroke();
+    }
+    // 穂先（墨をふくんだ黒い毛）：根元は柄の約1.2倍、しずくのように細くなる
+    g.beginPath(); g.moveTo(-.42*r, .26*r);
+    g.bezierCurveTo(-.72*r, .32*r, -.78*r, .5*r, -.64*r, .7*r);
+    g.bezierCurveTo(-.5*r, .9*r, -.1*r, 1.0*r, 0, tip);
+    g.bezierCurveTo(.1*r, 1.0*r, .5*r, .9*r, .64*r, .7*r);
+    g.bezierCurveTo(.78*r, .5*r, .72*r, .32*r, .42*r, .26*r); g.closePath();
+    g.fillStyle = lg(-.8*r, 0, .8*r, 0, ['#3a3a3a', '#141414', '#050505', '#262626'], g); g.fill();
+    g.strokeStyle = '#140820'; g.lineWidth = r*.05; g.stroke();
+    // 明るい毛の線（数本）
+    g.strokeStyle = 'rgba(190,190,200,.42)'; g.lineWidth = r*.03;
+    for (const k of [-.46, -.22, .02, .26, .48]){ g.beginPath(); g.moveTo(k*r*.85, .42*r); g.quadraticCurveTo(k*r*1.05, .8*r, k*r*.14, tip - .1*r); g.stroke(); }
+    g.strokeStyle = 'rgba(255,255,255,.14)'; g.lineWidth = r*.05;
+    g.beginPath(); g.moveTo(-.5*r, .5*r); g.quadraticCurveTo(-.5*r, .8*r, -.2*r, tip - .2*r); g.stroke();
+    // 柄（竹）：黄土色の筒、上下に節
+    RR(g, -.6*r, -1.2*r, 1.2*r, 1.3*r, .3*r);
+    g.fillStyle = lg(-.6*r, 0, .6*r, 0, [mix(col, '#ffffff', .35), col, dark], g); g.fill();
+    g.lineWidth = r*.07; g.strokeStyle = '#140820'; g.stroke();
+    g.save(); RR(g, -.6*r, -1.2*r, 1.2*r, 1.3*r, .3*r); g.clip();
+    g.fillStyle = dark; g.fillRect(-.7*r, -1.04*r, 1.4*r, .08*r); g.fillRect(-.7*r, .02*r, 1.4*r, .05*r);
+    g.restore();
+    // 金具（白い帯。柄と穂先のつなぎ目）
+    RR(g, -.46*r, .1*r, .92*r, .16*r, r*.04);
+    g.fillStyle = lg(-.46*r, 0, .46*r, 0, ['#ffffff', '#e6e0d0', '#b9b09a'], g); g.fill();
+    g.strokeStyle = '#140820'; g.lineWidth = r*.05; g.stroke();
+    // ほっぺ
+    if (!s.hurt && !s.rage){ g.fillStyle = 'rgba(255,120,170,.55)'; E(g, -.47*r, -.2*r, .1*r, .06*r); g.fill(); E(g, .47*r, -.2*r, .1*r, .06*r); g.fill(); }
+    // 目・まゆ・口
+    eyeball(g, -.31*r, -.45*r, .22*r, .26*r, s); eyeball(g, .31*r, -.45*r, .22*r, .26*r, s);
+    if (!s.hurt){
+      const dy = s.rage ? .08*r : 0;
+      brow(g, -.1*r, -.74*r, -.42*r, -.84*r + dy, r*.07); brow(g, .1*r, -.74*r, .42*r, -.84*r + dy, r*.07);
+    }
+    grin(g, r, -.1*r, .2*r, s.laugh ? .3 + .1*Math.abs(Math.sin(c*13)) : (s.throwing ? .2 : .08), 2);
+    // 穂先から落ちる墨の1滴
+    const p = (c*.6) % 1;
+    if (p > .2){
+      const q = Math.min(1, (p - .2)/.7), dy = tip + .03*r + q*.2*r, rad = r*.06*(1 - q*.3);
+      g.globalAlpha = 1 - Math.max(0, (q - .8)/.2)*1;
+      g.fillStyle = '#1a1a1a'; E(g, 0, dy, rad, rad*1.25); g.fill();
+      g.globalAlpha = 1;
+    }
+    g.restore();
+  },
+
+  /* 6 タコスミ：夏祭りのタコ */
+  function tako(g, r, c, s, col, dark){
+    g.save(); g.lineCap = 'round'; g.lineJoin = 'round';
+    // 足（後ろ）：6本がくねくね
+    const legs = [[-.66, .8, .13, 0], [-.4, .95, .15, 1.1], [-.14, 1.0, .12, 2.2], [.14, 1.0, .12, 3.3], [.4, .95, .15, 4.4], [.66, .8, .13, 5.5]];
+    for (const [x0, ln, a, k] of legs) abLeg(g, r, x0*r, .3*r, ln*r, a, c*2.4 + k, .36, .1, col, dark);
+    // 頭
+    E(g, 0, -.3*r, .92*r, .9*r);
+    g.fillStyle = lg(0, -1.2*r, 0, .6*r, [mix(col, '#ffffff', .35), col, dark], g); g.fill();
+    g.lineWidth = r*.07; g.strokeStyle = '#140820'; g.stroke();
+    // 吸盤もよう（うすいピンクの点）
+    g.fillStyle = 'rgba(255,190,205,.7)';
+    for (const [x, y] of [[-.6, -.5], [.6, -.5], [-.28, -.62], [.28, -.62], [0, -.72]]){ E(g, x*r, y*r, .07*r, .07*r); g.fill(); }
+    // 白いはちまき（頭の上の帯）
+    g.save(); E(g, 0, -.3*r, .92*r, .9*r); g.clip();
+    g.fillStyle = '#fbfbf6'; g.fillRect(-r, -1.0*r, 2*r, .19*r);
+    g.fillStyle = '#e0364a'; g.fillRect(-r, -.9*r, 2*r, .035*r);
+    g.strokeStyle = '#140820'; g.lineWidth = r*.025;
+    g.beginPath(); g.moveTo(-r, -1.0*r); g.lineTo(r, -1.0*r); g.moveTo(-r, -.81*r); g.lineTo(r, -.81*r); g.stroke();
+    g.restore();
+    // はちまきの結び目と飾りの端
+    g.save(); g.translate(.66*r, -.9*r); g.rotate(Math.sin(c*4)*.12);
+    g.fillStyle = '#fbfbf6'; g.strokeStyle = '#140820'; g.lineWidth = r*.04;
+    g.beginPath(); g.moveTo(0, -.05*r); g.lineTo(.46*r, -.16*r); g.lineTo(.36*r, .08*r); g.closePath(); g.fill(); g.stroke();
+    g.beginPath(); g.moveTo(0, .02*r); g.lineTo(.44*r, .2*r); g.lineTo(.22*r, .32*r); g.closePath(); g.fill(); g.stroke();
+    E(g, 0, 0, .08*r, .08*r); g.fill(); g.stroke();
+    g.restore();
+    // つや
+    g.fillStyle = 'rgba(255,255,255,.4)'; E(g, -.46*r, -.82*r + .2*r, .15*r, .07*r, -.5); g.fill();
+    // 目・まゆ・口
+    eyeball(g, -.33*r, -.1*r, .2*r, .24*r, s); eyeball(g, .33*r, -.1*r, .2*r, .24*r, s);
+    if (!s.hurt){
+      const dy = s.rage ? .08*r : 0;
+      brow(g, -.12*r, -.4*r, -.42*r, -.5*r + dy, r*.07); brow(g, .12*r, -.4*r, .42*r, -.5*r + dy, r*.07);
+    }
+    if (s.laugh) grin(g, r, .2*r, .26*r, .3 + .1*Math.abs(Math.sin(c*13)), 2);
+    else if (s.throwing) grin(g, r, .2*r, .2*r, .22, 0);
+    else { g.fillStyle = '#ff8aa0'; g.strokeStyle = '#140820'; g.lineWidth = r*.03; E(g, 0, .3*r, .11*r, .08*r); g.fill(); g.stroke();
+      g.fillStyle = '#3a0716'; E(g, 0, .3*r, .05*r, .035*r); g.fill(); }
+    g.restore();
+  },
+
+  /* 7 カラカサ：から傘おばけ（一つ目・長い舌・一本足） */
+  function haguruman(g, r, c, s, col, dark){
+    g.save(); g.lineCap = 'round'; g.lineJoin = 'round';
+    // 歯車（歯だけ回す）
+    g.save(); g.rotate(c*.6);
+    const N = 12, M = 144;
+    g.beginPath();
+    for (let i = 0; i <= M; i++){
+      const a = i/M*Math.PI*2, t = (i/M*N) % 1;
+      const f = t < .22 ? 0 : t < .38 ? (t - .22)/.16 : t < .62 ? 1 : t < .78 ? 1 - (t - .62)/.16 : 0;
+      const rr = (.82 + .18*f)*r;
+      if (i) g.lineTo(Math.cos(a)*rr, Math.sin(a)*rr); else g.moveTo(Math.cos(a)*rr, Math.sin(a)*rr);
+    }
+    g.closePath();
+    g.fillStyle = rg(-.3*r, -.35*r, .1*r, 1.05*r, [mix(col, '#ffffff', .4), col, dark], g); g.fill();
+    g.lineWidth = r*.07; g.strokeStyle = '#140820'; g.stroke();
+    g.strokeStyle = hexA(dark, .6); g.lineWidth = r*.03; g.beginPath(); g.arc(0, 0, .7*r, 0, 7); g.stroke();
+    g.fillStyle = dark;
+    for (let k = 0; k < 6; k++){ const a = k*Math.PI/3; E(g, Math.cos(a)*.42*r, Math.sin(a)*.42*r, .1*r, .1*r); g.fill(); }
+    g.restore();
+    // ゼンマイ（ねじ）と、回る羽根2枚（上に乗せる）
+    g.strokeStyle = '#140820'; g.lineWidth = r*.09;
+    g.beginPath(); g.moveTo(0, -.9*r); g.lineTo(.07*r, -.98*r); g.lineTo(-.07*r, -1.05*r); g.lineTo(.05*r, -1.12*r); g.stroke();
+    g.save(); g.translate(0, -1.2*r); g.rotate(c*5);
+    g.fillStyle = lg(-.3*r, 0, .3*r, 0, ['#fff3b0', '#e8b84a'], g);
+    for (const sd of [-1, 1]){ E(g, sd*.15*r, 0, .16*r, .065*r); g.fill(); g.lineWidth = r*.03; g.stroke(); }
+    E(g, 0, 0, .05*r, .05*r); g.fillStyle = dark; g.fill();
+    g.restore();
+    // 顔（歯車のまん中の丸い板。回さない）
+    E(g, 0, 0, .62*r, .62*r);
+    g.fillStyle = lg(0, -.6*r, 0, .6*r, ['#fffbe6', '#f3e2b0'], g); g.fill();
+    g.lineWidth = r*.05; g.strokeStyle = '#140820'; g.stroke();
+    if (!s.hurt && !s.rage){ g.fillStyle = 'rgba(255,120,150,.5)'; E(g, -.4*r, .16*r, .1*r, .06*r); g.fill(); E(g, .4*r, .16*r, .1*r, .06*r); g.fill(); }
+    eyeball(g, -.26*r, -.1*r, .17*r, .2*r, s); eyeball(g, .26*r, -.1*r, .17*r, .2*r, s);
+    if (!s.hurt){
+      const dy = s.rage ? .08*r : 0;
+      brow(g, -.1*r, -.38*r, -.38*r, -.46*r + dy, r*.06); brow(g, .1*r, -.38*r, .38*r, -.46*r + dy, r*.06);
+    }
+    grin(g, r, .22*r, .24*r, s.laugh ? .3 + .1*Math.abs(Math.sin(c*13)) : (s.throwing ? .18 : .08), 2);
+    g.restore();
+  },
+
+  /* 9 ヤミギツネ：九尾の大妖怪（全身。座った体・九本のしっぽ・えりまき・鈴・前足・きつね火） */
+  function karakasa(g, r, c, s, col, dark){
+    g.save(); g.lineCap = 'round'; g.lineJoin = 'round';
+    const hop = Math.abs(Math.sin(c*4.2))*.09*r;   // ぴょんぴょん
+    g.translate(0, -hop);
+    const top = -1.12*r, rimY = -.02*r, half = 1.05*r, lx = .42*r;
+    // 一本足と下駄
+    g.beginPath(); g.moveTo(lx, .4*r); g.quadraticCurveTo(lx + Math.sin(c*4.2)*.04*r, .7*r, lx, 1.0*r);
+    g.strokeStyle = '#140820'; g.lineWidth = r*.13; g.stroke();
+    g.strokeStyle = '#f6f3ec'; g.lineWidth = r*.07; g.stroke();
+    g.fillStyle = '#4a2a14'; g.strokeStyle = '#140820'; g.lineWidth = r*.04;
+    RR(g, lx - .3*r, .98*r, .6*r, .09*r, r*.03); g.fill(); g.stroke();
+    RR(g, lx - .3*r, 1.07*r, .1*r, .05*r, r*.02); g.fill(); g.stroke();
+    RR(g, lx + .2*r, 1.07*r, .1*r, .05*r, r*.02); g.fill(); g.stroke();
+    g.beginPath(); g.moveTo(lx - .1*r, .98*r); g.quadraticCurveTo(lx, .88*r, lx + .1*r, .98*r);
+    g.strokeStyle = '#d12a3a'; g.lineWidth = r*.035; g.stroke();
+    // 口（大きく開く）と長い舌
+    grin(g, r, .1*r, .42*r, s.laugh ? .42 + .1*Math.abs(Math.sin(c*13)) : (s.throwing ? .4 : .3), 4);
+    const tx = Math.sin(c*2.5)*.06*r, tw = .15*r;
+    g.beginPath(); g.moveTo(-tw, .15*r);
+    g.bezierCurveTo(-tw, .7*r, tx - .07*r, .85*r, tx, .95*r);
+    g.bezierCurveTo(tx + .07*r, .85*r, tw, .7*r, tw, .15*r); g.closePath();
+    g.fillStyle = '#ff7aa8'; g.fill(); g.strokeStyle = '#140820'; g.lineWidth = r*.05; g.stroke();
+    g.beginPath(); g.moveTo(0, .25*r); g.quadraticCurveTo(tx*.5, .6*r, tx, .8*r); g.strokeStyle = 'rgba(190,40,90,.45)'; g.lineWidth = r*.03; g.stroke();
+    // 傘（和傘の形：ふちは扇のようなぎざぎざ）
+    const cp = () => {
+      g.beginPath(); g.moveTo(-half, rimY);
+      g.bezierCurveTo(-1.02*r, -.7*r, -.5*r, top, 0, top);
+      g.bezierCurveTo(.5*r, top, 1.02*r, -.7*r, half, rimY);
+      const n = 5, step = 2*half/n;
+      for (let i = 0; i < n; i++){ const xa = half - i*step, xb = xa - step; g.quadraticCurveTo((xa + xb)/2, rimY + .17*r, xb, rimY); }
+      g.closePath();
+    };
+    cp(); g.fillStyle = lg(0, top, 0, rimY, [mix(col, '#ffffff', .3), col, dark], g); g.fill();
+    g.lineWidth = r*.07; g.strokeStyle = '#140820'; g.stroke();
+    g.save(); cp(); g.clip();
+    g.strokeStyle = hexA(dark, .9); g.lineWidth = r*.03;
+    for (let i = 0; i <= 5; i++){ const xr = -half + i*(2*half/5); g.beginPath(); g.moveTo(0, top + .02*r); g.lineTo(xr, rimY + .1*r); g.stroke(); }
+    g.restore();
+    g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = r*.06;
+    g.beginPath(); g.moveTo(-.72*r, -.56*r); g.quadraticCurveTo(-.6*r, -.86*r, -.34*r, -.98*r); g.stroke();
+    // 一つ目とまゆ
+    eyeball(g, 0, -.42*r, .3*r, .3*r, s);
+    if (!s.hurt){
+      const dy = s.rage ? .08*r : 0;
+      brow(g, -.16*r, -.8*r, -.44*r, -.9*r + dy, r*.07); brow(g, .16*r, -.8*r, .44*r, -.9*r + dy, r*.07);
+    }
+    g.restore();
+  },
+
+  /* 8 ハグルマン：からくり時計塔の歯車 */
+  function yamigitsune(g, r, c, s, col, dark){
+    g.save(); g.lineCap = 'round'; g.lineJoin = 'round';
+    const OUT = '#140820', bx = 0, by = .15*r;
+    // しっぽのかたち：付け根（bx,by）から角度 ang の方向へ。u=0 が付け根、u=1 が先。中ほどがふくらむしずく形
+    const tailPath = (ang, L, bend, hw) => {
+      const dx = Math.cos(ang), dy = Math.sin(ang), nx = -dy, ny = dx, N = 26, Lp = [], Rp = [];
+      for (let k = 0; k <= N; k++){
+        const u = k/N, w = hw*Math.pow(Math.sin(Math.PI*Math.pow(u, .7)), .6), off = bend*Math.sin(Math.PI*u);
+        const px = bx + dx*L*u + nx*off, py = by + dy*L*u + ny*off;
+        Lp.push([px + nx*w, py + ny*w]); Rp.push([px - nx*w, py - ny*w]);
+      }
+      g.beginPath();
+      Lp.forEach((p, i) => i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1]));
+      for (let i = Rp.length - 1; i >= 0; i--) g.lineTo(Rp[i][0], Rp[i][1]);
+      g.closePath();
+      return { tip: [bx + dx*L, by + dy*L], p75: [bx + dx*L*.75 + nx*bend*Math.sin(Math.PI*.75), by + dy*L*.75 + ny*bend*Math.sin(Math.PI*.75)] };
+    };
+    // きつね火：体のまわりを回る青白い炎（sin>0 は体の前、それ以外は体の後ろ）
+    const flame = (k, front) => {
+      const th = c*.9 + k*Math.PI/2, ss = Math.sin(th);
+      if ((ss > 0) !== front) return;
+      const fx = Math.cos(th)*1.15*r, fy = (.1 + ss*.55)*r, sz = .17*r, fl = Math.sin(c*9 + k*2.1)*.1*sz, hot = s.rage;
+      g.fillStyle = rg(fx, fy, 0, sz*3, hot ? ['rgba(255,200,110,.8)', 'rgba(255,40,60,.35)', 'rgba(255,30,60,0)']
+                                            : ['rgba(220,248,255,.8)', 'rgba(74,168,255,.35)', 'rgba(74,168,255,0)'], g);
+      E(g, fx, fy, sz*3, sz*3); g.fill();
+      const ty = fy - 1.5*sz + fl;
+      g.beginPath(); g.moveTo(fx, ty);
+      g.bezierCurveTo(fx + .9*sz, fy - .5*sz, fx + .65*sz, fy + .5*sz, fx, fy + .75*sz);
+      g.bezierCurveTo(fx - .65*sz, fy + .5*sz, fx - .9*sz, fy - .5*sz, fx, ty); g.closePath();
+      g.fillStyle = lg(0, ty, 0, fy + .75*sz, hot ? ['#fff3c0', '#ff9a3c', '#e0102e'] : ['#ffffff', '#bfe9ff', '#4aa8ff'], g); g.fill();
+      g.lineWidth = r*.03; g.strokeStyle = hot ? '#5a0a14' : '#1d3f7a'; g.stroke();
+    };
+
+    // 九本のしっぽ（いちばん後ろ）。-170°〜-10° の扇形、外側へ少しカーブ、ゆっくりなびく
+    const tailCol0 = mix(col, dark, .35), tailCol1 = mix(col, '#4a2fb8', .4);
+    for (let i = 0; i < 9; i++){
+      const deg = -170 + i*20, ang = deg*Math.PI/180 + Math.sin(c*1.2 + i*.8)*.06;
+      const L = (1.3 + .04*Math.abs(Math.sin(ang)))*r + Math.sin(c*1.6 + i*1.3)*.025*r;
+      const bend = ((i < 4 ? -1 : i > 4 ? 1 : 0)*.1 + Math.sin(c*1.4 + i*1.1)*.05)*r;
+      const T = tailPath(ang, L, bend, .2*r);
+      g.fillStyle = lg(bx, by, T.tip[0], T.tip[1], [tailCol0, tailCol1], g); g.fill();
+      g.save(); g.clip();                                    // 先の25%だけ、はっきりした白
+      g.translate(T.p75[0], T.p75[1]); g.rotate(ang); g.fillStyle = '#fbfbff'; g.fillRect(0, -2*r, 2*r, 4*r);
+      g.restore();
+      tailPath(ang, L, bend, .2*r);                          // 同じ形でふちを描く
+      g.lineWidth = r*.05; g.strokeStyle = OUT; g.stroke();
+    }
+    for (let k = 0; k < 4; k++) flame(k, false);
+
+    // 肩のとげ毛（左右3本ずつ。体の後ろ）
+    g.fillStyle = mix(col, '#140820', .2); g.lineWidth = r*.045; g.strokeStyle = OUT;
+    for (const sd of [-1, 1]) for (const [y0, ty] of [[-.02, -.2], [.14, .02], [.3, .24]]){
+      g.beginPath(); g.moveTo(sd*.5*r, y0*r); g.quadraticCurveTo(sd*.84*r, (y0 + ty)/2*r - .02*r, sd*.9*r, ty*r); g.quadraticCurveTo(sd*.7*r, (y0 + .1)*r, sd*.46*r, (y0 + .2)*r); g.closePath();
+      g.fill(); g.stroke();
+    }
+    // 体（座った姿。上がせまく下が広い洋なし形）
+    g.beginPath(); g.moveTo(0, -.3*r);
+    g.bezierCurveTo(.32*r, -.3*r, .6*r, -.02*r, .6*r, .4*r);
+    g.bezierCurveTo(.6*r, .82*r, .36*r, 1.0*r, 0, 1.0*r);
+    g.bezierCurveTo(-.36*r, 1.0*r, -.6*r, .82*r, -.6*r, .4*r);
+    g.bezierCurveTo(-.6*r, -.02*r, -.32*r, -.3*r, 0, -.3*r); g.closePath();
+    g.fillStyle = lg(0, -.3*r, 0, 1.0*r, [mix(col, '#ffffff', .2), col, dark], g); g.fill();
+    g.lineWidth = r*.06; g.strokeStyle = OUT; g.stroke();
+    // 体の毛のすじ（うすいラベンダー）とつや
+    g.strokeStyle = 'rgba(200,185,255,.22)'; g.lineWidth = r*.03;
+    for (const sd of [-1, 1]) for (const k of [0, 1]){
+      g.beginPath(); g.moveTo(sd*(.46 - k*.1)*r, (.5 + k*.22)*r); g.quadraticCurveTo(sd*(.3 - k*.05)*r, (.6 + k*.22)*r, sd*(.4 - k*.05)*r, (.9 + k*.02)*r); g.stroke();
+    }
+    g.fillStyle = 'rgba(255,255,255,.12)'; E(g, -.3*r, .2*r, .12*r, .22*r, .3); g.fill();
+
+    // 胸の白い毛（えりまき）：ギザギザのふち
+    g.beginPath(); g.moveTo(-.46*r, -.08*r); g.quadraticCurveTo(0, .08*r, .46*r, -.08*r); g.lineTo(.34*r, .5*r);
+    for (let i = 0; i <= 8; i++) g.lineTo(lerp(.34, -.34, i/8)*r, (i % 2 ? .6 : .5)*r);
+    g.lineTo(-.46*r, -.08*r); g.closePath();
+    g.fillStyle = lg(0, -.08*r, 0, .6*r, ['#d9d2f0', '#b4a8dc', '#8f82c4'], g); g.fill();
+    g.lineWidth = r*.035; g.strokeStyle = OUT; g.stroke();
+    // 赤い組みひも（横切り）と、金の大きな鈴
+    g.beginPath(); g.moveTo(-.42*r, .34*r); g.quadraticCurveTo(0, .46*r, .42*r, .34*r);
+    g.strokeStyle = OUT; g.lineWidth = r*.1; g.stroke();
+    g.strokeStyle = '#d12a3a'; g.lineWidth = r*.07; g.stroke();
+    g.setLineDash([r*.04, r*.04]); g.strokeStyle = '#ff6a7a'; g.lineWidth = r*.03; g.stroke(); g.setLineDash([]);
+    g.beginPath(); g.moveTo(0, .4*r); g.lineTo(0, .45*r); g.strokeStyle = OUT; g.lineWidth = r*.04; g.stroke();
+    E(g, 0, .57*r, .13*r, .13*r);
+    g.fillStyle = lg(-.13*r, .44*r, .13*r, .7*r, ['#fff1a0', '#e3b54a', '#7a5a12'], g); g.fill();
+    g.lineWidth = r*.03; g.strokeStyle = '#3a2208'; g.stroke();
+    g.beginPath(); g.moveTo(-.12*r, .57*r); g.lineTo(.12*r, .57*r); g.strokeStyle = OUT; g.lineWidth = r*.03; g.stroke();
+    g.fillStyle = '#140820'; E(g, 0, .64*r, .03*r, .045*r); g.fill();
+
+    // 前足2本（体の前。先に白い足先と黒いつめ3本）
+    for (const sd of [-1, 1]){
+      const px = sd*.3*r;
+      RR(g, px - .14*r, .5*r, .28*r, .6*r, .14*r);
+      g.fillStyle = lg(px, .5*r, px, 1.1*r, [mix(col, '#ffffff', .15), col, dark], g); g.fill();
+      g.lineWidth = r*.055; g.strokeStyle = OUT; g.stroke();
+      E(g, px, 1.02*r, .15*r, .1*r); g.fillStyle = '#f4f0ff'; g.fill(); g.lineWidth = r*.04; g.stroke();
+      g.fillStyle = OUT;
+      for (const k of [-1, 0, 1]){ const cx = px + k*.08*r; g.beginPath(); g.moveTo(cx - .03*r, 1.07*r); g.lineTo(cx, 1.16*r); g.lineTo(cx + .03*r, 1.07*r); g.closePath(); g.fill(); }
+    }
+    for (let k = 0; k < 4; k++) flame(k, true);
+
+    // 頭（きつねの顔）。F(v) は頭の単位 v を px にする（.72r が1）。eyeball は線の太さを px で決めるので拡大しない
+    const F = v => v*.72*r;
+    g.save(); g.translate(0, -.46*r);
+    // とがった耳（細くて高い。中はピンク）
+    for (const sd of [-1, 1]){
+      g.beginPath(); g.moveTo(F(sd*.34), F(-.4)); g.lineTo(F(sd*.5), F(-1.18)); g.lineTo(F(sd*.8), F(-.34)); g.closePath();
+      g.fillStyle = col; g.fill(); g.lineWidth = F(.1); g.strokeStyle = OUT; g.stroke();
+      g.beginPath(); g.moveTo(F(sd*.42), F(-.46)); g.lineTo(F(sd*.5), F(-1.05)); g.lineTo(F(sd*.68), F(-.4)); g.closePath();
+      g.fillStyle = 'rgba(255,110,160,.85)'; g.fill();
+    }
+    // ほおの毛（外へ突き出す白い三角。左右3本ずつ）：[付け根上x, 付け根上y, 先x, 先y, 付け根下x, 付け根下y]
+    g.fillStyle = '#f4f0ff'; g.strokeStyle = OUT; g.lineWidth = F(.07);
+    for (const sd of [-1, 1]) for (const t of [[.7, -.2, 1.1, -.04, .66, .06], [.6, .02, 1.0, .14, .54, .2], [.46, .16, .88, .3, .4, .34]]){
+      g.beginPath(); g.moveTo(F(sd*t[0]), F(t[1])); g.lineTo(F(sd*t[2]), F(t[3])); g.lineTo(F(sd*t[4]), F(t[5])); g.closePath(); g.fill(); g.stroke();
+    }
+    // 顔の輪郭：ほおは広く、下へいくほどせまくなり、長いマズル（鼻先）でとがる
+    const face = () => {
+      g.beginPath(); g.moveTo(0, F(-.5));
+      g.bezierCurveTo(F(.34), F(-.56), F(.66), F(-.5), F(.72), F(-.26));
+      g.bezierCurveTo(F(.76), F(-.06), F(.66), F(.08), F(.46), F(.2));
+      g.bezierCurveTo(F(.32), F(.3), F(.14), F(.4), 0, F(.5));
+      g.bezierCurveTo(F(-.14), F(.4), F(-.32), F(.3), F(-.46), F(.2));
+      g.bezierCurveTo(F(-.66), F(.08), F(-.76), F(-.06), F(-.72), F(-.26));
+      g.bezierCurveTo(F(-.66), F(-.5), F(-.34), F(-.56), 0, F(-.5)); g.closePath();
+    };
+    face(); g.fillStyle = lg(0, F(-.5), 0, F(.5), [mix(col, '#ffffff', .25), col, dark], g); g.fill();
+    g.lineWidth = F(.1); g.strokeStyle = OUT; g.stroke();
+    g.lineWidth = F(.04); g.strokeStyle = 'rgba(190,170,255,.55)'; g.stroke();
+    // 白いマズル（上は V 字に鼻先へ。顔の中だけ）
+    g.save(); face(); g.clip();
+    g.beginPath(); g.moveTo(F(-.52), F(.04)); g.quadraticCurveTo(F(-.22), F(.16), 0, F(.22)); g.quadraticCurveTo(F(.22), F(.16), F(.52), F(.04));
+    g.lineTo(F(.36), F(.44)); g.lineTo(0, F(.56)); g.lineTo(F(-.36), F(.44)); g.closePath();
+    g.fillStyle = '#f4f0ff'; g.fill();
+    g.restore();
+    face(); g.lineWidth = F(.1); g.strokeStyle = OUT; g.stroke();   // あごのふちを描き直す
+    g.fillStyle = 'rgba(255,255,255,.3)'; E(g, F(-.4), F(-.28), F(.14), F(.07), -.5); g.fill();
+    // ほおのくまどり（赤い線）
+    g.strokeStyle = '#ff3355'; g.lineWidth = F(.08);
+    for (const sd of [-1, 1]){ g.beginPath(); g.moveTo(F(sd*.3), F(.08)); g.quadraticCurveTo(F(sd*.5), F(.16), F(sd*.66), F(.1)); g.stroke(); }
+    // つり目（外側を上げて傾ける・金の白目・黒いたてひとみ）
+    for (const sd of [-1, 1]){
+      g.save(); g.translate(F(sd*.36), F(-.1)); g.rotate(-sd*.28);
+      eyeball(g, 0, 0, F(.26), F(.17), s, { white: '#ffd86a', slit: true, pupilCol: '#140820', pupil: .6 });
+      g.restore();
+    }
+    // まゆ（金の線に黒いふち。いかりのときは赤）
+    if (!s.hurt){
+      const bw = F(.09), bs = s.rage ? [[-.16, -.28, -.5, -.56], [.16, -.28, .5, -.56]] : [[-.17, -.34, -.48, -.44], [.17, -.34, .48, -.44]];
+      for (const [x1, y1, x2, y2] of bs){
+        g.beginPath(); g.moveTo(F(x1), F(y1)); g.lineTo(F(x2), F(y2)); g.lineCap = 'round';
+        g.strokeStyle = OUT; g.lineWidth = bw + F(.04); g.stroke();
+        g.strokeStyle = s.rage ? '#ff6a7a' : '#ffd86a'; g.lineWidth = bw; g.stroke();
+      }
+    }
+    // おでこの金の宝玉（光がゆれる）
+    g.beginPath(); g.moveTo(0, F(-.47)); g.lineTo(F(.1), F(-.37)); g.lineTo(0, F(-.27)); g.lineTo(F(-.1), F(-.37)); g.closePath();
+    g.fillStyle = lg(0, F(-.47), 0, F(-.27), ['#fff1a0', '#e8b03a', '#a8701a'], g); g.fill();
+    g.strokeStyle = '#3a2208'; g.lineWidth = F(.025); g.stroke();
+    g.fillStyle = `rgba(255,255,255,${.35 + .35*Math.sin(c*4)})`; E(g, F(-.03), F(-.4), F(.025), F(.025)); g.fill();
+    // 小さな黒い鼻（鼻先）と口
+    E(g, 0, F(.43), F(.09), F(.065)); g.fillStyle = OUT; g.fill();
+    grin(g, F(1), F(.5), F(.17), s.laugh ? .3 + .1*Math.abs(Math.sin(c*13)) : (s.throwing ? .2 : .08), 2);
+    g.restore();
+    g.restore();
+  }
+];
+ART.push(...ART_B);
 
 const EN = { idx:0, throwT:0, hurtT:0, laughT:0, enterT:0, defeatT:0, gone:false, bubble:null, pos:{ x:0, y:0, r:30 } };
 const eC = document.createElement('canvas'), eX = eC.getContext('2d');
@@ -2237,7 +4325,7 @@ function drawCard(q, x, y, s, o={}){
   RR(ctx, -w/2 + 3, -h/2 + 7, w, h, f*.6); ctx.fillStyle = 'rgba(0,0,0,.3)'; ctx.fill();
   RR(ctx, -w/2, -h/2, w, h, f*.6); ctx.fillStyle = '#fffaf0'; ctx.fill();
   ctx.lineWidth = f*.18; ctx.strokeStyle = o.danger > 0 ? mix('#1a0b2b','#e0102e',clamp(o.danger,0,1)) : '#1a0b2b'; ctx.stroke();
-  const tag = q.g === 'vocab' ? '語彙' : '文法', tw = f*2.7, th = f*1.15;
+  const tag = genreName(q.g), th = f*1.15; ctx.font = `800 ${f*.68}px ${UIFONT}`; const tw = Math.max(f*2.7, ctx.measureText(tag).width + f*1.1);
   RR(ctx, -w/2 + f*.5, -h/2 - th*.55, tw, th, th/2); ctx.fillStyle = q.g === 'vocab' ? '#4ff0ff' : '#ffd23f'; ctx.fill(); ctx.lineWidth = f*.1; ctx.stroke();
   ctx.fillStyle = '#1a0b2b'; ctx.font = `800 ${f*.68}px ${UIFONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(tag, -w/2 + f*.5 + tw/2, -h/2 - th*.05);
   ctx.textAlign = 'left';
@@ -2343,7 +4431,7 @@ function drawJamUI(pos, o){
     const fz = clamp(pos.fs*.13, 12, 18), py = by + bh + 16;
     ctx.globalAlpha = clamp(o*3, 0, 1);
     ctx.font = `800 ${fz}px ${UIFONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    const label = JAM_NAMES[S.jamStyle] || '', pw = ctx.measureText(label).width + fz*1.4, ph = fz*1.7;
+    const label = t('jamStyles')[S.jamStyle] || '', pw = ctx.measureText(label).width + fz*1.4, ph = fz*1.7;
     ctx.fillStyle = '#ffffff'; RR(ctx, pos.x - pw/2, py - ph/2, pw, ph, ph/2); ctx.fill();
     ctx.fillStyle = '#1a0b2b'; ctx.fillText(label, pos.x, py);
   }
@@ -2525,7 +4613,7 @@ function renderHud(breakIdx=-1){
   $('bossBar').classList.toggle('rage', !!S.rage);
   $('bossBar').style.visibility = (S.mode === 'warp' || S.mode === 'allclear') ? 'hidden' : 'visible';
   const hb = $('hintBtn');
-  hb.disabled = S.mode !== 'play' || S.hint >= 2; hb.textContent = S.hint === 0 ? 'ヒント' : 'もう1つ';
+  hb.disabled = S.mode !== 'play' || S.hint >= 2; hb.textContent = S.hint === 0 ? t('hint') : t('hint2');
   $('passBtn').disabled = S.mode !== 'play';
 }
 function renderGuide(){
@@ -2539,26 +4627,29 @@ function showBanner(main, cls, sub, sub2){
   banner.classList.remove('show'); void banner.offsetWidth; banner.classList.add('show');
 }
 const hideBanner = () => { banner.innerHTML = ''; };
-function showCombo(n){ const el = $('combo'); el.innerHTML = `${n}<small>れんぞく</small>`; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+function showCombo(n){ const el = $('combo'); el.innerHTML = `${n}<small>${t('combo')}</small>`; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
 function flashInput(cls){ ansForm.classList.remove('bad','good'); void ansForm.offsetWidth; ansForm.classList.add(cls); clearTimeout(flashInput.t); flashInput.t = setTimeout(() => ansForm.classList.remove(cls), 450); }
 
+// ステージ i（0〜4）で今回使う見た目の番号（0〜9）。B は i+5
+const vIdx = i => i + 5*((S && S.vars && S.vars[i]) || 0);
+function pickVars(){ return [0,1,2,3,4].map(() => Math.random() < .5 ? 0 : 1); }
 const inGame = () => ['kbwait','count','intro','play','hit','reveal','defeat','warp'].includes(S.mode);
 function startGame(){
   if (fsAuto && FS.supported() && !FS.active() && !isStandalone()) FS.enter();
   if (gameMode === 'type'){ $('controls').hidden = false; ansForm.hidden = false; input.value = ''; input.focus(); }
   AU.init(); clearTimeout(S.timer); WARP = null;
   S = { mode:'count', stage:0, hp:0, hpShown:0, maxHp:1, rage:false, lives:3, score:0, combo:0, maxCombo:0, correct:0, wrongs:0, hits:0,
-        missed:[], pool: shuffle(poolOf()), plan: hpPlan(qCount === 'all' ? poolOf().length : +qCount), idx:0, cur:null, p:0, push:0, dur:9000, hint:0, glitchT:0, wrongFx:0, spawnFlash:0, spinDir:1, hb:0, timer:null };
+        vars: pickVars(), missed:[], seen:[], got:[], pool: shuffle(poolOf()), plan: hpPlan(qCount === 'all' ? poolOf().length : +qCount), idx:0, cur:null, p:0, push:0, dur:9000, hint:0, glitchT:0, wrongFx:0, spawnFlash:0, spinDir:1, hb:0, timer:null };
   ['title','result','howto','reveal','settings','iosHelp'].forEach(id => $(id).hidden = true);
   $('hud').hidden = false; $('controls').hidden = false; hintPill.hidden = true;
   ansForm.hidden = gameMode !== 'type'; choicesEl.hidden = gameMode !== 'choice'; choicesEl.innerHTML = '';
   const touch = window.matchMedia && matchMedia('(pointer: coarse)').matches;
-  $('ctlNote').textContent = gameMode === 'type' ? 'Enter で回答' : (touch ? 'タップで回答' : 'キー 1〜4 でも選べます');
+  $('ctlNote').textContent = gameMode === 'type' ? t('noteEnter') : (touch ? t('noteTap') : t('noteKeys'));
   parts = []; pops = []; ghosts = []; bolts = []; cracks = null;
   input.value = '';
   prepareStage(0);
-  setStageVisual(0); enemyEnter();
-  Music.play(STAGES[0].song);
+  setStageVisual(vIdx(0)); enemyEnter();
+  Music.play(STAGES[vIdx(0)].song);
   renderHud(); renderGuide(); fit();
   if (gameMode === 'type'){
     input.focus(); S.mode = 'kbwait';
@@ -2568,7 +4659,7 @@ function startGame(){
 function beginCountdown(){
   $('kbGate').hidden = true; S.mode = 'count';
   const st = STAGES[0];
-  const seq = [[`ステージ 1`,'stage',st.name,`${st.enemy} があらわれた！`], ['3','num'], ['2','num'], ['1','num'], ['スタート！','go']];
+  const seq = [[t('stageN',{n:1}),'stage',stageName(vIdx(0)),t('appeared',{e:enemyName(vIdx(0))})], ['3','num'], ['2','num'], ['1','num'], [t('go'),'go']];
   let i = 0;
   const step = () => {
     if (S.mode !== 'count') return;
@@ -2580,18 +4671,19 @@ function beginCountdown(){
   };
   step();
 }
-function prepareStage(i){ S.stage = i; S.maxHp = (S.plan || [])[i] || STAGES[i].hp; S.hp = S.maxHp; S.hpShown = S.maxHp; S.rage = false; Music.intense = 0; }
+function prepareStage(i){ S.stage = i; S.maxHp = (S.plan || [])[i] || STAGES[vIdx(i)].hp; S.hp = S.maxHp; S.hpShown = S.maxHp; S.rage = false; Music.intense = 0; }
 function beginStage(i){
-  prepareStage(i); enemyEnter(); Music.play(STAGES[i].song);
+  prepareStage(i); enemyEnter(); Music.play(STAGES[vIdx(i)].song);
   S.mode = 'intro'; renderHud();
   const st = STAGES[i];
-  showBanner(i === 4 ? 'ボスステージ' : `ステージ ${i + 1}`, i === 4 ? 'over' : 'stage', st.name, `${st.enemy} があらわれた！`);
-  later(() => { showBanner('スタート！','go'); sfx('go'); later(() => { hideBanner(); nextWord(); }, 600); }, 1900);
+  showBanner(i === 4 ? t('bossStage') : t('stageN',{n:i + 1}), i === 4 ? 'over' : 'stage', stageName(vIdx(i)), t('appeared',{e:enemyName(vIdx(i))}));
+  later(() => { showBanner(t('go'),'go'); sfx('go'); later(() => { hideBanner(); nextWord(); }, 600); }, 1900);
 }
 
 function nextWord(){
   if (S.idx >= S.pool.length){ S.pool = shuffle(poolOf()); S.idx = 0; }
   S.cur = S.pool[S.idx++]; S.p = 0; S.push = 0; S.hint = 0; S.hb = 0; S.wrongFx = 0; S.glitchT = 0; S.spawnFlash = .2;
+  if (!S.seen.includes(S.cur)) S.seen.push(S.cur);
   S.spinDir = Math.random() < .5 ? -1 : 1;
   if (jamOn()){
     const styles = ['blur','mosaic','puzzle'].filter(s => s !== S.jamStyle);
@@ -2650,7 +4742,8 @@ function makeChoices(w){
   near.forEach(add); others.forEach(add);
   mutate(stem, !!suf).forEach(m => add(m + suf));
   if (picked.length < 3){
-    const every = shuffle(Object.values(WORDS).flat().filter(o => o !== w));
+    const every = LEVELS.map((L2, li) => ({ li, ws: shuffle(WORDS[L2].filter(o => o !== w)) }))
+      .sort((a, b) => Math.abs(a.li - level) - Math.abs(b.li - level)).flatMap(x => x.ws);
     const end = suf ? suf.slice(-1) : null;
     every.filter(o => end ? (splitOkuri(o)[1] && o.r[0].slice(-1) === end) : !splitOkuri(o)[1]).forEach(o => add(o.r[0]));
     every.forEach(o => add(o.r[0]));
@@ -2699,6 +4792,7 @@ function correct(){
   const jamBonus = jamOn() && !S.cur.sent && jamAmount(S.p) > .3;
   const pts = Math.round((100 + 150*(1 - S.p) + Math.min(S.combo,10)*20)*(1 + .15*S.stage)*mult*SPEEDS[speed].s*(jamBonus ? 1.5 : 1));
   S.score += pts; S.combo++; S.maxCombo = Math.max(S.maxCombo, S.combo); S.correct++; S.hp--;
+  if (!S.got.includes(S.cur)) S.got.push(S.cur);
   const pos = S.cur.sent ? cardPos(S.cur, S.p) : wordPos(S.cur, S.p);
   if (S.cur.sent) ghosts.push({ card: S.cur, x: pos.x, y: pos.y, s: pos.s, life: .55, max: .55 });
   else ghosts.push({ chars: pos.chars, x: pos.x, y: pos.y, fs: pos.fs, life: .35, max: .35 });
@@ -2707,7 +4801,7 @@ function correct(){
   const ps = clamp(W*.07, 22, 42);
   pop(S.cur.r[0], pos.x, pos.y - pos.fs*.6 - ps*.3, ps, '#ffffff', { vy:-40 });
   pop('+' + pts, pos.x, pos.y + pos.fs*.55 + ps*.4, ps*.8, '#ffd23f', { vy:-60, life:.8 });
-  const judge = jamBonus ? ['見破り！','#ff6fe0'] : S.p < .35 ? ['はやい！','#6ff2e0'] : S.p < .7 ? ['ナイス！','#7dff7a'] : ['ギリギリ！','#ff8a5a'];
+  const J = t('judge'); const judge = jamBonus ? [J.jam,'#ff6fe0'] : S.p < .35 ? [J.fast,'#6ff2e0'] : S.p < .7 ? [J.nice,'#7dff7a'] : [J.close,'#ff8a5a'];
   pop(judge[0], pos.x - Math.min(W*.3, 160), pos.y - pos.fs*.2, ps*.75, judge[1], { vy:-30, life:.8, sc:1 });
   bolts.push({ x0: pos.x, y0: pos.y, t: 0, dur: .24, done: false, onHit: enemyDamaged });
   sfx('ok'); if (gameMode === 'type') flashInput('good');
@@ -2753,9 +4847,9 @@ function hitPlayer(){
   shake(.6, 22); flash = { c:'#ff1a30', a:.6 }; spawnCracks();
   EN.laughT = 1.6; EN.bubble = { t: S.lives > 0 ? 'ケケケッ！' : 'ワッハッハ！', life: 1.6 };
   sfx('damage'); setTimeout(() => sfx('laugh'), 350);
-  $('rvH').textContent = S.lives > 0 ? `こたえ　ライフ のこり ${S.lives}` : 'こたえ';
+  $('rvH').textContent = S.lives > 0 ? t('answerLives',{n:S.lives}) : t('answer');
   fillAnswerCell($('rvK'), S.cur, 'rv-k dela outl');
-  $('rvR').textContent = S.cur.r.join('／'); $('rvM').textContent = S.cur.m;
+  $('rvR').textContent = S.cur.r.join('／'); $('rvM').textContent = meanOf(S.cur);
   $('reveal').hidden = false; hintPill.hidden = true;
   if (gameMode === 'choice'){ choicesEl.querySelectorAll('.choice').forEach((b,i) => { if (S.cur.r.includes(S.choices[i])) b.classList.add('ok'); }); setChoicesWaiting(); }
   if (!composing) input.value = '';
@@ -2772,29 +4866,88 @@ function defeatEnemy(){
     ring(p.x, p.y, p.r*.5, '#ffffff', 1200, .5); ring(p.x, p.y, p.r*.3, '#ffe14f', 800, .6);
     flash = { c:'#ffffff', a:.95 }; shake(.7, 20);
     const bonus = 500*(S.stage + 1) + S.lives*200; S.score += bonus; renderHud();
-    showBanner('撃破！','clear',`${STAGES[S.stage].enemy} をたおした！`,`ボーナス +${bonus.toLocaleString()}`); sfx('fanfare');
+    showBanner(t('defeat'),'clear',t('defeated',{e:enemyName(vIdx(S.stage))}),t('bonus',{n:bonus.toLocaleString()})); sfx('fanfare');
     later(() => {
       hideBanner();
       if (S.stage >= 4) return gameClear();
       S.mode = 'warp'; renderHud();
       const next = S.stage + 1;
-      startWarp(() => setStageVisual(next), () => beginStage(next));
+      startWarp(() => setStageVisual(vIdx(next)), () => beginStage(next));
     }, 2200);
   }, 1600);
 }
 function gameClear(){
   S.mode = 'allclear'; Music.stop(); sfx('clearall'); flash = { c:'#ffffff', a:.8 };
   const bonus = S.lives*1000; S.score += bonus; renderHud();
-  showBanner('全ステージクリア！','clear','スミノオウ をたおした！',`のこりライフボーナス +${bonus.toLocaleString()}`);
+  showBanner(t('allClear'),'clear',t('defeated',{e:enemyName(vIdx(4))}),t('lifeBonus',{n:bonus.toLocaleString()}));
   for (let i=0;i<120;i++) parts.push({ kind:'conf', x: Math.random()*W, y: -Math.random()*H*.5, vx: rnd(-60,60), vy: rnd(60,160), s: rnd(4,8), rot: Math.random()*6, vr: rnd(-8,8),
     life: 3.5, max: 3.5, c: ['#ffd23f','#ff4d5e','#35d49a','#4ff0ff','#ffffff','#ff4fd8'][i % 6], g: 40 });
   later(() => showResult(true), 3600);
 }
 function gameOver(){
   S.mode = 'over'; Music.stop(); EN.laughT = 2.5; EN.bubble = { t:'ワッハッハ！', life:2 }; sfx('over');
-  showBanner('ゲームオーバー','over');
+  showBanner(t('gameOver'),'over');
   later(() => showResult(false), 1900);
 }
+const rubyAlways = t => esc(t).replace(RUBY_RE, '<ruby>$1<rt>$2</rt></ruby>');
+function exHTML(w){
+  const x = w.ex, tr = lang === 'zh' ? x.t.zh : x.t.en;
+  const chips = x.parts.map(p => p.oku ? `<span class="exc oku"><b>${esc(p.r)}</b></span>`
+    : `<span class="exc${p.special ? ' sp' : ''}"><i>${esc(p.k)}</i><b>${esc(p.r)}</b>${p.special ? `<small>${esc(t('exSpecial'))}</small>` : ''}</span>`).join('');
+  return `<div class="exbox"><div class="exparts">${chips}</div>`
+    + `<p class="expt"><em>${esc(t('exPoint'))}</em>${rubyAlways(x.p[lang] || x.p.en)}</p>`
+    + `<p class="exs"><em>${esc(t('exExample'))}</em><span class="exjp">${rubyAlways(x.s)}</span><span class="extr">${esc(tr)}</span></p></div>`;
+}
+function reviewList(tab){
+  if (tab === 'miss') return S.missed;
+  if (tab === 'seen') return S.seen;
+  return poolOf();
+}
+function markOf(w){
+  if (S.missed.includes(w)) return ['ng', '×', t('markNg')];
+  if (S.got.includes(w)) return ['ok', '○', t('markOk')];
+  if (S.seen.includes(w)) return ['skip', '–', t('markSkip')];
+  return ['', '', ''];
+}
+function renderReview(){
+  const tab = S.rvTab || 'miss', list = reviewList(tab), tb = $('rTable');
+  const counts = { miss: S.missed.length, seen: S.seen.length, all: poolOf().length };
+  $('rTabs').querySelectorAll('[data-tab]').forEach(b => {
+    const k = b.dataset.tab;
+    b.textContent = `${t({ miss:'tabMiss', seen:'tabSeen', all:'tabAll' }[k])} ${counts[k]}`;
+    b.setAttribute('aria-selected', String(k === tab)); b.setAttribute('aria-checked', String(k === tab));
+  });
+  tb.innerHTML = '';
+  for (const w of list){
+    const tr = tb.insertRow(); if (w.sent) tr.classList.add('srow');
+    const [cls, sym, label] = markOf(w);
+    const s = tr.insertCell(); s.className = 'mk ' + cls; s.textContent = sym; if (label) s.title = label, s.setAttribute('aria-label', label);
+    const a = tr.insertCell(); fillAnswerCell(a, w, 'k dela');
+    const b = tr.insertCell(); b.className = 'r'; b.textContent = w.r.join('／\u200b');
+    const c = tr.insertCell(); c.className = 'm'; c.textContent = meanOf(w);
+    if (w.ex){
+      tr.classList.add('has-ex'); tr.tabIndex = 0; tr.setAttribute('aria-expanded', 'false');
+      const toggle = () => {
+        const open = tr.nextElementSibling && tr.nextElementSibling.classList.contains('ex-row');
+        if (open){ tr.nextElementSibling.remove(); tr.setAttribute('aria-expanded', 'false'); return; }
+        const xr = tb.insertRow(tr.rowIndex + 1); xr.className = 'ex-row';
+        const xc = xr.insertCell(); xc.colSpan = 4; xc.innerHTML = exHTML(w);
+        tr.setAttribute('aria-expanded', 'true'); sfx('tick');
+      };
+      tr.addEventListener('click', toggle);
+      tr.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); toggle(); } });
+    }
+  }
+  const empty = $('rEmpty');
+  empty.hidden = list.length > 0;
+  empty.textContent = tab === 'miss' ? t('rEmpty') : t('rNoneSeen');
+  $('rExTap').hidden = !list.some(w => w.ex);
+}
+$('rTabs').addEventListener('click', e => {
+  const b = e.target.closest('[data-tab]'); if (!b || b.dataset.tab === S.rvTab) return;
+  S.rvTab = b.dataset.tab; renderReview(); sfx('tick');
+  const tw = document.querySelector('#result .tw'); if (tw) tw.scrollTop = 0;
+});
 function showResult(cleared){
   clearTimeout(S.timer);
   const quit = S.mode !== 'over' && !cleared;
@@ -2802,29 +4955,22 @@ function showResult(cleared){
   AU.ctx && Music.play(0);
   const L = LEVELS[level], prev = bestOf(L), isNew = S.score > prev;
   if (isNew) store.set(bestKey(L), String(S.score));
-  const t = $('rTitle');
-  if (cleared){ t.textContent = '全ステージクリア！'; t.style.color = 'var(--green)'; }
-  else if (quit){ t.textContent = 'おつかれさま'; t.style.color = 'var(--yellow)'; }
-  else { t.textContent = 'ゲームオーバー'; t.style.color = 'var(--red)'; }
+  const tt = $('rTitle');
+  if (cleared){ tt.textContent = t('allClear'); tt.style.color = 'var(--green)'; }
+  else if (quit){ tt.textContent = t('goodWork'); tt.style.color = 'var(--yellow)'; }
+  else { tt.textContent = t('gameOver'); tt.style.color = 'var(--red)'; }
   const tries = S.correct + S.wrongs + S.hits, acc = tries ? S.correct/tries : 0;
   const rank = cleared && acc >= .9 ? 'S' : (cleared || (S.stage >= 3 && acc >= .75)) ? 'A' : (S.stage >= 1 || acc >= .7) ? 'B' : 'C';
   $('rRank').textContent = rank;
-  const ml = GENRE_NAME[genre] + (jamOn() ? '（妨害）' : '') + '・' + (gameMode === 'choice' ? '4択' : 'タイピング') + '・' + SPEEDS[speed].name + '・' + (qCount === 'all' ? '全問' : qCount + '問');
-  $('rSub').textContent = cleared ? `${L}・${ml}　全5ステージ制覇` : `${L}・${ml}　ステージ${S.stage + 1}「${STAGES[S.stage].name}」まで`;
+  const ml = genreName(genre) + (jamOn() ? t('jamTag') : '') + t('sep') + (gameMode === 'choice' ? t('mChoice') : t('mType')) + t('sep') + t('speeds')[speed] + t('sep') + qCountText(qCount);
+  $('rSub').textContent = cleared ? t('subClear',{l:L, ml}) : t('subReach',{l:L, ml, n:S.stage + 1, s:stageName(vIdx(S.stage))});
   $('rScore').textContent = S.score.toLocaleString();
   $('rNew').hidden = !isNew;
   $('rCorrect').textContent = S.correct;
   $('rWrong').textContent = S.wrongs + S.hits;
   $('rCombo').textContent = S.maxCombo;
   $('rBest').textContent = Math.max(prev, S.score).toLocaleString();
-  const tb = $('rTable'); tb.innerHTML = '';
-  for (const w of S.missed){
-    const tr = tb.insertRow();
-    const a = tr.insertCell(); fillAnswerCell(a, w, 'k dela');
-    const b = tr.insertCell(); b.className = 'r'; b.textContent = w.r.join('／');
-    const c = tr.insertCell(); c.className = 'm'; c.textContent = w.m;
-  }
-  $('rEmpty').hidden = S.missed.length > 0;
+  S.rvTab = S.missed.length ? 'miss' : S.seen.length ? 'seen' : 'all'; renderReview();
   input.blur();
   $('hud').hidden = true; $('controls').hidden = true; $('result').hidden = false;
   fit();
@@ -2844,7 +4990,7 @@ function renderCards(){
     const b = document.createElement('button');
     b.className = 'lvbtn'; b.setAttribute('role','radio'); b.setAttribute('aria-checked', String(i === level));
     b.style.background = `linear-gradient(165deg, ${mix(LV_COL[i],'#ffffff',.2)}, ${LV_COL[i]} 60%, ${mix(LV_COL[i],'#000000',.3)})`;
-    const n = genre === 'kanji' ? WORDS[L].length + '語' : QS[genre][L].length + '問';
+    const n = genre === 'kanji' ? t('nWords',{n:WORDS[L].length}) : t('nQ',{n:QS[genre][L].length});
     b.innerHTML = `<b>${L}</b><small>${n}</small>`;
     b.onclick = () => { level = i; store.set('kr-level', String(i)); renderCards(); AU.init(); sfx('tick'); };
     box.appendChild(b);
@@ -2854,10 +5000,10 @@ function renderCards(){
 function renderSummary(){
   const lv = $('sumLv'); lv.textContent = LEVELS[level];
   lv.style.background = `linear-gradient(165deg, ${mix(LV_COL[level],'#ffffff',.2)}, ${LV_COL[level]} 60%, ${mix(LV_COL[level],'#000000',.3)})`;
-  $('sumMain').textContent = `${GENRE_NAME[genre]}${jamOn() ? '（妨害）' : ''}・${gameMode === 'choice' ? '4択' : 'タイピング'}`;
-  if (furiOn()) $('sumMain').textContent += '・ふりがな';
-  $('sumSub').textContent = `${SPEEDS[speed].name}・${qCount === 'all' ? '全問' : qCount + '問'}　ベスト ${bestOf(LEVELS[level]).toLocaleString()}`;
-  $('modeNote').textContent = genre === 'kanji' ? '' : '語彙・文法は4択のみ';
+  $('sumMain').textContent = genreName(genre) + (jamOn() ? t('jamTag') : '') + t('sep') + (gameMode === 'choice' ? t('mChoice') : t('mType'));
+  if (furiOn()) $('sumMain').textContent += t('sep') + t('furiTag');
+  $('sumSub').textContent = t('speeds')[speed] + t('sep') + qCountText(qCount) + '　' + t('best',{n:bestOf(LEVELS[level]).toLocaleString()});
+  $('modeNote').textContent = genre === 'kanji' ? '' : t('modeNote');
 }
 function renderModeSel(){
   $('modeSel').querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.mode === gameMode)));
@@ -2870,7 +5016,7 @@ function renderGenreSel(){
   $('genreSel').querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.genre === genre)));
   gameMode = genre === 'kanji' ? prefMode : 'choice';
   const tb = $('modeSel').querySelector('[data-mode="type"]'); tb.disabled = genre !== 'kanji';
-  tb.title = genre !== 'kanji' ? '語彙・文法は4択のみです' : '';
+  tb.title = genre !== 'kanji' ? t('modeTitle') : '';
   renderModeSel();
   renderJamSel();
   renderFuriSel();
@@ -2884,7 +5030,7 @@ function renderFuriSel(){
     b.setAttribute('aria-checked', String((b.dataset.furi === 'on') === furi));
     b.disabled = genre === 'kanji';
   });
-  $('furiNote').textContent = genre === 'kanji' ? '語彙・文法のみ' : '';
+  $('furiNote').textContent = genre === 'kanji' ? t('furiNote') : '';
 }
 $('furiSel').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b || b.disabled) return;
@@ -2895,7 +5041,7 @@ function renderJamSel(){
     b.setAttribute('aria-checked', String((b.dataset.jam === 'on') === jamOn()));
     if (b.dataset.jam === 'on') b.disabled = genre !== 'kanji';
   });
-  $('jamNote').textContent = genre === 'kanji' ? '漢字が動かず、見えにくくなります' : '漢字のみ';
+  $('jamNote').textContent = genre === 'kanji' ? t('jamNoteK') : t('jamNoteO');
 }
 $('jamSel').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b || b.disabled) return;
@@ -2914,7 +5060,27 @@ $('speedSel').addEventListener('click', e => {
   speed = +b.dataset.speed; store.set('kr-speed5', String(speed)); renderSpeedSel(); renderSummary(); AU.init(); sfx('tick');
 });
 renderGenreSel(); renderSpeedSel(); renderCountSel(); renderJamSel(); renderFuriSel();
-$('roster').innerHTML = STAGES.map((s,i) => `<span>${i === 4 ? '★' : i + 1}　${s.name}／${s.enemy}</span>`).join('');
+function applyLang(){
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+  $('betaLbl').textContent = t('beta', { v: APP_VER });
+  document.body.dataset.lang = lang;   // html の lang は ja のまま（日本語の字形を保つ）
+  $('speedSel').querySelectorAll('button').forEach(b => { b.textContent = t('speeds')[+b.dataset.speed]; });
+  $('countSel').querySelectorAll('button').forEach(b => { b.textContent = qCountText(b.dataset.count); });
+  $('howList').innerHTML = t('howItems').map(([dt, dd]) => `<div><dt>${esc(dt)}</dt><dd>${esc(dd)}</dd></div>`).join('');
+  $('roster').innerHTML = [0,1,2,3,4].map(i => `<span>${i === 4 ? '★' : i + 1}　${esc(stageName(i))}／${esc(enemyName(i))}　・　${esc(stageName(i + 5))}／${esc(enemyName(i + 5))}</span>`).join('');
+  document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.lang === lang)));
+  renderGenreSel(); renderCards();
+  if (typeof paintFs === 'function') paintFs();
+  if (typeof paintSound === 'function') paintSound();
+}
+function setLang(l){
+  if (!LANGS.includes(l) || l === lang) return;
+  lang = l; store.set('kr-lang', l); applyLang(); AU.init(); sfx('tick');
+}
+for (const id of ['langTitle','langSel']) $(id).addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) setLang(b.dataset.lang); });
 
 /* ===== 入力 ===== */
 input.addEventListener('compositionstart', () => { composing = true; });
@@ -2938,10 +5104,10 @@ keepFocus($('hintBtn'), () => {
   if (S.mode !== 'play' || S.hint >= 2) return;
   S.hint++; sfx('hint');
   if (gameMode === 'choice'){
-    hintPill.textContent = S.cur.sent ? `英語：${S.cur.m}` : `意味：${S.cur.m}`;
+    hintPill.textContent = S.cur.sent ? t('hintSent',{m:meanOf(S.cur)}) : t('hintMean',{m:meanOf(S.cur)});
     if (S.hint === 2){ const cand = [...choicesEl.children].filter((b,i) => !b.disabled && !S.cur.r.includes(S.choices[i]));
       if (cand.length){ const b = cand[Math.floor(Math.random()*cand.length)]; b.classList.add('gone'); b.disabled = true; } }
-  } else hintPill.textContent = S.hint === 1 ? `意味：${S.cur.m}` : `意味：${S.cur.m}　／　最初の字「${S.cur.r[0][0]}」`;
+  } else hintPill.textContent = S.hint === 1 ? t('hintMean',{m:meanOf(S.cur)}) : t('hintFirst',{m:meanOf(S.cur), c:S.cur.r[0][0]});
   hintPill.hidden = false; renderHud();
 });
 keepFocus($('passBtn'), () => { if (S.mode === 'play') hitPlayer(); });
@@ -2986,17 +5152,17 @@ const FS = {
 };
 let fsAuto = store.get('kr-fsauto') === 'on';
 function showFsHelp(){
-  $('installSteps').innerHTML = ['このブラウザ（iPhoneのSafariなど）は、ページを全画面にする機能に対応していません。','タイトル画面の「アプリとして追加」からホーム画面に追加し、そのアイコンから開くと、ブラウザのバーがない全画面で遊べます。']
+  $('installSteps').innerHTML = t('fsHelp')
     .map((t,i) => `<div><dt>${i + 1}</dt><dd>${t}</dd></div>`).join('');
   $('diag').hidden = true; $('iosHelp').hidden = false;
 }
 function paintFs(){
   document.body.classList.toggle('is-fs', FS.active());
-  $('fsBtnTitle').textContent = FS.active() ? '全画面をやめる' : '全画面';
-  $('fsBtnHud').setAttribute('aria-label', FS.active() ? '全画面をやめる' : '全画面');
-  const b = $('fsAutoBtn'); b.textContent = `スタート時に全画面：${fsAuto ? 'オン' : 'オフ'}`; b.classList.toggle('off', !fsAuto);
+  $('fsBtnTitle').textContent = FS.active() ? t('fsExit') : t('fs');
+  $('fsBtnHud').setAttribute('aria-label', FS.active() ? t('fsExit') : t('fs'));
+  const b = $('fsAutoBtn'); b.textContent = t('fsAuto',{s: fsAuto ? t('on') : t('off')}); b.classList.toggle('off', !fsAuto);
   b.disabled = !FS.supported() || isStandalone();
-  $('fsNote').textContent = !FS.supported() ? 'このブラウザは非対応（ホーム画面に追加すると全画面になります）' : isStandalone() ? 'アプリとして開いているので常に全画面です' : '';
+  $('fsNote').textContent = !FS.supported() ? t('fsNoteNo') : isStandalone() ? t('fsNoteApp') : '';
   if (isStandalone() || !FS.supported()) { $('fsBtnHud').hidden = !FS.supported(); }
   setTimeout(fit, 120);
 }
@@ -3014,7 +5180,7 @@ $('settingsLink').onclick = openSettings;
 $('setClose').onclick = () => { $('settings').hidden = true; };
 $('setStart').onclick = () => { $('settings').hidden = true; startGame(); };
 $('howClose').onclick = () => { $('howto').hidden = true; };
-const paintSound = () => { $('musicBtn').textContent = AU.musicOn ? '音楽：オン' : '音楽：オフ'; $('sfxBtn').textContent = AU.sfxOn ? '効果音：オン' : '効果音：オフ';
+const paintSound = () => { $('musicBtn').textContent = t('music',{s: AU.musicOn ? t('on') : t('off')}); $('sfxBtn').textContent = t('sfx',{s: AU.sfxOn ? t('on') : t('off')});
   $('musicBtn').classList.toggle('off', !AU.musicOn); $('sfxBtn').classList.toggle('off', !AU.sfxOn); };
 $('musicBtn').onclick = () => { AU.init(); AU.setMusic(!AU.musicOn); if (AU.musicOn && S.mode === 'title') { Music.stop(); Music.play(0); } paintSound(); };
 $('sfxBtn').onclick = () => { AU.init(); AU.setSfx(!AU.sfxOn); sfx('tick'); paintSound(); };
@@ -3057,7 +5223,7 @@ function update(dt){
   } else Music.danger = 0;
   if (S.mode === 'title' && !WARP){
     titleT += dt;
-    if (titleT > 7){ titleT = 0; const next = (curStage + 1) % 5; startWarp(() => setStageVisual(next), () => enemyEnter(), 1.6); }
+    if (titleT > 7){ titleT = 0; const next = (curStage + 1) % STAGES.length; startWarp(() => setStageVisual(next), () => enemyEnter(), 1.6); }
   }
 }
 function render(){
@@ -3099,21 +5265,17 @@ const installBtn = $('installBtn');
 if (canPWA && !isStandalone() && (isIOS || isAndroid)) installBtn.hidden = false;
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; if (!isStandalone()) installBtn.hidden = false; });
 window.addEventListener('appinstalled', () => { installPrompt = null; installBtn.hidden = true; });
-const STEPS = {
-  ios: ['このページを Safari で開きます。','共有ボタン（四角から上向きの矢印）をタップします。','メニューを下にスクロールして「ホーム画面に追加」をタップします。','右上の「追加」をタップすると、ホーム画面にアイコンができます。'],
-  android: ['このページを Chrome（または Brave）で開き、一度だけページを再読み込みします。','ブラウザのメニュー「︙」をタップします（Chromeは右上、Braveは右下）。','「アプリをインストール」または「ホーム画面に追加」を選びます。','「インストール」を選ぶと、ホーム画面にアイコンができます。']
-};
 async function runDiag(){
-  const box = $('diag'); box.hidden = false; box.innerHTML = '<b>インストールに必要なファイルを確認中…</b>';
+  const box = $('diag'); box.hidden = false; box.innerHTML = '<b>' + t('diagChecking') + '</b>';
   const files = ['manifest.json','icon-192.png','icon-512.png','sw.js'], rows = []; let allOk = true;
   for (const f of files){
     let ok = false; try { const r = await fetch(f, { cache:'no-store' }); ok = r.ok; } catch(e){}
     allOk = allOk && ok; rows.push(`<span class="${ok ? 'okc' : 'ng'}">${ok ? '✓' : '✗'}</span> ${f}`);
   }
   let sw = false; try { sw = !!(await navigator.serviceWorker.getRegistration()); } catch(e){}
-  allOk = allOk && sw; rows.push(`<span class="${sw ? 'okc' : 'ng'}">${sw ? '✓' : '✗'}</span> オフライン機能（sw.js の登録）`);
-  box.innerHTML = `<b>チェック結果</b><br>${rows.join('<br>')}` + (allOk ? '<br>準備はできています。上の手順でインストールしてください。'
-    : '<br><span class="ng">✗ のファイルがサーバーにありません。index.html と同じ場所に、すべてのファイルをアップロードしてください。アップロード後は、ページを再読み込みしてからお試しください。</span>');
+  allOk = allOk && sw; rows.push(`<span class="${sw ? 'okc' : 'ng'}">${sw ? '✓' : '✗'}</span> ${t('diagSw')}`);
+  box.innerHTML = `<b>${t('diagResult')}</b><br>${rows.join('<br>')}` + (allOk ? '<br>' + t('diagOk')
+    : '<br><span class="ng">' + t('diagNg') + '</span>');
 }
 installBtn.addEventListener('click', async () => {
   if (installPrompt){
@@ -3121,7 +5283,7 @@ installBtn.addEventListener('click', async () => {
     try { await installPrompt.userChoice; } catch(e){}
     installPrompt = null; installBtn.hidden = true; return;
   }
-  const steps = isIOS ? STEPS.ios : STEPS.android;
+  const steps = isIOS ? t('stepsIOS') : t('stepsAndroid');
   $('installSteps').innerHTML = steps.map((t,i) => `<div><dt>${i + 1}</dt><dd>${t}</dd></div>`).join('');
   $('iosHelp').hidden = false;
   if (canPWA) runDiag();
@@ -3151,7 +5313,7 @@ if (document.fonts && document.fonts.load){
 }
 
 setStageVisual(0); enemyEnter();
-renderCards(); resize(); fit(); paintFs();
+renderCards(); resize(); fit(); applyLang();
 requestAnimationFrame(frame);
 
 </script>
